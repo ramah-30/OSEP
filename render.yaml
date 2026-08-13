@@ -1,0 +1,52 @@
+# Render Blueprint — deploys the OSEP Laravel API as a FREE Docker web service.
+# In Render: New +  ->  Blueprint  ->  pick this repo. It reads this file.
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: osep-api
+    runtime: docker
+    plan: free
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /up
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      # Generate locally with:  php artisan key:generate --show
+      - key: APP_KEY
+        sync: false
+      # Your Render URL,   e.g. https://osep-api.onrender.com
+      - key: APP_URL
+        sync: false
+      # Your Vercel URL,   e.g. https://osep.vercel.app  (used by CORS)
+      - key: FRONTEND_URL
+        sync: false
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: SESSION_DRIVER
+        value: file
+      - key: CACHE_STORE
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: MAIL_MAILER
+        value: log
+      # ---- Database (free managed MySQL: TiDB Cloud Serverless or Aiven) ----
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false            # TiDB Cloud Serverless = 4000
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      # Enables TLS to the DB using the container's built-in CA bundle.
+      - key: MYSQL_ATTR_SSL_CA
+        value: /etc/ssl/certs/ca-certificates.crt

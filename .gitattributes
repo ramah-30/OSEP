@@ -1,0 +1,5 @@
+# Keep shell scripts and the Dockerfile LF-only so they run correctly inside
+# Linux containers, even when checked out on Windows (which defaults to CRLF).
+*.sh        text eol=lf
+Dockerfile  text eol=lf
+entrypoint  text eol=lf
