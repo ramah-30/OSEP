@@ -49,6 +49,51 @@ The two apps are fully separated — the only contract between them is the JSON 
 
 ---
 
+## Getting started
+
+From a fresh clone to a running app:
+
+```bash
+# 1. Clone
+git clone https://github.com/ramah-30/OSEP.git
+cd OSEP
+
+# 2. Backend dependencies + environment
+cd backend
+composer install
+cp .env.example .env
+php artisan key:generate
+
+# 3. Database — pick ONE option:
+#    (a) Build a fresh schema + demo data
+php artisan migrate --seed
+#    (b) OR load the bundled dump (full schema + data; recreates the `osep` DB).
+#        Start MySQL first, then from the backend/ folder:
+#        mysql -u root < ../osep_backup.sql
+
+# 4. Finish the backend
+php artisan storage:link
+php artisan serve --port=8001         # http://localhost:8001
+
+# 5. Frontend (new terminal, from the repo root)
+cd frontend
+npm install
+cp .env.example .env                  # VITE_API_URL=http://localhost:8001/api/v1
+npm run dev                           # http://localhost:5173
+```
+
+Then open **http://localhost:5173** and sign in with any demo account — all use the
+password **`Password123!`** (e.g. `planner@osep.test`). See **Backend setup** below
+for the required `.env` values, and **Demo tenant** for every login.
+
+> **Windows / XAMPP:** start MySQL from the XAMPP Control Panel first. Option (b)
+> needs the MySQL client on your PATH (`C:\xampp\mysql\bin`); the bundled
+> `osep_backup.sql` already contains `CREATE DATABASE osep`, so you don't pre-create
+> it. After importing, **don't** run `php artisan migrate:fresh` — that would wipe
+> the data you just loaded.
+
+---
+
 ## Backend setup
 
 ```bash
