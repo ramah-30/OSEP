@@ -32,7 +32,11 @@ services:
         value: file
       - key: QUEUE_CONNECTION
         value: sync
+      # smtp | resend | log  (Render blocks outbound SMTP, so use resend for real delivery)
       - key: MAIL_MAILER
+        sync: false
+      # Resend API key — https://resend.com/api-keys (only needed if MAIL_MAILER=resend)
+      - key: RESEND_KEY
         sync: false
       # ---- Database (free managed MySQL: TiDB Cloud Serverless or Aiven) ----
       - key: DB_CONNECTION
