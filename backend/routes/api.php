@@ -156,6 +156,10 @@ Route::post('rsvp/{token}', [RsvpController::class, 'respond'])->middleware('thr
 // Public planner booking page — no auth required.
 Route::get('planners/{slug}', [PublicPlannerController::class, 'show'])->middleware('throttle:60,1');
 
+// Public vendor category list — needed by the registration form, before the
+// vendor has an account to authenticate with.
+Route::get('vendor-categories', [MpCategoryController::class, 'index'])->middleware('throttle:60,1');
+
 /*
 |--------------------------------------------------------------------------
 | Phase 2 — the authenticated workspace

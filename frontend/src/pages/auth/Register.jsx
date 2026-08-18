@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,11 +14,13 @@ import Input from '../../components/ui/Input'
 import PasswordInput from '../../components/ui/PasswordInput'
 import Select from '../../components/ui/Select'
 import { useAuth } from '../../context/AuthContext'
-import { applyServerErrors, parseApiError } from '../../lib/api'
+import { api, applyServerErrors, parseApiError } from '../../lib/api'
 import { cn } from '../../lib/cn'
 import { COUNTRIES } from '../../lib/countries'
 import { USER_CATEGORIES } from '../../lib/content'
 import { ACCOUNT_TYPES, registerSchema } from '../../lib/validation'
+
+const OTHER_CATEGORY = '__other__'
 
 const ACCENTS = {
   navy: 'text-navy-800 bg-navy-50',
@@ -38,6 +40,7 @@ export default function Register() {
   const [accountType, setAccountType] = useState(initialType)
   const [step, setStep] = useState(initialType ? 2 : 1)
   const [formError, setFormError] = useState(null)
+  const [vendorCategories, setVendorCategories] = useState([])
 
   const {
     register,
@@ -59,6 +62,8 @@ export default function Register() {
       account_type: initialType ?? '',
       country: '',
       terms: false,
+      category_id: '',
+      category_name: '',
     },
   })
 
@@ -68,11 +73,31 @@ export default function Register() {
     setStep(2)
   }
 
+  useEffect(() => {
+    if (accountType !== 'vendor' || vendorCategories.length) return
+
+    api
+      .get('/vendor-categories')
+      .then(({ data }) => setVendorCategories(data.data.categories))
+      .catch(() => setVendorCategories([]))
+  }, [accountType, vendorCategories.length])
+
+  const selectedCategoryId = watch('category_id')
+  const isOtherCategory = selectedCategoryId === OTHER_CATEGORY
+
   const onSubmit = async (values) => {
     setFormError(null)
 
+    const { category_id, category_name, ...rest } = values
+    const payload = {
+      ...rest,
+      ...(category_id === OTHER_CATEGORY
+        ? { category_name }
+        : { category_id: category_id || undefined }),
+    }
+
     try {
-      const user = await registerUser(values)
+      const user = await registerUser(payload)
       navigate(`/verify-email?email=${encodeURIComponent(user.email)}`, { replace: true })
     } catch (error) {
       const parsed = parseApiError(error)
@@ -221,6 +246,30 @@ export default function Register() {
                 {...register('country')}
               />
             </div>
+
+            {accountType === 'vendor' && (
+              <>
+                <Select
+                  label="Business category"
+                  icon="Tag"
+                  placeholder="Select"
+                  options={[
+                    ...vendorCategories.map((c) => ({ value: String(c.id), label: c.name })),
+                    { value: OTHER_CATEGORY, label: 'Not listed — add your own' },
+                  ]}
+                  error={errors.category_id?.message}
+                  {...register('category_id')}
+                />
+                {isOtherCategory && (
+                  <Input
+                    label="Your business category"
+                    icon="Tag"
+                    error={errors.category_name?.message}
+                    {...register('category_name')}
+                  />
+                )}
+              </>
+            )}
 
             <PasswordInput
               label="Password"

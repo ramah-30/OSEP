@@ -18,7 +18,6 @@ class UpdateVendorProfileRequest extends FormRequest
     {
         return [
             'business_name' => ['nullable', 'string', 'max:120'],
-            'category' => ['nullable', 'string', 'max:80'],
             'description' => ['nullable', 'string', 'max:2000'],
             'location' => ['nullable', 'string', 'max:120'],
             'phone' => ['nullable', 'string', 'max:20', 'regex:/^\+?[0-9\s\-()]+$/'],

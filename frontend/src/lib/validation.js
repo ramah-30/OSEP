@@ -33,11 +33,17 @@ export const registerSchema = z
     account_type: z.enum(ACCOUNT_TYPES, { message: 'Choose an account type.' }),
     country: z.string().trim().min(1, 'Select your country.').max(100),
     terms: z.literal(true, { message: 'Accept the Terms and Privacy Policy to continue.' }),
+    category_id: z.string().optional(),
+    category_name: z.string().trim().max(100).optional(),
   })
   .refine((values) => values.password === values.password_confirmation, {
     path: ['password_confirmation'],
     message: 'Passwords do not match.',
   })
+  .refine(
+    (values) => values.account_type !== 'vendor' || Boolean(values.category_id || values.category_name),
+    { path: ['category_id'], message: 'Choose a business category, or add your own.' },
+  )
 
 export const loginSchema = z.object({
   email: z.email('Enter a valid email address.').max(255),

@@ -9,7 +9,6 @@ export const AI_SUBNAV = [
   { label: 'Documents', to: 'documents', icon: 'FileText' },
   { label: 'Prompts', to: 'prompts', icon: 'Terminal' },
   { label: 'Automation', to: 'automation', icon: 'Zap' },
-  { label: 'Insights', to: 'insights', icon: 'LineChart' },
 ]
 
 /** Document/template category → icon + accent + label. */

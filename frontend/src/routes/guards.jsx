@@ -68,3 +68,17 @@ export function RoleRoute({ accountType }) {
 
   return <Outlet />
 }
+
+/**
+ * Keeps a non-venue vendor off the My Venues page directly, not just out of
+ * the sidebar. The server doesn't enforce this — same caveat as RoleRoute.
+ */
+export function VendorCategoryRoute({ slug }) {
+  const { user } = useAuth()
+
+  if (user.vendor_category_slug !== slug) {
+    return <Navigate to={user.dashboard_path} replace />
+  }
+
+  return <Outlet />
+}

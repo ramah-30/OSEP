@@ -9,17 +9,10 @@ import EmptyState from '../../../../components/ui/EmptyState'
 import { api } from '../../../../lib/api'
 import { cn } from '../../../../lib/cn'
 import { formatRelative } from '../../../../lib/format'
-import { PRIORITY_META, categoryMeta, healthTextClass, healthBarClass, healthTone, recommendationHref } from '../../../../lib/ai'
+import { PRIORITY_META, categoryMeta, healthTextClass, recommendationHref } from '../../../../lib/ai'
 import { useAiChat } from '../../../../context/AiChatContext'
 
 const BASE = '/dashboard/planner/ai-assistant'
-
-const QUICK_PROMPTS = [
-  'Summarize today’s outstanding tasks',
-  'Which events are most at risk?',
-  'Draft a 12-month wedding timeline',
-  'What should a corporate event budget include?',
-]
 
 export default function AiDashboard() {
   const navigate = useNavigate()
@@ -36,8 +29,6 @@ export default function AiDashboard() {
 
   const stats = data.stats ?? {}
   const recommendations = data.recommendations ?? []
-  const health = data.health ?? []
-  const forecast = data.forecast ?? { items: [] }
   const conversations = data.conversations ?? []
   const onboarding = data.onboarding
 
@@ -49,139 +40,74 @@ export default function AiDashboard() {
       )}
 
       {/* Stat tiles */}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-3">
         <Tile icon="CalendarClock" label="Active events" value={stats.active_events ?? 0} accent="navy" />
         <Tile icon="BellRing" label="Open reminders" value={stats.open_recommendations ?? 0} accent="purple" />
-        <Tile icon="Activity" label="Avg health" value={stats.avg_health != null ? `${stats.avg_health}/100` : '—'} accent="emerald" tone={stats.avg_health} />
         <Tile icon="MessagesSquare" label="Conversations" value={stats.conversations ?? 0} accent="navy" />
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-3">
-        {/* Recommendations */}
-        <Card className="p-5 lg:col-span-2">
-          <div className="mb-3 flex items-center justify-between">
-            <p className="flex items-center gap-2 font-bold text-ink"><Icon name="BellRing" className="size-4 text-purple-500" /> Today’s reminders</p>
-            <Link to={`${BASE}/recommendations`} className="text-sm font-semibold text-navy-700 hover:underline">View all</Link>
-          </div>
-          {recommendations.length === 0 ? (
-            <p className="py-6 text-center text-sm text-muted">No open reminders — everything looks healthy. ✅</p>
-          ) : (
-            <ul className="divide-y divide-line">
-              {recommendations.map((rec) => {
-                const cat = categoryMeta(rec.category)
-                const prio = PRIORITY_META[rec.priority] ?? PRIORITY_META.medium
-                const href = recommendationHref(rec)
-                return (
-                  <li key={rec.id} className="flex items-start gap-3 py-3 first:pt-0 last:pb-0">
-                    <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-canvas text-navy-700">
-                      <Icon name={cat.icon} className="size-4" />
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <p className="flex flex-wrap items-center gap-2 text-sm font-semibold text-ink">
-                        {rec.title} <Badge tone={prio.tone}>{prio.label}</Badge>
-                      </p>
-                      <p className="truncate text-xs text-muted">{rec.event_title}</p>
-                    </div>
-                    {href && (
-                      <button type="button" onClick={() => navigate(href)} className="shrink-0 text-navy-600 hover:text-navy-800" title={rec.action_label}>
-                        <Icon name="ArrowRight" className="size-4" />
-                      </button>
-                    )}
-                  </li>
-                )
-              })}
-            </ul>
-          )}
-        </Card>
-
-        {/* Health scores */}
-        <Card className="p-5">
-          <p className="mb-3 flex items-center gap-2 font-bold text-ink"><Icon name="Activity" className="size-4 text-emerald-500" /> Event health</p>
-          {health.length === 0 ? (
-            <p className="py-6 text-center text-sm text-muted">No active events.</p>
-          ) : (
-            <div className="space-y-3">
-              {health.map((h) => (
-                <Link key={h.event_id} to={`${BASE}/insights`} className="block">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="truncate pr-2 font-medium text-ink">{h.event_title}</span>
-                    <span className={cn('font-bold tabular-nums', healthTextClass(h.score))}>{h.score}</span>
-                  </div>
-                  <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-canvas">
-                    <div className={cn('h-full rounded-full', healthBarClass(h.score))} style={{ width: `${h.score}%` }} />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
-        </Card>
-      </div>
-
-      <div className="grid gap-5 lg:grid-cols-3">
-        {/* Forecast panel */}
-        <Card className="p-5 lg:col-span-2">
-          <p className="mb-3 flex items-center gap-2 font-bold text-ink">
-            <Icon name="TrendingUp" className="size-4 text-purple-500" /> Forecast
-            {forecast.event && <span className="text-sm font-normal text-muted">· {forecast.event.title}</span>}
-          </p>
-          {forecast.items.length === 0 ? (
-            <p className="py-6 text-center text-sm text-muted">Add event data to unlock predictive forecasts.</p>
-          ) : (
-            <div className="grid gap-3 sm:grid-cols-3">
-              {forecast.items.map((f) => (
-                <div key={f.key} className="rounded-xl border border-line bg-canvas p-4">
-                  <p className="text-xs font-medium text-muted">{f.label}</p>
-                  <p className="mt-1 text-xl font-extrabold tracking-tight text-ink">{f.value}</p>
-                  <Badge tone="purple" className="mt-2">{f.confidence}% conf.</Badge>
-                </div>
-              ))}
-            </div>
-          )}
-        </Card>
-
-        {/* Conversation shortcuts — open the floating copilot */}
-        <Card className="p-5">
-          <div className="mb-3 flex items-center justify-between">
-            <p className="flex items-center gap-2 font-bold text-ink"><Icon name="MessagesSquare" className="size-4 text-navy-600" /> Conversations</p>
-            <button type="button" onClick={() => openChat()} className="text-sm font-semibold text-navy-700 hover:underline">Open</button>
-          </div>
-          {conversations.length === 0 ? (
-            <button type="button" onClick={() => openChat()} className="w-full py-4 text-center text-sm text-muted hover:text-ink">
-              Start a conversation with your copilot.
-            </button>
-          ) : (
-            <ul className="space-y-1">
-              {conversations.map((c) => (
-                <li key={c.id}>
-                  <button type="button" onClick={() => openChat({ conversationId: c.id })} className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left hover:bg-canvas">
-                    <Icon name={c.event_id ? 'CalendarClock' : 'MessagesSquare'} className="size-4 shrink-0 text-muted" />
-                    <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-medium text-ink">{c.title}</span>
-                      {c.last_message_at && <span className="block text-[11px] text-muted">{formatRelative(c.last_message_at)}</span>}
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </Card>
-      </div>
-
-      {/* Quick prompts — open the copilot pre-filled */}
+      {/* Recommendations */}
       <Card className="p-5">
-        <p className="mb-3 flex items-center gap-2 font-bold text-ink"><Icon name="Wand2" className="size-4 text-purple-500" /> Quick prompts</p>
-        <div className="flex flex-wrap gap-2">
-          {QUICK_PROMPTS.map((p) => (
-            <button
-              key={p}
-              type="button"
-              onClick={() => openChat({ prompt: p })}
-              className="rounded-full border border-line bg-canvas px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:border-navy-200 hover:bg-navy-50"
-            >
-              {p}
-            </button>
-          ))}
+        <div className="mb-3 flex items-center justify-between">
+          <p className="flex items-center gap-2 font-bold text-ink"><Icon name="BellRing" className="size-4 text-purple-500" /> Today’s reminders</p>
+          <Link to={`${BASE}/recommendations`} className="text-sm font-semibold text-navy-700 hover:underline">View all</Link>
         </div>
+        {recommendations.length === 0 ? (
+          <p className="py-6 text-center text-sm text-muted">No open reminders — everything looks healthy. ✅</p>
+        ) : (
+          <ul className="divide-y divide-line">
+            {recommendations.map((rec) => {
+              const cat = categoryMeta(rec.category)
+              const prio = PRIORITY_META[rec.priority] ?? PRIORITY_META.medium
+              const href = recommendationHref(rec)
+              return (
+                <li key={rec.id} className="flex items-start gap-3 py-3 first:pt-0 last:pb-0">
+                  <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-canvas text-navy-700">
+                    <Icon name={cat.icon} className="size-4" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="flex flex-wrap items-center gap-2 text-sm font-semibold text-ink">
+                      {rec.title} <Badge tone={prio.tone}>{prio.label}</Badge>
+                    </p>
+                    <p className="truncate text-xs text-muted">{rec.event_title}</p>
+                  </div>
+                  {href && (
+                    <button type="button" onClick={() => navigate(href)} className="shrink-0 text-navy-600 hover:text-navy-800" title={rec.action_label}>
+                      <Icon name="ArrowRight" className="size-4" />
+                    </button>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+        )}
+      </Card>
+
+      {/* Conversation shortcuts — open the floating copilot */}
+      <Card className="p-5">
+        <div className="mb-3 flex items-center justify-between">
+          <p className="flex items-center gap-2 font-bold text-ink"><Icon name="MessagesSquare" className="size-4 text-navy-600" /> Conversations</p>
+          <button type="button" onClick={() => openChat()} className="text-sm font-semibold text-navy-700 hover:underline">Open</button>
+        </div>
+        {conversations.length === 0 ? (
+          <button type="button" onClick={() => openChat()} className="w-full py-4 text-center text-sm text-muted hover:text-ink">
+            Start a conversation with your copilot.
+          </button>
+        ) : (
+          <ul className="space-y-1">
+            {conversations.map((c) => (
+              <li key={c.id}>
+                <button type="button" onClick={() => openChat({ conversationId: c.id })} className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left hover:bg-canvas">
+                  <Icon name={c.event_id ? 'CalendarClock' : 'MessagesSquare'} className="size-4 shrink-0 text-muted" />
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-sm font-medium text-ink">{c.title}</span>
+                    {c.last_message_at && <span className="block text-[11px] text-muted">{formatRelative(c.last_message_at)}</span>}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </Card>
     </div>
   )

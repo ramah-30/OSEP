@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import Spinner from './components/ui/Spinner'
 
 import PublicLayout from './components/layout/PublicLayout'
-import { GuestRoute, ProtectedRoute, RoleRoute, VerifiedRoute } from './routes/guards'
+import { GuestRoute, ProtectedRoute, RoleRoute, VendorCategoryRoute, VerifiedRoute } from './routes/guards'
 
 import Landing from './pages/Landing'
 import NotFound from './pages/NotFound'
@@ -64,7 +64,6 @@ import AiDocument from './pages/dashboard/planner/ai/AiDocument'
 import AiAutomation from './pages/dashboard/planner/ai/AiAutomation'
 import AiPrompts from './pages/dashboard/planner/ai/AiPrompts'
 import AiPrompt from './pages/dashboard/planner/ai/AiPrompt'
-import AiInsights from './pages/dashboard/planner/ai/AiInsights'
 import EventWorkspace from './pages/dashboard/planner/EventWorkspace'
 import WorkspaceOverview from './pages/dashboard/planner/workspace/WorkspaceOverview'
 import Timeline from './pages/dashboard/planner/workspace/Timeline'
@@ -241,7 +240,6 @@ export default function App() {
                 <Route path="prompts" element={<AiPrompts />} />
                 <Route path="prompts/:id" element={<AiPrompt />} />
                 <Route path="automation" element={<AiAutomation />} />
-                <Route path="insights" element={<AiInsights />} />
               </Route>
               <Route path="clients" element={<Clients />} />
               <Route path="booking-requests" element={<BookingRequestsInbox />} />
@@ -281,7 +279,9 @@ export default function App() {
               <Route path="services" element={<VendorServices />} />
               <Route path="portfolio" element={<VendorPortfolio />} />
               <Route path="availability" element={<VendorAvailability />} />
-              <Route path="venues" element={<VendorVenues />} />
+              <Route element={<VendorCategoryRoute slug="venues" />}>
+                <Route path="venues" element={<VendorVenues />} />
+              </Route>
               <Route path="requests" element={<VendorRequests />} />
               <Route path="quotations" element={<VendorQuotations />} />
               <Route path="contracts" element={<VendorContracts />} />

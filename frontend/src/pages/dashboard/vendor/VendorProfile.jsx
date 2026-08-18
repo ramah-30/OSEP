@@ -6,17 +6,13 @@ import Icon from '../../../components/ui/Icon'
 import Badge from '../../../components/ui/Badge'
 import Alert from '../../../components/ui/Alert'
 import PageHeader from '../../../components/ui/PageHeader'
-import { Field, SelectField } from '../../../components/ui/Field'
+import { Field } from '../../../components/ui/Field'
 import Textarea from '../../../components/ui/Textarea'
 import AvatarUploader from '../../../components/dashboard/AvatarUploader'
 import LoadState from '../../../components/dashboard/LoadState'
 import { useResource } from '../../../lib/useResource'
 import { api, applyServerErrors, parseApiError } from '../../../lib/api'
 
-const CATEGORIES = [
-  'Catering', 'Photography', 'Videography', 'Decoration', 'Music & DJ', 'Venue',
-  'Transport', 'Florals', 'Security', 'Lighting', 'Other',
-]
 const VERIFY_TONE = { verified: 'emerald', pending: 'amber', rejected: 'danger' }
 
 export default function VendorProfile() {
@@ -37,7 +33,6 @@ export default function VendorProfile() {
     if (profile) {
       reset({
         business_name: profile.business_name ?? '',
-        category: profile.category ?? '',
         location: profile.location ?? '',
         phone: profile.phone ?? '',
         website: profile.website ?? '',
@@ -91,14 +86,6 @@ export default function VendorProfile() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div className="grid gap-5 sm:grid-cols-2">
               <Field label="Business name" error={errors.business_name?.message} {...register('business_name')} />
-              <SelectField label="Category" {...register('category')}>
-                <option value="">Select a category</option>
-                {CATEGORIES.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </SelectField>
               <Field label="Location" error={errors.location?.message} {...register('location')} />
               <Field label="Phone" error={errors.phone?.message} {...register('phone')} />
               <Field label="Website" type="url" placeholder="https://" error={errors.website?.message} {...register('website')} />

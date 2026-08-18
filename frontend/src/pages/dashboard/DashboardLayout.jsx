@@ -29,7 +29,7 @@ export default function DashboardLayout() {
 
   // Derive the page title from the matching nav item (longest match wins so
   // '/dashboard/client/my-events' beats the '/dashboard/client' overview).
-  const items = navFor(user.account_type)
+  const items = navFor(user.account_type, user)
   const active = [...items]
     .map((item) => ({ item, href: hrefFor(user.account_type, item) }))
     .filter(({ href }) => pathname === href || pathname.startsWith(`${href}/`))

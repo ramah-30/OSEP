@@ -9,6 +9,7 @@ use App\Exceptions\AuthFailedException;
 use App\Models\ClientProfile;
 use App\Models\PlannerProfile;
 use App\Models\User;
+use App\Models\VendorCategory;
 use App\Models\VendorProfile;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -52,6 +53,16 @@ class AuthService
             $user->assignRole($data['account_type']);
 
             $this->ensureProfile($user);
+
+            if ($user->account_type === AccountType::Vendor) {
+                $categoryId = $data['category_id']
+                    ?? VendorCategory::firstOrCreate(
+                        ['name' => $data['category_name']],
+                        ['is_custom' => true, 'is_active' => true, 'created_by' => $user->id],
+                    )->id;
+
+                $user->vendorProfile->forceFill(['category_id' => $categoryId])->save();
+            }
 
             return $user;
         });

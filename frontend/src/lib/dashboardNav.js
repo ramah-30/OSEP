@@ -39,7 +39,13 @@ const VENDOR_NAV = [
   { label: 'Services', path: 'services', icon: 'Package', ready: true },
   { label: 'Portfolio', path: 'portfolio', icon: 'Image', ready: true },
   { label: 'Availability', path: 'availability', icon: 'CalendarClock', ready: true },
-  { label: 'My Venues', path: 'venues', icon: 'Building', ready: true },
+  {
+    label: 'My Venues',
+    path: 'venues',
+    icon: 'Building',
+    ready: true,
+    visibleFor: (user) => user.vendor_category_slug === 'venues',
+  },
   { label: 'Requests', path: 'requests', icon: 'ClipboardList', ready: true },
   { label: 'Quotations', path: 'quotations', icon: 'FileText', ready: true },
   { label: 'Contracts', path: 'contracts', icon: 'Handshake', ready: true },
@@ -72,8 +78,9 @@ const BASE_BY_TYPE = {
   admin: '/dashboard/admin',
 }
 
-export function navFor(accountType) {
-  return NAV_BY_TYPE[accountType] ?? []
+export function navFor(accountType, user) {
+  const items = NAV_BY_TYPE[accountType] ?? []
+  return items.filter((item) => !item.visibleFor || item.visibleFor(user))
 }
 
 export function baseFor(accountType) {

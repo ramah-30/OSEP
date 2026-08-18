@@ -12,7 +12,7 @@ import { useAuth } from '../../context/AuthContext'
  */
 export default function Sidebar({ onNavigate }) {
   const { user, logout } = useAuth()
-  const items = navFor(user.account_type)
+  const items = navFor(user.account_type, user)
   const pendingBookings = usePendingBookings(user.account_type)
 
   return (

@@ -69,10 +69,17 @@ class RegistrationTest extends TestCase
         Notification::fake();
 
         foreach ([AccountType::Vendor, AccountType::Client] as $type) {
-            $this->postJson('/api/v1/auth/register', $this->payload([
+            $overrides = [
                 'email' => $type->value.'@example.com',
                 'account_type' => $type->value,
-            ]))->assertCreated();
+            ];
+
+            if ($type === AccountType::Vendor) {
+                $overrides['category_name'] = 'Photographers';
+            }
+
+            $this->postJson('/api/v1/auth/register', $this->payload($overrides))
+                ->assertCreated();
 
             $user = User::firstWhere('email', $type->value.'@example.com');
 

@@ -72,7 +72,7 @@ class ProfileResource extends JsonResource
     {
         return [
             'business_name' => $p?->business_name,
-            'category' => $p?->category,
+            'category' => $p?->marketplaceCategory?->name,
             'description' => $p?->description,
             'location' => $p?->location,
             'phone' => $p?->phone,

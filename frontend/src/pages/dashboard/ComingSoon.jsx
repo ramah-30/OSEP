@@ -16,7 +16,7 @@ export default function ComingSoon() {
   const { pathname } = useLocation()
 
   const section = pathname.split('/').pop()
-  const item = navFor(user.account_type).find((nav) => nav.path === section)
+  const item = navFor(user.account_type, user).find((nav) => nav.path === section)
   const label = item?.label ?? 'This module'
 
   return (

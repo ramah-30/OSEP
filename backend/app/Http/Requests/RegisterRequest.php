@@ -6,6 +6,7 @@ use App\Enums\AccountType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\Validator;
 
 class RegisterRequest extends FormRequest
 {
@@ -33,7 +34,21 @@ class RegisterRequest extends FormRequest
             'account_type' => ['required', Rule::in(AccountType::values())],
             'country' => ['required', 'string', 'max:100'],
             'terms' => ['accepted'],
+            'category_id' => ['nullable', 'integer', 'exists:vendor_categories,id'],
+            'category_name' => ['nullable', 'string', 'max:100'],
         ];
+    }
+
+    public function withValidator(Validator $validator): void
+    {
+        $validator->after(function (Validator $validator) {
+            $isVendor = $this->input('account_type') === AccountType::Vendor->value;
+            $hasCategory = $this->filled('category_id') || $this->filled('category_name');
+
+            if ($isVendor && ! $hasCategory) {
+                $validator->errors()->add('category_id', 'Choose a business category, or add your own.');
+            }
+        });
     }
 
     /**

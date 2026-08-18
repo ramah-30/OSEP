@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\AccountType;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -28,6 +29,9 @@ class UserResource extends JsonResource
             'account_type' => $this->account_type->value,
             'account_type_label' => $this->account_type->label(),
             'dashboard_path' => $this->account_type->dashboardPath(),
+            'vendor_category_slug' => $this->account_type === AccountType::Vendor
+                ? $this->vendorProfile?->marketplaceCategory?->slug
+                : null,
             'status' => $this->status->value,
             'email_verified' => $this->hasVerifiedEmail(),
             'email_verified_at' => $this->email_verified_at?->toIso8601String(),

@@ -153,7 +153,7 @@ export const USER_CATEGORIES = [
     title: 'Event Planner',
     tagline: 'For professionals running events end to end',
     description:
-      'Manage weddings, conferences, corporate events, birthdays and exhibitions from a single command centre.',
+      'Manage weddings from a single command centre.',
     benefits: [
       'Every event, timeline and deadline in one view',
       'AI-drafted plans you can edit, not fight',
