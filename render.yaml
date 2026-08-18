@@ -33,7 +33,7 @@ services:
       - key: QUEUE_CONNECTION
         value: sync
       - key: MAIL_MAILER
-        value: false
+        sync: false
       # ---- Database (free managed MySQL: TiDB Cloud Serverless or Aiven) ----
       - key: DB_CONNECTION
         value: mysql
