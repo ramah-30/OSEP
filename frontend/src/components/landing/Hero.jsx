@@ -57,7 +57,7 @@ export default function Hero() {
             className="mt-6 max-w-2xl text-lead text-white/80 text-pretty"
           >
             From the first brief to the last guest, OSEP brings planning, budgets, vendors and
-            guest lists into one calm workspace — for planners, vendors and the people they do it
+            guest lists into one calm workspace, for planners, vendors and the people they do it
             all for.
           </motion.p>
 

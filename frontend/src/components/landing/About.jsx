@@ -38,7 +38,7 @@ export default function About() {
               two weeks later. That is where budgets slip and details quietly go missing.
             </p>
             <p>
-              OSEP exists to put those decisions in one place — visible to the planner running the
+              OSEP exists to put those decisions in one place, visible to the planner running the
               event, the vendors delivering it and the client paying for it. The technology should
               be doing the remembering, so the people can do the creating.
             </p>

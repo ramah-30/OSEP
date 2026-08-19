@@ -48,7 +48,7 @@ export default function Contact() {
           </h2>
           <p className="mt-5 text-lead text-muted text-pretty">
             Questions about the platform, a partnership, or bringing your vendor business on
-            board — we read everything that arrives here.
+            board, we read everything that arrives here.
           </p>
 
           <div className="mt-10 space-y-4">

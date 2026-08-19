@@ -48,7 +48,7 @@ export const AUTH_CAROUSEL = [
     image: authGoldenHourPicnic,
     icon: 'Users',
     title: 'One plan the whole team reads',
-    body: 'Planners, vendors and clients see the same live event — no more conflicting spreadsheets.',
+    body: 'Planners, vendors and clients see the same live event. No more conflicting spreadsheets.',
   },
   {
     image: authCateringBuffet,
@@ -60,7 +60,7 @@ export const AUTH_CAROUSEL = [
     image: authBalloonArchNight,
     icon: 'PartyPopper',
     title: 'Celebrations, elevated',
-    body: 'Galas, launches and milestone nights — planned with the same care as the biggest conference.',
+    body: 'Galas, launches and milestone nights planned with the same care as the biggest conference.',
   },
 ]
 
@@ -85,7 +85,7 @@ export const FEATURES = [
     icon: 'Sparkles',
     title: 'AI Event Planning',
     description:
-      'Describe the event you have in mind and get a working plan back — timeline, task owners and risk flags — in seconds rather than weeks.',
+      'Describe the event you have in mind and get a working plan back (timeline, task owners and risk flags) in seconds rather than weeks.',
     accent: 'purple',
   },
   {
@@ -106,7 +106,7 @@ export const FEATURES = [
     icon: 'Users',
     title: 'Guest Management',
     description:
-      'Invitations, RSVPs, dietary needs and seating in one list that everyone on the team reads from — no more conflicting spreadsheets.',
+      'Invitations, RSVPs, dietary needs and seating in one list that everyone on the team reads from. No more conflicting spreadsheets.',
     accent: 'navy',
   },
   {
@@ -136,7 +136,7 @@ export const STEPS = [
     icon: 'Wand2',
     title: 'Plan Event',
     description:
-      'Set the brief and let OSEP draft the timeline, budget and shortlist. Adjust anything — it stays in sync.',
+      'Set the brief and let OSEP draft the timeline, budget and shortlist. Adjust anything and it stays in sync.',
   },
   {
     icon: 'PartyPopper',
@@ -169,7 +169,7 @@ export const USER_CATEGORIES = [
     title: 'Vendor',
     tagline: 'For businesses that supply the event',
     description:
-      'Caterers, venues, DJs, decorators, photographers, florists, security and transport — reach planners actively booking.',
+      'Caterers, venues, DJs, decorators, photographers, florists, security and transport: reach planners actively booking.',
     benefits: [
       'A profile in front of planners with live briefs',
       'Enquiries that arrive with budget and date attached',
@@ -235,7 +235,7 @@ export const TESTIMONIALS = [
   },
   {
     name: 'Omar Haddad',
-    role: 'Client — company offsite for 400',
+    role: 'Client, company offsite for 400',
     quote:
       'I am not an events person. I approved decisions on my phone between meetings and the whole thing came in under budget. That is all I wanted.',
     image: unsplash('photo-1600180758890-6b94519a8ba6', { w: 200, h: 200, q: 70 }),
@@ -246,12 +246,12 @@ export const FAQS = [
   {
     question: 'Who is OSEP built for?',
     answer:
-      'Three groups. Event planners running events professionally, vendors supplying services such as catering, venues, music or photography, and clients — individuals or companies — organising an event of their own. You pick your account type when you register, and your workspace is shaped around it.',
+      'Three groups. Event planners running events professionally, vendors supplying services such as catering, venues, music or photography, and clients (individuals or companies) organising an event of their own. You pick your account type when you register, and your workspace is shaped around it.',
   },
   {
     question: 'What does the AI actually do?',
     answer:
-      'It turns a brief into a starting point: a draft timeline, a budget broken down by category, a vendor shortlist and flags on the parts most likely to slip. Everything it produces is editable — it drafts, you decide.',
+      'It turns a brief into a starting point: a draft timeline, a budget broken down by category, a vendor shortlist and flags on the parts most likely to slip. Everything it produces is editable: it drafts, you decide.',
   },
   {
     question: 'Do I need a credit card to create an account?',
@@ -266,7 +266,7 @@ export const FAQS = [
   {
     question: 'Can my whole team use one workspace?',
     answer:
-      'Yes. The platform is built on roles from day one, so team members and clients can be given exactly the access they need — nothing more.',
+      'Yes. The platform is built on roles from day one, so team members and clients can be given exactly the access they need, nothing more.',
   },
   {
     question: 'Is my data secure?',

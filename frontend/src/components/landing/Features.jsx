@@ -16,7 +16,7 @@ export default function Features() {
       <SectionHeading
         eyebrow="Platform"
         title="Everything an event needs, in one place"
-        description="Six tools that replace the spreadsheet sprawl — built to work together from the first brief to the final invoice."
+        description="Six tools that replace the spreadsheet sprawl, built to work together from the first brief to the final invoice."
       />
 
       <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
