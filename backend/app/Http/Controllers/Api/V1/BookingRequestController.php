@@ -7,6 +7,7 @@ use App\Enums\EventStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RespondBookingRequestRequest;
 use App\Http\Resources\PlannerBookingRequestResource;
+use App\Models\Budget;
 use App\Models\Event;
 use App\Models\Notification;
 use App\Models\PlannerBookingRequest;
@@ -61,7 +62,7 @@ class BookingRequestController extends Controller
         $data = $request->validated();
 
         if ($data['decision'] === 'accepted') {
-            return $this->accept($planner, $bookingRequest, $data['planner_note'] ?? null);
+            return $this->accept($planner, $bookingRequest, $data['planner_note'] ?? null, $data['quoted_budget'] ?? null);
         }
 
         $bookingRequest->update([
@@ -84,6 +85,7 @@ class BookingRequestController extends Controller
         \App\Models\User $planner,
         PlannerBookingRequest $bookingRequest,
         ?string $plannerNote,
+        ?float $quotedBudget = null,
     ): JsonResponse {
         $client = $bookingRequest->client()->first();
 
@@ -101,16 +103,28 @@ class BookingRequestController extends Controller
             'venue'           => $bookingRequest->venue,
             'location'        => $bookingRequest->location,
             'expected_guests' => $bookingRequest->expected_guests,
+            'budget_total'    => $quotedBudget ?? 0,
             'status'          => EventStatus::Planning,
             'source'          => 'booking_accepted',
             'progress'        => 0,
         ]);
 
         $bookingRequest->update([
-            'status'       => BookingRequestStatus::Accepted,
-            'planner_note' => $plannerNote,
-            'event_id'     => $event->id,
+            'status'        => BookingRequestStatus::Accepted,
+            'planner_note'  => $plannerNote,
+            'quoted_budget' => $quotedBudget,
+            'event_id'      => $event->id,
         ]);
+
+        // A quote becomes the new event's starting budget, so the workspace
+        // isn't empty the moment it appears.
+        if ($quotedBudget !== null) {
+            Budget::create([
+                'event_id' => $event->id,
+                'currency' => 'TZS',
+                'estimated_total' => $quotedBudget,
+            ]);
+        }
 
         Notification::create([
             'user_id' => $bookingRequest->client_id,

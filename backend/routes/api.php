@@ -55,6 +55,7 @@ use App\Http\Controllers\Api\V1\Ai\MeetingController as AiMeetingController;
 // Client-planner booking
 use App\Http\Controllers\Api\V1\BookingRequestController;
 use App\Http\Controllers\Api\V1\ClientBookingController;
+use App\Http\Controllers\Api\V1\ClientInvoiceController;
 use App\Http\Controllers\Api\V1\ClientPlannerReviewController;
 use App\Http\Controllers\Api\V1\PlannerReviewController;
 use App\Http\Controllers\Api\V1\PublicPlannerController;
@@ -212,6 +213,11 @@ Route::middleware('auth:sanctum')->group(function () {
         // longer surfaces them, so a planner's approval flow keeps working.
         Route::get('approvals', [ApprovalController::class, 'index']);
         Route::post('approvals/{approval}/respond', [ApprovalController::class, 'respond']);
+
+        // Invoices sent by the planner, plus the simulated mobile-money pay action.
+        Route::get('invoices', [ClientInvoiceController::class, 'index']);
+        Route::get('invoices/{invoice}', [ClientInvoiceController::class, 'show']);
+        Route::post('invoices/{invoice}/pay', [ClientInvoiceController::class, 'pay']);
 
         // Browse planners to book
         Route::get('planners', [PublicPlannerController::class, 'index']);
@@ -517,6 +523,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('contracts', [MpContractController::class, 'index']);
             Route::get('contracts/{contract}', [MpContractController::class, 'show']);
             Route::post('contracts/{contract}/sign', [MpContractController::class, 'sign']);
+            Route::post('contracts/{contract}/pay', [MpContractController::class, 'pay']);
 
             // Reviews
             Route::get('reviews', [MpReviewController::class, 'index']);

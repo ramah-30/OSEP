@@ -6,12 +6,12 @@ import Button from '../../../components/ui/Button'
 import Icon from '../../../components/ui/Icon'
 import EmptyState from '../../../components/ui/EmptyState'
 import LoadState from '../../../components/dashboard/LoadState'
-import ConfirmDialog from '../../../components/ui/ConfirmDialog'
 import Drawer from '../../../components/ui/Drawer'
 import Textarea from '../../../components/ui/Textarea'
+import { Field } from '../../../components/ui/Field'
 import { useResource } from '../../../lib/useResource'
 import { api, parseApiError } from '../../../lib/api'
-import { formatDate } from '../../../lib/format'
+import { formatDate, formatCurrency } from '../../../lib/format'
 
 const STATUS_TONE = {
   pending: 'warning',
@@ -24,6 +24,7 @@ export default function BookingRequestsInbox() {
   const { data, loading, error, reload } = useResource('/planner-booking-requests')
   const [responding, setResponding] = useState(null) // { request, decision }
   const [note, setNote] = useState('')
+  const [quotedBudget, setQuotedBudget] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [responseError, setResponseError] = useState(null)
 
@@ -33,6 +34,8 @@ export default function BookingRequestsInbox() {
   function openRespond(request, decision) {
     setResponding({ request, decision })
     setNote('')
+    // Pre-fill with what the client asked for — the planner adjusts from there.
+    setQuotedBudget(request.proposed_budget != null ? String(request.proposed_budget) : '')
     setResponseError(null)
   }
 
@@ -44,6 +47,7 @@ export default function BookingRequestsInbox() {
       await api.post(`/planner-booking-requests/${responding.request.id}/respond`, {
         decision: responding.decision,
         planner_note: note || undefined,
+        quoted_budget: responding.decision === 'accepted' && quotedBudget ? Number(quotedBudget) : undefined,
       })
       setResponding(null)
       reload()
@@ -110,6 +114,9 @@ export default function BookingRequestsInbox() {
               <p className="font-semibold text-ink">{responding.request.client?.full_name}</p>
               {responding.request.event_type && <p>Type: {responding.request.event_type}</p>}
               {responding.request.event_date && <p>Date: {formatDate(responding.request.event_date)}</p>}
+              {responding.request.proposed_budget != null && (
+                <p>Proposed budget: {formatCurrency(responding.request.proposed_budget)}</p>
+              )}
               {responding.request.message && (
                 <p className="mt-2 border-t border-line pt-2 italic">{responding.request.message}</p>
               )}
@@ -118,6 +125,18 @@ export default function BookingRequestsInbox() {
 
           {responseError && (
             <p className="text-sm text-danger">{responseError}</p>
+          )}
+
+          {responding?.decision === 'accepted' && (
+            <Field
+              label="Quoted budget (optional)"
+              type="number"
+              min="0"
+              step="1000"
+              placeholder="Leave blank to set the budget later"
+              value={quotedBudget}
+              onChange={(e) => setQuotedBudget(e.target.value)}
+            />
           )}
 
           <Textarea
@@ -174,6 +193,16 @@ function RequestCard({ request, onAccept, onDecline }) {
             {request.expected_guests && (
               <span className="flex items-center gap-1.5">
                 <Icon name="Users" className="size-3.5" />{request.expected_guests} guests
+              </span>
+            )}
+            {request.proposed_budget != null && (
+              <span className="flex items-center gap-1.5">
+                <Icon name="Wallet" className="size-3.5" />Proposed {formatCurrency(request.proposed_budget)}
+              </span>
+            )}
+            {request.quoted_budget != null && (
+              <span className="flex items-center gap-1.5">
+                <Icon name="CircleDollarSign" className="size-3.5" />Quoted {formatCurrency(request.quoted_budget)}
               </span>
             )}
           </div>

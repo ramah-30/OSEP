@@ -3,7 +3,7 @@ import Icon from '../ui/Icon'
 import Badge from '../ui/Badge'
 import EmptyState from '../ui/EmptyState'
 import { formatCurrency, formatDate } from '../../lib/format'
-import { statusMeta, CONTRACT_STATUS } from '../../lib/marketplace'
+import { statusMeta, CONTRACT_STATUS, CONTRACT_PAYMENT_STATUS } from '../../lib/marketplace'
 
 /**
  * Shared contract list. `perspective` decides which party's name to emphasise
@@ -29,11 +29,24 @@ export default function ContractsList({ contracts, perspective = 'planner', rend
                   <p className="text-xs text-muted">{c.reference} · {counterparty}</p>
                 </div>
               </div>
-              <Badge tone={meta.tone}>{meta.label}</Badge>
+              <div className="flex flex-col items-end gap-1.5">
+                <Badge tone={meta.tone}>{meta.label}</Badge>
+                {c.amount != null && c.amount > 0 && (
+                  <Badge tone={statusMeta(CONTRACT_PAYMENT_STATUS, c.payment_status).tone}>
+                    {statusMeta(CONTRACT_PAYMENT_STATUS, c.payment_status).label}
+                  </Badge>
+                )}
+              </div>
             </div>
 
             <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
-              {c.amount != null && <span className="flex items-center gap-1.5"><Icon name="CircleDollarSign" className="size-4" />{formatCurrency(c.amount)}</span>}
+              {c.amount != null && (
+                <span className="flex items-center gap-1.5">
+                  <Icon name="CircleDollarSign" className="size-4" />
+                  {formatCurrency(c.amount)}
+                  {c.amount > 0 && c.balance > 0 && <span className="text-xs">({formatCurrency(c.balance)} due)</span>}
+                </span>
+              )}
               {c.start_date && <span className="flex items-center gap-1.5"><Icon name="Calendar" className="size-4" />{formatDate(c.start_date)}</span>}
               {c.signed_at && <span className="flex items-center gap-1.5"><Icon name="Check" className="size-4 text-emerald-500" />Signed {formatDate(c.signed_at)}</span>}
               {c.event_title && <span className="flex items-center gap-1.5"><Icon name="CalendarClock" className="size-4" />{c.event_title}</span>}

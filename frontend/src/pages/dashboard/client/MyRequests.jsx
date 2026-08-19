@@ -10,7 +10,7 @@ import LoadState from '../../../components/dashboard/LoadState'
 import ConfirmDialog from '../../../components/ui/ConfirmDialog'
 import { useResource } from '../../../lib/useResource'
 import { api } from '../../../lib/api'
-import { formatDate } from '../../../lib/format'
+import { formatDate, formatCurrency } from '../../../lib/format'
 
 const STATUS_TONE = {
   pending: 'warning',
@@ -73,6 +73,16 @@ export default function MyRequests() {
                         {r.expected_guests && (
                           <span className="flex items-center gap-1.5">
                             <Icon name="Users" className="size-3.5" />{r.expected_guests} guests
+                          </span>
+                        )}
+                        {r.proposed_budget != null && (
+                          <span className="flex items-center gap-1.5">
+                            <Icon name="Wallet" className="size-3.5" />Proposed {formatCurrency(r.proposed_budget)}
+                          </span>
+                        )}
+                        {r.quoted_budget != null && (
+                          <span className="flex items-center gap-1.5">
+                            <Icon name="CircleDollarSign" className="size-3.5" />Quoted {formatCurrency(r.quoted_budget)}
                           </span>
                         )}
                         <span className="flex items-center gap-1.5">

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\MobileNetwork;
 use App\Enums\PaymentDirection;
 use App\Enums\PaymentMethod;
 use App\Enums\PaymentStatus;
@@ -19,6 +20,7 @@ class Payment extends Model
         'planner_id',
         'event_id',
         'invoice_id',
+        'contract_id',
         'vendor_assigned_id',
         'payment_schedule_id',
         'direction',
@@ -28,6 +30,8 @@ class Payment extends Model
         'currency',
         'transaction_ref',
         'reference',
+        'network',
+        'payer_phone',
         'status',
         'paid_at',
         'notes',
@@ -40,6 +44,7 @@ class Payment extends Model
             'amount' => 'decimal:2',
             'direction' => PaymentDirection::class,
             'method' => PaymentMethod::class,
+            'network' => MobileNetwork::class,
             'status' => PaymentStatus::class,
             'paid_at' => 'date',
         ];
@@ -59,6 +64,14 @@ class Payment extends Model
     public function invoice(): BelongsTo
     {
         return $this->belongsTo(Invoice::class);
+    }
+
+    /**
+     * @return BelongsTo<Contract, $this>
+     */
+    public function contract(): BelongsTo
+    {
+        return $this->belongsTo(Contract::class);
     }
 
     /**

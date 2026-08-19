@@ -62,6 +62,7 @@ class ClientBookingController extends Controller
             'event_type'      => $data['event_type'] ?? null,
             'event_date'      => $data['event_date'] ?? null,
             'expected_guests' => $data['expected_guests'] ?? null,
+            'proposed_budget' => $data['proposed_budget'] ?? null,
             'venue'           => $data['venue'] ?? null,
             'location'        => $data['location'] ?? null,
             'message'         => $data['message'] ?? null,

@@ -17,11 +17,13 @@ class PlannerBookingRequest extends Model
         'event_type',
         'event_date',
         'expected_guests',
+        'proposed_budget',
         'venue',
         'location',
         'message',
         'status',
         'planner_note',
+        'quoted_budget',
         'event_id',
     ];
 
@@ -31,6 +33,8 @@ class PlannerBookingRequest extends Model
             'event_date' => 'date',
             'status' => BookingRequestStatus::class,
             'expected_guests' => 'integer',
+            'proposed_budget' => 'decimal:2',
+            'quoted_budget' => 'decimal:2',
         ];
     }
 

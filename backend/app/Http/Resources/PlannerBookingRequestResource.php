@@ -18,10 +18,12 @@ class PlannerBookingRequestResource extends JsonResource
             'event_type'      => $this->event_type,
             'event_date'      => $this->event_date?->toDateString(),
             'expected_guests' => $this->expected_guests,
+            'proposed_budget' => $this->proposed_budget !== null ? (float) $this->proposed_budget : null,
             'venue'           => $this->venue,
             'location'        => $this->location,
             'message'         => $this->message,
             'planner_note'    => $this->planner_note,
+            'quoted_budget'   => $this->quoted_budget !== null ? (float) $this->quoted_budget : null,
             'created_at'      => $this->created_at->toIso8601String(),
             'planner'         => $this->whenLoaded('planner', fn () => [
                 'id'           => $this->planner->id,

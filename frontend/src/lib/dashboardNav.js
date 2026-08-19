@@ -28,7 +28,7 @@ const CLIENT_NAV = [
   { label: 'Guest List', path: 'guests', icon: 'Users', ready: true },
   { label: 'Budget Overview', path: 'budget', icon: 'Wallet', ready: true },
   { label: 'Messages', path: 'messages', icon: 'MessageSquare', ready: true },
-  { label: 'Payments', path: 'payments', icon: 'CreditCard' },
+  { label: 'Payments', path: 'payments', icon: 'CreditCard', ready: true },
   { label: 'Profile', path: 'profile', icon: 'User', ready: true },
   { label: 'Settings', path: 'settings', icon: 'Settings', ready: true },
 ]

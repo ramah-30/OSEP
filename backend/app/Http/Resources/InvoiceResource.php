@@ -45,6 +45,11 @@ class InvoiceResource extends JsonResource
                 'name' => $this->client->full_name,
                 'email' => $this->client->email,
             ] : null),
+            'planner' => $this->whenLoaded('planner', fn () => $this->planner ? [
+                'id' => $this->planner->id,
+                'name' => $this->planner->full_name,
+                'phone' => $this->planner->phone,
+            ] : null),
             'event' => $this->whenLoaded('event', fn () => $this->event ? [
                 'id' => $this->event->id,
                 'title' => $this->event->title,

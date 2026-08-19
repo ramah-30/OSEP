@@ -12,8 +12,10 @@ class Receipt extends Model
         'payment_id',
         'planner_id',
         'client_id',
+        'vendor_id',
         'event_id',
         'invoice_id',
+        'contract_id',
         'amount',
         'currency',
         'issued_at',
@@ -57,5 +59,21 @@ class Receipt extends Model
     public function invoice(): BelongsTo
     {
         return $this->belongsTo(Invoice::class);
+    }
+
+    /**
+     * @return BelongsTo<User, $this>
+     */
+    public function vendor(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'vendor_id');
+    }
+
+    /**
+     * @return BelongsTo<Contract, $this>
+     */
+    public function contract(): BelongsTo
+    {
+        return $this->belongsTo(Contract::class);
     }
 }

@@ -57,6 +57,12 @@ export const CONTRACT_STATUS = {
   cancelled: { label: 'Cancelled', tone: 'danger' },
 }
 
+export const CONTRACT_PAYMENT_STATUS = {
+  unpaid: { label: 'Unpaid', tone: 'muted' },
+  partially_paid: { label: 'Partially paid', tone: 'amber' },
+  paid: { label: 'Paid', tone: 'emerald' },
+}
+
 export const SLOT_STATUS = {
   available: { label: 'Available', tone: 'emerald', dot: 'bg-emerald-500' },
   reserved: { label: 'Reserved', tone: 'amber', dot: 'bg-warning' },

@@ -6,18 +6,13 @@ import Card from '../../components/ui/Card'
 import Icon from '../../components/ui/Icon'
 import Alert from '../../components/ui/Alert'
 import Spinner from '../../components/ui/Spinner'
-import { Field, SelectField } from '../../components/ui/Field'
+import { Field } from '../../components/ui/Field'
 import Textarea from '../../components/ui/Textarea'
 import RatingStars from '../../components/marketplace/RatingStars'
 import PlannerBadge from '../../components/marketplace/PlannerBadge'
 import { api, parseApiError } from '../../lib/api'
 import { useAuth } from '../../context/AuthContext'
 import { formatDate } from '../../lib/format'
-
-const EVENT_TYPES = [
-  'Wedding', 'Birthday', 'Corporate', 'Conference', 'Baby Shower',
-  'Anniversary', 'Graduation', 'Concert', 'Exhibition', 'Other',
-]
 
 export default function PlannerBookingPage() {
   const { slug } = useParams()
@@ -31,7 +26,10 @@ export default function PlannerBookingPage() {
   const [submitted, setSubmitted] = useState(false)
   const [formError, setFormError] = useState(null)
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm()
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+    // Wedding-only platform for now: the type is fixed, carried through on submit.
+    defaultValues: { event_type: 'wedding' },
+  })
 
   useEffect(() => {
     api.get(`/planners/${slug}`)
@@ -179,10 +177,8 @@ export default function PlannerBookingPage() {
             {formError && <Alert tone="error" className="mb-6">{formError}</Alert>}
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              <SelectField label="Event type" error={errors.event_type?.message} {...register('event_type')}>
-                <option value="">Select a type</option>
-                {EVENT_TYPES.map((t) => <option key={t} value={t.toLowerCase()}>{t}</option>)}
-              </SelectField>
+              <input type="hidden" {...register('event_type')} />
+              <Field label="Event type" value="Wedding" disabled />
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <Field
@@ -210,6 +206,15 @@ export default function PlannerBookingPage() {
                   placeholder="Optional"
                   error={errors.location?.message}
                   {...register('location')}
+                />
+                <Field
+                  label="Proposed budget"
+                  type="number"
+                  min="0"
+                  step="1000"
+                  placeholder="Optional — a starting point for the planner's quote"
+                  error={errors.proposed_budget?.message}
+                  {...register('proposed_budget')}
                 />
               </div>
 

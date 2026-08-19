@@ -7,7 +7,6 @@ import RatingStars from '../../../components/marketplace/RatingStars'
 import PlannerBadge from '../../../components/marketplace/PlannerBadge'
 import { useResource } from '../../../lib/useResource'
 import { formatDate } from '../../../lib/format'
-import { cn } from '../../../lib/cn'
 
 /**
  * The planner's own reviews view: their auto-earned trust badge, aggregate

@@ -85,6 +85,7 @@ import FindPlanner from './pages/dashboard/client/FindPlanner'
 import Progress from './pages/dashboard/client/Progress'
 import ClientGuests from './pages/dashboard/client/Guests'
 import BudgetOverview from './pages/dashboard/client/BudgetOverview'
+import ClientPayments from './pages/dashboard/client/Payments'
 
 import VendorOverview from './pages/dashboard/vendor/VendorOverview'
 import VendorProfile from './pages/dashboard/vendor/VendorProfile'
@@ -264,6 +265,7 @@ export default function App() {
               <Route path="progress" element={<Progress />} />
               <Route path="guests" element={<ClientGuests />} />
               <Route path="budget" element={<BudgetOverview />} />
+              <Route path="payments" element={<ClientPayments />} />
               <Route path="messages" element={<Messages />} />
               <Route path="profile" element={<ClientProfile />} />
               <Route path="settings" element={<Settings />} />

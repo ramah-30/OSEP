@@ -11,7 +11,8 @@ import LoadState from '../../../components/dashboard/LoadState'
 import { useResource } from '../../../lib/useResource'
 import { api, applyServerErrors, parseApiError } from '../../../lib/api'
 
-const EVENT_TYPES = ['Wedding', 'Birthday', 'Corporate', 'Conference', 'Anniversary', 'Graduation', 'Other']
+// Wedding-only platform for now.
+const EVENT_TYPES = ['Wedding']
 const COMMS = ['Email', 'Phone', 'WhatsApp', 'SMS']
 
 export default function ClientProfile() {

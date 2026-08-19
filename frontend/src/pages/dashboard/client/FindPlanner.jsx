@@ -12,15 +12,10 @@ import Drawer from '../../../components/ui/Drawer'
 import LoadState from '../../../components/dashboard/LoadState'
 import RatingStars from '../../../components/marketplace/RatingStars'
 import PlannerBadge from '../../../components/marketplace/PlannerBadge'
-import { Field, SelectField } from '../../../components/ui/Field'
+import { Field } from '../../../components/ui/Field'
 import Textarea from '../../../components/ui/Textarea'
 import { useResource } from '../../../lib/useResource'
 import { api, parseApiError } from '../../../lib/api'
-
-const EVENT_TYPES = [
-  'Wedding', 'Birthday', 'Corporate', 'Conference', 'Baby Shower',
-  'Anniversary', 'Graduation', 'Concert', 'Exhibition', 'Other',
-]
 
 export default function FindPlanner() {
   const navigate = useNavigate()
@@ -43,7 +38,10 @@ export default function FindPlanner() {
 
   const { data, loading, error, reload } = useResource(path)
 
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm()
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm({
+    // Wedding-only platform for now: the type is fixed, carried through on submit.
+    defaultValues: { event_type: 'wedding' },
+  })
 
   function openBooking(planner) {
     setSelectedPlanner(planner)
@@ -202,16 +200,8 @@ export default function FindPlanner() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             {bookError && <Alert tone="error">{bookError}</Alert>}
 
-            <SelectField
-              label="Event type"
-              error={errors.event_type?.message}
-              {...register('event_type')}
-            >
-              <option value="">Select a type</option>
-              {EVENT_TYPES.map((t) => (
-                <option key={t} value={t.toLowerCase()}>{t}</option>
-              ))}
-            </SelectField>
+            <input type="hidden" {...register('event_type')} />
+            <Field label="Event type" value="Wedding" disabled />
 
             <div className="grid gap-5 sm:grid-cols-2">
               <Field
@@ -239,6 +229,15 @@ export default function FindPlanner() {
                 placeholder="Optional"
                 error={errors.location?.message}
                 {...register('location')}
+              />
+              <Field
+                label="Proposed budget"
+                type="number"
+                min="0"
+                step="1000"
+                placeholder="Optional — a starting point for the planner's quote"
+                error={errors.proposed_budget?.message}
+                {...register('proposed_budget')}
               />
             </div>
 

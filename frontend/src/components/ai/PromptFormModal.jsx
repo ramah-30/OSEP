@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react'
 import Button from '../ui/Button'
-import Icon from '../ui/Icon'
 import Modal from '../ui/Modal'
 import ListboxSelect from '../ui/ListboxSelect'
 import { api, parseApiError } from '../../lib/api'

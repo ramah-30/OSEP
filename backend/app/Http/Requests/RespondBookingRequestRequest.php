@@ -19,6 +19,7 @@ class RespondBookingRequestRequest extends FormRequest
         return [
             'decision'     => ['required', 'in:accepted,declined'],
             'planner_note' => ['nullable', 'string', 'max:2000'],
+            'quoted_budget' => ['nullable', 'numeric', 'min:0'],
         ];
     }
 }

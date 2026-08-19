@@ -2,14 +2,24 @@
 
 namespace App\Models;
 
+use App\Enums\ContractPaymentStatus;
 use App\Enums\ContractStatus;
+use App\Enums\PaymentStatus;
 use App\Models\Concerns\BelongsToProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Contract extends Model
 {
     use BelongsToProvider;
+
+    /** Mirrors the migration's DB defaults so a freshly created() instance
+     * has them in memory too, before any round trip to the database. */
+    protected $attributes = [
+        'amount_paid' => 0,
+        'payment_status' => 'unpaid',
+    ];
 
     protected $fillable = [
         'quotation_id',
@@ -22,6 +32,8 @@ class Contract extends Model
         'title',
         'status',
         'amount',
+        'amount_paid',
+        'payment_status',
         'currency',
         'terms',
         'document_path',
@@ -34,7 +46,9 @@ class Contract extends Model
     {
         return [
             'status' => ContractStatus::class,
+            'payment_status' => ContractPaymentStatus::class,
             'amount' => 'decimal:2',
+            'amount_paid' => 'decimal:2',
             'start_date' => 'date',
             'end_date' => 'date',
             'signed_at' => 'datetime',
@@ -63,5 +77,42 @@ class Contract extends Model
     public function event(): BelongsTo
     {
         return $this->belongsTo(Event::class);
+    }
+
+    /**
+     * @return HasMany<Payment, $this>
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class)->latest('paid_at');
+    }
+
+    public function balance(): float
+    {
+        return (float) $this->amount - (float) $this->amount_paid;
+    }
+
+    /**
+     * Re-derive `amount_paid` from completed outgoing payments and advance
+     * `payment_status` accordingly. Deliberately separate from `status` —
+     * signing/active/completed is the contract's legal lifecycle, this is
+     * just how much of it has been paid.
+     */
+    public function recalculatePaid(): void
+    {
+        $paid = (float) $this->payments()
+            ->where('direction', 'outgoing')
+            ->where('status', PaymentStatus::Completed->value)
+            ->sum('amount');
+
+        $this->amount_paid = $paid;
+
+        $this->payment_status = match (true) {
+            (float) $this->amount > 0 && $paid >= (float) $this->amount => ContractPaymentStatus::Paid,
+            $paid > 0 => ContractPaymentStatus::PartiallyPaid,
+            default => ContractPaymentStatus::Unpaid,
+        };
+
+        $this->save();
     }
 }

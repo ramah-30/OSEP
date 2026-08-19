@@ -45,4 +45,24 @@ trait BelongsToProvider
 
         return $this->vendor?->vendorProfile?->business_name ?? $this->vendor?->full_name;
     }
+
+    /** The user id to notify/pay — the vendor themself, or the venue's owner. */
+    public function providerId(): ?int
+    {
+        if ($this->venue_id) {
+            return MarketplaceVenue::whereKey($this->venue_id)->value('owner_id');
+        }
+
+        return $this->vendor_id;
+    }
+
+    /** The provider's phone number, whichever kind it is. */
+    public function providerPhone(): ?string
+    {
+        if ($this->venue_id) {
+            return $this->venue?->owner?->phone;
+        }
+
+        return $this->vendor?->phone;
+    }
 }
