@@ -49,7 +49,10 @@ return [
             'root' => env('FILESYSTEM_PUBLIC_DRIVER', 'local') === 'local' ? storage_path('app/public') : null,
             'url' => env('AWS_URL', env('APP_URL').'/storage'),
             'visibility' => 'public',
-            'throw' => false,
+            // A failed write here is a genuine problem (a returned URL for a
+            // file that doesn't exist), so this disk should throw, not just
+            // report a URL and move on.
+            'throw' => true,
             'report' => false,
             'key' => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
