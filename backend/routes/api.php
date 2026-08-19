@@ -17,7 +17,6 @@ use App\Http\Controllers\Api\V1\DocumentController;
 use App\Http\Controllers\Api\V1\EmailVerificationController;
 use App\Http\Controllers\Api\V1\EventApprovalController;
 use App\Http\Controllers\Api\V1\EventController;
-use App\Http\Controllers\Api\V1\GoogleAuthController;
 use App\Http\Controllers\Api\V1\GuestCategoryController;
 use App\Http\Controllers\Api\V1\GuestController;
 use App\Http\Controllers\Api\V1\GuestDashboardController;
@@ -135,11 +134,6 @@ Route::prefix('auth')->group(function () {
 
     Route::post('resend-verification', [EmailVerificationController::class, 'resend'])
         ->middleware('throttle:verification-resend');
-
-    Route::get('google/redirect', [GoogleAuthController::class, 'redirect']);
-    Route::get('google/callback', [GoogleAuthController::class, 'callback']);
-    Route::post('google/exchange', [GoogleAuthController::class, 'exchange'])
-        ->middleware('throttle:login');
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);

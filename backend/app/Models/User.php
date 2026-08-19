@@ -32,7 +32,6 @@ class User extends Authenticatable implements MustVerifyEmailContract
         'password',
         'account_type',
         'country',
-        'google_id',
         'avatar_url',
         'status',
         'account_claimed',
@@ -47,7 +46,6 @@ class User extends Authenticatable implements MustVerifyEmailContract
     protected $hidden = [
         'password',
         'remember_token',
-        'google_id',
     ];
 
     /**

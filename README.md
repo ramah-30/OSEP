@@ -130,11 +130,6 @@ MAIL_PASSWORD=
 MAIL_SCHEME=tls
 MAIL_FROM_ADDRESS=no-reply@osep.app
 MAIL_FROM_NAME=OSEP
-
-# Google OAuth (optional — the button reports "not configured" until set)
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-GOOGLE_REDIRECT_URI=http://localhost:8001/api/v1/auth/google/callback
 ```
 
 With `MAIL_MAILER=log`, verification and reset emails are written to
@@ -171,8 +166,6 @@ All routes are prefixed `/api/v1` and return a fixed envelope:
 | POST | `/auth/reset-password` | — |
 | GET | `/auth/verify-email/{id}/{hash}` | signed |
 | POST | `/auth/resend-verification` | — |
-| GET | `/auth/google/redirect` | — |
-| GET | `/auth/google/callback` | — |
 | POST | `/contact` | — |
 
 ### Phase 2 — the workspace (all `Bearer`)

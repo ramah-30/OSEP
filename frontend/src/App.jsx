@@ -11,7 +11,6 @@ import Privacy from './pages/legal/Privacy'
 import Terms from './pages/legal/Terms'
 
 import ForgotPassword from './pages/auth/ForgotPassword'
-import GoogleCallback from './pages/auth/GoogleCallback'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import ResetPassword from './pages/auth/ResetPassword'
@@ -174,7 +173,6 @@ export default function App() {
 
         {/* Reachable either way — the API has already done the work */}
         <Route path="/verify-email/callback" element={<VerifyEmailCallback />} />
-        <Route path="/auth/google/callback" element={<GoogleCallback />} />
 
         {/* Signed in, email not yet confirmed */}
         <Route element={<ProtectedRoute />}>

@@ -16,7 +16,6 @@ enum AuthEvent: string
     case PasswordReset = 'password_reset';
     case EmailVerified = 'email_verified';
     case VerificationResent = 'verification_resent';
-    case GoogleLogin = 'google_login';
     case EmailChanged = 'email_changed';
     case PasswordChanged = 'password_changed';
 }

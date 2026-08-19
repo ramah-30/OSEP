@@ -3,8 +3,6 @@ import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-do
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AuthLayout from '../../components/layout/AuthLayout'
-import Divider from '../../components/auth/Divider'
-import GoogleButton from '../../components/auth/GoogleButton'
 import Alert from '../../components/ui/Alert'
 import Button from '../../components/ui/Button'
 import Checkbox from '../../components/ui/Checkbox'
@@ -81,9 +79,6 @@ export default function Login() {
       }
     >
       <div className="space-y-6">
-        <GoogleButton />
-        <Divider>or sign in with email</Divider>
-
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
           {notice && <Alert tone={notice.tone}>{notice.text}</Alert>}
           {formError && <Alert tone="error">{formError}</Alert>}

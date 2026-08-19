@@ -121,22 +121,21 @@ class LoginTest extends TestCase
         ]);
     }
 
-    public function test_a_google_only_account_gets_the_same_generic_answer(): void
+    public function test_an_account_with_no_password_set_gets_the_same_generic_answer(): void
     {
         User::factory()->create([
-            'email' => 'google@example.com',
+            'email' => 'no-password@example.com',
             'password' => null,
-            'google_id' => '1234567890',
         ]);
 
         $this->postJson('/api/v1/auth/login', [
-            'email' => 'google@example.com',
+            'email' => 'no-password@example.com',
             'password' => 'Password123!',
         ])
             ->assertStatus(401)
             ->assertJsonPath('message', self::GENERIC_FAILURE);
 
-        $log = \App\Models\AuthAuditLog::firstWhere('email', 'google@example.com');
+        $log = \App\Models\AuthAuditLog::firstWhere('email', 'no-password@example.com');
 
         $this->assertSame('password_not_set', $log->metadata['reason']);
     }

@@ -127,61 +127,6 @@ class AuthService
     }
 
     /**
-     * Sign in — or transparently create — a user from a Google profile.
-     *
-     * @return array{user: User, token: string}
-     */
-    public function loginWithGoogle(\Laravel\Socialite\Contracts\User $googleUser, Request $request): array
-    {
-        $email = strtolower((string) $googleUser->getEmail());
-
-        $user = User::where('google_id', $googleUser->getId())
-            ->orWhere('email', $email)
-            ->first();
-
-        if ($user) {
-            $user->forceFill([
-                'google_id' => $googleUser->getId(),
-                'avatar_url' => $user->avatar_url ?: $googleUser->getAvatar(),
-                // Google has already proven ownership of the address.
-                'email_verified_at' => $user->email_verified_at ?? now(),
-                'status' => $user->isSuspended() ? UserStatus::Suspended : UserStatus::Active,
-            ])->save();
-        } else {
-            [$first, $last] = $this->splitName($googleUser->getName() ?: $email);
-
-            $user = User::create([
-                'first_name' => $first,
-                'last_name' => $last,
-                'email' => $email,
-                'google_id' => $googleUser->getId(),
-                'avatar_url' => $googleUser->getAvatar(),
-                // Defaults to Client; the user can be upgraded later without
-                // blocking the OAuth hand-off on a profession question.
-                'account_type' => AccountType::Client,
-                'status' => UserStatus::Active,
-                'email_verified_at' => now(),
-            ]);
-
-            $user->assignRole(AccountType::Client->value);
-            $this->ensureProfile($user);
-        }
-
-        if ($user->isSuspended()) {
-            $this->audit->log(AuthEvent::LoginBlocked, $user, $email, $request, ['reason' => 'suspended']);
-
-            throw new AuthFailedException('This account has been suspended. Please contact support.');
-        }
-
-        $this->audit->log(AuthEvent::GoogleLogin, $user, $email, $request);
-
-        return [
-            'user' => $user->load('roles'),
-            'token' => $this->issueToken($user, remember: true),
-        ];
-    }
-
-    /**
      * Create the empty profile row that matches the user's account type, so the
      * profile endpoints and dashboards always have a record to read and update.
      */
@@ -226,18 +171,5 @@ class AuthService
             ['*'],
             now()->addHours($hours)
         )->plainTextToken;
-    }
-
-    /**
-     * @return array{0: string, 1: string}
-     */
-    private function splitName(string $name): array
-    {
-        $parts = preg_split('/\s+/', trim($name)) ?: [];
-
-        $first = array_shift($parts) ?: 'OSEP';
-        $last = $parts ? implode(' ', $parts) : 'Member';
-
-        return [Str::limit($first, 50, ''), Str::limit($last, 50, '')];
     }
 }

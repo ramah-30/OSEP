@@ -71,15 +71,6 @@ export function AuthProvider({ children }) {
     [persistSession],
   )
 
-  const loginWithGoogleCode = useCallback(
-    async (code) => {
-      const { data } = await api.post('/auth/google/exchange', { code })
-      persistSession(data.data.token, data.data.user)
-      return data.data.user
-    },
-    [persistSession],
-  )
-
   const logout = useCallback(async () => {
     try {
       await api.post('/auth/logout')
@@ -99,12 +90,11 @@ export function AuthProvider({ children }) {
       isAuthenticated: Boolean(user),
       login,
       register,
-      loginWithGoogleCode,
       logout,
       refreshUser,
       setUser,
     }),
-    [user, token, loading, login, register, loginWithGoogleCode, logout, refreshUser],
+    [user, token, loading, login, register, logout, refreshUser],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

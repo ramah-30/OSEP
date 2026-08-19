@@ -35,12 +35,6 @@ return [
         ],
     ],
 
-    'google' => [
-        'client_id' => env('GOOGLE_CLIENT_ID'),
-        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('GOOGLE_REDIRECT_URI', env('APP_URL').'/api/v1/auth/google/callback'),
-    ],
-
     /*
     | Africa's Talking SMS gateway. `username` is "sandbox" on the test account.
     | Leave AT_API_KEY empty to keep SMS disabled (the dispatcher then reports the

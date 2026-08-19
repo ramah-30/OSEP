@@ -119,6 +119,5 @@ class RegistrationTest extends TestCase
         $response = $this->postJson('/api/v1/auth/register', $this->payload());
 
         $this->assertArrayNotHasKey('password', $response->json('data.user'));
-        $this->assertArrayNotHasKey('google_id', $response->json('data.user'));
     }
 }
