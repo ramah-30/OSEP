@@ -512,22 +512,29 @@ class DemoSeeder extends Seeder
 
     private function activity(Event $event, User $planner): void
     {
+        // Mirrors what the real controllers log for each of these actions
+        // (see ActivityLogger call sites), including which ones are
+        // client-visible, so the client dashboard's Updates timeline has
+        // something real to show out of the box.
         $entries = [
-            ['event_created', "created the event \"{$event->title}\""],
-            ['venue_added', 'set the venue to "The Waterfront Pavilion"'],
-            ['vendor_assigned', 'assigned Zawadi Photography for Photography'],
-            ['vendor_assigned', 'assigned Neema Catering Co. for Catering'],
-            ['budget_updated', 'added a budget line for Venue'],
-            ['approval_submitted', 'submitted "Decoration Proposal" for client approval'],
-            ['task_completed', 'completed task "Book venue"'],
-            ['approval_decision', 'Approved "Catering Quotation"'],
+            ['event_created', "created the event \"{$event->title}\"", false],
+            ['venue_added', 'set the venue to "The Waterfront Pavilion"', false],
+            ['vendor_booking_accepted', 'Zawadi Photography confirmed their booking.', true],
+            ['vendor_booking_accepted', 'Neema Catering Co. confirmed their booking.', true],
+            ['budget_updated', 'added a budget line for Venue', false],
+            ['approval_submitted', 'submitted "Decoration Proposal" for client approval', false],
+            ['task_completed', 'completed task "Book venue"', false],
+            ['approval_decision', 'Approved "Catering Quotation"', false],
+            ['quotation_sent', 'Catering Quotation was sent for approval.', true],
+            ['contract_payment', 'Paid TZS 3,000,000.00 towards Zawadi Photography\'s contract.', true],
         ];
 
-        foreach ($entries as $i => [$action, $description]) {
+        foreach ($entries as $i => [$action, $description, $visibleToClient]) {
             $event->activities()->updateOrCreate(
                 ['action' => $action, 'description' => $description],
                 [
                     'user_id' => $planner->id,
+                    'visible_to_client' => $visibleToClient,
                     'created_at' => now()->subDays(count($entries) - $i),
                     'updated_at' => now()->subDays(count($entries) - $i),
                 ],

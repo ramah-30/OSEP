@@ -36,16 +36,37 @@ export function AuthProvider({ children }) {
       return null
     }
 
-    try {
-      const { data } = await api.get('/auth/me')
-      setUser(data.data.user)
-      return data.data.user
-    } catch {
-      clearSession()
-      return null
-    } finally {
-      setLoading(false)
+    // A few retries with backoff before giving up — the free-tier backend
+    // can take 30-80s to wake from an idle sleep, and the first request or
+    // two often times out or 5xx's even though the token itself is fine.
+    const retryDelaysMs = [2000, 4000, 8000]
+
+    for (let attempt = 0; attempt <= retryDelaysMs.length; attempt++) {
+      try {
+        const { data } = await api.get('/auth/me')
+        setUser(data.data.user)
+        setLoading(false)
+        return data.data.user
+      } catch (error) {
+        // A genuine 401 means the token really is invalid — sign out.
+        if (error?.response?.status === 401) {
+          clearSession()
+          setLoading(false)
+          return null
+        }
+
+        // Anything else (network blip, cold start, 5xx) — retry with
+        // backoff, and even after giving up don't wipe the token: a stray
+        // failure shouldn't force a real re-login when the session may
+        // still be good on the next successful check.
+        if (attempt < retryDelaysMs.length) {
+          await new Promise((resolve) => setTimeout(resolve, retryDelaysMs[attempt]))
+        }
+      }
     }
+
+    setLoading(false)
+    return null
   }, [clearSession])
 
   // Rehydrate on first paint so a refresh keeps the user signed in.

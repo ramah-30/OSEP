@@ -14,6 +14,8 @@ const UPDATE_META = {
   vendor_booking_accepted: { icon: 'Store', accent: 'emerald' },
   contract_signed: { icon: 'Handshake', accent: 'purple' },
   quotation_sent: { icon: 'ReceiptText', accent: 'navy' },
+  contract_payment: { icon: 'CreditCard', accent: 'emerald' },
+  payment_received: { icon: 'CreditCard', accent: 'emerald' },
 }
 
 const ACCENTS = {
