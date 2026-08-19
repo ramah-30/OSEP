@@ -41,9 +41,12 @@ return [
         // Local disk by default (matches every dev machine). Set
         // FILESYSTEM_PUBLIC_DRIVER=s3 in production so uploads survive a
         // redeploy — Render's container disk is wiped on every deploy.
-        'public' => [
+        // `root` is filtered out entirely for s3 — the S3 adapter treats a
+        // present `root` as a key prefix, so a local filesystem path there
+        // would get baked into every uploaded object's URL.
+        'public' => array_filter([
             'driver' => env('FILESYSTEM_PUBLIC_DRIVER', 'local'),
-            'root' => storage_path('app/public'),
+            'root' => env('FILESYSTEM_PUBLIC_DRIVER', 'local') === 'local' ? storage_path('app/public') : null,
             'url' => env('AWS_URL', env('APP_URL').'/storage'),
             'visibility' => 'public',
             'throw' => false,
@@ -54,7 +57,7 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
-        ],
+        ], fn ($value) => $value !== null),
 
         's3' => [
             'driver' => 's3',
