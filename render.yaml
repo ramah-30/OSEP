@@ -54,3 +54,22 @@ services:
       # Enables TLS to the DB using the container's built-in CA bundle.
       - key: MYSQL_ATTR_SSL_CA
         value: /etc/ssl/certs/ca-certificates.crt
+      # ---- Uploads (Render's container disk is wiped on every deploy —
+      # avatars/logos/venue photos need real object storage to survive one).
+      # Set up a free Cloudflare R2 bucket, then fill these in.
+      - key: FILESYSTEM_PUBLIC_DRIVER
+        sync: false             # local | s3  (s3 talks to R2 here)
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: AWS_DEFAULT_REGION
+        sync: false             # R2 uses "auto"
+      - key: AWS_BUCKET
+        sync: false
+      - key: AWS_ENDPOINT
+        sync: false             # https://<account-id>.r2.cloudflarestorage.com
+      - key: AWS_USE_PATH_STYLE_ENDPOINT
+        sync: false             # true for R2
+      - key: AWS_URL
+        sync: false             # the bucket's public base URL (r2.dev or custom domain)
