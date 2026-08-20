@@ -3,11 +3,18 @@
 namespace App\Models;
 
 use App\Enums\BudgetItemStatus;
+use App\Observers\BudgetItemObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BudgetItem extends Model
 {
+    protected static function boot(): void
+    {
+        parent::boot();
+        self::observe(BudgetItemObserver::class);
+    }
+
     protected $fillable = [
         'event_id',
         'budget_id',
