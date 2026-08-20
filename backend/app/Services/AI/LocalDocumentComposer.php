@@ -6,7 +6,7 @@ namespace App\Services\AI;
  * The offline, data-grounded document composer — the document-generation
  * counterpart to LocalProvider. It assembles polished Markdown deliverables from
  * the structured event context (budget, timeline, guests, vendors, finance,
- * health) so the platform can generate real proposals, timelines, emails and
+ * so the platform can generate real proposals, timelines, emails and
  * more with no API key. When live LLM drivers are configured, DocumentGenerator
  * routes to them instead; this class guarantees the feature works out of the box.
  */
@@ -285,11 +285,6 @@ class LocalDocumentComposer
         $out[] = '';
         $out[] = "Here is a quick update on where **{$title}** stands.";
         $out[] = '';
-
-        if (isset($c['health'])) {
-            $out[] = "**Overall health: {$c['health']['score']}/100 — {$c['health']['label']}.**";
-            $out[] = '';
-        }
 
         $bullets = [];
         if (isset($c['budget']) && $c['budget']['total'] > 0) {

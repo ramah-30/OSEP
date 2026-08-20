@@ -20,12 +20,11 @@ class PromptStarterCatalog
                 'key' => 'event_status_briefing',
                 'name' => 'Event status briefing',
                 'category' => 'Overview',
-                'description' => 'A concise health check across budget, timeline, guests and vendors.',
+                'description' => 'A concise status check across budget, timeline, guests and vendors.',
                 'body' => "Give me a status briefing for this event. Cover:\n"
-                    . "1. Overall health and the single biggest risk\n"
-                    . "2. Budget: are we on track vs the {{focus_area}} area?\n"
-                    . "3. Timeline: any overdue or at-risk tasks\n"
-                    . "4. Guests & vendors that still need attention\n\n"
+                    . "1. Budget: are we on track vs the {{focus_area}} area?\n"
+                    . "2. Timeline: any overdue or at-risk tasks\n"
+                    . "3. Guests & vendors that still need attention\n\n"
                     . 'End with the top 3 actions I should take this week.',
             ],
             [

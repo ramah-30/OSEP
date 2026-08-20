@@ -21,7 +21,6 @@ class Orchestrator
     public function __construct(
         private readonly AiManager $ai,
         private readonly EventContextBuilder $contextBuilder,
-        private readonly HealthScoreService $health,
         private readonly KnowledgeRetriever $knowledge,
         private readonly CommandParser $commands,
         private readonly ActionExecutor $executor,
@@ -137,12 +136,6 @@ class Orchestrator
             $built = $this->contextBuilder->forEvent($user, $conversation->event);
             if ($built) {
                 $context = $built;
-                [$score, $breakdown] = $this->health->score($built);
-                $context['health'] = [
-                    'score' => $score,
-                    'label' => $this->health->label($score),
-                    'breakdown' => $breakdown,
-                ];
 
                 // The planner's own historical benchmarks, so budget/vendor
                 // answers can compare against how they usually work.
@@ -195,7 +188,7 @@ class Orchestrator
             $this->has($p, ['vendor', 'supplier', 'photographer', 'caterer', 'quote']) => 'vendor',
             $this->has($p, ['guest', 'rsvp', 'invite', 'seat', 'attend', 'meal']) => 'guest',
             $this->has($p, ['timeline', 'task', 'milestone', 'schedule', 'deadline', 'agenda']) => 'planning',
-            $this->has($p, ['analytic', 'insight', 'forecast', 'health', 'predict', 'trend']) => 'analytics',
+            $this->has($p, ['analytic', 'insight', 'forecast', 'predict', 'trend']) => 'conversation',
             $conversation->context_type === 'budget' => 'budget',
             $conversation->context_type === 'vendor' => 'vendor',
             default => 'conversation',
@@ -210,7 +203,6 @@ class Orchestrator
             'vendor' => 'You are the Vendor agent: focus on vendor selection, value, readiness and contracts.',
             'guest' => 'You are the Guest agent: focus on RSVPs, attendance, seating and catering.',
             'planning' => 'You are the Planning agent: focus on timeline, milestones, tasks and the critical path.',
-            'analytics' => 'You are the Analytics agent: focus on insights, forecasts and the health score.',
             default => 'You are a general planning copilot.',
         };
 

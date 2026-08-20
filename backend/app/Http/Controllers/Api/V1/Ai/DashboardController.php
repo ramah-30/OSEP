@@ -10,7 +10,6 @@ use App\Models\AiConversation;
 use App\Models\AiRecommendation;
 use App\Models\Event;
 use App\Services\AI\AiManager;
-use App\Services\AI\HealthScoreService;
 use App\Services\AI\OnboardingCoachService;
 use App\Services\AI\RecommendationEngine;
 use App\Traits\ApiResponse;
@@ -18,9 +17,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
- * Powers the AI Dashboard widgets: today's recommendations, portfolio health,
- * a forecast panel and conversation shortcuts — an at-a-glance copilot summary
- * across all of the planner's active events.
+ * Powers the AI Dashboard widgets: today's recommendations and conversation shortcuts —
+ * an at-a-glance copilot summary across all of the planner's active events.
  */
 class DashboardController extends Controller
 {
@@ -28,7 +26,6 @@ class DashboardController extends Controller
 
     public function __construct(
         private readonly RecommendationEngine $engine,
-        private readonly HealthScoreService $health,
         private readonly AiManager $ai,
         private readonly OnboardingCoachService $coach,
     ) {}
@@ -42,19 +39,8 @@ class DashboardController extends Controller
             ->orderBy('event_date')
             ->get();
 
-        $healthRows = [];
         foreach ($activeEvents as $event) {
             $this->engine->syncForEvent($user, $event);
-            $score = $this->health->for($user, $event);
-            if ($score) {
-                $healthRows[] = [
-                    'event_id' => $event->id,
-                    'event_title' => $event->title,
-                    'score' => $score->score,
-                    'label' => $score->label,
-                    'date' => $event->event_date?->toFormattedDateString(),
-                ];
-            }
         }
 
         $recommendations = AiRecommendation::where('user_id', $user->id)
@@ -72,22 +58,6 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
-        // Forecast panel: nearest upcoming event with data.
-        $forecasts = [];
-        $forecastEvent = null;
-        foreach ($healthRows as $row) {
-            $score = $this->health->for($user, $activeEvents->firstWhere('id', $row['event_id']));
-            if ($score && ! empty($score->forecasts)) {
-                $forecasts = $score->forecasts;
-                $forecastEvent = ['id' => $row['event_id'], 'title' => $row['event_title']];
-                break;
-            }
-        }
-
-        $avgHealth = count($healthRows)
-            ? (int) round(collect($healthRows)->avg('score'))
-            : null;
-
         return $this->success([
             'assistant_name' => config('ai.assistant_name', 'OSEP AI'),
             'driver' => $this->ai->driver(),
@@ -97,12 +67,9 @@ class DashboardController extends Controller
                 'active_events' => $activeEvents->count(),
                 'open_recommendations' => AiRecommendation::where('user_id', $user->id)
                     ->where('status', RecommendationStatus::Pending->value)->count(),
-                'avg_health' => $avgHealth,
                 'conversations' => AiConversation::where('user_id', $user->id)->count(),
             ],
-            'health' => collect($healthRows)->sortBy('score')->values(),
             'recommendations' => AiRecommendationResource::collection($recommendations),
-            'forecast' => ['event' => $forecastEvent, 'items' => $forecasts],
             'conversations' => AiConversationResource::collection($conversations),
         ]);
     }

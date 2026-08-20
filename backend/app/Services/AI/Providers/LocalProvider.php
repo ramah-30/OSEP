@@ -105,11 +105,6 @@ class LocalProvider implements AiProvider
 
         $lines = ["Here's where **{$event['title']}** stands today:"];
 
-        if (isset($context['health'])) {
-            $h = $context['health'];
-            $lines[] = "\n**Health score: {$h['score']}/100 — {$h['label']}.**";
-        }
-
         $when = $this->countdown($event);
         $lines[] = "\n- 📅 **Timing:** {$when}";
 

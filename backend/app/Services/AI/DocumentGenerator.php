@@ -18,7 +18,6 @@ class DocumentGenerator
     public function __construct(
         private readonly AiManager $ai,
         private readonly EventContextBuilder $contextBuilder,
-        private readonly HealthScoreService $health,
         private readonly LocalDocumentComposer $composer,
     ) {}
 
@@ -66,13 +65,6 @@ class DocumentGenerator
         if (! $built) {
             return [];
         }
-
-        [$score, $breakdown] = $this->health->score($built);
-        $built['health'] = [
-            'score' => $score,
-            'label' => $this->health->label($score),
-            'breakdown' => $breakdown,
-        ];
 
         return $built;
     }
