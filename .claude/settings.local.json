@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:pin.it)",
+      "Bash(npm run *)"
+    ]
+  }
+}
