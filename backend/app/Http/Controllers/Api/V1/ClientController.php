@@ -29,8 +29,11 @@ class ClientController extends Controller
     {
         $user = $request->user();
 
-        // Clients this planner has worked with, with a live event count.
-        $clientIds = $user->plannedEvents()->whereNotNull('client_id')->pluck('client_id')->unique();
+        // Clients this planner has worked with (from events) plus everyone on
+        // their roster (added standalone), with a live event count.
+        $clientIds = $user->plannedEvents()->whereNotNull('client_id')->pluck('client_id')
+            ->merge($user->clients()->pluck('users.id'))
+            ->unique();
 
         $clients = User::whereIn('id', $clientIds)
             ->with('clientProfile')
@@ -55,6 +58,33 @@ class ClientController extends Controller
     {
         $data = $request->validated();
 
+        // The email may already belong to someone: the same person can be a
+        // client of several planners. Reuse that account rather than failing on
+        // the unique constraint — but only if it's actually a client account.
+        $existing = User::where('email', $data['email'])->first();
+
+        if ($existing) {
+            if ($existing->account_type !== AccountType::Client) {
+                return $this->error(
+                    'That email is already in use by another account.',
+                    ['email' => ['That email is already in use by another account.']],
+                    422,
+                );
+            }
+
+            $request->user()->clients()->syncWithoutDetaching([$existing->id]);
+
+            return $this->created([
+                'client' => [
+                    'id' => $existing->id,
+                    'full_name' => $existing->full_name,
+                    'email' => $existing->email,
+                    'phone' => $existing->phone,
+                    'location' => $existing->clientProfile?->location,
+                ],
+            ], 'Client added to your list.');
+        }
+
         $client = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -68,6 +98,10 @@ class ClientController extends Controller
 
         $client->assignRole(AccountType::Client->value);
         $this->auth->ensureProfile($client);
+
+        // Put the new client on this planner's roster so they show up in the
+        // list even before they're attached to an event.
+        $request->user()->clients()->syncWithoutDetaching([$client->id]);
 
         if (! empty($data['location'])) {
             $client->clientProfile()->update(['location' => $data['location']]);
@@ -169,6 +203,7 @@ class ClientController extends Controller
     private function ownsClient(User $planner, User $client): bool
     {
         return $client->account_type === AccountType::Client
-            && $planner->plannedEvents()->where('client_id', $client->id)->exists();
+            && ($planner->clients()->where('users.id', $client->id)->exists()
+                || $planner->plannedEvents()->where('client_id', $client->id)->exists());
     }
 }

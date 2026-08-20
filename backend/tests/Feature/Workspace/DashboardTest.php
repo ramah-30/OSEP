@@ -41,10 +41,10 @@ class DashboardTest extends TestCase
             ->assertOk()
             ->assertJsonPath('data.stats.0.key', 'active_events')
             ->assertJsonPath('data.stats.0.value', 1) // one active (execution)
-            ->assertJsonPath('data.stats.2.key', 'completed_events')
-            ->assertJsonPath('data.stats.2.value', 1) // completed
-            ->assertJsonPath('data.stats.3.key', 'revenue')
-            ->assertJsonPath('data.stats.3.value', fn ($v) => (float) $v === 1500.0); // revenue = total budgets
+            ->assertJsonPath('data.stats.1.key', 'completed_events')
+            ->assertJsonPath('data.stats.1.value', 1) // completed
+            ->assertJsonPath('data.stats.2.key', 'revenue')
+            ->assertJsonPath('data.stats.2.value', fn ($v) => (float) $v === 1500.0); // revenue = total budgets
     }
 
     public function test_client_stats_include_their_event_and_pending_approvals(): void

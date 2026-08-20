@@ -45,6 +45,7 @@ class DatabaseSeeder extends Seeder
             $this->call(EventStaffingVendorsSeeder::class);
             $this->call(EventTechnologyVendorsSeeder::class);
             $this->call(CleaningVendorsSeeder::class);
+            $this->call(HotelVendorSeeder::class);
             $this->call(VendorReviewsSeeder::class);
             $this->call(AccommodationReviewsSeeder::class);
             $this->call(FinanceSeeder::class);

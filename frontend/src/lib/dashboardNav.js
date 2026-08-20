@@ -57,6 +57,8 @@ const VENDOR_NAV = [
 
 const ADMIN_NAV = [
   { label: 'Overview', path: '', icon: 'LayoutDashboard', ready: true },
+  { label: 'Planners', path: 'planners', icon: 'UserCheck', ready: true },
+  { label: 'Clients', path: 'clients', icon: 'Users', ready: true },
   { label: 'Vendors', path: 'vendors', icon: 'Store', ready: true },
   { label: 'Venues', path: 'venues', icon: 'Building', ready: true },
   { label: 'Categories', path: 'categories', icon: 'Tag', ready: true },

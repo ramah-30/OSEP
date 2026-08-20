@@ -18,4 +18,5 @@ enum AuthEvent: string
     case VerificationResent = 'verification_resent';
     case EmailChanged = 'email_changed';
     case PasswordChanged = 'password_changed';
+    case AccountDeleted = 'account_deleted';
 }

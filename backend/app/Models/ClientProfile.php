@@ -12,12 +12,14 @@ class ClientProfile extends Model
         'preferred_event_types',
         'communication_preference',
         'location',
+        'verified_at',
     ];
 
     protected function casts(): array
     {
         return [
             'preferred_event_types' => 'array',
+            'verified_at' => 'datetime',
         ];
     }
 

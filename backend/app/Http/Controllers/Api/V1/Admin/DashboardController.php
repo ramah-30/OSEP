@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1\Admin;
 use App\Enums\AccountType;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ReviewResource;
-use App\Http\Resources\VendorResource;
 use App\Models\BookingRequest;
 use App\Models\Contract;
 use App\Models\MarketplaceVenue;
@@ -25,23 +24,16 @@ class DashboardController extends Controller
 
     public function index(): JsonResponse
     {
-        $pendingVendors = User::query()
-            ->select('users.*')
-            ->join('vendor_profiles as vp', 'vp.user_id', '=', 'users.id')
-            ->where('users.account_type', AccountType::Vendor->value)
-            ->where('vp.verification_status', 'pending')
-            ->with('vendorProfile.marketplaceCategory')
-            ->latest('users.created_at')->limit(10)->get();
-
         $flaggedReviews = Review::query()
             ->where('status', 'pending')
             ->with(['reviewer', 'vendor.vendorProfile', 'venue'])
             ->latest()->limit(10)->get();
 
         return $this->success([
-            'pending_vendors' => VendorResource::collection($pendingVendors),
             'flagged_reviews' => ReviewResource::collection($flaggedReviews),
             'stats' => [
+                'planners' => User::where('account_type', AccountType::EventPlanner->value)->count(),
+                'clients' => User::where('account_type', AccountType::Client->value)->count(),
                 'vendors' => VendorProfile::count(),
                 'pending_vendors' => VendorProfile::where('verification_status', 'pending')->count(),
                 'suspended_vendors' => VendorProfile::where('is_suspended', true)->count(),

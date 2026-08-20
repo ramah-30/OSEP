@@ -1,16 +1,13 @@
-import { Link } from 'react-router-dom'
 import Card from '../../../components/ui/Card'
 import Badge from '../../../components/ui/Badge'
 import Icon from '../../../components/ui/Icon'
 import Button from '../../../components/ui/Button'
-import ProgressBar from '../../../components/ui/ProgressBar'
 import EmptyState from '../../../components/ui/EmptyState'
 import StatGrid from '../../../components/dashboard/StatGrid'
-import EventUpdates from '../../../components/client/EventUpdates'
 import LoadState from '../../../components/dashboard/LoadState'
 import { useResource } from '../../../lib/useResource'
 import { useAuth } from '../../../context/AuthContext'
-import { formatCurrency, formatDate } from '../../../lib/format'
+import { formatDate } from '../../../lib/format'
 
 export default function ClientOverview() {
   const { user } = useAuth()
@@ -64,12 +61,7 @@ export default function ClientOverview() {
               </div>
 
               <div className="p-6 md:p-8">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="font-semibold text-ink">Planning progress</span>
-                  <span className="font-bold text-emerald-600">{event.progress}% complete</span>
-                </div>
-                <ProgressBar value={event.progress} className="mt-3" />
-                <div className="mt-5 flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-3">
                   <Button to={`${base}/my-events`} size="sm">
                     View my events
                     <Icon name="ArrowRight" className="size-4" />
@@ -83,64 +75,6 @@ export default function ClientOverview() {
             </Card>
 
             <StatGrid stats={data.stats} />
-
-            <EventUpdates updates={event.updates ?? []} limit={6} />
-
-            <div className="grid gap-4 lg:grid-cols-2">
-              <Card className="p-6">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-ink">Milestones</h3>
-                  <Link
-                    to={`${base}/progress`}
-                    className="text-sm font-semibold text-navy-700 hover:underline"
-                  >
-                    See all
-                  </Link>
-                </div>
-                <ul className="mt-4 space-y-2.5">
-                  {event.milestones?.slice(0, 4).map((m) => (
-                    <li key={m.id} className="flex items-center gap-3 text-sm">
-                      <Icon
-                        name={m.status === 'completed' ? 'CheckCircle2' : 'Clock'}
-                        className={m.status === 'completed' ? 'size-4 text-emerald-500' : 'size-4 text-muted'}
-                      />
-                      <span className="flex-1 text-ink">{m.name}</span>
-                      <span className="text-xs text-muted">{m.status_label}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-
-              <Card className="p-6">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-ink">Budget snapshot</h3>
-                  <Link
-                    to={`${base}/budget`}
-                    className="text-sm font-semibold text-navy-700 hover:underline"
-                  >
-                    View details
-                  </Link>
-                </div>
-                {event.budget ? (
-                  <ul className="mt-4 space-y-2.5 text-sm">
-                    <li className="flex items-center justify-between">
-                      <span className="text-muted">Total budget</span>
-                      <span className="font-semibold text-ink">{formatCurrency(event.budget.total)}</span>
-                    </li>
-                    <li className="flex items-center justify-between">
-                      <span className="text-muted">Spent</span>
-                      <span className="font-semibold text-ink">{formatCurrency(event.budget.spent)}</span>
-                    </li>
-                    <li className="flex items-center justify-between">
-                      <span className="text-muted">Remaining</span>
-                      <span className="font-semibold text-emerald-600">{formatCurrency(event.budget.remaining)}</span>
-                    </li>
-                  </ul>
-                ) : (
-                  <p className="mt-4 text-sm text-muted">Your budget appears here once it's set.</p>
-                )}
-              </Card>
-            </div>
           </div>
         )}
       </LoadState>

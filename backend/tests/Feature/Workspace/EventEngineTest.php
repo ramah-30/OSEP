@@ -75,7 +75,7 @@ class EventEngineTest extends TestCase
         $this->assertSame(50, $event->refresh()->progress);
     }
 
-    public function test_budget_item_updates_spent_from_committed_and_paid(): void
+    public function test_budget_item_updates_spent_from_all_line_items(): void
     {
         Sanctum::actingAs($planner = $this->planner());
         $event = Event::create(['planner_id' => $planner->id, 'title' => 'Party', 'status' => 'planning', 'budget_total' => 1000]);
@@ -84,7 +84,13 @@ class EventEngineTest extends TestCase
             'category' => 'Venue', 'description' => 'Hall', 'estimated_cost' => 500, 'actual_cost' => 450, 'status' => 'paid',
         ])->assertCreated();
 
-        $this->assertSame('450.00', $event->refresh()->budget_spent);
+        // A still-planned line with an actual cost must count too, so the client's
+        // budget overview mirrors the planner's "Actual spend" figure.
+        $this->postJson("/api/v1/events/{$event->id}/budget-items", [
+            'category' => 'Catering', 'description' => 'Buffet', 'estimated_cost' => 300, 'actual_cost' => 200, 'status' => 'planned',
+        ])->assertCreated();
+
+        $this->assertSame('650.00', $event->refresh()->budget_spent);
     }
 
     public function test_submitting_an_approval_records_history_and_notifies_the_client(): void

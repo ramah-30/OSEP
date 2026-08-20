@@ -3,17 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Enums\AccountType;
-use App\Enums\ApprovalStatus;
 use App\Enums\EventStatus;
-use App\Enums\MilestoneStatus;
-use App\Enums\TaskStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ActivityResource;
 use App\Http\Resources\EventResource;
 use App\Models\ActivityLog;
-use App\Models\Approval;
-use App\Models\EventMilestone;
-use App\Models\EventTask;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
@@ -53,35 +47,14 @@ class DashboardController extends Controller
         $active = $events->whereIn('status', $activeStatuses)->count();
         $completed = $events->where('status', EventStatus::Completed)->count();
 
-        $upcoming = $events
-            ->whereNotIn('status', [EventStatus::Completed, EventStatus::Archived, EventStatus::Cancelled])
-            ->filter(fn ($e) => $e->event_date !== null && $e->event_date->isFuture())
-            ->count();
-
         $revenue = (float) $events->sum('budget_total');
-
-        $pendingApprovals = Approval::whereIn('event_id', $eventIds)
-            ->where('status', ApprovalStatus::Pending->value)->count();
-
-        $horizon = now()->addDays(14);
-        $dueTasks = EventTask::whereIn('event_id', $eventIds)
-            ->whereNotIn('status', [TaskStatus::Completed->value, TaskStatus::Cancelled->value])
-            ->whereNotNull('due_date')
-            ->whereBetween('due_date', [now()->startOfDay(), $horizon])->count();
-        $dueMilestones = EventMilestone::whereIn('event_id', $eventIds)
-            ->where('status', '!=', MilestoneStatus::Completed->value)
-            ->whereNotNull('due_date')
-            ->whereBetween('due_date', [now()->startOfDay(), $horizon])->count();
 
         return [
             'greeting' => $user->first_name,
             'stats' => [
                 ['key' => 'active_events', 'label' => 'Active Events', 'value' => $active, 'icon' => 'CalendarClock', 'accent' => 'navy'],
-                ['key' => 'upcoming_events', 'label' => 'Upcoming Events', 'value' => $upcoming, 'icon' => 'Calendar', 'accent' => 'navy'],
                 ['key' => 'completed_events', 'label' => 'Completed Events', 'value' => $completed, 'icon' => 'CheckCircle2', 'accent' => 'emerald'],
                 ['key' => 'revenue', 'label' => 'Total Revenue', 'value' => $revenue, 'format' => 'currency', 'icon' => 'Wallet', 'accent' => 'purple'],
-                ['key' => 'pending_approvals', 'label' => 'Pending Approvals', 'value' => $pendingApprovals, 'icon' => 'ClipboardCheck', 'accent' => 'purple'],
-                ['key' => 'upcoming_deadlines', 'label' => 'Upcoming Deadlines', 'value' => $dueTasks + $dueMilestones, 'icon' => 'ListChecks', 'accent' => 'navy'],
             ],
             'recent_events' => EventResource::collection(
                 $user->plannedEvents()->with('client')->latest()->take(5)->get()

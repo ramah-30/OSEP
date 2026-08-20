@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\BudgetItemStatus;
 use App\Enums\EventStatus;
 use App\Enums\MilestoneStatus;
 use App\Enums\Priority;
@@ -256,15 +255,15 @@ class Event extends Model
     }
 
     /**
-     * Re-derive `budget_spent` from the actual costs of budget items marked
-     * committed or paid, and persist it. Keeps the client dashboard, which reads
-     * the stored figure, consistent with the line items.
+     * Re-derive `budget_spent` from the actual costs of the budget line items and
+     * persist it. This mirrors the planner-facing "Actual spend" figure (the sum
+     * of every line's actual cost, regardless of status), so the client budget
+     * overview — which reads the stored figure — stays in step with what the
+     * planner sees as they break the budget down.
      */
     public function recalculateBudgetSpent(): void
     {
-        $spent = $this->budgetItems()
-            ->whereIn('status', [BudgetItemStatus::Committed->value, BudgetItemStatus::Paid->value])
-            ->sum('actual_cost');
+        $spent = $this->budgetItems()->sum('actual_cost');
 
         $this->forceFill(['budget_spent' => $spent])->save();
     }

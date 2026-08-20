@@ -35,6 +35,7 @@ class VendorCategorySeeder extends Seeder
         ['name' => 'Gift Suppliers', 'icon' => 'Gift'],
         ['name' => 'Event Technology', 'icon' => 'MonitorSmartphone'],
         ['name' => 'Venues', 'icon' => 'Building'],
+        ['name' => 'Hotels', 'icon' => 'Hotel'],
     ];
 
     public function run(): void

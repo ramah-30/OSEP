@@ -128,7 +128,12 @@ export default function GuestListPanel({ eventId, event }) {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h2 className="text-lg font-extrabold text-ink">Guest List</h2>
-          <p className="text-sm text-muted">{filtered.length} of {guests.length} guests</p>
+          <p className="text-sm text-muted">
+            {event?.expected_guests
+              ? `${guests.length} of ${event.expected_guests} expected guests`
+              : `${guests.length} ${guests.length === 1 ? 'guest' : 'guests'}`}
+            {filtered.length !== guests.length && ` · ${filtered.length} shown`}
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant={showArchived ? 'secondary' : 'ghost'} size="sm" onClick={() => setShowArchived((v) => !v)}>

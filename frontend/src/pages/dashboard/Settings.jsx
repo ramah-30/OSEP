@@ -4,6 +4,7 @@ import Card from '../../components/ui/Card'
 import Button from '../../components/ui/Button'
 import Icon from '../../components/ui/Icon'
 import Alert from '../../components/ui/Alert'
+import Modal from '../../components/ui/Modal'
 import Tabs from '../../components/ui/Tabs'
 import PageHeader from '../../components/ui/PageHeader'
 import { Field, SelectField } from '../../components/ui/Field'
@@ -11,6 +12,8 @@ import { cn } from '../../lib/cn'
 import { api, applyServerErrors, parseApiError } from '../../lib/api'
 import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
+
+const DELETE_PHRASE = 'delete my account'
 
 const TABS = [
   { value: 'account', label: 'Account' },
@@ -71,7 +74,93 @@ function AccountTab() {
       <div className="flex justify-end">
         <Button type="submit" loading={formState.isSubmitting}>Save changes</Button>
       </div>
+
+      {user.account_type !== 'admin' && <DeleteAccountSection />}
     </form>
+  )
+}
+
+/**
+ * Danger zone: permanently delete the signed-in user's own account. The action
+ * only fires once the exact phrase is typed, then the session is cleared.
+ */
+function DeleteAccountSection() {
+  const { logout } = useAuth()
+  const [open, setOpen] = useState(false)
+  const [phrase, setPhrase] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState(null)
+
+  const canDelete = phrase.trim().toLowerCase() === DELETE_PHRASE
+
+  function close() {
+    if (busy) return
+    setOpen(false)
+    setPhrase('')
+    setError(null)
+  }
+
+  async function confirmDelete() {
+    if (!canDelete) return
+    setBusy(true)
+    setError(null)
+    try {
+      await api.delete('/settings/account', { data: { confirmation: phrase.trim() } })
+      // Account and token are gone server-side; clear the local session.
+      await logout()
+      // logout() redirects via auth state; nothing more to do here.
+    } catch (err) {
+      setError(parseApiError(err).message)
+      setBusy(false)
+    }
+  }
+
+  return (
+    <div className="mt-8 rounded-card border border-danger/30 bg-danger-soft/40 p-5">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h3 className="flex items-center gap-2 font-bold text-danger">
+            <Icon name="TriangleAlert" className="size-4" /> Delete account
+          </h3>
+          <p className="mt-1 max-w-prose text-sm text-muted">
+            Permanently delete your account and all related data — events, guests, budgets,
+            messages and everything tied to it. This cannot be undone.
+          </p>
+        </div>
+        <Button type="button" variant="danger" size="sm" onClick={() => setOpen(true)}>
+          <Icon name="Trash2" className="size-4" /> Delete account
+        </Button>
+      </div>
+
+      <Modal
+        open={open}
+        onClose={close}
+        title="Delete your account?"
+        description="This permanently removes your account and every record connected to it. There is no way to recover it."
+        footer={
+          <>
+            <Button variant="ghost" size="sm" onClick={close} disabled={busy}>Cancel</Button>
+            <Button variant="danger" size="sm" onClick={confirmDelete} loading={busy} disabled={!canDelete}>
+              Delete my account
+            </Button>
+          </>
+        }
+      >
+        <div className="space-y-3">
+          {error && <Alert tone="error">{error}</Alert>}
+          <p className="text-sm text-ink">
+            To confirm, type <span className="font-bold">{DELETE_PHRASE}</span> below.
+          </p>
+          <Field
+            value={phrase}
+            onChange={(e) => setPhrase(e.target.value)}
+            placeholder={DELETE_PHRASE}
+            autoComplete="off"
+            aria-label={`Type ${DELETE_PHRASE} to confirm`}
+          />
+        </div>
+      </Modal>
+    </div>
   )
 }
 

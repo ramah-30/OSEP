@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Workspace;
 
+use App\Enums\AccountType;
 use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\RoleSeeder;
@@ -80,5 +81,41 @@ class SettingsTest extends TestCase
             'timezone' => 'Africa/Dar_es_Salaam',
             'theme' => 'dark',
         ])->assertOk()->assertJsonPath('data.user.preferences.theme', 'dark');
+    }
+
+    public function test_a_user_can_delete_their_own_account_with_the_confirmation_phrase(): void
+    {
+        $user = User::factory()->accountType(AccountType::Client)->create();
+        Sanctum::actingAs($user);
+
+        $this->deleteJson('/api/v1/settings/account', [
+            'confirmation' => 'delete my account',
+        ])->assertOk();
+
+        $this->assertDatabaseMissing('users', ['id' => $user->id]);
+    }
+
+    public function test_deleting_an_account_requires_the_exact_confirmation_phrase(): void
+    {
+        $user = User::factory()->accountType(AccountType::Client)->create();
+        Sanctum::actingAs($user);
+
+        $this->deleteJson('/api/v1/settings/account', [
+            'confirmation' => 'delete',
+        ])->assertStatus(422)->assertJsonValidationErrors(['confirmation']);
+
+        $this->assertDatabaseHas('users', ['id' => $user->id]);
+    }
+
+    public function test_admins_cannot_delete_their_account_from_settings(): void
+    {
+        $admin = User::factory()->accountType(AccountType::Admin)->create();
+        Sanctum::actingAs($admin);
+
+        $this->deleteJson('/api/v1/settings/account', [
+            'confirmation' => 'delete my account',
+        ])->assertStatus(403);
+
+        $this->assertDatabaseHas('users', ['id' => $admin->id]);
     }
 }

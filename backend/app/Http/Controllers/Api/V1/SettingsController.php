@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Enums\AccountType;
 use App\Enums\AuthEvent;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeleteAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Http\Requests\UpdateEmailRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdatePreferencesRequest;
 use App\Http\Resources\UserResource;
+use App\Services\AccountDeletionService;
 use App\Services\AuthAuditService;
 use App\Traits\ApiResponse;
 use Illuminate\Auth\Events\Registered;
@@ -75,5 +78,25 @@ class SettingsController extends Controller
         return $this->success([
             'user' => new UserResource($user->load('roles')),
         ], 'Preferences saved.');
+    }
+
+    /**
+     * Permanently delete the signed-in user's own account and everything tied to
+     * it. Guarded by a typed confirmation phrase (validated in the form request)
+     * and closed to admins, who must be removed through admin tooling.
+     */
+    public function destroyAccount(DeleteAccountRequest $request, AccountDeletionService $accounts): JsonResponse
+    {
+        $user = $request->user();
+
+        if ($user->account_type === AccountType::Admin) {
+            return $this->error('Administrator accounts cannot be deleted from settings.', null, 403);
+        }
+
+        $this->audit->log(AuthEvent::AccountDeleted, $user, request: $request);
+
+        $accounts->delete($user);
+
+        return $this->success(null, 'Your account has been permanently deleted.');
     }
 }

@@ -89,7 +89,9 @@ use App\Http\Controllers\Api\V1\Client\Ai\ChatController as ClientAiChatControll
 use App\Http\Controllers\Api\V1\Client\Ai\DashboardController as ClientAiDashboardController;
 use App\Http\Controllers\Api\V1\Client\Ai\ActionController as ClientAiActionController;
 use App\Http\Controllers\Api\V1\Vendor\AnalyticsController as VendorAnalyticsController;
+use App\Http\Controllers\Api\V1\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Api\V1\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Api\V1\Admin\PlannerController as AdminPlannerController;
 use App\Http\Controllers\Api\V1\Admin\VendorController as AdminVendorController;
 use App\Http\Controllers\Api\V1\Admin\VenueController as AdminVenueController;
 use App\Http\Controllers\Api\V1\Admin\CategoryController as AdminCategoryController;
@@ -190,6 +192,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('settings/email', [SettingsController::class, 'updateEmail']);
     Route::put('settings/password', [SettingsController::class, 'updatePassword']);
     Route::put('settings/preferences', [SettingsController::class, 'updatePreferences']);
+    Route::delete('settings/account', [SettingsController::class, 'destroyAccount']);
 
     // Client workspace
     Route::middleware('role:client')->group(function () {
@@ -692,6 +695,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::get('reviews', [AdminReviewController::class, 'index']);
         Route::put('reviews/{review}/moderate', [AdminReviewController::class, 'moderate']);
+    });
+
+    // Admin moderation of people accounts (planners & clients): list + verify.
+    Route::middleware('role:admin')->prefix('admin')->group(function () {
+        Route::get('planners', [AdminPlannerController::class, 'index']);
+        Route::put('planners/{planner}/verify', [AdminPlannerController::class, 'verify']);
+        Route::put('planners/{planner}/suspend', [AdminPlannerController::class, 'suspend']);
+
+        Route::get('clients', [AdminClientController::class, 'index']);
+        Route::put('clients/{client}/verify', [AdminClientController::class, 'verify']);
+        Route::put('clients/{client}/suspend', [AdminClientController::class, 'suspend']);
     });
 
     /*

@@ -101,6 +101,8 @@ import VendorAnalytics from './pages/dashboard/vendor/Analytics'
 // Admin marketplace
 import AdminOverview from './pages/dashboard/admin/AdminOverview'
 import AdminVendors from './pages/dashboard/admin/AdminVendors'
+import AdminPlanners from './pages/dashboard/admin/AdminPlanners'
+import AdminClients from './pages/dashboard/admin/AdminClients'
 import AdminVenues from './pages/dashboard/admin/AdminVenues'
 import AdminCategories from './pages/dashboard/admin/AdminCategories'
 import AdminReviews from './pages/dashboard/admin/AdminReviews'
@@ -297,6 +299,8 @@ export default function App() {
           <Route element={<RoleRoute accountType="admin" />}>
             <Route path="/dashboard/admin" element={<DashboardLayout />}>
               <Route index element={<AdminOverview />} />
+              <Route path="planners" element={<AdminPlanners />} />
+              <Route path="clients" element={<AdminClients />} />
               <Route path="vendors" element={<AdminVendors />} />
               <Route path="venues" element={<AdminVenues />} />
               <Route path="categories" element={<AdminCategories />} />

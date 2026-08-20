@@ -16,12 +16,14 @@ class PlannerProfile extends Model
         'location',
         'website',
         'booking_slug',
+        'verified_at',
     ];
 
     protected function casts(): array
     {
         return [
             'experience_years' => 'integer',
+            'verified_at' => 'datetime',
         ];
     }
 

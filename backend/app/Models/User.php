@@ -125,6 +125,17 @@ class User extends Authenticatable implements MustVerifyEmailContract
     }
 
     /**
+     * The clients on this planner's roster (added standalone or picked up from
+     * an event). This is what backs the planner's Clients list.
+     *
+     * @return BelongsToMany<User, $this>
+     */
+    public function clients(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'planner_client', 'planner_id', 'client_id')->withTimestamps();
+    }
+
+    /**
      * Marketplace venue listings this (vendor) user owns.
      *
      * @return HasMany<MarketplaceVenue, $this>
