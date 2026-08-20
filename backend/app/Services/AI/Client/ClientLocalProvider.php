@@ -309,12 +309,19 @@ class ClientLocalProvider implements AiProvider
     {
         $days = $event['days_until'] ?? null;
         $date = $event['date'] ?? 'a date not yet set';
+        $status = $event['status'] ?? null;
 
         if ($days === null) {
             return 'Date not set yet';
         }
+
+        // Check event status to determine if it's past (completed/cancelled) or future
+        if (in_array($status, ['completed', 'cancelled', 'archived'])) {
+            return "Completed on {$date}";
+        }
+
         if ($days < 0) {
-            return "Took place on {$date}";
+            return "Was scheduled for {$date} (now past)";
         }
         if ($days === 0) {
             return "**Today** ({$date})";

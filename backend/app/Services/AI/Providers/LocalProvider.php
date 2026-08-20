@@ -116,8 +116,9 @@ class LocalProvider implements AiProvider
         if (isset($context['budget'])) {
             $b = $context['budget'];
             $flag = $b['over_budget'] ? ' ⚠️ over budget' : '';
-            $lines[] = "- 💰 **Budget:** {$this->money($b['spent'])} of {$this->money($b['total'])} committed "
-                . "({$b['utilization_pct']}% used{$flag})";
+            $remaining = max(0, $b['total'] - $b['spent']);
+            $lines[] = "- 💰 **Budget:** {$this->money($b['spent'])} spent of {$this->money($b['total'])} allocated "
+                . "({$b['utilization_pct']}% used, {$this->money($remaining)} remaining{$flag})";
         }
 
         if (isset($context['timeline'])) {
@@ -156,19 +157,23 @@ class LocalProvider implements AiProvider
         }
 
         $lines = ["**Budget health**"];
-        $lines[] = "- Allocated: {$this->money($b['total'])}";
-        $lines[] = "- Committed / spent: {$this->money($b['spent'])} ({$b['utilization_pct']}%)";
-        $lines[] = "- Remaining: {$this->money($b['remaining'])}";
+        $lines[] = "- **Allocated budget:** {$this->money($b['total'])}";
+        $lines[] = "- **Amount spent:** {$this->money($b['spent'])} ({$b['utilization_pct']}% of budget)";
+        $lines[] = "- **Remaining budget:** {$this->money($b['remaining'])}";
 
         if ($b['over_budget']) {
             $over = $b['spent'] - $b['total'];
-            $lines[] = "\n⚠️ You're **{$this->money($over)} over** the allocated budget. To pull it back I'd review the "
+            $lines[] = "\n⚠️ **Over budget by {$this->money($over)}.** To bring this back in line, I'd review the "
                 . "largest categories first and renegotiate or trim discretionary line items.";
-        } elseif ($b['utilization_pct'] >= 85) {
-            $lines[] = "\nYou've used {$b['utilization_pct']}% with {$this->money($b['remaining'])} left — tight but not over. "
-                . "Keep new commitments deliberate from here.";
+        } elseif ($b['utilization_pct'] >= 90) {
+            $lines[] = "\n⚠️ **Budget is {$b['utilization_pct']}% committed** with only {$this->money($b['remaining'])} left. "
+                . "Approach any new spending carefully.";
+        } elseif ($b['utilization_pct'] >= 70) {
+            $lines[] = "\n✅ You're at {$b['utilization_pct']}% utilization with {$this->money($b['remaining'])} headroom. "
+                . "Continue monitoring closely.";
         } else {
-            $lines[] = "\nYou're pacing comfortably with {$this->money($b['remaining'])} of headroom.";
+            $lines[] = "\n✅ You have comfortable headroom with {$b['utilization_pct']}% spent and "
+                . "{$this->money($b['remaining'])} remaining.";
         }
 
         if (! empty($b['top_categories'])) {
@@ -508,12 +513,19 @@ class LocalProvider implements AiProvider
     {
         $days = $event['days_until'] ?? null;
         $date = $event['date'] ?? 'a date not yet set';
+        $status = $event['status'] ?? null;
 
         if ($days === null) {
             return "date not set yet";
         }
+
+        // Check event status to determine if it's past (completed/cancelled) or future
+        if (in_array($status, ['completed', 'cancelled', 'archived'])) {
+            return "completed on {$date}";
+        }
+
         if ($days < 0) {
-            return "took place on {$date}";
+            return "was on {$date} (past the scheduled date)";
         }
         if ($days === 0) {
             return "**today** ({$date})";
