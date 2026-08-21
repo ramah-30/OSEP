@@ -16,13 +16,6 @@ import { useTheme } from '../../context/ThemeContext'
 
 const DELETE_PHRASE = 'delete my account'
 
-const TABS = [
-  { value: 'account', label: 'Account' },
-  { value: 'email', label: 'Email' },
-  { value: 'password', label: 'Password' },
-  { value: 'preferences', label: 'Preferences' },
-]
-
 /** Shared form scaffold: success/error banners + submit wiring. */
 function useSettingsForm(defaults) {
   const form = useForm({ defaultValues: defaults })
@@ -47,6 +40,7 @@ function useSettingsForm(defaults) {
 }
 
 function AccountTab() {
+  const { t } = useTranslation()
   const { user, refreshUser } = useAuth()
   const { register, submit, saved, formError, formState } = useSettingsForm({
     first_name: user.first_name,
@@ -60,20 +54,20 @@ function AccountTab() {
       onSubmit={submit(async (values) => {
         await api.put('/settings/account', values)
         await refreshUser()
-        return 'Account details updated.'
+        return t('settings.accountUpdated')
       })}
       className="space-y-5"
     >
       {saved && <Alert tone="success">{saved}</Alert>}
       {formError && <Alert tone="error">{formError}</Alert>}
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="First name" error={formState.errors.first_name?.message} {...register('first_name')} />
-        <Field label="Last name" error={formState.errors.last_name?.message} {...register('last_name')} />
-        <Field label="Phone" error={formState.errors.phone?.message} {...register('phone')} />
-        <Field label="Country" error={formState.errors.country?.message} {...register('country')} />
+        <Field label={t('settings.firstName')} error={formState.errors.first_name?.message} {...register('first_name')} />
+        <Field label={t('settings.lastName')} error={formState.errors.last_name?.message} {...register('last_name')} />
+        <Field label={t('settings.phone')} error={formState.errors.phone?.message} {...register('phone')} />
+        <Field label={t('settings.country')} error={formState.errors.country?.message} {...register('country')} />
       </div>
       <div className="flex justify-end">
-        <Button type="submit" loading={formState.isSubmitting}>Save changes</Button>
+        <Button type="submit" loading={formState.isSubmitting}>{t('settings.saveChanges')}</Button>
       </div>
 
       {user.account_type !== 'admin' && <DeleteAccountSection />}
@@ -86,6 +80,7 @@ function AccountTab() {
  * only fires once the exact phrase is typed, then the session is cleared.
  */
 function DeleteAccountSection() {
+  const { t } = useTranslation()
   const { logout } = useAuth()
   const [open, setOpen] = useState(false)
   const [phrase, setPhrase] = useState('')
@@ -121,28 +116,27 @@ function DeleteAccountSection() {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h3 className="flex items-center gap-2 font-bold text-danger">
-            <Icon name="TriangleAlert" className="size-4" /> Delete account
+            <Icon name="TriangleAlert" className="size-4" /> {t('settings.deleteAccount')}
           </h3>
           <p className="mt-1 max-w-prose text-sm text-muted">
-            Permanently delete your account and all related data — events, guests, budgets,
-            messages and everything tied to it. This cannot be undone.
+            {t('settings.deleteAccountDescription')}
           </p>
         </div>
         <Button type="button" variant="danger" size="sm" onClick={() => setOpen(true)}>
-          <Icon name="Trash2" className="size-4" /> Delete account
+          <Icon name="Trash2" className="size-4" /> {t('settings.deleteAccount')}
         </Button>
       </div>
 
       <Modal
         open={open}
         onClose={close}
-        title="Delete your account?"
-        description="This permanently removes your account and every record connected to it. There is no way to recover it."
+        title={t('settings.deleteAccountConfirm')}
+        description={t('settings.deleteAccountConfirmDescription')}
         footer={
           <>
-            <Button variant="ghost" size="sm" onClick={close} disabled={busy}>Cancel</Button>
+            <Button variant="ghost" size="sm" onClick={close} disabled={busy}>{t('common.cancel')}</Button>
             <Button variant="danger" size="sm" onClick={confirmDelete} loading={busy} disabled={!canDelete}>
-              Delete my account
+              {t('settings.deleteMyAccount')}
             </Button>
           </>
         }
@@ -150,7 +144,7 @@ function DeleteAccountSection() {
         <div className="space-y-3">
           {error && <Alert tone="error">{error}</Alert>}
           <p className="text-sm text-ink">
-            To confirm, type <span className="font-bold">{DELETE_PHRASE}</span> below.
+            {t('settings.deleteAccountWarning')} <span className="font-bold">{DELETE_PHRASE}</span> {t('common.below')}.
           </p>
           <Field
             value={phrase}
@@ -166,6 +160,7 @@ function DeleteAccountSection() {
 }
 
 function EmailTab() {
+  const { t } = useTranslation()
   const { user, refreshUser } = useAuth()
   const { register, submit, saved, formError, formState, reset } = useSettingsForm({
     email: user.email,
@@ -177,24 +172,25 @@ function EmailTab() {
         await api.put('/settings/email', values)
         await refreshUser()
         reset({ email: values.email })
-        return 'Email updated. Check your inbox to confirm the new address.'
+        return t('settings.emailUpdateSuccess')
       })}
       className="space-y-5"
     >
       {saved && <Alert tone="success">{saved}</Alert>}
       {formError && <Alert tone="error">{formError}</Alert>}
       {!user.email_verified && (
-        <Alert tone="warning">Your email address is not confirmed yet.</Alert>
+        <Alert tone="warning">{t('settings.emailNotVerified')}</Alert>
       )}
-      <Field label="Email address" type="email" error={formState.errors.email?.message} {...register('email')} />
+      <Field label={t('settings.emailAddress')} type="email" error={formState.errors.email?.message} {...register('email')} />
       <div className="flex justify-end">
-        <Button type="submit" loading={formState.isSubmitting}>Update email</Button>
+        <Button type="submit" loading={formState.isSubmitting}>{t('settings.updateEmail')}</Button>
       </div>
     </form>
   )
 }
 
 function PasswordTab() {
+  const { t } = useTranslation()
   const { register, submit, saved, formError, formState, reset } = useSettingsForm({
     current_password: '',
     password: '',
@@ -206,37 +202,38 @@ function PasswordTab() {
       onSubmit={submit(async (values) => {
         await api.put('/settings/password', values)
         reset({ current_password: '', password: '', password_confirmation: '' })
-        return 'Password changed. Other sessions have been signed out.'
+        return t('settings.passwordChangeSuccess')
       })}
       className="space-y-5"
     >
       {saved && <Alert tone="success">{saved}</Alert>}
       {formError && <Alert tone="error">{formError}</Alert>}
-      <Field label="Current password" type="password" error={formState.errors.current_password?.message} {...register('current_password')} />
+      <Field label={t('settings.currentPassword')} type="password" error={formState.errors.current_password?.message} {...register('current_password')} />
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="New password" type="password" error={formState.errors.password?.message} {...register('password')} />
-        <Field label="Confirm new password" type="password" {...register('password_confirmation')} />
+        <Field label={t('settings.newPassword')} type="password" error={formState.errors.password?.message} {...register('password')} />
+        <Field label={t('settings.confirmNewPassword')} type="password" {...register('password_confirmation')} />
       </div>
       <p className="text-sm text-muted">
-        Use at least 8 characters with upper &amp; lower case, a number and a symbol.
+        {t('settings.passwordRequirements')}
       </p>
       <div className="flex justify-end">
-        <Button type="submit" loading={formState.isSubmitting}>Change password</Button>
+        <Button type="submit" loading={formState.isSubmitting}>{t('settings.changePassword')}</Button>
       </div>
     </form>
   )
 }
 
 const THEMES = [
-  { value: 'light', label: 'Light', icon: 'Sun' },
-  { value: 'dark', label: 'Dark', icon: 'Moon' },
-  { value: 'system', label: 'System', icon: 'Monitor' },
+  { value: 'light', label: 'light', icon: 'Sun' },
+  { value: 'dark', label: 'dark', icon: 'Moon' },
+  { value: 'system', label: 'system', icon: 'Monitor' },
 ]
 
 function PreferencesTab() {
+  const { t } = useTranslation()
   const { user, refreshUser } = useAuth()
   const { setPreference } = useTheme()
-  const { i18n, t } = useTranslation()
+  const { i18n } = useTranslation()
   const { register, submit, saved, formError, formState, watch, setValue } = useSettingsForm({
     locale: user.preferences?.locale ?? 'en',
     timezone: user.preferences?.timezone ?? 'Africa/Dar_es_Salaam',
@@ -259,7 +256,7 @@ function PreferencesTab() {
         }
         await api.put('/settings/preferences', values)
         await refreshUser()
-        return 'Preferences saved.'
+        return t('settings.preferencesUpdated')
       })}
       className="space-y-6"
     >
@@ -270,7 +267,7 @@ function PreferencesTab() {
         <SelectField label={t('settings.language')} {...register('locale')}>
           <option value="en">English</option>
           <option value="sw">Kiswahili</option>
-          <option value="fr">Français</option>
+          <option value="fr">Francais</option>
         </SelectField>
         <SelectField label={t('settings.timezone')} {...register('timezone')}>
           {timezones.map((tz) => (
@@ -284,15 +281,15 @@ function PreferencesTab() {
       <div>
         <p className="mb-2 text-sm font-semibold text-ink">{t('settings.theme')}</p>
         <div className="grid max-w-md grid-cols-3 gap-2">
-          {THEMES.map((t) => {
-            const active = theme === t.value
+          {THEMES.map((themeOption) => {
+            const active = theme === themeOption.value
             return (
               <button
-                key={t.value}
+                key={themeOption.value}
                 type="button"
                 onClick={() => {
-                  setValue('theme', t.value, { shouldDirty: true })
-                  setPreference(t.value)
+                  setValue('theme', themeOption.value, { shouldDirty: true })
+                  setPreference(themeOption.value)
                 }}
                 className={cn(
                   'flex flex-col items-center gap-2 rounded-card border p-4 text-sm font-semibold transition-colors',
@@ -301,8 +298,8 @@ function PreferencesTab() {
                     : 'border-line text-muted hover:border-navy-200',
                 )}
               >
-                <Icon name={t.icon} className="size-5" />
-                {t.label}
+                <Icon name={themeOption.icon} className="size-5" />
+                {t(`settings.${themeOption.label}`)}
               </button>
             )
           })}
@@ -310,18 +307,26 @@ function PreferencesTab() {
       </div>
 
       <div className="flex justify-end">
-        <Button type="submit" loading={formState.isSubmitting}>Save preferences</Button>
+        <Button type="submit" loading={formState.isSubmitting}>{t('settings.savePreferences')}</Button>
       </div>
     </form>
   )
 }
 
 export default function Settings() {
+  const { t } = useTranslation()
   const [tab, setTab] = useState('account')
+
+  const TABS = [
+    { value: 'account', label: t('settings.account') },
+    { value: 'email', label: t('settings.email') },
+    { value: 'password', label: t('settings.password') },
+    { value: 'preferences', label: t('settings.preferences') },
+  ]
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Settings" description="Manage your account, security and preferences." />
+      <PageHeader title={t('settings.settings')} description={t('settings.settingsDescription')} />
 
       <Card className="overflow-hidden">
         <div className="px-6 pt-2">
