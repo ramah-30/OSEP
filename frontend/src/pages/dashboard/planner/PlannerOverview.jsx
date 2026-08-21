@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Card from '../../../components/ui/Card'
 import Badge from '../../../components/ui/Badge'
 import Icon from '../../../components/ui/Icon'
@@ -15,13 +16,14 @@ import { EVENT_STATUS_TONE } from '../../../lib/eventConstants'
 
 export default function PlannerOverview() {
   const { user } = useAuth()
+  const { t } = useTranslation()
   const { data, loading, error, reload } = useResource('/dashboard/stats')
 
   return (
     <div className="space-y-8">
       <div>
         <h1 className="text-h3 font-extrabold tracking-tight text-ink">
-          Hi, {user.first_name} <span className="inline-block">👋</span>
+          {t('dashboard.welcome')}, {user.first_name} <span className="inline-block">👋</span>
         </h1>
         <p className="mt-1.5 text-muted">Here is your event planning overview.</p>
       </div>
@@ -33,14 +35,14 @@ export default function PlannerOverview() {
 
             <div>
               <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-muted">
-                Quick actions
+                {t('dashboard.quickActions')}
               </h2>
               <QuickActions
                 actions={[
-                  { label: 'Create Event', icon: 'Plus', to: `${user.dashboard_path}/events`, accent: 'navy' },
-                  { label: 'Add Client', icon: 'UserPlus', to: `${user.dashboard_path}/clients`, accent: 'emerald' },
-                  { label: 'Add Vendor', icon: 'Store', to: `${user.dashboard_path}/marketplace`, accent: 'purple' },
-                  { label: 'View Calendar', icon: 'Calendar', to: `${user.dashboard_path}/calendar`, accent: 'navy' },
+                  { label: t('events.createEvent'), icon: 'Plus', to: `${user.dashboard_path}/events`, accent: 'navy' },
+                  { label: t('clients.addClient'), icon: 'UserPlus', to: `${user.dashboard_path}/clients`, accent: 'emerald' },
+                  { label: t('vendors.addVendor'), icon: 'Store', to: `${user.dashboard_path}/marketplace`, accent: 'purple' },
+                  { label: t('events.timeline'), icon: 'Calendar', to: `${user.dashboard_path}/calendar`, accent: 'navy' },
                 ]}
               />
             </div>
@@ -49,13 +51,13 @@ export default function PlannerOverview() {
               <div className="lg:col-span-2">
                 <div className="mb-3 flex items-center justify-between">
                   <h2 className="text-sm font-bold uppercase tracking-wide text-muted">
-                    Recent events
+                    {t('dashboard.recentActivity')}
                   </h2>
                   <Link
                     to={`${user.dashboard_path}/events`}
                     className="text-sm font-semibold text-navy-700 hover:underline"
                   >
-                    View all
+                    {t('common.more')}
                   </Link>
                 </div>
 
