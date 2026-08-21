@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import Card from '../../components/ui/Card'
 import Button from '../../components/ui/Button'
 import Icon from '../../components/ui/Icon'
@@ -235,6 +236,7 @@ const THEMES = [
 function PreferencesTab() {
   const { user, refreshUser } = useAuth()
   const { setPreference } = useTheme()
+  const { i18n } = useTranslation()
   const { register, submit, saved, formError, formState, watch, setValue } = useSettingsForm({
     locale: user.preferences?.locale ?? 'en',
     timezone: user.preferences?.timezone ?? 'Africa/Dar_es_Salaam',
@@ -253,6 +255,9 @@ function PreferencesTab() {
       onSubmit={submit(async (values) => {
         await api.put('/settings/preferences', values)
         await refreshUser()
+        if (values.locale) {
+          i18n.changeLanguage(values.locale)
+        }
         return 'Preferences saved.'
       })}
       className="space-y-6"

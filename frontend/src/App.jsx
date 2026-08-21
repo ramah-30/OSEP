@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Spinner from './components/ui/Spinner'
+import { useLanguage } from './hooks/useLanguage'
 
 import PublicLayout from './components/layout/PublicLayout'
 import { GuestRoute, ProtectedRoute, RoleRoute, VendorCategoryRoute, VerifiedRoute } from './routes/guards'
@@ -141,6 +142,8 @@ function ScrollManager() {
 }
 
 export default function App() {
+  useLanguage()
+
   return (
     <>
       <ScrollManager />
