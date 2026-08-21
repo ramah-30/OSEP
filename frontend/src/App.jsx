@@ -56,7 +56,6 @@ import FinanceAudit from './pages/dashboard/planner/finance/Audit'
 import FinancePrint from './pages/dashboard/planner/finance/FinancePrint'
 import AiLayout from './pages/dashboard/planner/ai/AiLayout'
 import AiDashboard from './pages/dashboard/planner/ai/AiDashboard'
-import AiTemplates from './pages/dashboard/planner/ai/AiTemplates'
 import AiDocuments from './pages/dashboard/planner/ai/AiDocuments'
 import AiDocument from './pages/dashboard/planner/ai/AiDocument'
 import EventWorkspace from './pages/dashboard/planner/EventWorkspace'
@@ -230,7 +229,6 @@ export default function App() {
               </Route>
               <Route path="ai-assistant" element={<AiLayout />}>
                 <Route index element={<AiDashboard />} />
-                <Route path="templates" element={<AiTemplates />} />
                 <Route path="documents" element={<AiDocuments />} />
                 <Route path="documents/:id" element={<AiDocument />} />
               </Route>
