@@ -39,17 +39,14 @@ use App\Http\Controllers\Api\V1\VenueLayoutController;
 // Phase 7 — AI Planning Engine
 use App\Http\Controllers\Api\V1\Ai\ChatController as AiChatController;
 use App\Http\Controllers\Api\V1\Ai\DashboardController as AiDashboardController;
-use App\Http\Controllers\Api\V1\Ai\RecommendationController as AiRecommendationController;
 use App\Http\Controllers\Api\V1\Ai\AnalyticsController as AiAnalyticsController;
 use App\Http\Controllers\Api\V1\Ai\MemoryController as AiMemoryController;
 use App\Http\Controllers\Api\V1\Ai\TemplateController as AiTemplateController;
 use App\Http\Controllers\Api\V1\Ai\DocumentController as AiDocumentController;
 use App\Http\Controllers\Api\V1\Ai\FeedbackController as AiFeedbackController;
 use App\Http\Controllers\Api\V1\Ai\KnowledgeController as AiKnowledgeController;
-use App\Http\Controllers\Api\V1\Ai\AutomationController as AiAutomationController;
 use App\Http\Controllers\Api\V1\Ai\ActionController as AiActionController;
 use App\Http\Controllers\Api\V1\Ai\SettingsController as AiSettingsController;
-use App\Http\Controllers\Api\V1\Ai\PromptController as AiPromptController;
 use App\Http\Controllers\Api\V1\Ai\MeetingController as AiMeetingController;
 // Client-planner booking
 use App\Http\Controllers\Api\V1\BookingRequestController;
@@ -310,10 +307,6 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::put('conversations/{conversation}', [AiChatController::class, 'update']);
             Route::delete('conversations/{conversation}', [AiChatController::class, 'destroy']);
 
-            // Recommendations
-            Route::get('recommendations', [AiRecommendationController::class, 'index']);
-            Route::put('recommendations/{recommendation}/dismiss', [AiRecommendationController::class, 'dismiss']);
-            Route::post('recommendations/{recommendation}/apply', [AiRecommendationController::class, 'apply']);
 
             // Analytics & insights
             Route::get('analytics', [AiAnalyticsController::class, 'analytics']);
@@ -346,21 +339,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::put('knowledge/{knowledge}', [AiKnowledgeController::class, 'update']);
             Route::delete('knowledge/{knowledge}', [AiKnowledgeController::class, 'destroy']);
 
-            // Automation rules (trigger → AI action)
-            Route::get('automation', [AiAutomationController::class, 'index']);
-            Route::post('automation', [AiAutomationController::class, 'store']);
-            Route::post('automation/run', [AiAutomationController::class, 'run']);
-            Route::put('automation/{automation}', [AiAutomationController::class, 'update']);
-            Route::delete('automation/{automation}', [AiAutomationController::class, 'destroy']);
 
-            // Prompt library (versioned, reusable, grounded prompts)
-            Route::get('prompts', [AiPromptController::class, 'index']);
-            Route::post('prompts', [AiPromptController::class, 'store']);
-            Route::get('prompts/{prompt}', [AiPromptController::class, 'show']);
-            Route::put('prompts/{prompt}', [AiPromptController::class, 'update']);
-            Route::delete('prompts/{prompt}', [AiPromptController::class, 'destroy']);
-            Route::post('prompts/{prompt}/run', [AiPromptController::class, 'run']);
-            Route::post('prompts/{prompt}/rollback', [AiPromptController::class, 'rollback']);
 
             // Meeting assistant (notes → grounded summary + action items → tasks)
             Route::get('meetings', [AiMeetingController::class, 'index']);

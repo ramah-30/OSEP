@@ -56,13 +56,9 @@ import FinanceAudit from './pages/dashboard/planner/finance/Audit'
 import FinancePrint from './pages/dashboard/planner/finance/FinancePrint'
 import AiLayout from './pages/dashboard/planner/ai/AiLayout'
 import AiDashboard from './pages/dashboard/planner/ai/AiDashboard'
-import AiRecommendations from './pages/dashboard/planner/ai/AiRecommendations'
 import AiTemplates from './pages/dashboard/planner/ai/AiTemplates'
 import AiDocuments from './pages/dashboard/planner/ai/AiDocuments'
 import AiDocument from './pages/dashboard/planner/ai/AiDocument'
-import AiAutomation from './pages/dashboard/planner/ai/AiAutomation'
-import AiPrompts from './pages/dashboard/planner/ai/AiPrompts'
-import AiPrompt from './pages/dashboard/planner/ai/AiPrompt'
 import EventWorkspace from './pages/dashboard/planner/EventWorkspace'
 import WorkspaceOverview from './pages/dashboard/planner/workspace/WorkspaceOverview'
 import Timeline from './pages/dashboard/planner/workspace/Timeline'
@@ -234,13 +230,9 @@ export default function App() {
               </Route>
               <Route path="ai-assistant" element={<AiLayout />}>
                 <Route index element={<AiDashboard />} />
-                <Route path="recommendations" element={<AiRecommendations />} />
                 <Route path="templates" element={<AiTemplates />} />
                 <Route path="documents" element={<AiDocuments />} />
                 <Route path="documents/:id" element={<AiDocument />} />
-                <Route path="prompts" element={<AiPrompts />} />
-                <Route path="prompts/:id" element={<AiPrompt />} />
-                <Route path="automation" element={<AiAutomation />} />
               </Route>
               <Route path="clients" element={<Clients />} />
               <Route path="booking-requests" element={<BookingRequestsInbox />} />
