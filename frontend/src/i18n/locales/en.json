@@ -544,5 +544,19 @@
     "category": "Category",
     "deleteDocument": "Delete document?",
     "noFileSelected": "Choose a file to upload."
+  },
+  "profile": {
+    "profile": "Profile",
+    "profileDescription": "How your studio appears across OSEP.",
+    "yourBookingLink": "Your booking link",
+    "shareBookingLink": "Share this link so clients can book your services directly.",
+    "copyBookingLink": "Copy booking link",
+    "profileUpdated": "Your profile has been updated.",
+    "companyName": "Company name",
+    "yearsOfExperience": "Years of experience",
+    "specialization": "Specialization",
+    "location": "Location",
+    "website": "Website",
+    "aboutStudio": "About your studio"
   }
 }

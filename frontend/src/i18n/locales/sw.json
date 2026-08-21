@@ -544,5 +544,19 @@
     "category": "Kategoria",
     "deleteDocument": "Futa hati?",
     "noFileSelected": "Chagua faili kupakia."
+  },
+  "profile": {
+    "profile": "Wasifu",
+    "profileDescription": "Jinsi studio yako inavyoonekana kwenye OSEP.",
+    "yourBookingLink": "Kiungo cha booking chako",
+    "shareBookingLink": "Sambaza kiungo hiki ili wateja waweze kubisha huduma zako moja kwa moja.",
+    "copyBookingLink": "Nakili kiungo cha booking",
+    "profileUpdated": "Wasifu wako umesasishwa.",
+    "companyName": "Jina la kampuni",
+    "yearsOfExperience": "Miaka ya uzoefu",
+    "specialization": "Utaalam",
+    "location": "Mahali",
+    "website": "Wavuti",
+    "aboutStudio": "Kuhusu studio yako"
   }
 }

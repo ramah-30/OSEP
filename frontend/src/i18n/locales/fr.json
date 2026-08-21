@@ -544,5 +544,19 @@
     "category": "Categorie",
     "deleteDocument": "Supprimer le document?",
     "noFileSelected": "Choisissez un fichier a telecharger."
+  },
+  "profile": {
+    "profile": "Profil",
+    "profileDescription": "Comment votre studio apparait sur OSEP.",
+    "yourBookingLink": "Votre lien de reservation",
+    "shareBookingLink": "Partagez ce lien pour que les clients puissent directement reserver vos services.",
+    "copyBookingLink": "Copier le lien de reservation",
+    "profileUpdated": "Votre profil a ete mis a jour.",
+    "companyName": "Nom de l'entreprise",
+    "yearsOfExperience": "Annees d'experience",
+    "specialization": "Specialisation",
+    "location": "Localisation",
+    "website": "Site web",
+    "aboutStudio": "A propos de votre studio"
   }
 }
