@@ -125,7 +125,8 @@
     "accountDetails": "Maelezo ya Akaunti",
     "changeEmail": "Badilisha Barua Pepe",
     "twoFactorAuth": "Uthibitisho wa Sababu Mbili",
-    "sessionTimeout": "Muda wa Kipindi Umekwisha"
+    "sessionTimeout": "Muda wa Kipindi Umekwisha",
+    "settings": "Mipangilio"
   },
   "events": {
     "myEvents": "Matukio Yangu",
@@ -165,7 +166,14 @@
     "noEventsMatch": "Hakuna matukio yanayofanana",
     "noEventsMatchDesc": "Badilisha vichujio vyako, au unda matukio mapya kuanza.",
     "createEventDesc": "Weka mahitaji ya msingi - unaweza kujaza matukio yanayobaki ndani ya nafasi ya kazi.",
-    "deleteEventDesc": "Kazi zote, wageni, milestones, na vitu vya bajeti kwa matukio haya itafutwa kabisa."
+    "deleteEventDesc": "Kazi zote, wageni, milestones, na vitu vya bajeti kwa matukio haya itafutwa kabisa.",
+    "overview": "Muhtasari",
+    "venue": "Mahali",
+    "venueDesigner": "Muonekano wa Mahali",
+    "changeStatus": "Badilisha hali",
+    "allEvents": "Matukio yote",
+    "guestCount": "wageni",
+    "complete": "kamili"
   },
   "finance": {
     "invoice": "Ankara",

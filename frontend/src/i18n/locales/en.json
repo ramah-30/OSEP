@@ -125,7 +125,8 @@
     "accountDetails": "Account Details",
     "changeEmail": "Change Email",
     "twoFactorAuth": "Two Factor Authentication",
-    "sessionTimeout": "Session Timeout"
+    "sessionTimeout": "Session Timeout",
+    "settings": "Settings"
   },
   "events": {
     "myEvents": "My Events",
@@ -165,7 +166,14 @@
     "noEventsMatch": "No events match",
     "noEventsMatchDesc": "Adjust your filters, or create a new event to get started.",
     "createEventDesc": "Set up the essentials — you can fill in the rest inside the workspace.",
-    "deleteEventDesc": "All tasks, guests, milestones, and budget items for this event will be permanently removed."
+    "deleteEventDesc": "All tasks, guests, milestones, and budget items for this event will be permanently removed.",
+    "overview": "Overview",
+    "venue": "Venue",
+    "venueDesigner": "Venue Designer",
+    "changeStatus": "Change status",
+    "allEvents": "All events",
+    "guestCount": "guests",
+    "complete": "complete"
   },
   "finance": {
     "invoice": "Invoice",

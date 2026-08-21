@@ -125,7 +125,8 @@
     "accountDetails": "Détails du compte",
     "changeEmail": "Changer l'email",
     "twoFactorAuth": "Authentification à deux facteurs",
-    "sessionTimeout": "Expiration de la session"
+    "sessionTimeout": "Expiration de la session",
+    "settings": "Paramètres"
   },
   "events": {
     "myEvents": "Mes événements",
@@ -165,7 +166,14 @@
     "noEventsMatch": "Aucun événement ne correspond",
     "noEventsMatchDesc": "Ajustez vos filtres ou créez un nouvel événement pour commencer.",
     "createEventDesc": "Configurez l'essentiel - vous pouvez remplir le reste dans l'espace de travail.",
-    "deleteEventDesc": "Toutes les tâches, les invités, les jalons et les éléments budgétaires de cet événement seront supprimés de manière permanente."
+    "deleteEventDesc": "Toutes les tâches, les invités, les jalons et les éléments budgétaires de cet événement seront supprimés de manière permanente.",
+    "overview": "Aperçu",
+    "venue": "Lieu",
+    "venueDesigner": "Conception de lieu",
+    "changeStatus": "Changer le statut",
+    "allEvents": "Tous les événements",
+    "guestCount": "invités",
+    "complete": "complétée"
   },
   "finance": {
     "invoice": "Facture",

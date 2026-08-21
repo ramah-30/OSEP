@@ -1,4 +1,5 @@
 import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Badge from '../../../components/ui/Badge'
 import Icon from '../../../components/ui/Icon'
 import ProgressBar from '../../../components/ui/ProgressBar'
@@ -10,18 +11,6 @@ import { useAuth } from '../../../context/AuthContext'
 import { api } from '../../../lib/api'
 import { formatDate } from '../../../lib/format'
 import { EVENT_PIPELINE, EVENT_STATUS_TONE } from '../../../lib/eventConstants'
-
-const TABS = [
-  { value: '', label: 'Overview' },
-  { value: 'timeline', label: 'Timeline' },
-  { value: 'tasks', label: 'Tasks' },
-  { value: 'budget', label: 'Budget' },
-  { value: 'guests', label: 'Guests' },
-  { value: 'vendors', label: 'Vendors' },
-  { value: 'venue', label: 'Venue' },
-  { value: 'venue-designer', label: 'Venue Designer' },
-  { value: 'settings', label: 'Settings' },
-]
 
 const PIPE = EVENT_PIPELINE.map((s) => s.value)
 
@@ -39,11 +28,24 @@ function allowedTargets(current) {
 const LABELS = { ...Object.fromEntries(EVENT_PIPELINE.map((s) => [s.value, s.label])), cancelled: 'Cancelled' }
 
 export default function EventWorkspace() {
+  const { t } = useTranslation()
   const { eventId } = useParams()
   const { user } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const { data, loading, error, reload } = useResource(`/events/${eventId}`)
+
+  const TABS = [
+    { value: '', label: t('events.overview') },
+    { value: 'timeline', label: t('events.timeline') },
+    { value: 'tasks', label: t('events.tasks') },
+    { value: 'budget', label: t('events.budget') },
+    { value: 'guests', label: t('events.guests') },
+    { value: 'vendors', label: t('events.vendors') },
+    { value: 'venue', label: t('events.venue') },
+    { value: 'venue-designer', label: t('events.venueDesigner') },
+    { value: 'settings', label: t('settings.settings') },
+  ]
 
   const base = `${user.dashboard_path}/events/${eventId}`
   const rest = location.pathname.replace(base, '').replace(/^\//, '')
@@ -61,7 +63,7 @@ export default function EventWorkspace() {
   return (
     <div className="space-y-6">
       <Link to={`${user.dashboard_path}/events`} className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted hover:text-ink">
-        <Icon name="ArrowLeft" className="size-4" /> All events
+        <Icon name="ArrowLeft" className="size-4" /> {t('events.allEvents')}
       </Link>
 
       <LoadState loading={loading} error={error} onRetry={reload}>
@@ -76,7 +78,7 @@ export default function EventWorkspace() {
                     <span className="flex items-center gap-1.5"><Icon name="Calendar" className="size-4" />{formatDate(data.event.event_date)}</span>
                     {data.event.venue && <span className="flex items-center gap-1.5"><Icon name="MapPin" className="size-4" />{data.event.venue}</span>}
                     {data.event.client && <span className="flex items-center gap-1.5"><Icon name="User" className="size-4" />{data.event.client.full_name}</span>}
-                    {data.event.expected_guests != null && <span className="flex items-center gap-1.5"><Icon name="Users" className="size-4" />{data.event.expected_guests} guests</span>}
+                    {data.event.expected_guests != null && <span className="flex items-center gap-1.5"><Icon name="Users" className="size-4" />{data.event.expected_guests} {t('events.guestCount')}</span>}
                   </div>
                 </div>
 
@@ -89,7 +91,7 @@ export default function EventWorkspace() {
                   <Dropdown
                     trigger={() => (
                       <span className="inline-flex h-10 items-center gap-1.5 rounded-btn border border-line bg-surface px-3 text-sm font-semibold text-ink hover:border-navy-200">
-                        Change status <Icon name="ChevronDown" className="size-4" />
+                        {t('events.changeStatus')} <Icon name="ChevronDown" className="size-4" />
                       </span>
                     )}
                   >
@@ -106,7 +108,7 @@ export default function EventWorkspace() {
 
               <div className="mt-5 flex items-center gap-4">
                 <ProgressBar value={data.event.progress} className="max-w-md flex-1" />
-                <span className="text-sm font-semibold text-ink">{data.event.progress}% complete</span>
+                <span className="text-sm font-semibold text-ink">{data.event.progress}% {t('events.complete')}</span>
               </div>
             </div>
 
