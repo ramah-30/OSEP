@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import PageHeader from '../../../components/ui/PageHeader'
 import Button from '../../../components/ui/Button'
 import Icon from '../../../components/ui/Icon'
@@ -14,6 +15,7 @@ import { useResource } from '../../../lib/useResource'
 import { api, applyServerErrors, parseApiError } from '../../../lib/api'
 
 export default function Clients() {
+  const { t } = useTranslation()
   const { data, loading, error, reload } = useResource('/clients')
   const [editing, setEditing] = useState(null) // null = closed, {} = new, {id,...} = edit
   const [deleting, setDeleting] = useState(null)
@@ -37,9 +39,9 @@ export default function Clients() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Clients"
-        description="The clients you're planning events for."
-        actions={<Button size="sm" onClick={() => setEditing({})}><Icon name="UserPlus" className="size-4" /> New client</Button>}
+        title={t('clients.myClients')}
+        description={t('clients.clientsDescription')}
+        actions={<Button size="sm" onClick={() => setEditing({})}><Icon name="UserPlus" className="size-4" /> {t('clients.newClient')}</Button>}
       />
 
       <LoadState loading={loading} error={error} onRetry={reload}>
@@ -47,7 +49,7 @@ export default function Clients() {
           data.clients.length ? (
             <Table>
               <THead>
-                <TR><TH>Client</TH><TH>Email</TH><TH>Phone</TH><TH>Location</TH><TH className="text-right">Actions</TH></TR>
+                <TR><TH>{t('clients.clientTableHeader')}</TH><TH>{t('clients.emailTableHeader')}</TH><TH>{t('clients.phoneTableHeader')}</TH><TH>{t('clients.locationTableHeader')}</TH><TH className="text-right">{t('clients.actionsTableHeader')}</TH></TR>
               </THead>
               <TBody>
                 {data.clients.map((c) => (
@@ -63,10 +65,10 @@ export default function Clients() {
                     <TD className="text-muted">{c.location ?? '—'}</TD>
                     <TD>
                       <div className="flex items-center justify-end gap-1">
-                        <Button size="sm" variant="ghost" to={`/dashboard/planner/messages?to=${c.id}`} aria-label={`Message ${c.full_name}`}>
+                        <Button size="sm" variant="ghost" to={`/dashboard/planner/messages?to=${c.id}`} aria-label={`${t('clients.messageClient')} ${c.full_name}`}>
                           <Icon name="MessageSquare" className="size-4" />
                         </Button>
-                        <Button size="sm" variant="ghost" onClick={() => setEditing(c)} aria-label={`Edit ${c.full_name}`}>
+                        <Button size="sm" variant="ghost" onClick={() => setEditing(c)} aria-label={`${t('clients.editClient')} ${c.full_name}`}>
                           <Icon name="PenLine" className="size-4" />
                         </Button>
                         <Button
@@ -74,7 +76,7 @@ export default function Clients() {
                           variant="ghost"
                           className="text-danger hover:bg-danger-soft"
                           onClick={() => { setDeleteError(null); setDeleting(c) }}
-                          aria-label={`Delete ${c.full_name}`}
+                          aria-label={`${t('common.delete')} ${c.full_name}`}
                         >
                           <Icon name="Trash2" className="size-4" />
                         </Button>
@@ -85,9 +87,9 @@ export default function Clients() {
               </TBody>
             </Table>
           ) : (
-            <EmptyState icon="Users" title="No clients yet"
-              description="Add a client here, or create one inline while setting up an event."
-              action={<Button size="sm" onClick={() => setEditing({})}><Icon name="UserPlus" className="size-4" /> New client</Button>} />
+            <EmptyState icon="Users" title={t('clients.noClients')}
+              description={t('clients.noClientsDesc')}
+              action={<Button size="sm" onClick={() => setEditing({})}><Icon name="UserPlus" className="size-4" /> {t('clients.newClient')}</Button>} />
           )
         )}
       </LoadState>
@@ -102,13 +104,13 @@ export default function Clients() {
         open={!!deleting}
         onClose={() => setDeleting(null)}
         onConfirm={handleDelete}
-        title="Remove client?"
+        title={t('clients.removeClientTitle')}
         description={
           deleteError
             ? deleteError
-            : `${deleting?.full_name ?? 'This client'} will be removed from your roster and unlinked from your events. This can't be undone.`
+            : `${deleting?.full_name ?? t('clients.removeClient')} ${t('clients.removeClientDesc')}`
         }
-        confirmLabel="Remove"
+        confirmLabel={t('clients.removeClientButton')}
         loading={removing}
       />
     </div>
@@ -116,6 +118,7 @@ export default function Clients() {
 }
 
 function ClientDrawer({ client, onClose, onSaved }) {
+  const { t } = useTranslation()
   const open = client !== null
   const isEdit = !!client?.id
   const { register, handleSubmit, reset, setError, formState: { errors, isSubmitting } } = useForm()
@@ -147,17 +150,17 @@ function ClientDrawer({ client, onClose, onSaved }) {
   })
 
   return (
-    <Drawer open={open} onClose={onClose} title={isEdit ? 'Edit client' : 'New client'}>
+    <Drawer open={open} onClose={onClose} title={isEdit ? t('clients.editClient') : t('clients.newClient')}>
       <form onSubmit={submit} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
-          <Field label="First name" error={errors.first_name?.message} {...register('first_name', { required: 'Required' })} />
-          <Field label="Last name" error={errors.last_name?.message} {...register('last_name', { required: 'Required' })} />
+          <Field label={t('clients.firstName')} error={errors.first_name?.message} {...register('first_name', { required: t('clients.required') })} />
+          <Field label={t('clients.lastName')} error={errors.last_name?.message} {...register('last_name', { required: t('clients.required') })} />
         </div>
-        <Field type="email" label="Email" error={errors.email?.message} {...register('email', { required: 'Required' })} />
-        <Field label="Phone" {...register('phone')} />
-        <Field label="Location" {...register('location')} />
+        <Field type="email" label={t('clients.email')} error={errors.email?.message} {...register('email', { required: t('clients.required') })} />
+        <Field label={t('clients.phone')} {...register('phone')} />
+        <Field label={t('clients.location')} {...register('location')} />
         <div className="flex justify-end pt-2">
-          <Button type="submit" loading={isSubmitting}>{isEdit ? 'Save changes' : 'Create client'}</Button>
+          <Button type="submit" loading={isSubmitting}>{isEdit ? t('clients.saveChanges') : t('clients.createClient')}</Button>
         </div>
       </form>
     </Drawer>
