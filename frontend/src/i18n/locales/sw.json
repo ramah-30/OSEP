@@ -502,5 +502,20 @@
     "status": "Hali",
     "edit": "Hariri",
     "delete": "Futa"
+  },
+  "approvals": {
+    "approvalsTitle": "Idhini",
+    "approvalsDescription": "Tuma vipengee kwa mteja kwa idhini, na fuatilia maamuzi yao.",
+    "requestApproval": "Omba idhini",
+    "assignClientFirst": "Gawa mteja kwenye matukio haya kabla ya kuomba idhini.",
+    "clientNote": "Kumbuka ya mteja",
+    "noApprovalsYet": "Hakuna idhini bado",
+    "noApprovalsDesc": "Tuma pendekezo, kadirio au mpango kwa mteja wako kwa motisha.",
+    "title": "Jina",
+    "type": "Aina",
+    "description": "Maelezo",
+    "sendToClient": "Tuma kwa mteja",
+    "rsvpReminder": "Kumbuka ya RSVP",
+    "askAI": "Wauliza AI"
   }
 }

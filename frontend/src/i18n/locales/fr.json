@@ -502,5 +502,20 @@
     "status": "Statut",
     "edit": "Modifier",
     "delete": "Supprimer"
+  },
+  "approvals": {
+    "approvalsTitle": "Approbations",
+    "approvalsDescription": "Soumettez des articles a approuver par le client et suivez leurs decisions.",
+    "requestApproval": "Demander une approbation",
+    "assignClientFirst": "Attribuez un client a cet evenement avant de demander des approbations.",
+    "clientNote": "Note du client",
+    "noApprovalsYet": "Pas encore d'approbations",
+    "noApprovalsDesc": "Envoyez une proposition, un devis ou un plan a votre client pour approbation.",
+    "title": "Titre",
+    "type": "Type",
+    "description": "Description",
+    "sendToClient": "Envoyer au client",
+    "rsvpReminder": "Rappel RSVP",
+    "askAI": "Demander a l'IA"
   }
 }

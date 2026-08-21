@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import Button from '../../../../components/ui/Button'
 import Icon from '../../../../components/ui/Icon'
 import Badge from '../../../../components/ui/Badge'
@@ -14,6 +15,7 @@ import { formatRelative } from '../../../../lib/format'
 import { APPROVAL_TONE, APPROVAL_TYPE_OPTIONS } from '../../../../lib/eventConstants'
 
 export default function ApprovalsTab() {
+  const { t } = useTranslation()
   const { event, reload } = useOutletContext()
   const approvals = event.approvals ?? []
   const [creating, setCreating] = useState(false)
@@ -22,17 +24,17 @@ export default function ApprovalsTab() {
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-extrabold text-ink">Approvals</h2>
-          <p className="text-sm text-muted">Submit items for the client to approve, and track their decisions.</p>
+          <h2 className="text-lg font-extrabold text-ink">{t('approvals.approvalsTitle')}</h2>
+          <p className="text-sm text-muted">{t('approvals.approvalsDescription')}</p>
         </div>
         <Button size="sm" onClick={() => setCreating(true)} disabled={!event.client}>
-          <Icon name="Plus" className="size-4" /> Request approval
+          <Icon name="Plus" className="size-4" /> {t('approvals.requestApproval')}
         </Button>
       </div>
 
       {!event.client && (
         <p className="rounded-btn border border-line bg-canvas/60 px-4 py-3 text-sm text-muted">
-          Assign a client to this event before requesting approvals.
+          {t('approvals.assignClientFirst')}
         </p>
       )}
 
@@ -51,7 +53,7 @@ export default function ApprovalsTab() {
 
               {a.client_note && (
                 <p className="mt-3 rounded-btn bg-canvas/70 px-3 py-2 text-sm text-ink">
-                  <span className="font-semibold">Client note:</span> {a.client_note}
+                  <span className="font-semibold">{t('approvals.clientNote')}:</span> {a.client_note}
                 </p>
               )}
 
@@ -71,7 +73,7 @@ export default function ApprovalsTab() {
           ))}
         </div>
       ) : (
-        <EmptyState icon="ClipboardCheck" title="No approvals yet" description="Send a proposal, quotation or plan to your client for sign-off." />
+        <EmptyState icon="ClipboardCheck" title={t('approvals.noApprovalsYet')} description={t('approvals.noApprovalsDesc')} />
       )}
 
       <ApprovalDrawer open={creating} eventId={event.id}
@@ -82,6 +84,7 @@ export default function ApprovalsTab() {
 }
 
 function ApprovalDrawer({ open, eventId, onClose, onSaved }) {
+  const { t } = useTranslation()
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({ defaultValues: { type: 'proposal' } })
 
   const submit = handleSubmit(async (values) => {
@@ -90,13 +93,13 @@ function ApprovalDrawer({ open, eventId, onClose, onSaved }) {
   })
 
   return (
-    <Drawer open={open} onClose={onClose} title="Request approval">
+    <Drawer open={open} onClose={onClose} title={t('approvals.requestApproval')}>
       <form onSubmit={submit} className="space-y-4">
-        <Field label="Title" error={errors.title?.message} {...register('title', { required: 'A title is required' })} />
-        <SelectField label="Type" options={APPROVAL_TYPE_OPTIONS} {...register('type')} />
-        <Textarea label="Description" rows={4} {...register('description')} />
+        <Field label={t('approvals.title')} error={errors.title?.message} {...register('title', { required: 'A title is required' })} />
+        <SelectField label={t('approvals.type')} options={APPROVAL_TYPE_OPTIONS} {...register('type')} />
+        <Textarea label={t('approvals.description')} rows={4} {...register('description')} />
         <div className="flex justify-end pt-2">
-          <Button type="submit" loading={isSubmitting}>Send to client</Button>
+          <Button type="submit" loading={isSubmitting}>{t('approvals.sendToClient')}</Button>
         </div>
       </form>
     </Drawer>

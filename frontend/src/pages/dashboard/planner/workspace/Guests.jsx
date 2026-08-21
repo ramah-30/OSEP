@@ -1,4 +1,5 @@
 import { useSearchParams, useOutletContext } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Icon from '../../../../components/ui/Icon'
 import { AskAiButton, GenerateAiButton } from '../../../../components/ai/InlineAiButtons'
 import { cn } from '../../../../lib/cn'
@@ -14,6 +15,7 @@ import SetupPanel from './guests/SetupPanel'
  * their own data so switching views is snappy.
  */
 export default function Guests() {
+  const { t } = useTranslation()
   const { event } = useOutletContext()
   const [params, setParams] = useSearchParams()
   const view = GUEST_VIEWS.some((v) => v.value === params.get('view')) ? params.get('view') : 'overview'
@@ -34,8 +36,8 @@ export default function Guests() {
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap items-center justify-end gap-2">
-        <AskAiButton eventId={event.id} prompt={`How are RSVPs looking for ${event.title}? Who still needs a nudge?`} label="Ask AI" />
-        <GenerateAiButton templateKey="rsvp_reminder_email" eventId={event.id} label="RSVP reminder" />
+        <AskAiButton eventId={event.id} prompt={`How are RSVPs looking for ${event.title}? Who still needs a nudge?`} label={t('approvals.askAI')} />
+        <GenerateAiButton templateKey="rsvp_reminder_email" eventId={event.id} label={t('approvals.rsvpReminder')} />
       </div>
 
       <nav className="flex gap-1 overflow-x-auto rounded-xl border border-line bg-surface p-1">

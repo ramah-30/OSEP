@@ -502,5 +502,20 @@
     "status": "Status",
     "edit": "Edit",
     "delete": "Delete"
+  },
+  "approvals": {
+    "approvalsTitle": "Approvals",
+    "approvalsDescription": "Submit items for the client to approve, and track their decisions.",
+    "requestApproval": "Request approval",
+    "assignClientFirst": "Assign a client to this event before requesting approvals.",
+    "clientNote": "Client note",
+    "noApprovalsYet": "No approvals yet",
+    "noApprovalsDesc": "Send a proposal, quotation or plan to your client for sign-off.",
+    "title": "Title",
+    "type": "Type",
+    "description": "Description",
+    "sendToClient": "Send to client",
+    "rsvpReminder": "RSVP reminder",
+    "askAI": "Ask AI"
   }
 }
