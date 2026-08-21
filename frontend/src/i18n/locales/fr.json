@@ -517,5 +517,32 @@
     "sendToClient": "Envoyer au client",
     "rsvpReminder": "Rappel RSVP",
     "askAI": "Demander a l'IA"
+  },
+  "timeline": {
+    "timeline": "Calendrier",
+    "timelineDescription": "Jalons, delais et preparation du jour de l'evenement.",
+    "runOfShow": "Deroulement du spectacle",
+    "addMilestone": "Ajouter un jalon",
+    "noMilestonesYet": "Pas encore de jalons",
+    "mapOutPlan": "Planifiez en ajoutant votre premier jalon.",
+    "editMilestone": "Modifier le jalon",
+    "milestoneName": "Nom",
+    "milestoneStatus": "Statut",
+    "milestoneDueDate": "Date d'echeance",
+    "deleteMilestone": "Supprimer le jalon?"
+  },
+  "documents": {
+    "documents": "Documents",
+    "documentsDescription": "Contrats, devis, plans d'etage et plus.",
+    "upload": "Telecharger",
+    "noDocumentsYet": "Pas encore de documents",
+    "uploadDocumentsDesc": "Telechargez les contrats, devis et plans pour garder tout au meme endroit.",
+    "uploadDocument": "Telecharger un document",
+    "chooseFile": "Choisir un fichier",
+    "fileTypes": "PDF, Office, images · jusqu'a 10 MB",
+    "displayName": "Nom d'affichage (facultatif)",
+    "category": "Categorie",
+    "deleteDocument": "Supprimer le document?",
+    "noFileSelected": "Choisissez un fichier a telecharger."
   }
 }

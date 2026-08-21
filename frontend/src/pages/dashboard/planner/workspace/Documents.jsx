@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Button from '../../../../components/ui/Button'
 import Icon from '../../../../components/ui/Icon'
 import Badge from '../../../../components/ui/Badge'
@@ -22,6 +23,7 @@ function humanSize(bytes) {
 }
 
 export default function Documents() {
+  const { t } = useTranslation()
   const { event, reload } = useOutletContext()
   const documents = event.documents ?? []
   const [uploading, setUploading] = useState(false)
@@ -43,10 +45,10 @@ export default function Documents() {
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-extrabold text-ink">Documents</h2>
-          <p className="text-sm text-muted">Contracts, quotations, floor plans and more.</p>
+          <h2 className="text-lg font-extrabold text-ink">{t('documents.documents')}</h2>
+          <p className="text-sm text-muted">{t('documents.documentsDescription')}</p>
         </div>
-        <Button size="sm" onClick={() => setUploading(true)}><Icon name="Upload" className="size-4" /> Upload</Button>
+        <Button size="sm" onClick={() => setUploading(true)}><Icon name="Upload" className="size-4" /> {t('documents.upload')}</Button>
       </div>
 
       {documents.length ? (
@@ -64,15 +66,15 @@ export default function Documents() {
                 </p>
               </div>
               <div className="flex shrink-0 gap-1">
-                <a href={d.url} target="_blank" rel="noreferrer" className="grid size-9 place-items-center rounded-btn text-muted hover:bg-canvas hover:text-ink"><Icon name="Download" className="size-4" /></a>
-                <button type="button" onClick={() => setRemoving(d)} className="grid size-9 place-items-center rounded-btn text-muted hover:bg-danger-soft hover:text-danger"><Icon name="Trash2" className="size-4" /></button>
+                <a href={d.url} target="_blank" rel="noreferrer" className="grid size-9 place-items-center rounded-btn text-muted hover:bg-canvas hover:text-ink" aria-label={t('common.download')}><Icon name="Download" className="size-4" /></a>
+                <button type="button" onClick={() => setRemoving(d)} className="grid size-9 place-items-center rounded-btn text-muted hover:bg-danger-soft hover:text-danger" aria-label={t('budget.delete')}><Icon name="Trash2" className="size-4" /></button>
               </div>
             </Card>
           ))}
         </div>
       ) : (
-        <EmptyState icon="FileText" title="No documents yet" description="Upload contracts, quotations and plans to keep everything in one place."
-          action={<Button size="sm" onClick={() => setUploading(true)}><Icon name="Upload" className="size-4" /> Upload</Button>} />
+        <EmptyState icon="FileText" title={t('documents.noDocumentsYet')} description={t('documents.uploadDocumentsDesc')}
+          action={<Button size="sm" onClick={() => setUploading(true)}><Icon name="Upload" className="size-4" /> {t('documents.upload')}</Button>} />
       )}
 
       <UploadDrawer open={uploading} eventId={event.id}
@@ -80,12 +82,13 @@ export default function Documents() {
         onSaved={() => { setUploading(false); reload() }} />
 
       <ConfirmDialog open={!!removing} onClose={() => setRemoving(null)} onConfirm={remove}
-        title="Delete document?" confirmLabel="Delete" loading={busy} />
+        title={t('documents.deleteDocument')} confirmLabel={t('budget.delete')} loading={busy} />
     </div>
   )
 }
 
 function UploadDrawer({ open, eventId, onClose, onSaved }) {
+  const { t } = useTranslation()
   const fileRef = useRef(null)
   const [file, setFile] = useState(null)
   const [name, setName] = useState('')
@@ -95,7 +98,7 @@ function UploadDrawer({ open, eventId, onClose, onSaved }) {
 
   async function submit(e) {
     e.preventDefault()
-    if (!file) { setError('Choose a file to upload.'); return }
+    if (!file) { setError(t('documents.noFileSelected')); return }
     setSaving(true)
     setError(null)
     try {
@@ -114,23 +117,23 @@ function UploadDrawer({ open, eventId, onClose, onSaved }) {
   }
 
   return (
-    <Drawer open={open} onClose={onClose} title="Upload document">
+    <Drawer open={open} onClose={onClose} title={t('documents.uploadDocument')}>
       <form onSubmit={submit} className="space-y-4">
         <button type="button" onClick={() => fileRef.current?.click()}
           className="flex w-full flex-col items-center gap-2 rounded-card border border-dashed border-line bg-canvas/50 px-4 py-8 text-center transition-colors hover:border-navy-300">
           <Icon name="FileUp" className="size-7 text-navy-700" />
-          <span className="text-sm font-semibold text-ink">{file ? file.name : 'Choose a file'}</span>
-          <span className="text-xs text-muted">PDF, Office, images · up to 10 MB</span>
+          <span className="text-sm font-semibold text-ink">{file ? file.name : t('documents.chooseFile')}</span>
+          <span className="text-xs text-muted">{t('documents.fileTypes')}</span>
         </button>
         <input ref={fileRef} type="file" className="hidden" onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
 
-        <Field label="Display name (optional)" value={name} onChange={(e) => setName(e.target.value)} />
-        <SelectField label="Category" options={DOCUMENT_CATEGORY_OPTIONS} value={category} onChange={(e) => setCategory(e.target.value)} />
+        <Field label={t('documents.displayName')} value={name} onChange={(e) => setName(e.target.value)} />
+        <SelectField label={t('documents.category')} options={DOCUMENT_CATEGORY_OPTIONS} value={category} onChange={(e) => setCategory(e.target.value)} />
 
         {error && <p className="text-sm text-danger">{error}</p>}
 
         <div className="flex justify-end pt-2">
-          <Button type="submit" loading={saving}>Upload</Button>
+          <Button type="submit" loading={saving}>{t('documents.upload')}</Button>
         </div>
       </form>
     </Drawer>

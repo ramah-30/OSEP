@@ -517,5 +517,32 @@
     "sendToClient": "Send to client",
     "rsvpReminder": "RSVP reminder",
     "askAI": "Ask AI"
+  },
+  "timeline": {
+    "timeline": "Timeline",
+    "timelineDescription": "Milestones, deadlines and the run-up to the event day.",
+    "runOfShow": "Run of show",
+    "addMilestone": "Add milestone",
+    "noMilestonesYet": "No milestones yet",
+    "mapOutPlan": "Map out the plan by adding your first milestone.",
+    "editMilestone": "Edit milestone",
+    "milestoneName": "Name",
+    "milestoneStatus": "Status",
+    "milestoneDueDate": "Due date",
+    "deleteMilestone": "Delete milestone?"
+  },
+  "documents": {
+    "documents": "Documents",
+    "documentsDescription": "Contracts, quotations, floor plans and more.",
+    "upload": "Upload",
+    "noDocumentsYet": "No documents yet",
+    "uploadDocumentsDesc": "Upload contracts, quotations and plans to keep everything in one place.",
+    "uploadDocument": "Upload document",
+    "chooseFile": "Choose a file",
+    "fileTypes": "PDF, Office, images · up to 10 MB",
+    "displayName": "Display name (optional)",
+    "category": "Category",
+    "deleteDocument": "Delete document?",
+    "noFileSelected": "Choose a file to upload."
   }
 }

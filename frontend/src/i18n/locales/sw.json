@@ -517,5 +517,32 @@
     "sendToClient": "Tuma kwa mteja",
     "rsvpReminder": "Kumbuka ya RSVP",
     "askAI": "Wauliza AI"
+  },
+  "timeline": {
+    "timeline": "Ratiba",
+    "timelineDescription": "Miamala, tarehe halisi na maandalizi ya siku ya matukio.",
+    "runOfShow": "Muhtasari wa kumvua",
+    "addMilestone": "Ongeza miamala",
+    "noMilestonesYet": "Hakuna miamala bado",
+    "mapOutPlan": "Panda mpango kwa kuongeza miamala yako ya kwanza.",
+    "editMilestone": "Hariri miamala",
+    "milestoneName": "Jina",
+    "milestoneStatus": "Hali",
+    "milestoneDueDate": "Tarehe halisi",
+    "deleteMilestone": "Futa miamala?"
+  },
+  "documents": {
+    "documents": "Hati",
+    "documentsDescription": "Mikataba, vipango, mipango na zaidi.",
+    "upload": "Pakia",
+    "noDocumentsYet": "Hakuna hati bado",
+    "uploadDocumentsDesc": "Pakia mikataba, vipango na mipango kuweka kila kitu katika mahali pamoja.",
+    "uploadDocument": "Pakia hati",
+    "chooseFile": "Chagua faili",
+    "fileTypes": "PDF, Office, picha · hadi MB 10",
+    "displayName": "Jina la kuonyesha (hauihitajiki)",
+    "category": "Kategoria",
+    "deleteDocument": "Futa hati?",
+    "noFileSelected": "Chagua faili kupakia."
   }
 }
