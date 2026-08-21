@@ -28,7 +28,7 @@ export const IMAGES = {
 
 /**
  * Auth screens (login/register) show a rotating carousel on their side panel
- * instead of a single static photo — five curated event-styling shots supplied
+ * instead of a single static photo - five curated event-styling shots supplied
  * directly as local assets rather than hotlinked.
  */
 export const AUTH_CAROUSEL = [
@@ -199,46 +199,46 @@ export const USER_CATEGORIES = [
 
 export const TESTIMONIALS = [
   {
-    name: 'Maya Alvarez',
+    name: 'Ramadhan Yusuph',
     role: 'Lead Planner, Northwind Weddings',
     quote:
       'We used to lose a full week to the first draft of a plan. OSEP gets us to a working timeline the same afternoon the brief lands, and the budget stays honest all the way to invoice.',
-    image: unsplash('photo-1494790108377-be9c29b29330', { w: 200, h: 200, q: 70 }),
+    image: '',
   },
   {
-    name: 'Adaeze Nwosu',
+    name: 'Jumanne Peter',
     role: 'Founder, Saffron Catering',
     quote:
       'Enquiries arrive with the date, headcount and budget already attached. I stopped writing speculative quotes and my booking rate went up in the first month.',
-    image: unsplash('photo-1531123897727-8f129e1688ce', { w: 200, h: 200, q: 70 }),
+    image: '',
   },
   {
-    name: 'Renée Castillo',
+    name: 'Bruno David',
     role: 'Head of Events, Vertex Summit',
     quote:
       'Running a 2,000-delegate conference across three venues used to mean four spreadsheets and a prayer. Now the whole team is reading from one live plan.',
-    image: unsplash('photo-1573497019940-1c28c88b4f3e', { w: 200, h: 200, q: 70 }),
+    image: '',
   },
   {
-    name: 'Daniel Reyes',
+    name: 'Baraka Chacha',
     role: 'Creative Director, Lumen Hospitality',
     quote:
       'The venue designer alone paid for the year. Sharing a floor plan that suppliers can build from removed an entire round of back-and-forth.',
-    image: unsplash('photo-1507003211169-0a1dd7228f2d', { w: 200, h: 200, q: 70 }),
+    image: '',
   },
   {
-    name: 'Tom Whitaker',
+    name: 'Rahel Berbad',
     role: 'Operations, Atlas Expo Group',
     quote:
-      'What sold me was the analytics. Being able to show a client exactly where last year’s spend went made this year’s brief a ten-minute conversation.',
-    image: unsplash('photo-1568602471122-7832951cc4c5', { w: 200, h: 200, q: 70 }),
+      'What sold me was the analytics. Being able to show a client exactly where last year\'s spend went made this year\'s brief a ten-minute conversation.',
+    image: '',
   },
   {
-    name: 'Omar Haddad',
+    name: 'Aisha Juma',
     role: 'Client, company offsite for 400',
     quote:
       'I am not an events person. I approved decisions on my phone between meetings and the whole thing came in under budget. That is all I wanted.',
-    image: unsplash('photo-1600180758890-6b94519a8ba6', { w: 200, h: 200, q: 70 }),
+    image: '',
   },
 ]
 

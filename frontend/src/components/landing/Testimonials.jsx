@@ -14,7 +14,7 @@ function Avatar({ person, className }) {
     .join('')
     .slice(0, 2)
 
-  if (failed) {
+  if (failed || !person.image) {
     return (
       <span
         className={cn(
