@@ -28,7 +28,20 @@
     "show": "Show",
     "more": "More",
     "less": "Less",
-    "none": "None"
+    "none": "None",
+    "update": "Update",
+    "download": "Download",
+    "upload": "Upload",
+    "export": "Export",
+    "import": "Import",
+    "refresh": "Refresh",
+    "copy": "Copy",
+    "paste": "Paste",
+    "clear": "Clear",
+    "apply": "Apply",
+    "create": "Create",
+    "new": "New",
+    "remove": "Remove"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -40,7 +53,11 @@
     "reports": "Reports",
     "settings": "Settings",
     "profile": "Profile",
-    "logout": "Log out"
+    "logout": "Log out",
+    "messages": "Messages",
+    "notifications": "Notifications",
+    "help": "Help",
+    "home": "Home"
   },
   "auth": {
     "login": "Login",
@@ -59,7 +76,29 @@
     "noAccount": "Don't have an account?",
     "haveAccount": "Already have an account?",
     "signInWith": "Sign in with",
-    "signUpWith": "Sign up with"
+    "signUpWith": "Sign up with",
+    "resetPassword": "Reset Password",
+    "newPassword": "New Password",
+    "currentPassword": "Current Password",
+    "changePassword": "Change Password",
+    "verifyEmail": "Verify Email",
+    "resendCode": "Resend Code",
+    "verificationCode": "Verification Code"
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "overview": "Overview",
+    "activeEvents": "Active Events",
+    "totalEvents": "Total Events",
+    "upcomingDeadlines": "Upcoming Deadlines",
+    "recentActivity": "Recent Activity",
+    "quickActions": "Quick Actions",
+    "statistics": "Statistics",
+    "pending": "Pending",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "startPlanning": "Start Planning",
+    "viewAll": "View All"
   },
   "settings": {
     "preferences": "Preferences",
@@ -74,7 +113,11 @@
     "security": "Security",
     "saveChanges": "Save changes",
     "accountDeleted": "Account deleted successfully",
-    "preferencesUpdated": "Preferences saved"
+    "preferencesUpdated": "Preferences saved",
+    "accountDetails": "Account Details",
+    "changeEmail": "Change Email",
+    "twoFactorAuth": "Two Factor Authentication",
+    "sessionTimeout": "Session Timeout"
   },
   "events": {
     "myEvents": "My Events",
@@ -96,7 +139,19 @@
     "progress": "Progress",
     "archived": "Archived",
     "completed": "Completed",
-    "cancelled": "Cancelled"
+    "cancelled": "Cancelled",
+    "draft": "Draft",
+    "published": "Published",
+    "activeEventCount": "Active Events",
+    "eventDetails": "Details",
+    "eventHost": "Host",
+    "eventGuests": "Guests",
+    "eventBudget": "Budget",
+    "eventVendors": "Vendors",
+    "editEvent": "Edit Event",
+    "deleteEvent": "Delete Event",
+    "archiveEvent": "Archive Event",
+    "shareEvent": "Share Event"
   },
   "finance": {
     "invoice": "Invoice",
@@ -113,7 +168,22 @@
     "unpaid": "Unpaid",
     "partiallyPaid": "Partially Paid",
     "overdue": "Overdue",
-    "outstanding": "Outstanding"
+    "outstanding": "Outstanding",
+    "totalAmount": "Total Amount",
+    "amountPaid": "Amount Paid",
+    "amountDue": "Amount Due",
+    "invoiceNumber": "Invoice Number",
+    "invoiceDate": "Invoice Date",
+    "paymentMethod": "Payment Method",
+    "transaction": "Transaction",
+    "refund": "Refund",
+    "budget": "Budget",
+    "budgets": "Budgets",
+    "expenses": "Expenses",
+    "expense": "Expense",
+    "category": "Category",
+    "contracts": "Contracts",
+    "contract": "Contract"
   },
   "ai": {
     "askAI": "Ask OSEP AI",
@@ -126,7 +196,10 @@
     "newChat": "New chat",
     "history": "History",
     "liveMode": "Live",
-    "offlineMode": "Offline"
+    "offlineMode": "Offline",
+    "answeringEngine": "Answering engine",
+    "deleteConversation": "Delete conversation",
+    "clearHistory": "Clear History"
   },
   "messages": {
     "somethingWentWrong": "Something went wrong. Please try again.",
@@ -140,6 +213,86 @@
     "saved": "Saved successfully",
     "updated": "Updated successfully",
     "deleted": "Deleted successfully",
-    "created": "Created successfully"
+    "created": "Created successfully",
+    "noData": "No data available",
+    "emptyList": "Nothing here yet",
+    "tryAgain": "Try again",
+    "checkConnection": "Check your connection",
+    "unsavedChanges": "You have unsaved changes"
+  },
+  "clients": {
+    "myClients": "My Clients",
+    "clientName": "Client Name",
+    "clientEmail": "Client Email",
+    "clientPhone": "Client Phone",
+    "addClient": "Add Client",
+    "removeClient": "Remove Client",
+    "clientList": "Client List",
+    "activeClients": "Active Clients",
+    "clientDetails": "Client Details",
+    "contactInfo": "Contact Information"
+  },
+  "vendors": {
+    "myVendors": "My Vendors",
+    "vendorName": "Vendor Name",
+    "vendorCategory": "Category",
+    "vendorPhone": "Phone",
+    "vendorEmail": "Email",
+    "addVendor": "Add Vendor",
+    "removeVendor": "Remove Vendor",
+    "vendorList": "Vendor List",
+    "viewProfile": "View Profile",
+    "rating": "Rating",
+    "reviews": "Reviews",
+    "availableNow": "Available Now"
+  },
+  "forms": {
+    "name": "Name",
+    "description": "Description",
+    "title": "Title",
+    "required": "Required",
+    "optional": "Optional",
+    "address": "Address",
+    "city": "City",
+    "state": "State",
+    "zipCode": "Zip Code",
+    "notes": "Notes",
+    "attachment": "Attachment",
+    "selectOption": "Select an option",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "startTime": "Start Time",
+    "endTime": "End Time"
+  },
+  "actions": {
+    "approve": "Approve",
+    "reject": "Reject",
+    "pending": "Pending Approval",
+    "approve": "Approve",
+    "approveAll": "Approve All",
+    "rejectAll": "Reject All",
+    "requestMoreInfo": "Request More Info",
+    "respond": "Respond",
+    "request": "Request",
+    "quote": "Quote",
+    "book": "Book",
+    "contact": "Contact",
+    "message": "Message",
+    "invite": "Invite"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "draft": "Draft",
+    "sent": "Sent",
+    "opened": "Opened",
+    "read": "Read",
+    "unread": "Unread",
+    "processing": "Processing",
+    "error": "Error",
+    "success": "Success"
   }
 }

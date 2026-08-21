@@ -28,7 +28,20 @@
     "show": "Montrer",
     "more": "Plus",
     "less": "Moins",
-    "none": "Aucun"
+    "none": "Aucun",
+    "update": "Mettre à jour",
+    "download": "Télécharger",
+    "upload": "Télécharger",
+    "export": "Exporter",
+    "import": "Importer",
+    "refresh": "Actualiser",
+    "copy": "Copier",
+    "paste": "Coller",
+    "clear": "Effacer",
+    "apply": "Appliquer",
+    "create": "Créer",
+    "new": "Nouveau",
+    "remove": "Retirer"
   },
   "nav": {
     "dashboard": "Tableau de bord",
@@ -40,7 +53,11 @@
     "reports": "Rapports",
     "settings": "Paramètres",
     "profile": "Profil",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "messages": "Messages",
+    "notifications": "Notifications",
+    "help": "Aide",
+    "home": "Accueil"
   },
   "auth": {
     "login": "Connexion",
@@ -59,7 +76,29 @@
     "noAccount": "Pas encore de compte?",
     "haveAccount": "Vous avez déjà un compte?",
     "signInWith": "Se connecter avec",
-    "signUpWith": "S'inscrire avec"
+    "signUpWith": "S'inscrire avec",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "currentPassword": "Mot de passe actuel",
+    "changePassword": "Changer le mot de passe",
+    "verifyEmail": "Vérifier l'email",
+    "resendCode": "Renvoyer le code",
+    "verificationCode": "Code de vérification"
+  },
+  "dashboard": {
+    "welcome": "Bienvenue",
+    "overview": "Aperçu",
+    "activeEvents": "Événements actifs",
+    "totalEvents": "Nombre total d'événements",
+    "upcomingDeadlines": "Délais à venir",
+    "recentActivity": "Activité récente",
+    "quickActions": "Actions rapides",
+    "statistics": "Statistiques",
+    "pending": "En attente",
+    "completed": "Terminé",
+    "inProgress": "En cours",
+    "startPlanning": "Commencer la planification",
+    "viewAll": "Afficher tout"
   },
   "settings": {
     "preferences": "Préférences",
@@ -74,7 +113,11 @@
     "security": "Sécurité",
     "saveChanges": "Enregistrer les modifications",
     "accountDeleted": "Compte supprimé avec succès",
-    "preferencesUpdated": "Préférences enregistrées"
+    "preferencesUpdated": "Préférences enregistrées",
+    "accountDetails": "Détails du compte",
+    "changeEmail": "Changer l'email",
+    "twoFactorAuth": "Authentification à deux facteurs",
+    "sessionTimeout": "Expiration de la session"
   },
   "events": {
     "myEvents": "Mes événements",
@@ -96,7 +139,18 @@
     "progress": "Progression",
     "archived": "Archivé",
     "completed": "Terminé",
-    "cancelled": "Annulé"
+    "cancelled": "Annulé",
+    "draft": "Brouillon",
+    "published": "Publié",
+    "activeEventCount": "Événements actifs",
+    "eventHost": "Organisateur",
+    "eventGuests": "Invités à l'événement",
+    "eventBudget": "Budget de l'événement",
+    "eventVendors": "Fournisseurs de l'événement",
+    "editEvent": "Modifier l'événement",
+    "deleteEvent": "Supprimer l'événement",
+    "archiveEvent": "Archiver l'événement",
+    "shareEvent": "Partager l'événement"
   },
   "finance": {
     "invoice": "Facture",
@@ -113,7 +167,22 @@
     "unpaid": "Non payé",
     "partiallyPaid": "Partiellement payé",
     "overdue": "En retard",
-    "outstanding": "Impayé"
+    "outstanding": "Impayé",
+    "totalAmount": "Montant total",
+    "amountPaid": "Montant payé",
+    "amountDue": "Montant dû",
+    "invoiceNumber": "Numéro de facture",
+    "invoiceDate": "Date de la facture",
+    "paymentMethod": "Mode de paiement",
+    "transaction": "Transaction",
+    "refund": "Remboursement",
+    "budget": "Budget",
+    "budgets": "Budgets",
+    "expenses": "Dépenses",
+    "expense": "Dépense",
+    "category": "Catégorie",
+    "contracts": "Contrats",
+    "contract": "Contrat"
   },
   "ai": {
     "askAI": "Demandez à OSEP AI",
@@ -126,7 +195,10 @@
     "newChat": "Nouvelle conversation",
     "history": "Historique",
     "liveMode": "En direct",
-    "offlineMode": "Hors ligne"
+    "offlineMode": "Hors ligne",
+    "answeringEngine": "Moteur de réponse",
+    "deleteConversation": "Supprimer la conversation",
+    "clearHistory": "Effacer l'historique"
   },
   "messages": {
     "somethingWentWrong": "Une erreur s'est produite. Veuillez réessayer.",
@@ -140,6 +212,85 @@
     "saved": "Enregistré avec succès",
     "updated": "Mis à jour avec succès",
     "deleted": "Supprimé avec succès",
-    "created": "Créé avec succès"
+    "created": "Créé avec succès",
+    "noData": "Aucune donnée disponible",
+    "emptyList": "Rien ici pour le moment",
+    "tryAgain": "Réessayer",
+    "checkConnection": "Vérifiez votre connexion",
+    "unsavedChanges": "Vous avez des modifications non enregistrées"
+  },
+  "clients": {
+    "myClients": "Mes clients",
+    "clientName": "Nom du client",
+    "clientEmail": "Email du client",
+    "clientPhone": "Téléphone du client",
+    "addClient": "Ajouter un client",
+    "removeClient": "Supprimer le client",
+    "clientList": "Liste des clients",
+    "activeClients": "Clients actifs",
+    "clientDetails": "Détails du client",
+    "contactInfo": "Coordonnées"
+  },
+  "vendors": {
+    "myVendors": "Mes fournisseurs",
+    "vendorName": "Nom du fournisseur",
+    "vendorCategory": "Catégorie",
+    "vendorPhone": "Téléphone",
+    "vendorEmail": "Email",
+    "addVendor": "Ajouter un fournisseur",
+    "removeVendor": "Supprimer le fournisseur",
+    "vendorList": "Liste des fournisseurs",
+    "viewProfile": "Afficher le profil",
+    "rating": "Évaluation",
+    "reviews": "Avis",
+    "availableNow": "Disponible maintenant"
+  },
+  "forms": {
+    "name": "Nom",
+    "description": "Description",
+    "title": "Titre",
+    "required": "Requis",
+    "optional": "Optionnel",
+    "address": "Adresse",
+    "city": "Ville",
+    "state": "État",
+    "zipCode": "Code postal",
+    "notes": "Notes",
+    "attachment": "Pièce jointe",
+    "selectOption": "Sélectionner une option",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "startTime": "Heure de début",
+    "endTime": "Heure de fin"
+  },
+  "actions": {
+    "approve": "Approuver",
+    "reject": "Rejeter",
+    "pending": "En attente d'approbation",
+    "approveAll": "Approuver tout",
+    "rejectAll": "Rejeter tout",
+    "requestMoreInfo": "Demander plus d'informations",
+    "respond": "Répondre",
+    "request": "Demander",
+    "quote": "Devis",
+    "book": "Réserver",
+    "contact": "Contacter",
+    "message": "Message",
+    "invite": "Inviter"
+  },
+  "status": {
+    "active": "Actif",
+    "inactive": "Inactif",
+    "pending": "En attente",
+    "approved": "Approuvé",
+    "rejected": "Rejeté",
+    "draft": "Brouillon",
+    "sent": "Envoyé",
+    "opened": "Ouvert",
+    "read": "Lu",
+    "unread": "Non lu",
+    "processing": "Traitement en cours",
+    "error": "Erreur",
+    "success": "Succès"
   }
 }
