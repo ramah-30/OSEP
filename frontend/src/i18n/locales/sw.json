@@ -42,7 +42,8 @@
     "create": "Unda",
     "new": "Mpya",
     "remove": "Ondoa",
-    "hi": "Habari"
+    "hi": "Habari",
+    "total": "jumla"
   },
   "nav": {
     "dashboard": "Dashibodi",
@@ -103,7 +104,9 @@
     "clientEventOverview": "Hii ndio jinsi matukio yako yanavyokuja pamoja.",
     "noEventAssigned": "Hakuna matukio yaliyoteuliwa bado",
     "noEventAssignedDesc": "Mara tu mlezi wako atakapopanga matukio yako, itaonekana hapa.",
-    "vendorBusinessOverview": "Hii ndio jinsi biashara yako inayoendeshwa kwenye OSEP."
+    "vendorBusinessOverview": "Hii ndio jinsi biashara yako inayoendeshwa kwenye OSEP.",
+    "marketplaceAdmin": "Utawala wa Soko",
+    "marketplaceModerate": "Dhibiti wabepari, maeneo na mapitio kote kwenye jukwaa."
   },
   "settings": {
     "preferences": "Mapendeleo",
@@ -308,6 +311,17 @@
     "unread": "Haijasomwa",
     "processing": "Inachakatwa",
     "error": "Hitilafu",
-    "success": "Iliyofaulu"
+    "success": "Iliyofaulu",
+    "suspended": "Iliyofungwa"
+  },
+  "admin": {
+    "planners": "Wapanga",
+    "clients": "Wateja",
+    "vendors": "Wabepari",
+    "venues": "Maeneo",
+    "contracts": "Mikataba",
+    "flaggedReviews": "Mapitio yaliyoashiriwa",
+    "noFlaggedReviews": "Hakuna kinachofunguliwa",
+    "noReviewsModeration": "Hakuna mapitio yanayohitaji dhibiti."
   }
 }

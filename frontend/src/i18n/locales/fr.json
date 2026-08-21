@@ -42,7 +42,8 @@
     "create": "Créer",
     "new": "Nouveau",
     "remove": "Retirer",
-    "hi": "Bonjour"
+    "hi": "Bonjour",
+    "total": "total"
   },
   "nav": {
     "dashboard": "Tableau de bord",
@@ -103,7 +104,9 @@
     "clientEventOverview": "Voici comment votre événement prend forme.",
     "noEventAssigned": "Pas encore d'événement assigné",
     "noEventAssignedDesc": "Une fois que votre planificateur configurera votre événement, il apparaîtra ici.",
-    "vendorBusinessOverview": "Voici comment votre entreprise fonctionne sur OSEP."
+    "vendorBusinessOverview": "Voici comment votre entreprise fonctionne sur OSEP.",
+    "marketplaceAdmin": "Administration de la place de marché",
+    "marketplaceModerate": "Modérez les fournisseurs, les lieux et les avis sur la plateforme."
   },
   "settings": {
     "preferences": "Préférences",
@@ -308,6 +311,17 @@
     "unread": "Non lu",
     "processing": "Traitement en cours",
     "error": "Erreur",
-    "success": "Succès"
+    "success": "Succès",
+    "suspended": "Suspendu"
+  },
+  "admin": {
+    "planners": "Planificateurs",
+    "clients": "Clients",
+    "vendors": "Fournisseurs",
+    "venues": "Lieux",
+    "contracts": "Contrats",
+    "flaggedReviews": "Avis signalés",
+    "noFlaggedReviews": "Rien de signalé",
+    "noReviewsModeration": "Aucun avis n'a besoin de modération."
   }
 }

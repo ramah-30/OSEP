@@ -42,7 +42,8 @@
     "create": "Create",
     "new": "New",
     "remove": "Remove",
-    "hi": "Hi"
+    "hi": "Hi",
+    "total": "total"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -103,7 +104,9 @@
     "clientEventOverview": "Here's how your event is coming together.",
     "noEventAssigned": "No event assigned yet",
     "noEventAssignedDesc": "Once your planner sets up your event, it will appear right here.",
-    "vendorBusinessOverview": "Here's how your business is performing on OSEP."
+    "vendorBusinessOverview": "Here's how your business is performing on OSEP.",
+    "marketplaceAdmin": "Marketplace administration",
+    "marketplaceModerate": "Moderate vendors, venues and reviews across the platform."
   },
   "settings": {
     "preferences": "Preferences",
@@ -309,6 +312,17 @@
     "unread": "Unread",
     "processing": "Processing",
     "error": "Error",
-    "success": "Success"
+    "success": "Success",
+    "suspended": "Suspended"
+  },
+  "admin": {
+    "planners": "Planners",
+    "clients": "Clients",
+    "vendors": "Vendors",
+    "venues": "Venues",
+    "contracts": "Contracts",
+    "flaggedReviews": "Flagged reviews",
+    "noFlaggedReviews": "Nothing flagged",
+    "noReviewsModeration": "No reviews need moderation."
   }
 }

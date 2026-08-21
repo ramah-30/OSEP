@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import Card from '../../../components/ui/Card'
 import Icon from '../../../components/ui/Icon'
 import EmptyState from '../../../components/ui/EmptyState'
@@ -7,29 +8,30 @@ import { useResource } from '../../../lib/useResource'
 import { formatNumber } from '../../../lib/format'
 
 export default function AdminOverview() {
+  const { t } = useTranslation()
   const { data, loading, error, reload } = useResource('/admin/marketplace/dashboard')
 
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-h3 font-extrabold tracking-tight text-ink">Marketplace administration</h1>
-        <p className="mt-1.5 text-muted">Moderate vendors, venues and reviews across the platform.</p>
+        <h1 className="text-h3 font-extrabold tracking-tight text-ink">{t('dashboard.marketplaceAdmin')}</h1>
+        <p className="mt-1.5 text-muted">{t('dashboard.marketplaceModerate')}</p>
       </div>
 
       <LoadState loading={loading} error={error} onRetry={reload}>
         {data && (
           <div className="space-y-8">
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              <Stat icon="UserCheck" label="Planners" value={data.stats.planners} />
-              <Stat icon="Users" label="Clients" value={data.stats.clients} />
-              <Stat icon="Store" label="Vendors" value={data.stats.vendors} sub={`${data.stats.pending_vendors} pending`} />
-              <Stat icon="Building" label="Venues" value={data.stats.venues} sub={`${data.stats.suspended_venues} suspended`} />
-              <Stat icon="Handshake" label="Contracts" value={data.stats.contracts} />
-              <Stat icon="Star" label="Flagged reviews" value={data.stats.flagged_reviews} sub={`${data.stats.reviews} total`} />
+              <Stat icon="UserCheck" label={t('admin.planners')} value={data.stats.planners} t={t} />
+              <Stat icon="Users" label={t('admin.clients')} value={data.stats.clients} t={t} />
+              <Stat icon="Store" label={t('admin.vendors')} value={data.stats.vendors} sub={`${data.stats.pending_vendors} ${t('status.pending').toLowerCase()}`} t={t} />
+              <Stat icon="Building" label={t('admin.venues')} value={data.stats.venues} sub={`${data.stats.suspended_venues} ${t('status.suspended').toLowerCase()}`} t={t} />
+              <Stat icon="Handshake" label={t('admin.contracts')} value={data.stats.contracts} t={t} />
+              <Stat icon="Star" label={t('admin.flaggedReviews')} value={data.stats.flagged_reviews} sub={`${data.stats.reviews} ${t('common.total')}`} t={t} />
             </div>
 
             <Card className="p-6">
-              <h3 className="mb-4 font-bold text-ink">Flagged reviews</h3>
+              <h3 className="mb-4 font-bold text-ink">{t('admin.flaggedReviews')}</h3>
               {data.flagged_reviews.length ? (
                 <div className="space-y-3">
                   {data.flagged_reviews.map((r) => (
@@ -42,7 +44,7 @@ export default function AdminOverview() {
                     </div>
                   ))}
                 </div>
-              ) : <EmptyState icon="Star" title="Nothing flagged" description="No reviews need moderation." />}
+              ) : <EmptyState icon="Star" title={t('admin.noFlaggedReviews')} description={t('admin.noReviewsModeration')} />}
             </Card>
           </div>
         )}
