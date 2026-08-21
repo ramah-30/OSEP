@@ -20,14 +20,14 @@ export const ROLE_AI_CONFIG = {
     base: '/marketplace/vendor/ai',
     defaultName: 'OSEP Vendor Copilot',
     launcher: 'Ask OSEP AI',
-    placeholder: 'Ask your business copilot…',
+    placeholder: 'Ask your business copilot...',
     intro: 'Ask about your pipeline, quotes, revenue, reviews or availability.',
   },
   client: {
     base: '/client/ai',
     defaultName: 'OSEP Planning Concierge',
     launcher: 'Ask OSEP AI',
-    placeholder: 'Ask your concierge…',
+    placeholder: 'Ask your concierge...',
     intro: 'Ask about your event, approvals, payments, guests or updates from your planner.',
   },
 }
@@ -122,7 +122,7 @@ export default function RoleAiChatWidget({ config }) {
       setMessages((m) => [...m, { id: msg.id, role: ‘assistant’, content: msg.content, action: msg.action }])
       loadConversations()
     } catch {
-      setMessages((m) => [...m, { role: ‘assistant’, content: ‘Sorry — I couldn’t answer that just now. Please try again.’ }])
+      setMessages((m) => [...m, { role: ‘assistant’, content: ‘Sorry — I couldn\’t answer that just now. Please try again.’ }])
     } finally {
       setSending(false)
     }
@@ -335,7 +335,7 @@ export default function RoleAiChatWidget({ config }) {
               {sending && (
                 <div className="flex justify-start">
                   <div className="flex items-center gap-2 rounded-2xl border border-line bg-canvas px-3.5 py-2.5 text-sm text-muted">
-                    <Spinner className="size-4" /> Thinking…
+                    <Spinner className="size-4" /> Thinking...
                   </div>
                 </div>
               )}
