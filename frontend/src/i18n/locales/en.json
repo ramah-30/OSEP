@@ -273,7 +273,21 @@
     "emptyList": "Nothing here yet",
     "tryAgain": "Try again",
     "checkConnection": "Check your connection",
-    "unsavedChanges": "You have unsaved changes"
+    "unsavedChanges": "You have unsaved changes",
+    "messagesPageTitle": "Messages",
+    "messagesPageDesc": "Your private conversations. Each thread stays just between you and one other person.",
+    "newMessage": "New message",
+    "conversations": "Conversations",
+    "noConversations": "No conversations yet. Start one with \"New message\".",
+    "unknown": "Unknown",
+    "you": "You",
+    "selectConversation": "Select a conversation",
+    "selectConversationDesc": "Pick a thread on the left, or start a new message.",
+    "noMessagesYet": "No messages yet. Say hello 👋",
+    "writeMessage": "Write a message…",
+    "chooseContact": "Choose who you'd like to message.",
+    "noContacts": "No contacts yet",
+    "noContactsDesc": "People you work with on events will appear here."
   },
   "clients": {
     "myClients": "My Clients",

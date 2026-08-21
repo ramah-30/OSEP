@@ -273,7 +273,21 @@
     "emptyList": "Rien ici pour le moment",
     "tryAgain": "Réessayer",
     "checkConnection": "Vérifiez votre connexion",
-    "unsavedChanges": "Vous avez des modifications non enregistrées"
+    "unsavedChanges": "Vous avez des modifications non enregistrées",
+    "messagesPageTitle": "Messages",
+    "messagesPageDesc": "Vos conversations privées. Chaque fil reste entre vous et une autre personne.",
+    "newMessage": "Nouveau message",
+    "conversations": "Conversations",
+    "noConversations": "Pas encore de conversations. Commencez-en une avec \"Nouveau message\".",
+    "unknown": "Inconnu",
+    "you": "Vous",
+    "selectConversation": "Sélectionner une conversation",
+    "selectConversationDesc": "Choisissez un fil à gauche, ou commencez un nouveau message.",
+    "noMessagesYet": "Pas encore de messages. Dites bonjour 👋",
+    "writeMessage": "Écrivez un message…",
+    "chooseContact": "Choisissez qui vous voulez contacter.",
+    "noContacts": "Pas encore de contacts",
+    "noContactsDesc": "Les personnes avec lesquelles vous travaillez sur des événements apparaîtront ici."
   },
   "clients": {
     "myClients": "Mes clients",

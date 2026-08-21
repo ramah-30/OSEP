@@ -273,7 +273,21 @@
     "emptyList": "Hakuna kitu hapa bado",
     "tryAgain": "Jaribu tena",
     "checkConnection": "Angalia muunganisho wako",
-    "unsavedChanges": "Una mabadiliko yasiyohifadhiwa"
+    "unsavedChanges": "Una mabadiliko yasiyohifadhiwa",
+    "messagesPageTitle": "Ujumbe",
+    "messagesPageDesc": "Mazungumzo yako ya binafsi. Kila kamba inabaki kati yako na mtu mmoja tu.",
+    "newMessage": "Ujumbe mpya",
+    "conversations": "Mazungumzo",
+    "noConversations": "Hakuna mazungumzo bado. Anza mmoja na \"Ujumbe mpya\".",
+    "unknown": "Haijulikani",
+    "you": "Wewe",
+    "selectConversation": "Chagua mazungumzo",
+    "selectConversationDesc": "Chagua kamba kwenye upande wa kushoto, au anza ujumbe mpya.",
+    "noMessagesYet": "Hakuna ujumbe bado. Salimia 👋",
+    "writeMessage": "Andika ujumbe…",
+    "chooseContact": "Chagua mtu unayetaka kumwandikia ujumbe.",
+    "noContacts": "Hakuna mawasiliano bado",
+    "noContactsDesc": "Watu unayofanya kazi nao kwenye matukio watakuja hapa."
   },
   "clients": {
     "myClients": "Wateja Wangu",
