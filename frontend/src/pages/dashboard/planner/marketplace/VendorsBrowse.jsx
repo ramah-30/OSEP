@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Icon from '../../../../components/ui/Icon'
 import EmptyState from '../../../../components/ui/EmptyState'
 import Button from '../../../../components/ui/Button'
@@ -23,6 +24,7 @@ function buildQuery(values) {
 }
 
 export default function VendorsBrowse() {
+  const { t } = useTranslation()
   const [searchParams] = useSearchParams()
   const [filters, setFilters] = useState({ ...EMPTY, category_id: searchParams.get('category_id') ?? '', q: searchParams.get('q') ?? '' })
   const [debounced, setDebounced] = useState(filters)
@@ -44,6 +46,14 @@ export default function VendorsBrowse() {
   const toggleCompare = (vendor) =>
     setCompare((c) => (c.find((x) => x.id === vendor.id) ? c.filter((x) => x.id !== vendor.id) : [...c, vendor].slice(0, 4)))
 
+  const SORT_OPTIONS = [
+    { value: 'rating', label: t('vendors.topRated') },
+    { value: 'reviews', label: t('vendors.mostReviewed') },
+    { value: 'price_low', label: t('vendors.priceLowToHigh') },
+    { value: 'price_high', label: t('vendors.priceHighToLow') },
+    { value: 'newest', label: t('vendors.newest') },
+  ]
+
   return (
     <div className="space-y-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -52,7 +62,7 @@ export default function VendorsBrowse() {
           <input
             value={filters.q}
             onChange={(e) => patch({ q: e.target.value })}
-            placeholder="Search vendors by name or category"
+            placeholder={t('vendors.searchVendorsByNameOrCategory')}
             className="h-11 w-full rounded-btn border border-line bg-surface pl-10 pr-4 text-sm text-ink outline-none focus:border-navy-600 focus:shadow-[0_0_0_3px_rgba(41,71,200,0.12)]"
           />
         </div>
@@ -62,11 +72,9 @@ export default function VendorsBrowse() {
           value={filters.sort}
           onChange={(e) => patch({ sort: e.target.value })}
         >
-          <option value="rating">Top rated</option>
-          <option value="reviews">Most reviewed</option>
-          <option value="price_low">Price: low to high</option>
-          <option value="price_high">Price: high to low</option>
-          <option value="newest">Newest</option>
+          {SORT_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>{option.label}</option>
+          ))}
         </ListboxSelect>
       </div>
 
@@ -79,7 +87,7 @@ export default function VendorsBrowse() {
           <LoadState loading={loading} error={error} onRetry={reload}>
             {data && (data.vendors.length ? (
               <>
-                <p className="mb-3 text-sm text-muted">{data.meta?.total ?? data.vendors.length} vendors</p>
+                <p className="mb-3 text-sm text-muted">{data.meta?.total ?? data.vendors.length} {t('vendors.vendorCount')}</p>
                 <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
                   {data.vendors.map((v) => (
                     <VendorCard
@@ -94,7 +102,7 @@ export default function VendorsBrowse() {
                 </div>
               </>
             ) : (
-              <EmptyState icon="Store" title="No vendors match your filters" description="Try widening your search or resetting the filters." action={<Button variant="secondary" onClick={() => setFilters(EMPTY)}>Reset filters</Button>} />
+              <EmptyState icon="Store" title={t('vendors.noVendorsMatchFilters')} description={t('vendors.tryWideningSearchOrResetFilters')} action={<Button variant="secondary" onClick={() => setFilters(EMPTY)}>{t('vendors.resetFilters')}</Button>} />
             ))}
           </LoadState>
         </div>

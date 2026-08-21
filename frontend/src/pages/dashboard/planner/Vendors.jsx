@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import PageHeader from '../../../components/ui/PageHeader'
 import Card from '../../../components/ui/Card'
 import Icon from '../../../components/ui/Icon'
@@ -9,6 +10,7 @@ import LoadState from '../../../components/dashboard/LoadState'
 import { useResource } from '../../../lib/useResource'
 
 export default function Vendors() {
+  const { t } = useTranslation()
   const [q, setQ] = useState('')
   const [debounced, setDebounced] = useState('')
 
@@ -22,11 +24,11 @@ export default function Vendors() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Vendors" description="The registered vendor directory you can assign to events." />
+      <PageHeader title={t('vendors.vendorsTitle')} description={t('vendors.vendorsDescription')} />
 
       <div className="relative max-w-md">
         <Icon name="Search" className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted" />
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by business or category"
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t('vendors.searchByBusinessOrCategory')}
           className="h-11 w-full rounded-btn border border-line bg-surface pl-10 pr-4 text-sm text-ink outline-none focus:border-navy-600 focus:shadow-[0_0_0_3px_rgba(41,71,200,0.12)]" />
       </div>
 
@@ -48,13 +50,13 @@ export default function Vendors() {
                     {v.rating != null && <span className="flex items-center gap-1 font-semibold text-ink"><Icon name="Star" className="size-4 text-warning" />{v.rating}</span>}
                   </div>
                   {v.verification_status === 'verified' && (
-                    <Badge tone="emerald" className="mt-3"><Icon name="ShieldCheck" className="size-3.5" /> Verified</Badge>
+                    <Badge tone="emerald" className="mt-3"><Icon name="ShieldCheck" className="size-3.5" /> {t('vendors.verified')}</Badge>
                   )}
                 </Card>
               ))}
             </div>
           ) : (
-            <EmptyState icon="Store" title="No vendors found" description="Try a different search." />
+            <EmptyState icon="Store" title={t('vendors.noVendorsFound')} description={t('vendors.tryDifferentSearch')} />
           )
         )}
       </LoadState>
