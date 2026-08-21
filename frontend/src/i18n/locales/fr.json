@@ -423,7 +423,10 @@
     "book": "Réserver",
     "contact": "Contacter",
     "message": "Message",
-    "invite": "Inviter"
+    "invite": "Inviter",
+    "accept": "Accepter",
+    "decline": "Refuser",
+    "acceptAndCreateEvent": "Accepter & créer un événement"
   },
   "filters": {
     "allStatuses": "Tous les statuts",
@@ -454,5 +457,50 @@
     "flaggedReviews": "Avis signalés",
     "noFlaggedReviews": "Rien de signalé",
     "noReviewsModeration": "Aucun avis n'a besoin de modération."
+  },
+  "bookings": {
+    "bookingRequests": "Demandes de réservation",
+    "bookingRequestsDesc": "Les clients qui souhaitent réserver vos services de planification.",
+    "pending": "En attente",
+    "noPendingRequests": "Aucune demande en attente",
+    "newRequestsAppear": "Les nouvelles demandes des clients apparaîtront ici.",
+    "history": "Historique",
+    "acceptRequest": "Accepter la demande",
+    "declineRequest": "Refuser la demande",
+    "acceptingCreateWorkspace": "L'acceptation créera un espace de travail pour ce client.",
+    "declineMessage": "Faites savoir au client que vous ne pouvez pas prendre sa réservation.",
+    "eventType": "Type",
+    "eventDate": "Date",
+    "proposedBudget": "Budget proposé",
+    "quotedBudget": "Budget estimé (facultatif)",
+    "budgetPlaceholder": "Laissez vide pour définir le budget ultérieurement",
+    "noteToClient": "Note au client (facultatif)",
+    "notePlaceholder": "Tout message que vous souhaitez inclure…",
+    "cancel": "Annuler",
+    "unknownClient": "Client inconnu",
+    "guests": "invités",
+    "proposed": "Proposé",
+    "quoted": "Estimé",
+    "yourNote": "Votre note",
+    "eventCreated": "Événement créé",
+    "deleteBudgetItem": "Supprimer l'article du budget?"
+  },
+  "budget": {
+    "budget": "Budget",
+    "budgetDescription": "Suivez les dépenses estimées et réelles par catégorie.",
+    "askAI": "Demander à l'IA",
+    "budgetGuide": "Guide budgétaire",
+    "addItem": "Ajouter un article",
+    "totalBudget": "Budget total",
+    "estimated": "Estimé",
+    "actualSpend": "Dépenses réelles",
+    "remaining": "Restant",
+    "noBudgetItems": "Pas encore d'articles budgétaires",
+    "breakDownBudget": "Divisez le budget par catégorie pour suivre les dépenses.",
+    "category": "Catégorie",
+    "description": "Description",
+    "status": "Statut",
+    "edit": "Modifier",
+    "delete": "Supprimer"
   }
 }

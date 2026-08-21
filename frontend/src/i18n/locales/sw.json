@@ -423,7 +423,10 @@
     "book": "Kamatia",
     "contact": "Wasiliana",
     "message": "Ujumbe",
-    "invite": "Kamatanisha"
+    "invite": "Kamatanisha",
+    "accept": "Kubali",
+    "decline": "Kataa",
+    "acceptAndCreateEvent": "Kubali na kuunda matukio"
   },
   "filters": {
     "allStatuses": "Hali zote",
@@ -454,5 +457,50 @@
     "flaggedReviews": "Mapitio yaliyoashiriwa",
     "noFlaggedReviews": "Hakuna kinachofunguliwa",
     "noReviewsModeration": "Hakuna mapitio yanayohitaji dhibiti."
+  },
+  "bookings": {
+    "bookingRequests": "Maombi ya Booking",
+    "bookingRequestsDesc": "Wateja ambao wanataka kubisha huduma zako za kupanga.",
+    "pending": "Inasubiri",
+    "noPendingRequests": "Hakuna maombi yanayosubiri",
+    "newRequestsAppear": "Maombi mapya kutoka kwa wateja yataonekana hapa.",
+    "history": "Historia",
+    "acceptRequest": "Kubali ombi",
+    "declineRequest": "Kataa ombi",
+    "acceptingCreateWorkspace": "Kubali kutataka kuunda nafasi ya kazi kwa mteja huyu.",
+    "declineMessage": "Jaribu mteja jua kwamba hauwezi kuchukua booking yao.",
+    "eventType": "Aina",
+    "eventDate": "Tarehe",
+    "proposedBudget": "Bajeti inayopendekezwa",
+    "quotedBudget": "Bajeti iliyokadirio (hauihitajiki)",
+    "budgetPlaceholder": "Acha tupu kuseti bajeti baadaye",
+    "noteToClient": "Kumbuka kwa mteja (hauihitajiki)",
+    "notePlaceholder": "Ujumbe wowote unataka ujumuishe...",
+    "cancel": "Ghairi",
+    "unknownClient": "Mteja hajulikani",
+    "guests": "wageni",
+    "proposed": "Inayopendekezwa",
+    "quoted": "Iliyokadirio",
+    "yourNote": "Kumbuka chako",
+    "eventCreated": "Matukio yamefungwa",
+    "deleteBudgetItem": "Futa kipengee cha bajeti?"
+  },
+  "budget": {
+    "budget": "Bajeti",
+    "budgetDescription": "Fuatilia kiasi kinachokadiriwa kwa matukio yanayofanya utendaji.",
+    "askAI": "Wauliza AI",
+    "budgetGuide": "Mwongozo wa bajeti",
+    "addItem": "Ongeza kipengee",
+    "totalBudget": "Jumla ya bajeti",
+    "estimated": "Inakadiriwa",
+    "actualSpend": "Matumizi halisi",
+    "remaining": "Inayobaki",
+    "noBudgetItems": "Hakuna vipengee vya bajeti bado",
+    "breakDownBudget": "Gawa bajeti kwa kategoria kufuatilia matumizi.",
+    "category": "Kategoria",
+    "description": "Maelezo",
+    "status": "Hali",
+    "edit": "Hariri",
+    "delete": "Futa"
   }
 }

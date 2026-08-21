@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import PageHeader from '../../../components/ui/PageHeader'
 import Card from '../../../components/ui/Card'
 import Badge from '../../../components/ui/Badge'
@@ -21,6 +22,7 @@ const STATUS_TONE = {
 }
 
 export default function BookingRequestsInbox() {
+  const { t } = useTranslation()
   const { data, loading, error, reload } = useResource('/planner-booking-requests')
   const [responding, setResponding] = useState(null) // { request, decision }
   const [note, setNote] = useState('')
@@ -61,8 +63,8 @@ export default function BookingRequestsInbox() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Booking Requests"
-        description="Clients who want to book your planning services."
+        title={t('bookings.bookingRequests')}
+        description={t('bookings.bookingRequestsDesc')}
       />
 
       <LoadState loading={loading} error={error} onRetry={reload}>
@@ -71,7 +73,7 @@ export default function BookingRequestsInbox() {
             {/* Pending */}
             <section>
               <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">
-                Pending — {pending.length}
+                {t('bookings.pending')} — {pending.length}
               </h2>
               {pending.length ? (
                 <div className="space-y-3">
@@ -80,14 +82,14 @@ export default function BookingRequestsInbox() {
                   ))}
                 </div>
               ) : (
-                <EmptyState icon="Inbox" title="No pending requests" description="New requests from clients will appear here." />
+                <EmptyState icon="Inbox" title={t('bookings.noPendingRequests')} description={t('bookings.newRequestsAppear')} />
               )}
             </section>
 
             {/* History */}
             {history.length > 0 && (
               <section>
-                <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">History</h2>
+                <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">{t('bookings.history')}</h2>
                 <div className="space-y-3">
                   {history.map((r) => <RequestCard key={r.id} request={r} />)}
                 </div>
@@ -101,21 +103,21 @@ export default function BookingRequestsInbox() {
       <Drawer
         open={!!responding}
         onClose={() => setResponding(null)}
-        title={responding?.decision === 'accepted' ? 'Accept request' : 'Decline request'}
+        title={responding?.decision === 'accepted' ? t('bookings.acceptRequest') : t('bookings.declineRequest')}
         description={
           responding?.decision === 'accepted'
-            ? "Accepting will create an event workspace for this client."
-            : "Let the client know you're unable to take their booking."
+            ? t('bookings.acceptingCreateWorkspace')
+            : t('bookings.declineMessage')
         }
       >
         <div className="space-y-4">
           {responding?.request && (
             <div className="rounded-card border border-line bg-surface p-4 text-sm text-muted">
               <p className="font-semibold text-ink">{responding.request.client?.full_name}</p>
-              {responding.request.event_type && <p>Type: {responding.request.event_type}</p>}
-              {responding.request.event_date && <p>Date: {formatDate(responding.request.event_date)}</p>}
+              {responding.request.event_type && <p>{t('bookings.eventType')}: {responding.request.event_type}</p>}
+              {responding.request.event_date && <p>{t('bookings.eventDate')}: {formatDate(responding.request.event_date)}</p>}
               {responding.request.proposed_budget != null && (
-                <p>Proposed budget: {formatCurrency(responding.request.proposed_budget)}</p>
+                <p>{t('bookings.proposedBudget')}: {formatCurrency(responding.request.proposed_budget)}</p>
               )}
               {responding.request.message && (
                 <p className="mt-2 border-t border-line pt-2 italic">{responding.request.message}</p>
@@ -129,27 +131,27 @@ export default function BookingRequestsInbox() {
 
           {responding?.decision === 'accepted' && (
             <Field
-              label="Quoted budget (optional)"
+              label={t('bookings.quotedBudget')}
               type="number"
               min="0"
               step="1000"
-              placeholder="Leave blank to set the budget later"
+              placeholder={t('bookings.budgetPlaceholder')}
               value={quotedBudget}
               onChange={(e) => setQuotedBudget(e.target.value)}
             />
           )}
 
           <Textarea
-            label="Note to client (optional)"
+            label={t('bookings.noteToClient')}
             rows={3}
-            placeholder="Any message you want to include…"
+            placeholder={t('bookings.notePlaceholder')}
             value={note}
             onChange={(e) => setNote(e.target.value)}
           />
 
           <div className="flex justify-end gap-3">
             <Button variant="ghost" onClick={() => setResponding(null)} disabled={submitting}>
-              Cancel
+              {t('bookings.cancel')}
             </Button>
             <Button
               tone={responding?.decision === 'accepted' ? 'primary' : 'danger'}
@@ -157,9 +159,9 @@ export default function BookingRequestsInbox() {
               onClick={submitResponse}
             >
               {responding?.decision === 'accepted' ? (
-                <><Icon name="Check" className="size-4" /> Accept &amp; create event</>
+                <><Icon name="Check" className="size-4" /> {t('bookings.acceptRequest')}</>
               ) : (
-                <><Icon name="X" className="size-4" /> Decline</>
+                <><Icon name="X" className="size-4" /> {t('actions.decline')}</>
               )}
             </Button>
           </div>
@@ -170,12 +172,14 @@ export default function BookingRequestsInbox() {
 }
 
 function RequestCard({ request, onAccept, onDecline }) {
+  const { t } = useTranslation()
+
   return (
     <Card className="p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <p className="font-bold text-ink">{request.client?.full_name ?? 'Unknown client'}</p>
+            <p className="font-bold text-ink">{request.client?.full_name ?? t('bookings.unknownClient')}</p>
             <Badge tone={STATUS_TONE[request.status] ?? 'muted'}>{request.status_label}</Badge>
           </div>
           <p className="mt-0.5 text-xs font-mono text-muted">{request.reference}</p>
@@ -192,17 +196,17 @@ function RequestCard({ request, onAccept, onDecline }) {
             )}
             {request.expected_guests && (
               <span className="flex items-center gap-1.5">
-                <Icon name="Users" className="size-3.5" />{request.expected_guests} guests
+                <Icon name="Users" className="size-3.5" />{request.expected_guests} {t('bookings.guests')}
               </span>
             )}
             {request.proposed_budget != null && (
               <span className="flex items-center gap-1.5">
-                <Icon name="Wallet" className="size-3.5" />Proposed {formatCurrency(request.proposed_budget)}
+                <Icon name="Wallet" className="size-3.5" />{t('bookings.proposed')} {formatCurrency(request.proposed_budget)}
               </span>
             )}
             {request.quoted_budget != null && (
               <span className="flex items-center gap-1.5">
-                <Icon name="CircleDollarSign" className="size-3.5" />Quoted {formatCurrency(request.quoted_budget)}
+                <Icon name="CircleDollarSign" className="size-3.5" />{t('bookings.quoted')} {formatCurrency(request.quoted_budget)}
               </span>
             )}
           </div>
@@ -211,12 +215,12 @@ function RequestCard({ request, onAccept, onDecline }) {
           )}
           {request.planner_note && (
             <p className="mt-2 text-sm text-muted">
-              <span className="font-semibold">Your note:</span> {request.planner_note}
+              <span className="font-semibold">{t('bookings.yourNote')}:</span> {request.planner_note}
             </p>
           )}
           {request.event_id && (
             <p className="mt-2 flex items-center gap-1.5 text-xs text-green-700 dark:text-green-400">
-              <Icon name="CalendarCheck2" className="size-3.5" /> Event created
+              <Icon name="CalendarCheck2" className="size-3.5" /> {t('bookings.eventCreated')}
             </p>
           )}
         </div>
@@ -224,10 +228,10 @@ function RequestCard({ request, onAccept, onDecline }) {
         {request.status === 'pending' && onAccept && onDecline && (
           <div className="flex shrink-0 gap-2">
             <Button size="sm" variant="outline" onClick={onDecline}>
-              Decline
+              {t('actions.decline')}
             </Button>
             <Button size="sm" onClick={onAccept}>
-              Accept
+              {t('actions.accept')}
             </Button>
           </div>
         )}

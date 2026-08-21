@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import Button from '../../../../components/ui/Button'
 import Icon from '../../../../components/ui/Icon'
 import Badge from '../../../../components/ui/Badge'
@@ -16,6 +17,7 @@ import { formatCurrency } from '../../../../lib/format'
 import { BUDGET_STATUS_OPTIONS, BUDGET_STATUS_TONE } from '../../../../lib/eventConstants'
 
 export default function Budget() {
+  const { t } = useTranslation()
   const { event, reload } = useOutletContext()
   const items = event.budget_items ?? []
   const [drawer, setDrawer] = useState({ open: false, editing: null })
@@ -41,31 +43,31 @@ export default function Budget() {
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-extrabold text-ink">Budget</h2>
-          <p className="text-sm text-muted">Track estimated vs. actual spend across categories.</p>
+          <h2 className="text-lg font-extrabold text-ink">{t('budget.budget')}</h2>
+          <p className="text-sm text-muted">{t('budget.budgetDescription')}</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <AskAiButton eventId={event.id} prompt={`Is the budget for ${event.title} on track? Where can I save?`} label="Ask AI" />
-          <GenerateAiButton templateKey="budget_outline" eventId={event.id} label="Budget guide" />
+          <AskAiButton eventId={event.id} prompt={`Is the budget for ${event.title} on track? Where can I save?`} label={t('budget.askAI')} />
+          <GenerateAiButton templateKey="budget_outline" eventId={event.id} label={t('budget.budgetGuide')} />
           <Button size="sm" onClick={() => setDrawer({ open: true, editing: null })}>
-            <Icon name="Plus" className="size-4" /> Add item
+            <Icon name="Plus" className="size-4" /> {t('budget.addItem')}
           </Button>
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Summary label="Total budget" value={total} />
-        <Summary label="Estimated" value={estimated} />
-        <Summary label="Actual spend" value={actual} />
-        <Summary label="Remaining" value={total - actual} tone="emerald" />
+        <Summary label={t('budget.totalBudget')} value={total} />
+        <Summary label={t('budget.estimated')} value={estimated} />
+        <Summary label={t('budget.actualSpend')} value={actual} />
+        <Summary label={t('budget.remaining')} value={total - actual} tone="emerald" />
       </div>
 
       {items.length ? (
         <Table>
           <THead>
             <TR>
-              <TH>Category</TH><TH>Description</TH><TH className="text-right">Estimated</TH>
-              <TH className="text-right">Actual</TH><TH>Status</TH><TH />
+              <TH>{t('budget.category')}</TH><TH>{t('budget.description')}</TH><TH className="text-right">{t('budget.estimated')}</TH>
+              <TH className="text-right">{t('budget.actualSpend')}</TH><TH>{t('budget.status')}</TH><TH />
             </TR>
           </THead>
           <TBody>
@@ -78,8 +80,8 @@ export default function Budget() {
                 <TD><Badge tone={BUDGET_STATUS_TONE[i.status] ?? 'muted'}>{i.status_label}</Badge></TD>
                 <TD>
                   <div className="flex justify-end gap-1">
-                    <button type="button" onClick={() => setDrawer({ open: true, editing: i })} className="grid size-8 place-items-center rounded-btn text-muted hover:bg-canvas hover:text-ink"><Icon name="PenLine" className="size-4" /></button>
-                    <button type="button" onClick={() => setRemoving(i)} className="grid size-8 place-items-center rounded-btn text-muted hover:bg-danger-soft hover:text-danger"><Icon name="Trash2" className="size-4" /></button>
+                    <button type="button" onClick={() => setDrawer({ open: true, editing: i })} className="grid size-8 place-items-center rounded-btn text-muted hover:bg-canvas hover:text-ink" aria-label={t('budget.edit')}><Icon name="PenLine" className="size-4" /></button>
+                    <button type="button" onClick={() => setRemoving(i)} className="grid size-8 place-items-center rounded-btn text-muted hover:bg-danger-soft hover:text-danger" aria-label={t('budget.delete')}><Icon name="Trash2" className="size-4" /></button>
                   </div>
                 </TD>
               </TR>
@@ -87,8 +89,8 @@ export default function Budget() {
           </TBody>
         </Table>
       ) : (
-        <EmptyState icon="Wallet" title="No budget items yet" description="Break the budget down by category to track spend."
-          action={<Button size="sm" onClick={() => setDrawer({ open: true, editing: null })}><Icon name="Plus" className="size-4" /> Add item</Button>} />
+        <EmptyState icon="Wallet" title={t('budget.noBudgetItems')} description={t('budget.breakDownBudget')}
+          action={<Button size="sm" onClick={() => setDrawer({ open: true, editing: null })}><Icon name="Plus" className="size-4" /> {t('budget.addItem')}</Button>} />
       )}
 
       <BudgetDrawer
@@ -101,7 +103,7 @@ export default function Budget() {
       />
 
       <ConfirmDialog open={!!removing} onClose={() => setRemoving(null)} onConfirm={remove}
-        title="Delete budget item?" confirmLabel="Delete" loading={busy} />
+        title={t('bookings.deleteBudgetItem')} confirmLabel={t('budget.delete')} loading={busy} />
     </div>
   )
 }
@@ -116,6 +118,7 @@ function Summary({ label, value, tone }) {
 }
 
 function BudgetDrawer({ open, editing, eventId, onClose, onSaved }) {
+  const { t } = useTranslation()
   const [categories, setCategories] = useState([])
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     defaultValues: editing
@@ -138,20 +141,20 @@ function BudgetDrawer({ open, editing, eventId, onClose, onSaved }) {
   })
 
   return (
-    <Drawer open={open} onClose={onClose} title={editing ? 'Edit budget item' : 'Add budget item'}>
+    <Drawer open={open} onClose={onClose} title={editing ? t('budget.edit') + ' ' + t('budget.addItem').toLowerCase() : t('budget.addItem')}>
       <form onSubmit={submit} className="space-y-4">
-        <SelectField label="Category" error={errors.category?.message} {...register('category', { required: 'Choose a category' })}>
-          <option value="">Select a category…</option>
+        <SelectField label={t('budget.category')} error={errors.category?.message} {...register('category', { required: 'Choose a category' })}>
+          <option value="">{t('forms.selectOption')}</option>
           {categories.map((c) => <option key={c} value={c}>{c}</option>)}
         </SelectField>
-        <Field label="Description" error={errors.description?.message} {...register('description', { required: 'A description is required' })} />
+        <Field label={t('budget.description')} error={errors.description?.message} {...register('description', { required: 'A description is required' })} />
         <div className="grid grid-cols-2 gap-4">
-          <Field type="number" min="0" step="1000" label="Estimated cost" {...register('estimated_cost', { required: true })} />
-          <Field type="number" min="0" step="1000" label="Actual cost" {...register('actual_cost')} />
+          <Field type="number" min="0" step="1000" label={t('budget.estimated')} {...register('estimated_cost', { required: true })} />
+          <Field type="number" min="0" step="1000" label={t('budget.actualSpend')} {...register('actual_cost')} />
         </div>
-        <SelectField label="Status" options={BUDGET_STATUS_OPTIONS} {...register('status')} />
+        <SelectField label={t('budget.status')} options={BUDGET_STATUS_OPTIONS} {...register('status')} />
         <div className="flex justify-end pt-2">
-          <Button type="submit" loading={isSubmitting}>{editing ? 'Save' : 'Add item'}</Button>
+          <Button type="submit" loading={isSubmitting}>{editing ? t('common.save') : t('budget.addItem')}</Button>
         </div>
       </form>
     </Drawer>

@@ -423,7 +423,10 @@
     "book": "Book",
     "contact": "Contact",
     "message": "Message",
-    "invite": "Invite"
+    "invite": "Invite",
+    "accept": "Accept",
+    "decline": "Decline",
+    "acceptAndCreateEvent": "Accept & create event"
   },
   "filters": {
     "allStatuses": "All statuses",
@@ -454,5 +457,50 @@
     "flaggedReviews": "Flagged reviews",
     "noFlaggedReviews": "Nothing flagged",
     "noReviewsModeration": "No reviews need moderation."
+  },
+  "bookings": {
+    "bookingRequests": "Booking Requests",
+    "bookingRequestsDesc": "Clients who want to book your planning services.",
+    "pending": "Pending",
+    "noPendingRequests": "No pending requests",
+    "newRequestsAppear": "New requests from clients will appear here.",
+    "history": "History",
+    "acceptRequest": "Accept request",
+    "declineRequest": "Decline request",
+    "acceptingCreateWorkspace": "Accepting will create an event workspace for this client.",
+    "declineMessage": "Let the client know you're unable to take their booking.",
+    "eventType": "Type",
+    "eventDate": "Date",
+    "proposedBudget": "Proposed budget",
+    "quotedBudget": "Quoted budget (optional)",
+    "budgetPlaceholder": "Leave blank to set the budget later",
+    "noteToClient": "Note to client (optional)",
+    "notePlaceholder": "Any message you want to include…",
+    "cancel": "Cancel",
+    "unknownClient": "Unknown client",
+    "guests": "guests",
+    "proposed": "Proposed",
+    "quoted": "Quoted",
+    "yourNote": "Your note",
+    "eventCreated": "Event created",
+    "deleteBudgetItem": "Delete budget item?"
+  },
+  "budget": {
+    "budget": "Budget",
+    "budgetDescription": "Track estimated vs. actual spend across categories.",
+    "askAI": "Ask AI",
+    "budgetGuide": "Budget guide",
+    "addItem": "Add item",
+    "totalBudget": "Total budget",
+    "estimated": "Estimated",
+    "actualSpend": "Actual spend",
+    "remaining": "Remaining",
+    "noBudgetItems": "No budget items yet",
+    "breakDownBudget": "Break the budget down by category to track spend.",
+    "category": "Category",
+    "description": "Description",
+    "status": "Status",
+    "edit": "Edit",
+    "delete": "Delete"
   }
 }
