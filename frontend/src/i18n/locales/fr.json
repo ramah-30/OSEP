@@ -160,7 +160,12 @@
     "editEvent": "Modifier l'événement",
     "deleteEvent": "Supprimer l'événement",
     "archiveEvent": "Archiver l'événement",
-    "shareEvent": "Partager l'événement"
+    "shareEvent": "Partager l'événement",
+    "eventsDescription": "Chaque événement que vous planifiez, du brouillon initial au grand jour.",
+    "noEventsMatch": "Aucun événement ne correspond",
+    "noEventsMatchDesc": "Ajustez vos filtres ou créez un nouvel événement pour commencer.",
+    "createEventDesc": "Configurez l'essentiel - vous pouvez remplir le reste dans l'espace de travail.",
+    "deleteEventDesc": "Toutes les tâches, les invités, les jalons et les éléments budgétaires de cet événement seront supprimés de manière permanente."
   },
   "finance": {
     "invoice": "Facture",
@@ -281,7 +286,8 @@
     "startDate": "Date de début",
     "endDate": "Date de fin",
     "startTime": "Heure de début",
-    "endTime": "Heure de fin"
+    "endTime": "Heure de fin",
+    "searchEvents": "Rechercher des événements par nom, code ou lieu"
   },
   "actions": {
     "approve": "Approuver",
@@ -297,6 +303,10 @@
     "contact": "Contacter",
     "message": "Message",
     "invite": "Inviter"
+  },
+  "filters": {
+    "allStatuses": "Tous les statuts",
+    "allPriorities": "Toutes les priorités"
   },
   "status": {
     "active": "Actif",

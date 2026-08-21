@@ -160,7 +160,12 @@
     "editEvent": "Hariri Matukio",
     "deleteEvent": "Futa Matukio",
     "archiveEvent": "Hifadhi Matukio",
-    "shareEvent": "Shiriki Matukio"
+    "shareEvent": "Shiriki Matukio",
+    "eventsDescription": "Kila matukio unayopanga, kutoka rasimu ya kwanza hadi siku kubwa.",
+    "noEventsMatch": "Hakuna matukio yanayofanana",
+    "noEventsMatchDesc": "Badilisha vichujio vyako, au unda matukio mapya kuanza.",
+    "createEventDesc": "Weka mahitaji ya msingi - unaweza kujaza matukio yanayobaki ndani ya nafasi ya kazi.",
+    "deleteEventDesc": "Kazi zote, wageni, milestones, na vitu vya bajeti kwa matukio haya itafutwa kabisa."
   },
   "finance": {
     "invoice": "Ankara",
@@ -281,7 +286,8 @@
     "startDate": "Tarehe ya Kuanza",
     "endDate": "Tarehe ya Kuishia",
     "startTime": "Wakati wa Kuanza",
-    "endTime": "Wakati wa Kuishia"
+    "endTime": "Wakati wa Kuishia",
+    "searchEvents": "Tafuta matukio kwa jina, nambari au eneo"
   },
   "actions": {
     "approve": "Kubali",
@@ -297,6 +303,10 @@
     "contact": "Wasiliana",
     "message": "Ujumbe",
     "invite": "Kamatanisha"
+  },
+  "filters": {
+    "allStatuses": "Hali zote",
+    "allPriorities": "Vipaumbele vyote"
   },
   "status": {
     "active": "Kimesha",

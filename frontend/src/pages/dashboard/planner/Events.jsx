@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import PageHeader from '../../../components/ui/PageHeader'
 import Button from '../../../components/ui/Button'
 import Card from '../../../components/ui/Card'
@@ -21,6 +22,7 @@ import { EVENT_PIPELINE, EVENT_STATUS_TONE, PRIORITY_OPTIONS, PRIORITY_TONE } fr
 export default function Events() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [filters, setFilters] = useState({ q: '', status: '', priority: '' })
   const [debouncedQ, setDebouncedQ] = useState('')
   const [creating, setCreating] = useState(false)
@@ -68,11 +70,11 @@ export default function Events() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Events"
-        description="Every event you're planning, from first draft to the big day."
+        title={t('nav.events')}
+        description={t('events.eventsDescription')}
         actions={
           <Button size="sm" onClick={() => setCreating(true)}>
-            <Icon name="Plus" className="size-4" /> New event
+            <Icon name="Plus" className="size-4" /> {t('events.createEvent')}
           </Button>
         }
       />
@@ -83,20 +85,20 @@ export default function Events() {
           <input
             value={filters.q}
             onChange={(e) => setFilters((f) => ({ ...f, q: e.target.value }))}
-            placeholder="Search events by name, code or location"
+            placeholder={t('forms.searchEvents')}
             className="h-11 w-full rounded-btn border border-line bg-surface pl-10 pr-4 text-sm text-ink outline-none focus:border-navy-600 focus:shadow-[0_0_0_3px_rgba(41,71,200,0.12)]"
           />
         </div>
         <SelectField className="sm:w-44" value={filters.status}
           onChange={(e) => setFilters((f) => ({ ...f, status: e.target.value }))}>
-          <option value="">All statuses</option>
+          <option value="">{t('filters.allStatuses')}</option>
           {EVENT_PIPELINE.concat([{ value: 'cancelled', label: 'Cancelled' }]).map((s) => (
             <option key={s.value} value={s.value}>{s.label}</option>
           ))}
         </SelectField>
         <SelectField className="sm:w-40" value={filters.priority}
           onChange={(e) => setFilters((f) => ({ ...f, priority: e.target.value }))}>
-          <option value="">All priorities</option>
+          <option value="">{t('filters.allPriorities')}</option>
           {PRIORITY_OPTIONS.map((p) => <option key={p.value} value={p.value}>{p.label}</option>)}
         </SelectField>
       </div>
@@ -152,16 +154,16 @@ export default function Events() {
           ) : (
             <EmptyState
               icon="CalendarClock"
-              title="No events match"
-              description="Adjust your filters, or create a new event to get started."
-              action={<Button size="sm" onClick={() => setCreating(true)}><Icon name="Plus" className="size-4" /> New event</Button>}
+              title={t('events.noEventsMatch')}
+              description={t('events.noEventsMatchDesc')}
+              action={<Button size="sm" onClick={() => setCreating(true)}><Icon name="Plus" className="size-4" /> {t('events.createEvent')}</Button>}
             />
           )
         )}
       </LoadState>
 
-      <Drawer open={creating} onClose={() => setCreating(false)} title="Create event"
-        description="Set up the essentials — you can fill in the rest inside the workspace.">
+      <Drawer open={creating} onClose={() => setCreating(false)} title={t('events.createEvent')}
+        description={t('events.createEventDesc')}>
         <EventForm onSubmit={handleCreate} submitting={submitting} showVenueLocation={false} />
       </Drawer>
 
@@ -169,9 +171,9 @@ export default function Events() {
         open={!!deletingId}
         onClose={() => setDeletingId(null)}
         onConfirm={handleDelete}
-        title="Delete event?"
-        description="All tasks, guests, milestones, and budget items for this event will be permanently removed."
-        confirmLabel="Delete"
+        title={t('events.deleteEvent') + '?'}
+        description={t('events.deleteEventDesc')}
+        confirmLabel={t('common.delete')}
         loading={deleting}
       />
     </div>

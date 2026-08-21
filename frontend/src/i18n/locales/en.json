@@ -160,7 +160,12 @@
     "editEvent": "Edit Event",
     "deleteEvent": "Delete Event",
     "archiveEvent": "Archive Event",
-    "shareEvent": "Share Event"
+    "shareEvent": "Share Event",
+    "eventsDescription": "Every event you're planning, from first draft to the big day.",
+    "noEventsMatch": "No events match",
+    "noEventsMatchDesc": "Adjust your filters, or create a new event to get started.",
+    "createEventDesc": "Set up the essentials — you can fill in the rest inside the workspace.",
+    "deleteEventDesc": "All tasks, guests, milestones, and budget items for this event will be permanently removed."
   },
   "finance": {
     "invoice": "Invoice",
@@ -281,13 +286,13 @@
     "startDate": "Start Date",
     "endDate": "End Date",
     "startTime": "Start Time",
-    "endTime": "End Time"
+    "endTime": "End Time",
+    "searchEvents": "Search events by name, code or location"
   },
   "actions": {
     "approve": "Approve",
     "reject": "Reject",
     "pending": "Pending Approval",
-    "approve": "Approve",
     "approveAll": "Approve All",
     "rejectAll": "Reject All",
     "requestMoreInfo": "Request More Info",
@@ -298,6 +303,10 @@
     "contact": "Contact",
     "message": "Message",
     "invite": "Invite"
+  },
+  "filters": {
+    "allStatuses": "All statuses",
+    "allPriorities": "All priorities"
   },
   "status": {
     "active": "Active",
