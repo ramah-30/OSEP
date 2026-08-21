@@ -35,8 +35,8 @@ export const ROLE_AI_CONFIG = {
 /**
  * A floating role copilot (vendor or client) mirroring the planner's
  * AiChatWidget: a corner launcher opens a compact chat window grounded in the
- * role's own offline endpoints, with full conversation history — reopen a past
- * thread or delete it — available on every page of the role's workspace.
+ * role's own offline endpoints, with full conversation history - reopen a past
+ * thread or delete it - available on every page of the role's workspace.
  */
 export default function RoleAiChatWidget({ config }) {
   const { base, launcher, defaultName, placeholder, intro } = config
@@ -108,8 +108,8 @@ export default function RoleAiChatWidget({ config }) {
   const send = async (text) => {
     const message = (text ?? body).trim()
     if (!message || sending) return
-    setBody(‘’)
-    setMessages((m) => [...m, { role: ‘user’, content: message }])
+    setBody('')
+    setMessages((m) => [...m, { role: 'user', content: message }])
     setSending(true)
     try {
       const r = await api.post(`${base}/chat`, {
@@ -119,10 +119,10 @@ export default function RoleAiChatWidget({ config }) {
       })
       setConversationId(r.data.data.conversation.id)
       const msg = r.data.data.message
-      setMessages((m) => [...m, { id: msg.id, role: ‘assistant’, content: msg.content, action: msg.action }])
+      setMessages((m) => [...m, { id: msg.id, role: 'assistant', content: msg.content, action: msg.action }])
       loadConversations()
     } catch {
-      setMessages((m) => [...m, { role: ‘assistant’, content: ‘Sorry — I couldn\’t answer that just now. Please try again.’ }])
+      setMessages((m) => [...m, { role: 'assistant', content: 'Sorry - I couldn\'t answer that just now. Please try again.' }])
     } finally {
       setSending(false)
     }
@@ -135,7 +135,7 @@ export default function RoleAiChatWidget({ config }) {
       setMessages((m) => m.map((msg, i) => (i === idx ? { ...msg, action: { ...msg.action, status } } : msg)))
       setMessages((m) => [...m, { role: 'assistant', content: r.data.message || (approve ? 'Done.' : 'Dismissed.') }])
     } catch {
-      setMessages((m) => [...m, { role: 'assistant', content: 'That didn’t go through — please try again.' }])
+      setMessages((m) => [...m, { role: 'assistant', content: "That didn't go through - please try again." }])
     }
   }
 
