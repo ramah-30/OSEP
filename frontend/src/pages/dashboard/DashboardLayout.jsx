@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { AnimatePresence, motion } from 'framer-motion'
 import Sidebar from '../../components/dashboard/Sidebar'
 import Topbar from '../../components/dashboard/Topbar'
@@ -17,6 +18,7 @@ import { AiChatProvider } from '../../context/AiChatContext'
  * never sets it and stays light.
  */
 export default function DashboardLayout() {
+  const { t } = useTranslation()
   const { user } = useAuth()
   const { effective } = useTheme()
   const { pathname } = useLocation()
@@ -34,7 +36,7 @@ export default function DashboardLayout() {
     .map((item) => ({ item, href: hrefFor(user.account_type, item) }))
     .filter(({ href }) => pathname === href || pathname.startsWith(`${href}/`))
     .sort((a, b) => b.href.length - a.href.length)[0]
-  const title = active?.item.label ?? 'Dashboard'
+  const title = active?.item.label ?? t('nav.dashboard')
   const isPlanner = user.account_type === 'event_planner'
   const isVendor = user.account_type === 'vendor'
   const isClient = user.account_type === 'client'
@@ -58,7 +60,7 @@ export default function DashboardLayout() {
           >
             <button
               type="button"
-              aria-label="Close navigation"
+              aria-label={t('nav.closeNavigation')}
               onClick={() => setDrawerOpen(false)}
               className="absolute inset-0 bg-navy-950/50"
             />

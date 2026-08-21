@@ -43,7 +43,9 @@
     "new": "Mpya",
     "remove": "Ondoa",
     "hi": "Habari",
-    "total": "jumla"
+    "total": "jumla",
+    "backToSite": "Rudi kwenye wavuti",
+    "signOut": "Toka nje"
   },
   "nav": {
     "dashboard": "Dashibodi",
@@ -59,7 +61,9 @@
     "messages": "Ujumbe",
     "notifications": "Arifa",
     "help": "Msaada",
-    "home": "Nyumbani"
+    "home": "Nyumbani",
+    "openNavigation": "Fungua urambazaji",
+    "closeNavigation": "Funga urambazaji"
   },
   "auth": {
     "login": "Ingia",

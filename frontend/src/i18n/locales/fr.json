@@ -43,7 +43,9 @@
     "new": "Nouveau",
     "remove": "Retirer",
     "hi": "Bonjour",
-    "total": "total"
+    "total": "total",
+    "backToSite": "Retour au site",
+    "signOut": "Déconnexion"
   },
   "nav": {
     "dashboard": "Tableau de bord",
@@ -59,7 +61,9 @@
     "messages": "Messages",
     "notifications": "Notifications",
     "help": "Aide",
-    "home": "Accueil"
+    "home": "Accueil",
+    "openNavigation": "Ouvrir la navigation",
+    "closeNavigation": "Fermer la navigation"
   },
   "auth": {
     "login": "Connexion",

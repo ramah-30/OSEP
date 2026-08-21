@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Icon from '../ui/Icon'
 import Avatar from '../ui/Avatar'
 import Dropdown, { DropdownItem } from '../ui/Dropdown'
@@ -12,6 +13,7 @@ import { useNotifications } from '../../context/NotificationsContext'
  * the notifications bell and the user menu.
  */
 export default function Topbar({ title, onOpenSidebar }) {
+  const { t } = useTranslation()
   const { user, logout } = useAuth()
   const { unread } = useNotifications()
   const navigate = useNavigate()
@@ -27,7 +29,7 @@ export default function Topbar({ title, onOpenSidebar }) {
         type="button"
         onClick={onOpenSidebar}
         className="grid size-10 place-items-center rounded-btn text-muted transition-colors hover:bg-canvas hover:text-ink lg:hidden"
-        aria-label="Open navigation"
+        aria-label={t('nav.openNavigation')}
       >
         <Icon name="Menu" className="size-5" />
       </button>
@@ -86,7 +88,7 @@ export default function Topbar({ title, onOpenSidebar }) {
                 }}
               >
                 <Icon name="User" className="size-4 text-muted" />
-                Profile
+                {t('nav.profile')}
               </DropdownItem>
               <DropdownItem
                 onClick={() => {
@@ -95,7 +97,7 @@ export default function Topbar({ title, onOpenSidebar }) {
                 }}
               >
                 <Icon name="Settings" className="size-4 text-muted" />
-                Settings
+                {t('nav.settings')}
               </DropdownItem>
               <Link
                 to="/"
@@ -103,7 +105,7 @@ export default function Topbar({ title, onOpenSidebar }) {
                 className="flex items-center gap-2.5 rounded-btn px-3 py-2 text-sm font-medium text-ink transition-colors hover:bg-canvas"
               >
                 <Icon name="Globe2" className="size-4 text-muted" />
-                Back to site
+                {t('common.backToSite')}
               </Link>
             </div>
             <div className="border-t border-line pt-1">
@@ -115,7 +117,7 @@ export default function Topbar({ title, onOpenSidebar }) {
                 className="text-danger hover:bg-danger-soft"
               >
                 <Icon name="LogOut" className="size-4" />
-                Sign out
+                {t('common.signOut')}
               </DropdownItem>
             </div>
           </div>

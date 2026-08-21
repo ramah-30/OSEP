@@ -43,7 +43,9 @@
     "new": "New",
     "remove": "Remove",
     "hi": "Hi",
-    "total": "total"
+    "total": "total",
+    "backToSite": "Back to site",
+    "signOut": "Sign out"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -59,7 +61,9 @@
     "messages": "Messages",
     "notifications": "Notifications",
     "help": "Help",
-    "home": "Home"
+    "home": "Home",
+    "openNavigation": "Open navigation",
+    "closeNavigation": "Close navigation"
   },
   "auth": {
     "login": "Login",
