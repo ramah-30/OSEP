@@ -45,7 +45,7 @@ class ActivityLogger
     }
 
     /**
-     * Notify the event's client of a client-visible update — unless the client
+     * Notify the event's client of a client-visible update - unless the client
      * is the one who triggered it (no self-notifications).
      */
     private function pingClient(Event $event, ActivityLog $activity): void

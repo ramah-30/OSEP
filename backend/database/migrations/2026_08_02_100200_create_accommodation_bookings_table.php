@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * A confirmed room reservation a planner makes for a client — the honeymoon
+ * A confirmed room reservation a planner makes for a client - the honeymoon
  * stay. Price is snapshotted at booking time so later rate changes don't rewrite
  * history. Optionally tied to the client and their wedding event.
  */

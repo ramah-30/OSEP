@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class RoleSeeder extends Seeder
 {
     /**
-     * Roles are seeded up-front — including the ones nothing assigns yet.
+     * Roles are seeded up-front - including the ones nothing assigns yet.
      * Granting a user `admin` or `staff` later is an insert into user_roles,
      * never a schema change.
      */

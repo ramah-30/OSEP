@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * Structured action items extracted from a meeting. Each can be pushed into the
- * event's real task board — `task_id` links the created event_task so the planner
+ * event's real task board - `task_id` links the created event_task so the planner
  * can see (and avoid re-creating) items already actioned.
  */
 return new class extends Migration

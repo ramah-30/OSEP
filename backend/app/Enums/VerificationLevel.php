@@ -6,7 +6,7 @@ namespace App\Enums;
  * Progressive trust tiers a vendor or venue can reach in the marketplace. Higher
  * tiers unlock a more prominent badge; `PremiumPartner` is granted by an admin.
  * This is distinct from {@see VerificationStatus}, which tracks the admin review
- * workflow (pending/verified/rejected) — the level is the outward-facing badge.
+ * workflow (pending/verified/rejected) - the level is the outward-facing badge.
  */
 enum VerificationLevel: string
 {
@@ -25,7 +25,7 @@ enum VerificationLevel: string
         };
     }
 
-    /** Sort weight — higher is more trusted. */
+    /** Sort weight - higher is more trusted. */
     public function weight(): int
     {
         return match ($this) {

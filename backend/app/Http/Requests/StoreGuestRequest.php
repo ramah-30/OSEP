@@ -19,7 +19,7 @@ class StoreGuestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // full_name OR (first_name/last_name) — the model reconciles the two.
+            // full_name OR (first_name/last_name) - the model reconciles the two.
             'full_name' => ['required_without:first_name', 'nullable', 'string', 'max:255'],
             'first_name' => ['required_without:full_name', 'nullable', 'string', 'max:120'],
             'last_name' => ['nullable', 'string', 'max:120'],

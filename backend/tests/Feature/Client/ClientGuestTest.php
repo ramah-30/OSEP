@@ -49,7 +49,7 @@ class ClientGuestTest extends TestCase
         $this->assertDatabaseHas('guests', ['id' => $guestId, 'event_id' => $event->id, 'full_name' => 'John Doe']);
         $this->assertDatabaseHas('notifications', ['user_id' => $planner->id, 'type' => 'client_guest_added']);
 
-        // List — the client sees their guest.
+        // List - the client sees their guest.
         $this->getJson("/api/v1/my-events/{$event->id}/guests")
             ->assertOk()
             ->assertJsonPath('data.summary.total', 1)

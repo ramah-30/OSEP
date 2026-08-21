@@ -127,7 +127,7 @@ class AccommodationTest extends TestCase
         $this->postJson("/api/v1/marketplace/accommodation-bookings/{$id}/cancel")->assertOk()
             ->assertJsonPath('data.booking.status', 'cancelled');
 
-        // Cancelled inventory is freed — the same dates can be rebooked.
+        // Cancelled inventory is freed - the same dates can be rebooked.
         $this->postJson('/api/v1/marketplace/accommodation-bookings', [
             'room_type_id' => $room->id, 'check_in' => now()->addDays(5)->toDateString(),
             'check_out' => now()->addDays(6)->toDateString(), 'rooms' => 2, 'guests' => 2, 'guest_name' => 'B',

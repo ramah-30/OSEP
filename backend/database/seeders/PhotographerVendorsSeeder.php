@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Hash;
  * Nine real Tanzanian wedding/event photography studios as demo vendor accounts,
  * so the marketplace's Photographers category shows recognisable listings.
  *
- * Real, public details are used — studio name, city, description, website /
- * social — but login email and phone are demo values (@osep.test / a placeholder
+ * Real, public details are used - studio name, city, description, website /
+ * social - but login email and phone are demo values (@osep.test / a placeholder
  * number), NOT the studios' real contact lines, since these are illustrative demo
  * accounts, not genuine sign-ups. Ratings/job counts are demo metrics. Idempotent
  * (keyed on email) and guarded to non-production in DatabaseSeeder.
@@ -111,7 +111,7 @@ class PhotographerVendorsSeeder extends Seeder
             );
         }
 
-        // Portfolio — photography imagery
+        // Portfolio - photography imagery
         $shots = ['1511285560929-80b456fea0bc', '1502920917128-1aa500764cbd', '1583939003579-730e3918a45a', '1522673607200-164d1b6ce486', '1537633552985-df8429e8048b', '1516035069371-29a1b244cc32'];
         foreach (['Beach Wedding', 'Stone Town Engagement', 'Corporate Gala'] as $i => $title) {
             $vendor->vendorPortfolios()->updateOrCreate(
@@ -125,7 +125,7 @@ class PhotographerVendorsSeeder extends Seeder
                         ['type' => 'image', 'url' => $this->img($shots[($i * 2) % count($shots)], 800, 600), 'caption' => 'Ceremony'],
                         ['type' => 'image', 'url' => $this->img($shots[($i * 2 + 1) % count($shots)], 800, 600), 'caption' => 'Portraits'],
                     ],
-                    'client_feedback' => 'Every photo tells the story of our day — we could not be happier with the gallery.',
+                    'client_feedback' => 'Every photo tells the story of our day - we could not be happier with the gallery.',
                     'is_case_study' => $i === 1,
                     'sort_order' => $i,
                 ],
@@ -157,7 +157,7 @@ class PhotographerVendorsSeeder extends Seeder
                 'location' => 'Dar es Salaam, Tanzania', 'years' => 10, 'level' => 'premium_partner',
                 'featured' => true, 'rating' => 4.85, 'reviews' => 62, 'jobs' => 180, 'response' => 2,
                 'website' => 'https://www.royalweddingtz.com', 'instagram' => 'https://instagram.com/royalweddingtz',
-                'description' => 'Dar es Salaam luxury studio pairing fine-art photography with cinematic videography, shooting at Tanzania’s top venues — Serena, Hyatt Regency, Johari Rotana and beyond.',
+                'description' => 'Dar es Salaam luxury studio pairing fine-art photography with cinematic videography, shooting at Tanzania’s top venues - Serena, Hyatt Regency, Johari Rotana and beyond.',
                 'logo' => '1502920917128-1aa500764cbd', 'cover' => '1511285560929-80b456fea0bc',
             ],
             [
@@ -166,7 +166,7 @@ class PhotographerVendorsSeeder extends Seeder
                 'location' => 'Dar es Salaam, Tanzania', 'years' => 15, 'level' => 'premium_partner',
                 'featured' => true, 'rating' => 4.9, 'reviews' => 88, 'jobs' => 620, 'response' => 1,
                 'website' => 'https://zapstudioportraits.mypixieset.com', 'instagram' => 'https://instagram.com/zapphotography',
-                'description' => 'Tanzania’s leading wedding studio — 15+ years and 600+ weddings — covering weddings, events, portraits and commercial shoots from Dar es Salaam.',
+                'description' => 'Tanzania’s leading wedding studio - 15+ years and 600+ weddings - covering weddings, events, portraits and commercial shoots from Dar es Salaam.',
                 'logo' => '1606216794074-735e91aa2c92', 'cover' => '1554048612-b6a482bc67e5',
             ],
             [
@@ -189,7 +189,7 @@ class PhotographerVendorsSeeder extends Seeder
             ],
             [
                 'key' => 'grandtone', 'email' => 'grandtone@osep.test', 'first' => 'Joshua', 'last' => 'Zizrael',
-                'business' => 'Grandtone Studios', 'tagline' => 'Joshphix — destination luxury weddings',
+                'business' => 'Grandtone Studios', 'tagline' => 'Joshphix - destination luxury weddings',
                 'location' => 'Arusha, Tanzania', 'years' => 9, 'level' => 'business_verified',
                 'featured' => false, 'rating' => 4.7, 'reviews' => 29, 'jobs' => 84, 'response' => 3,
                 'website' => 'https://grandtonestudios.example', 'instagram' => 'https://instagram.com/joshphix',

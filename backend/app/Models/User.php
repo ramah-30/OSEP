@@ -333,7 +333,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
     }
 
     // -----------------------------------------------------------------
-    // Notifications — routed through the branded OSEP mail templates
+    // Notifications - routed through the branded OSEP mail templates
     // -----------------------------------------------------------------
 
     public function sendEmailVerificationNotification(): void

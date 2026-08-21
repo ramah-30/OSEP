@@ -105,7 +105,7 @@ class Orchestrator
 
         $assistant = $conversation->messages()->create([
             'role' => 'assistant',
-            'content' => "I can do that — **{$preview['title']}**.\n\n{$preview['summary']}\n\nApprove below and I'll run it. Nothing goes out until you do.",
+            'content' => "I can do that - **{$preview['title']}**.\n\n{$preview['summary']}\n\nApprove below and I'll run it. Nothing goes out until you do.",
             'agent' => 'action',
             'model' => 'command',
             'meta' => ['driver' => $this->ai->driver(), 'has_action' => true],
@@ -222,7 +222,7 @@ class Orchestrator
         $updates = ['last_message_at' => now()];
 
         if ($conversation->title === 'New conversation') {
-            $updates['title'] = Str::limit(trim($firstMessage), 48, '…');
+            $updates['title'] = Str::limit(trim($firstMessage), 48, '...');
         }
 
         $conversation->update($updates);

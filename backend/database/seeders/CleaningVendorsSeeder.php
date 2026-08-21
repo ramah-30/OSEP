@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 /**
  * Nine real Tanzanian cleaning companies (marketplace Cleaning Services category
- * — pre/post-event cleaning, venue restoration). Real firms found publicly
+ * - pre/post-event cleaning, venue restoration). Real firms found publicly
  * (SEARS, Eon, Monalisa, Broschem, WEinc, Kulaya Group) plus representative
  * regional cleaners; demo contact + illustrative metrics.
  * See {@see RealVendorSeeder}.
@@ -60,7 +60,7 @@ class CleaningVendorsSeeder extends RealVendorSeeder
 
     protected function portfolioFeedback(): string
     {
-        return 'They had the venue spotless by morning — fast, thorough and completely hassle-free.';
+        return 'They had the venue spotless by morning - fast, thorough and completely hassle-free.';
     }
 
     protected function rows(): array

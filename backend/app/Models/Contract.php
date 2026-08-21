@@ -94,7 +94,7 @@ class Contract extends Model
 
     /**
      * Re-derive `amount_paid` from completed outgoing payments and advance
-     * `payment_status` accordingly. Deliberately separate from `status` —
+     * `payment_status` accordingly. Deliberately separate from `status` -
      * signing/active/completed is the contract's legal lifecycle, this is
      * just how much of it has been paid.
      */

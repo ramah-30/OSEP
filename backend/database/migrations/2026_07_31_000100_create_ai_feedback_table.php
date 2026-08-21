@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Planner feedback on AI output — a thumbs up/down (with an optional reason) on
+ * Planner feedback on AI output - a thumbs up/down (with an optional reason) on
  * an assistant message or a generated document. One row per planner per subject
  * (upserted), so the rating simply toggles. Feeds the AI quality view and makes
  * the assistant auditable and improvable.

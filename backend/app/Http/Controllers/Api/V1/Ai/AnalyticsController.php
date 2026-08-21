@@ -47,7 +47,7 @@ class AnalyticsController extends Controller
         ]);
     }
 
-    /** Detailed per-domain insight sections (budget, timeline, guests, …). */
+    /** Detailed per-domain insight sections (budget, timeline, guests, ...). */
     public function insights(Request $request): JsonResponse
     {
         $user = $request->user();
@@ -85,7 +85,7 @@ class AnalyticsController extends Controller
     /**
      * "What-if" calculator: given a guest delta (and optional table size / target
      * budget), return the projected catering cost, tables, meal rollup and a
-     * venue-capacity check — all deterministic maths over the event's real data.
+     * venue-capacity check - all deterministic maths over the event's real data.
      */
     public function scenario(Request $request): JsonResponse
     {

@@ -46,7 +46,7 @@ class EventResource extends JsonResource
             ],
             'created_at' => $this->created_at?->toIso8601String(),
 
-            // Counts — present when the caller loaded them with withCount().
+            // Counts - present when the caller loaded them with withCount().
             'counts' => [
                 'tasks' => $this->whenCounted('tasks'),
                 'guests' => $this->whenCounted('guests'),

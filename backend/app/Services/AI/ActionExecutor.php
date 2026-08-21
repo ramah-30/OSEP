@@ -19,7 +19,7 @@ use App\Services\Sms\AfricasTalkingGateway;
 use Illuminate\Support\Carbon;
 
 /**
- * Runs the copilot's actions — the things it does *for* the planner rather than
+ * Runs the copilot's actions - the things it does *for* the planner rather than
  * just talks about. Each type knows how to (a) preview itself (what would happen,
  * without touching anything) and (b) execute once the planner approves. Automation
  * rules and the chat command parser both queue actions through here; approval is
@@ -360,7 +360,7 @@ class ActionExecutor
         if ($client) {
             $bits[] = 'client ' . $client->full_name;
         } elseif (! empty($params['client'])) {
-            $bits[] = "client \"{$params['client']}\" (not matched — left unset)";
+            $bits[] = "client \"{$params['client']}\" (not matched - left unset)";
         }
 
         if (isset($params['expected_guests'])) { $bits[] = number_format((int) $params['expected_guests']) . ' guests'; }
@@ -368,7 +368,7 @@ class ActionExecutor
         if (! empty($params['theme'])) { $bits[] = 'theme: ' . $params['theme']; }
         if (! empty($params['description'])) { $bits[] = 'with a description'; }
 
-        $detail = $bits ? ' — ' . implode(' · ', $bits) : '';
+        $detail = $bits ? ' - ' . implode(' · ', $bits) : '';
 
         return [
             'title' => "Create event · {$title}",
@@ -410,7 +410,7 @@ class ActionExecutor
 
     /**
      * Resolve a client reference (numeric id or a name/email hint) against the
-     * planner's client book — clients already on one of their events. Never
+     * planner's client book - clients already on one of their events. Never
      * matches an arbitrary user.
      */
     private function resolveClient(User $user, array $params): ?User
@@ -546,7 +546,7 @@ class ActionExecutor
 
         return [
             'title' => 'Update ' . $meta['noun'] . ' · ' . $item->{$meta['field']},
-            'summary' => "Update \"{$item->{$meta['field']}}\"" . ($changes ? ': ' . $changes : ' — nothing to change') . '.',
+            'summary' => "Update \"{$item->{$meta['field']}}\"" . ($changes ? ': ' . $changes : ' - nothing to change') . '.',
             'count' => $changes ? 1 : 0,
         ];
     }
@@ -708,7 +708,7 @@ class ActionExecutor
 
         return [
             'title' => 'Update budget item · ' . $item->description,
-            'summary' => "Update \"{$item->description}\"" . ($changes ? ': ' . $changes : ' — nothing to change') . '.',
+            'summary' => "Update \"{$item->description}\"" . ($changes ? ': ' . $changes : ' - nothing to change') . '.',
             'count' => $changes ? 1 : 0,
         ];
     }
@@ -824,7 +824,7 @@ class ActionExecutor
             'title' => 'Design venue' . ($event ? " · {$event->title}" : ''),
             'summary' => $guests > 0
                 ? "Create a new floor plan for {$guests} guest(s): {$tables} round table(s) of {$perTable}, a stage and a dance floor."
-                : 'No guest count is available — add guests to the event or say how many.',
+                : 'No guest count is available - add guests to the event or say how many.',
             'count' => $tables,
         ];
     }
@@ -847,7 +847,7 @@ class ActionExecutor
 
         $layout = $event->venueLayouts()->create([
             'created_by' => $event->planner_id,
-            'layout_name' => "AI Layout — {$guests} guests",
+            'layout_name' => "AI Layout - {$guests} guests",
             'venue_name' => $event->venue ?: 'Main hall',
             'width' => $width,
             'height' => $height,

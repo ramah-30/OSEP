@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
  * booking pages and the client concierge's recommendations show a realistic
  * spread of choices. Each is a full login (@osep.test / Password123!) with a
  * complete profile; a handful carry client reviews so ratings and auto-earned
- * badges vary. Idempotent — keyed on email / profile — and safe to re-run.
+ * badges vary. Idempotent - keyed on email / profile - and safe to re-run.
  *
  * Guarded to non-production in DatabaseSeeder (runs after DemoSeeder).
  */
@@ -81,7 +81,7 @@ class PlannerDirectorySeeder extends Seeder
     private function comment(int $rating): string
     {
         return match (true) {
-            $rating >= 5 => 'Absolutely outstanding — organised, calm under pressure and a joy to work with. Highly recommend.',
+            $rating >= 5 => 'Absolutely outstanding - organised, calm under pressure and a joy to work with. Highly recommend.',
             $rating === 4 => 'Great experience overall. Professional, responsive and the day came together beautifully.',
             default => 'Solid, dependable planning. A few small things to iron out, but the event went well.',
         };
@@ -106,7 +106,7 @@ class PlannerDirectorySeeder extends Seeder
                 'phone' => '+255 754 100 202', 'company_name' => 'Summit Corporate Events',
                 'experience_years' => 9, 'specialization' => 'Corporate events, conferences & galas',
                 'location' => 'Dar es Salaam, Tanzania', 'website' => 'https://summitevents.example',
-                'bio' => 'David runs large-scale corporate programmes — product launches, AGMs and awards galas — with military precision. Fortune-500 clients trust Summit for run-of-show discipline, AV mastery and on-budget delivery.',
+                'bio' => 'David runs large-scale corporate programmes - product launches, AGMs and awards galas - with military precision. Fortune-500 clients trust Summit for run-of-show discipline, AV mastery and on-budget delivery.',
                 'reviews' => [5, 4],
             ],
             [
@@ -114,7 +114,7 @@ class PlannerDirectorySeeder extends Seeder
                 'phone' => '+255 754 100 203', 'company_name' => 'Serengeti Celebrations',
                 'experience_years' => 7, 'specialization' => 'Destination weddings & safari experiences',
                 'location' => 'Arusha, Tanzania', 'website' => 'https://serengeticelebrations.example',
-                'bio' => 'Neema specialises in unforgettable destination weddings — bush ceremonies, crater-rim receptions and safari honeymoons. She handles logistics end to end so couples simply arrive and celebrate.',
+                'bio' => 'Neema specialises in unforgettable destination weddings - bush ceremonies, crater-rim receptions and safari honeymoons. She handles logistics end to end so couples simply arrive and celebrate.',
                 'reviews' => [5, 5, 5],
             ],
             [
@@ -130,7 +130,7 @@ class PlannerDirectorySeeder extends Seeder
                 'phone' => '+255 754 100 205', 'company_name' => 'Bloom Events Co.',
                 'experience_years' => 4, 'specialization' => 'Birthdays, showers & social events',
                 'location' => 'Mwanza, Tanzania', 'website' => 'https://bloomevents.example',
-                'bio' => 'Amani brings colour and joy to milestone celebrations — birthdays, baby showers and anniversaries — with playful themes, standout décor and a warm, hands-on style clients adore.',
+                'bio' => 'Amani brings colour and joy to milestone celebrations - birthdays, baby showers and anniversaries - with playful themes, standout décor and a warm, hands-on style clients adore.',
                 'reviews' => [4],
             ],
             [
@@ -138,7 +138,7 @@ class PlannerDirectorySeeder extends Seeder
                 'phone' => '+255 754 100 206', 'company_name' => 'Regal Affairs',
                 'experience_years' => 10, 'specialization' => 'Luxury & cultural weddings',
                 'location' => 'Moshi, Tanzania', 'website' => 'https://regalaffairs.example',
-                'bio' => 'Faith honours tradition while delivering modern luxury — from send-off ceremonies to grand receptions. A decade of cultural weddings has made Regal Affairs the name families pass down.',
+                'bio' => 'Faith honours tradition while delivering modern luxury - from send-off ceremonies to grand receptions. A decade of cultural weddings has made Regal Affairs the name families pass down.',
                 'reviews' => [5, 4, 5],
             ],
             [
@@ -146,7 +146,7 @@ class PlannerDirectorySeeder extends Seeder
                 'phone' => '+255 754 100 207', 'company_name' => 'Peak Productions',
                 'experience_years' => 8, 'specialization' => 'Concerts, festivals & large-scale productions',
                 'location' => 'Dar es Salaam, Tanzania', 'website' => 'https://peakproductions.example',
-                'bio' => 'Baraka produces concerts and festivals for thousands — staging, security, ticketing and artist liaison under one roof. If it needs a stage and a crowd, Peak Productions makes it happen safely and on time.',
+                'bio' => 'Baraka produces concerts and festivals for thousands - staging, security, ticketing and artist liaison under one roof. If it needs a stage and a crowd, Peak Productions makes it happen safely and on time.',
                 'reviews' => [4],
             ],
             [

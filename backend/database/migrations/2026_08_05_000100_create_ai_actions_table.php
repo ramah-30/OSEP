@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * The AI action queue. When the copilot decides to *do* something on the
- * planner's behalf — send RSVP reminders, invite guests, create tasks, spin up
- * an event — it queues the action here instead of acting silently. The planner
+ * planner's behalf - send RSVP reminders, invite guests, create tasks, spin up
+ * an event - it queues the action here instead of acting silently. The planner
  * approves (or rejects) each one; approval is what actually runs it. Rows are the
  * audit trail of everything the copilot has done or proposed.
  */

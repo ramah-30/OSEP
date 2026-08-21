@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 /**
  * The AI action queue: the copilot proposes actions (from automations or chat),
  * and the planner approves or rejects each one here. Approval is the single point
- * where anything is actually performed — nothing outbound runs before it.
+ * where anything is actually performed - nothing outbound runs before it.
  */
 class ActionController extends Controller
 {
@@ -45,7 +45,7 @@ class ActionController extends Controller
         ]);
     }
 
-    /** Approve a pending action — this runs it. */
+    /** Approve a pending action - this runs it. */
     public function approve(Request $request, AiAction $action): JsonResponse
     {
         $this->authorizeAction($request, $action);
@@ -61,7 +61,7 @@ class ActionController extends Controller
         ], $done ? ($action->result['message'] ?? 'Action completed.') : ('Action failed: ' . $action->error));
     }
 
-    /** Reject a pending action — nothing runs. */
+    /** Reject a pending action - nothing runs. */
     public function reject(Request $request, AiAction $action): JsonResponse
     {
         $this->authorizeAction($request, $action);

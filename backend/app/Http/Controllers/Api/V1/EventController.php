@@ -205,7 +205,7 @@ class EventController extends Controller
     }
 
     /**
-     * Every event this client owns — populated automatically as planners accept
+     * Every event this client owns - populated automatically as planners accept
      * their booking requests. Powers the client's "My Events" and "Progress".
      */
     public function myEvents(Request $request): JsonResponse

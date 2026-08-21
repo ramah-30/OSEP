@@ -40,8 +40,8 @@ return [
 
         // Local disk by default (matches every dev machine). Set
         // FILESYSTEM_PUBLIC_DRIVER=s3 in production so uploads survive a
-        // redeploy — Render's container disk is wiped on every deploy.
-        // `root` is filtered out entirely for s3 — the S3 adapter treats a
+        // redeploy - Render's container disk is wiped on every deploy.
+        // `root` is filtered out entirely for s3 - the S3 adapter treats a
         // present `root` as a key prefix, so a local filesystem path there
         // would get baked into every uploaded object's URL.
         'public' => array_filter([

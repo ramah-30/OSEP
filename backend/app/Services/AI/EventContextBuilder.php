@@ -89,7 +89,7 @@ class EventContextBuilder
             ->groupBy('category')
             ->map(fn ($items, $name) => [
                 'name' => $name ?: 'Uncategorised',
-                // Prefer the actual cost only once it's a real figure — the column
+                // Prefer the actual cost only once it's a real figure - the column
                 // defaults to 0.00, so a planned line must fall through to its
                 // estimate rather than count as zero.
                 'amount' => (float) $items->sum(fn ($i) => (float) ((float) $i->actual_cost > 0 ? $i->actual_cost : $i->estimated_cost)),

@@ -11,8 +11,8 @@ use Illuminate\Support\Str;
  * marketplace business: the booking pipeline, quotations and win rate, contracts
  * and revenue, reviews and rating, availability and storefront readiness.
  *
- * Answers are assembled purely from the vendor's own structured data — no API
- * key, no internet, no cost — so the copilot is useful the moment it's opened.
+ * Answers are assembled purely from the vendor's own structured data - no API
+ * key, no internet, no cost - so the copilot is useful the moment it's opened.
  */
 class VendorLocalProvider implements AiProvider
 {
@@ -48,7 +48,7 @@ class VendorLocalProvider implements AiProvider
         $business = $context['vendor']['business_name'] ?? null;
         $who = $business ? " for **{$business}**" : '';
 
-        return "Hi — I'm {$name}, your marketplace business copilot{$who}. I can see your booking requests, "
+        return "Hi - I'm {$name}, your marketplace business copilot{$who}. I can see your booking requests, "
             . "quotations, contracts, reviews and availability. Try asking me:\n\n"
             . "- *How's my business doing?*\n"
             . "- *Which requests need a reply?*\n"
@@ -60,7 +60,7 @@ class VendorLocalProvider implements AiProvider
     private function summaryAnswer(array $context): string
     {
         $v = $context['vendor'] ?? null;
-        $lines = ['Here\'s where your business stands' . ($v && $v['business_name'] ? " — **{$v['business_name']}**" : '') . ':'];
+        $lines = ['Here\'s where your business stands' . ($v && $v['business_name'] ? " - **{$v['business_name']}**" : '') . ':'];
 
         if ($r = $context['requests'] ?? null) {
             $lines[] = "\n- 📥 **Requests:** {$r['open']} awaiting reply, {$r['accepted']} accepted";
@@ -79,7 +79,7 @@ class VendorLocalProvider implements AiProvider
 
         $focus = $this->topReminder($context);
         if ($focus) {
-            $lines[] = "\n**Where I'd focus next:** {$focus['title']} — {$focus['description']}";
+            $lines[] = "\n**Where I'd focus next:** {$focus['title']} - {$focus['description']}";
         }
 
         return implode("\n", $lines);
@@ -90,7 +90,7 @@ class VendorLocalProvider implements AiProvider
         $r = $context['requests'] ?? null;
         if (! $r || $r['total'] === 0) {
             return "You have no booking requests yet. A complete storefront with packages and portfolio photos is the "
-                . "best way to start attracting planners — ask me *how do I improve my storefront?*";
+                . "best way to start attracting planners - ask me *how do I improve my storefront?*";
         }
 
         $lines = ['**Booking pipeline**'];
@@ -100,14 +100,14 @@ class VendorLocalProvider implements AiProvider
 
         if ($r['open'] > 0 && $r['oldest_pending_days'] !== null) {
             $lines[] = "\n⏱️ Your oldest open request is **{$r['oldest_pending_days']} day(s)** old. Planners often book the "
-                . "first solid vendor to reply — respond promptly to lift your win rate.";
+                . "first solid vendor to reply - respond promptly to lift your win rate.";
         }
 
         if (! empty($r['open_list'])) {
             $lines[] = "\n**Awaiting reply:**";
             foreach ($r['open_list'] as $item) {
                 $meta = array_filter([$item['planner'], $item['event_date'], $item['budget'] > 0 ? $this->money($item['budget']) : null]);
-                $suffix = $meta ? ' — ' . implode(' · ', $meta) : '';
+                $suffix = $meta ? ' - ' . implode(' · ', $meta) : '';
                 $lines[] = "- **{$item['title']}**{$suffix}";
             }
         }
@@ -120,7 +120,7 @@ class VendorLocalProvider implements AiProvider
         $q = $context['quotations'] ?? null;
         if (! $q || $q['total'] === 0) {
             return "You haven't sent any quotations yet. When a booking request comes in, send a clear, itemised quote "
-                . "quickly — speed and clarity are what win marketplace work.";
+                . "quickly - speed and clarity are what win marketplace work.";
         }
 
         $lines = ['**Quotations**'];
@@ -134,7 +134,7 @@ class VendorLocalProvider implements AiProvider
         if ($q['expiring_soon'] > 0) {
             $lines[] = "\n⚠️ **{$q['expiring_soon']} quotation(s) expire within 7 days.** Follow up before they lapse:";
             foreach ($q['expiring_list'] as $item) {
-                $lines[] = "- {$item['reference']} ({$this->money($item['total'])}) — expires {$item['expires']}";
+                $lines[] = "- {$item['reference']} ({$this->money($item['total'])}) - expires {$item['expires']}";
             }
         }
 
@@ -145,7 +145,7 @@ class VendorLocalProvider implements AiProvider
     {
         $c = $context['contracts'] ?? null;
         if (! $c || $c['total'] === 0) {
-            return "No contracts yet. Once a planner accepts a quotation you can turn it into a contract — that's where "
+            return "No contracts yet. Once a planner accepts a quotation you can turn it into a contract - that's where "
                 . "quoted work becomes secured revenue.";
         }
 
@@ -156,7 +156,7 @@ class VendorLocalProvider implements AiProvider
         $lines[] = "- Pipeline (not yet active): {$this->money($c['pipeline_value'])}";
 
         if ($c['awaiting_signature'] > 0) {
-            $lines[] = "\n✍️ **{$c['awaiting_signature']} contract(s) await signature** — that's revenue not yet locked in. Chase the signatures.";
+            $lines[] = "\n✍️ **{$c['awaiting_signature']} contract(s) await signature** - that's revenue not yet locked in. Chase the signatures.";
         }
 
         return implode("\n", $lines);
@@ -167,7 +167,7 @@ class VendorLocalProvider implements AiProvider
         $rev = $context['reviews'] ?? null;
         if (! $rev || $rev['total'] === 0) {
             return "You have no published reviews yet. After completing a booking, a happy planner's review is the "
-                . "single strongest signal to future clients — it's worth asking for one.";
+                . "single strongest signal to future clients - it's worth asking for one.";
         }
 
         $lines = ['**Reviews & rating**'];
@@ -175,12 +175,12 @@ class VendorLocalProvider implements AiProvider
         $lines[] = "- Awaiting your reply: {$rev['unreplied']}" . ($rev['unreplied_negative'] > 0 ? " ({$rev['unreplied_negative']} critical)" : '');
 
         if ($rev['unreplied_negative'] > 0) {
-            $lines[] = "\n💬 Reply calmly and professionally to the critical review(s) first — a measured public response "
+            $lines[] = "\n💬 Reply calmly and professionally to the critical review(s) first - a measured public response "
                 . "reassures future planners more than the rating alone worries them.";
         } elseif ($rev['unreplied'] > 0) {
             $lines[] = "\n💬 Thanking reviewers publicly signals an engaged, professional vendor.";
         } else {
-            $lines[] = "\n✅ Every review has a reply — great engagement.";
+            $lines[] = "\n✅ Every review has a reply - great engagement.";
         }
 
         return implode("\n", $lines);
@@ -200,7 +200,7 @@ class VendorLocalProvider implements AiProvider
         $lines[] = '- Next open date: ' . ($a['next_available'] ?? 'none marked');
 
         if ($a['available_upcoming'] === 0) {
-            $lines[] = "\n⚠️ You have no open dates in the next 60 days — if that's not right, update your calendar so planners can book you.";
+            $lines[] = "\n⚠️ You have no open dates in the next 60 days - if that's not right, update your calendar so planners can book you.";
         }
 
         return implode("\n", $lines);
@@ -223,7 +223,7 @@ class VendorLocalProvider implements AiProvider
             $lines[] = "\n📋 To convert more of the planners who view you, add: **{$missing}**. Complete storefronts with "
                 . "photos and clear packages win far more enquiries.";
         } else {
-            $lines[] = "\n✅ Your storefront is complete — services, packages, portfolio, description and logo are all in place.";
+            $lines[] = "\n✅ Your storefront is complete - services, packages, portfolio, description and logo are all in place.";
         }
 
         return implode("\n", $lines);
@@ -234,14 +234,14 @@ class VendorLocalProvider implements AiProvider
         $reminders = $this->reminders($context);
 
         if (empty($reminders)) {
-            return "You're in good shape — no requests waiting, quotes current, reviews answered and your storefront is "
+            return "You're in good shape - no requests waiting, quotes current, reviews answered and your storefront is "
                 . "complete. Keep your availability up to date and the enquiries flowing.";
         }
 
         $lines = ['Here\'s what I\'d focus on, most important first:'];
         foreach ($reminders as $i => $reminder) {
             $n = $i + 1;
-            $lines[] = "{$n}. **{$reminder['title']}** — {$reminder['description']}";
+            $lines[] = "{$n}. **{$reminder['title']}** - {$reminder['description']}";
         }
 
         return implode("\n", $lines);

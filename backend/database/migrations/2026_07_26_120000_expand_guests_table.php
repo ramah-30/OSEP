@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Phase 4 — grow the lean Phase 3 guest record into a full profile: split name,
+ * Phase 4 - grow the lean Phase 3 guest record into a full profile: split name,
  * demographics, accessibility, the separate invitation / check-in status tracks,
  * plus-one allowance and a stable public RSVP token.
  */

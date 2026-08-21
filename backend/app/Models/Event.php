@@ -152,7 +152,7 @@ class Event extends Model
     }
 
     /**
-     * The subset of the activity feed the client is allowed to see — the
+     * The subset of the activity feed the client is allowed to see - the
      * milestone moments (a vendor confirming, a contract signed, a quotation
      * sent) that power the client's "Updates" timeline.
      *
@@ -264,7 +264,7 @@ class Event extends Model
      * Re-derive `budget_spent` from the actual costs of the budget line items and
      * persist it. This mirrors the planner-facing "Actual spend" figure (the sum
      * of every line's actual cost, regardless of status), so the client budget
-     * overview — which reads the stored figure — stays in step with what the
+     * overview - which reads the stored figure - stays in step with what the
      * planner sees as they break the budget down.
      */
     public function recalculateBudgetSpent(): void
@@ -314,7 +314,7 @@ class Event extends Model
         $prefix = "EVT-{$year}-";
 
         // Derive the next sequence from the highest existing code for the year,
-        // not a row count — counting collides once any event is deleted. The
+        // not a row count - counting collides once any event is deleted. The
         // codes are zero-padded, so ordering lexicographically == numerically.
         $last = static::where('event_code', 'like', $prefix.'%')
             ->orderByDesc('event_code')

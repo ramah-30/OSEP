@@ -7,8 +7,8 @@ use Illuminate\Support\Str;
 /**
  * Turns a vendor's natural-language message into a proposed action, if it reads
  * as a command ("accept the booking request from Sarah", "reply to that review
- * saying thanks"). Only the defined command set is recognised; anything else —
- * and any question — returns null and is answered as a normal chat turn.
+ * saying thanks"). Only the defined command set is recognised; anything else -
+ * and any question - returns null and is answered as a normal chat turn.
  *
  * Rule-based so it behaves identically offline and live: the copilot's ability
  * to *act* never depends on a hosted model.

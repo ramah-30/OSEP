@@ -14,14 +14,14 @@ use Illuminate\Support\Carbon;
 
 /**
  * Assembles the structured, permission-filtered snapshot of a vendor's business
- * that the vendor copilot reasons over — booking pipeline, quotations, contracts
+ * that the vendor copilot reasons over - booking pipeline, quotations, contracts
  * and revenue, reviews, availability and storefront completeness. Every figure
  * is scoped to what this vendor owns (directly via vendor_id, or through a venue
  * they own), so the AI can only ever see the vendor's own book of business.
  */
 class VendorContextBuilder
 {
-    /** Quotation states that are "live" — sent to a planner, not yet resolved. */
+    /** Quotation states that are "live" - sent to a planner, not yet resolved. */
     private const QUOTE_OPEN = ['sent', 'negotiating'];
 
     /**

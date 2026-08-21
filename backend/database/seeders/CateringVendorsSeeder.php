@@ -14,8 +14,8 @@ use Illuminate\Support\Str;
  * Nine real Tanzanian catering companies as demo vendor accounts, so the
  * marketplace's Caterers category shows recognisable, believable listings.
  *
- * Real, public details are used — company name, city, description, website /
- * social — but login email and phone are demo values (@osep.test / a placeholder
+ * Real, public details are used - company name, city, description, website /
+ * social - but login email and phone are demo values (@osep.test / a placeholder
  * number), NOT the businesses' real contact lines, since these are illustrative
  * demo accounts, not genuine sign-ups. Ratings/job counts are demo metrics.
  * Idempotent (keyed on email) and guarded to non-production in DatabaseSeeder.
@@ -108,7 +108,7 @@ class CateringVendorsSeeder extends Seeder
             );
         }
 
-        // Portfolio — catering/food imagery
+        // Portfolio - catering/food imagery
         $food = [
             '1555244162-803834f70033', '1519671482749-fd09be7ccebf', '1467003909585-2f8a72700288',
             '1414235077428-338989a2e8c0', '1530062845289-9109b2c9c868', '1478145046317-39f10e56b5e9',
@@ -126,14 +126,14 @@ class CateringVendorsSeeder extends Seeder
                         ['type' => 'image', 'url' => $img($i * 2), 'caption' => 'Buffet setup'],
                         ['type' => 'image', 'url' => $img($i * 2 + 1), 'caption' => 'Plated course'],
                     ],
-                    'client_feedback' => 'The food was the highlight of the day — guests are still talking about it.',
+                    'client_feedback' => 'The food was the highlight of the day - guests are still talking about it.',
                     'is_case_study' => $i === 1,
                     'sort_order' => $i,
                 ],
             );
         }
 
-        // Availability — next 21 days
+        // Availability - next 21 days
         foreach (range(0, 20) as $d) {
             $status = match (true) {
                 $d % 7 === 4 => 'fully_booked',
@@ -178,7 +178,7 @@ class CateringVendorsSeeder extends Seeder
                 'location' => 'Dar es Salaam, Tanzania', 'years' => 12, 'level' => 'business_verified',
                 'featured' => true, 'rating' => 4.7, 'reviews' => 48, 'jobs' => 130, 'response' => 2,
                 'website' => 'https://drrec.co.tz',
-                'description' => 'Full-service catering and event planning in Dar es Salaam — corporate functions, private parties, kids’ events and weddings — handling food, equipment, staffing, theming and venue hire end to end.',
+                'description' => 'Full-service catering and event planning in Dar es Salaam - corporate functions, private parties, kids’ events and weddings - handling food, equipment, staffing, theming and venue hire end to end.',
                 'cover' => 'https://images.unsplash.com/photo-1555244162-803834f70033?w=1200&q=80',
             ],
             [
@@ -223,7 +223,7 @@ class CateringVendorsSeeder extends Seeder
                 'location' => 'Arusha, Tanzania', 'years' => 15, 'level' => 'premium_partner',
                 'featured' => true, 'rating' => 4.75, 'reviews' => 58, 'jobs' => 170, 'response' => 2,
                 'website' => 'https://lavicato.co.tz',
-                'description' => '15+ years in the mobile events industry — catering, event management, party rentals, mobile bar and venue hire — from a trusted Arusha team.',
+                'description' => '15+ years in the mobile events industry - catering, event management, party rentals, mobile bar and venue hire - from a trusted Arusha team.',
                 'cover' => 'https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?w=1200&q=80',
             ],
             [

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * Guest responses from the public RSVP page. Kept append-only (a guest may change
- * their mind) — the latest row is the authoritative answer, mirrored onto the
+ * their mind) - the latest row is the authoritative answer, mirrored onto the
  * guest's `rsvp_status` for fast reads.
  */
 return new class extends Migration

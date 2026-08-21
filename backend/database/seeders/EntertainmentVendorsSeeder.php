@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 /**
- * Nine Tanzanian entertainment acts (marketplace Entertainment category —
+ * Nine Tanzanian entertainment acts (marketplace Entertainment category -
  * dancers, acrobats, photo booths, fireworks; distinct from DJs / live bands).
  * Real acts/concepts (Tanzanian acrobats, Mdundiko/Ngoma dancers) plus
  * representative brands; demo contact + illustrative metrics.
@@ -61,7 +61,7 @@ class EntertainmentVendorsSeeder extends RealVendorSeeder
 
     protected function portfolioFeedback(): string
     {
-        return 'They brought the house down — the energy was electric and our guests will never forget it.';
+        return 'They brought the house down - the energy was electric and our guests will never forget it.';
     }
 
     protected function rows(): array

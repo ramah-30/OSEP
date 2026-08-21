@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 
 /**
  * The client's own guest list for their event. A client may list, add, edit and
- * remove guests on the single event assigned to them — nothing else — and every
+ * remove guests on the single event assigned to them - nothing else - and every
  * change pings the planner so the two lists never drift apart.
  */
 class ClientGuestController extends Controller
@@ -84,7 +84,7 @@ class ClientGuestController extends Controller
 
     /**
      * Tell the planner their client just changed the guest list, and drop a row
-     * on the event's activity feed (planner-facing — not the client's own feed).
+     * on the event's activity feed (planner-facing - not the client's own feed).
      */
     private function notifyPlanner(Request $request, Event $event, string $verb, Guest $guest, ?string $name = null): void
     {

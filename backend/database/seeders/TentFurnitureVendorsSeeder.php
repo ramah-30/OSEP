@@ -85,7 +85,7 @@ class TentFurnitureVendorsSeeder extends RealVendorSeeder
              'business' => 'Mahraj Industries', 'tagline' => 'Tents, furniture, staging & flooring', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 14, 'level' => 'business_verified', 'featured' => false, 'rating' => 4.7, 'reviews' => 31, 'jobs' => 260, 'response' => 3,
              'website' => 'https://mahrajindustries.com', 'instagram' => 'https://instagram.com/mahrajindustries',
-             'description' => 'Full event fit-out — tents with lining, draping, flooring, HVAC, chiavari/tiffany chairs, staging and dancefloors.'],
+             'description' => 'Full event fit-out - tents with lining, draping, flooring, HVAC, chiavari/tiffany chairs, staging and dancefloors.'],
             ['key' => 'tarpo', 'email' => 'tarpotz@osep.test', 'first' => 'Paul', 'last' => 'Tarimo',
              'business' => 'TARPO', 'tagline' => 'Event tents & décor for hire', 'location' => 'Arusha, Tanzania',
              'years' => 11, 'level' => 'business_verified', 'featured' => false, 'rating' => 4.65, 'reviews' => 24, 'jobs' => 170, 'response' => 3,

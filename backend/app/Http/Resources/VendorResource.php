@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * A marketplace vendor — a vendor-role User plus its storefront profile. Compact
+ * A marketplace vendor - a vendor-role User plus its storefront profile. Compact
  * fields power the card grid and compare drawer; the heavier relations are only
  * serialised when eager-loaded for the storefront page.
  *
@@ -47,7 +47,7 @@ class VendorResource extends JsonResource
             'is_suspended' => (bool) $profile?->is_suspended,
             'price_from' => $this->when(isset($this->price_from), fn () => (float) $this->price_from),
 
-            // Contact — only exposed on the full storefront.
+            // Contact - only exposed on the full storefront.
             'phone' => $this->when((bool) $request->route('vendor'), fn () => $profile?->phone),
             'contact_email' => $this->when((bool) $request->route('vendor'), fn () => $profile?->contact_email),
             'website' => $this->when((bool) $request->route('vendor'), fn () => $profile?->website),

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * A saved version of a venue floor plan for an event. An event can hold several
- * (Wedding Layout, Reception Layout …); each carries its own venue dimensions.
+ * (Wedding Layout, Reception Layout ...); each carries its own venue dimensions.
  */
 return new class extends Migration
 {

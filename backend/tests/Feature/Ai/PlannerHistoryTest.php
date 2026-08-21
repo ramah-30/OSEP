@@ -65,7 +65,7 @@ class PlannerHistoryTest extends TestCase
         // History: catering is normally ~60%.
         $this->deliveredWedding($planner, catering: 6_000_000, venue: 4_000_000);
 
-        // Live event: catering is only 20% — a sharp divergence.
+        // Live event: catering is only 20% - a sharp divergence.
         $live = Event::create([
             'planner_id' => $planner->id, 'title' => 'New wedding', 'event_type' => 'Wedding', 'status' => 'planning',
         ]);

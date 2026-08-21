@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * Persistent AI memory. Two scopes:
- *  - planner: reusable preferences (timeline style, tone, report format …)
+ *  - planner: reusable preferences (timeline style, tone, report format ...)
  *  - event:   facts about one event (theme, client preferences, decisions),
  *             which expire when the event is archived unless promoted.
  * Planners can view, edit and delete every memory.

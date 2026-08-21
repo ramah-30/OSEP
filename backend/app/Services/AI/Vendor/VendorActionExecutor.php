@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Collection;
 
 /**
- * Runs the vendor copilot's actions — the things it does *for* the vendor rather
+ * Runs the vendor copilot's actions - the things it does *for* the vendor rather
  * than just talks about: responding to a booking request, replying to a review.
  * Each type can (a) preview itself without touching anything and (b) execute once
  * the vendor approves. Approval (in the controller) is the single choke point
@@ -168,10 +168,10 @@ class VendorActionExecutor
             return 'You have no open booking requests to respond to right now.';
         }
         if ($hint !== '') {
-            return "I couldn't find an open request matching “{$hint}”. You have {$count} open — try naming the planner or event.";
+            return "I couldn't find an open request matching “{$hint}”. You have {$count} open - try naming the planner or event.";
         }
 
-        return "You have {$count} open requests — tell me which one (e.g. “accept the request from Sarah”).";
+        return "You have {$count} open requests - tell me which one (e.g. “accept the request from Sarah”).";
     }
 
     private function requestLabel(BookingRequest $request): string

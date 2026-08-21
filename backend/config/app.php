@@ -59,8 +59,8 @@ return [
     | Frontend URL
     |--------------------------------------------------------------------------
     |
-    | Root of the React SPA. Every link the API emails to a user — email
-    | verification, password reset, OAuth hand-off — is built from this.
+    | Root of the React SPA. Every link the API emails to a user - email
+    | verification, password reset, OAuth hand-off - is built from this.
     |
     */
 

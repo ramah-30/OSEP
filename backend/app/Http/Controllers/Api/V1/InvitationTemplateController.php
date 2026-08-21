@@ -12,7 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
- * The invitation template library — global starters (null owner, read-only) plus
+ * The invitation template library - global starters (null owner, read-only) plus
  * the planner's own designs. Planner-scoped, not tied to a single event.
  */
 class InvitationTemplateController extends Controller

@@ -678,7 +678,7 @@ class DemoSeeder extends Seeder
     {
         $ratings = [5, 5, 4];
         $comments = [
-            'Sarah and her team were flawless — every detail handled, zero stress on the day. Would book again in a heartbeat.',
+            'Sarah and her team were flawless - every detail handled, zero stress on the day. Would book again in a heartbeat.',
             'Incredible communication throughout and a beautiful result. Our guests are still talking about it.',
             'Very professional and well organised. A couple of small timing hiccups, but nothing that affected the day.',
         ];
@@ -705,7 +705,7 @@ class DemoSeeder extends Seeder
             [$planner, 'client_request', 'New client enquiry', 'Amina Hassan requested a proposal for a corporate gala.'],
             [$planner, 'vendor_quotation', 'Vendor quotation received', 'Zawadi Photography submitted a quote for the wedding.'],
             [$planner, 'approval_completed', 'Catering approved', "John Carter approved the catering quotation for {$wedding->title}."],
-            [$john, 'proposal', 'Proposal ready for review', 'Your decoration proposal is ready — please review and approve.'],
+            [$john, 'proposal', 'Proposal ready for review', 'Your decoration proposal is ready - please review and approve.'],
             [$john, 'payment_reminder', 'Payment reminder', 'A deposit of TZS 5,000,000 is due on 30 July 2026.'],
             [$john, 'planning_update', 'Planning update', 'Catering has been confirmed. You are now 65% complete.'],
         ];

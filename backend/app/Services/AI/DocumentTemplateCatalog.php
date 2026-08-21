@@ -23,7 +23,7 @@ class DocumentTemplateCatalog
                 'key' => 'client_proposal',
                 'category' => 'proposal',
                 'name' => 'Client Event Proposal',
-                'description' => 'A polished proposal for a client — scope, plan, budget summary and next steps, drawn from the event.',
+                'description' => 'A polished proposal for a client - scope, plan, budget summary and next steps, drawn from the event.',
                 'icon' => 'FileText',
                 'requires_event' => true,
                 'variables' => [
@@ -36,7 +36,7 @@ class DocumentTemplateCatalog
                 'key' => 'planning_timeline',
                 'category' => 'timeline',
                 'name' => 'Planning Timeline',
-                'description' => 'A countdown planning schedule to the event date — grounded in your milestones, or a best-practice plan if none exist yet.',
+                'description' => 'A countdown planning schedule to the event date - grounded in your milestones, or a best-practice plan if none exist yet.',
                 'icon' => 'CalendarClock',
                 'requires_event' => true,
                 'variables' => [],
@@ -58,7 +58,7 @@ class DocumentTemplateCatalog
                 'key' => 'vendor_brief',
                 'category' => 'vendor',
                 'name' => 'Vendor Brief / RFQ',
-                'description' => 'A brief to send a vendor requesting a quote — event details, requirements and what to include.',
+                'description' => 'A brief to send a vendor requesting a quote - event details, requirements and what to include.',
                 'icon' => 'Store',
                 'requires_event' => true,
                 'variables' => [
@@ -82,7 +82,7 @@ class DocumentTemplateCatalog
                 'key' => 'client_update_email',
                 'category' => 'email',
                 'name' => 'Client Status Update Email',
-                'description' => 'A concise progress update to the client — where the event stands across budget, tasks, guests and vendors.',
+                'description' => 'A concise progress update to the client - where the event stands across budget, tasks, guests and vendors.',
                 'icon' => 'MailCheck',
                 'requires_event' => true,
                 'variables' => [
@@ -94,7 +94,7 @@ class DocumentTemplateCatalog
                 'key' => 'budget_outline',
                 'category' => 'budget',
                 'name' => 'Budget Breakdown Guide',
-                'description' => 'A recommended budget allocation for the event — measured against your real figures where a budget exists.',
+                'description' => 'A recommended budget allocation for the event - measured against your real figures where a budget exists.',
                 'icon' => 'Wallet',
                 'requires_event' => false,
                 'variables' => [

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Fields for the simulated mobile-money gateway: which contract an outgoing
  * (vendor) payment settles, which network was used, and the payer's own
- * number — none of these apply to a planner's manual ledger entry, so they
+ * number - none of these apply to a planner's manual ledger entry, so they
  * stay nullable.
  */
 return new class extends Migration

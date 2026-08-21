@@ -7,9 +7,9 @@ use Illuminate\Support\Str;
 
 /**
  * The offline, data-grounded reasoning engine for the CLIENT concierge. Every
- * answer is assembled from the client's own event data — their event and
+ * answer is assembled from the client's own event data - their event and
  * countdown, guest list, approvals, payments, planner updates and booking
- * requests — in a warm, reassuring tone. No API key, no internet, no cost.
+ * requests - in a warm, reassuring tone. No API key, no internet, no cost.
  */
 class ClientLocalProvider implements AiProvider
 {
@@ -45,7 +45,7 @@ class ClientLocalProvider implements AiProvider
         $event = $context['event'] ?? null;
 
         if ($event) {
-            return "Hi — I'm your {$name}, here to help with **{$event['title']}**. I can see your event's progress, "
+            return "Hi - I'm your {$name}, here to help with **{$event['title']}**. I can see your event's progress, "
                 . "guest list, approvals, payments and updates from your planner. Try asking me:\n\n"
                 . "- *How's my event coming along?*\n"
                 . "- *What do I need to approve?*\n"
@@ -54,7 +54,7 @@ class ClientLocalProvider implements AiProvider
                 . "- *What should I take care of next?*";
         }
 
-        return "Hi — I'm your {$name}. Once you've booked a planner and your event is set up, I'll keep you on top of "
+        return "Hi - I'm your {$name}. Once you've booked a planner and your event is set up, I'll keep you on top of "
             . "everything: approvals to give, payments due, RSVPs and the latest updates from your planner. You can start "
             . "by finding a planner and sending a booking request.";
     }
@@ -93,7 +93,7 @@ class ClientLocalProvider implements AiProvider
 
         $focus = $this->topReminder($context);
         if ($focus) {
-            $lines[] = "\n**What I'd take care of next:** {$focus['title']} — {$focus['description']}";
+            $lines[] = "\n**What I'd take care of next:** {$focus['title']} - {$focus['description']}";
         }
 
         return implode("\n", $lines);
@@ -103,14 +103,14 @@ class ClientLocalProvider implements AiProvider
     {
         $a = $context['approvals'] ?? null;
         if (! $a || $a['pending'] === 0) {
-            return "You're all caught up — there's nothing waiting for your approval right now. I'll flag anything new "
+            return "You're all caught up - there's nothing waiting for your approval right now. I'll flag anything new "
                 . "the moment your planner sends it over.";
         }
 
         $lines = ["You have **{$a['pending']} approval(s)** waiting for your decision:"];
         foreach ($a['list'] as $item) {
             $type = $item['type'] ? " _({$item['type']})_" : '';
-            $ev = $item['event'] ? " — {$item['event']}" : '';
+            $ev = $item['event'] ? " - {$item['event']}" : '';
             $lines[] = "- **{$item['title']}**{$type}{$ev}";
         }
         $lines[] = "\nGiving your planner a timely decision keeps everything on schedule.";
@@ -127,7 +127,7 @@ class ClientLocalProvider implements AiProvider
         }
 
         if ($f['outstanding_amount'] <= 0) {
-            return "You're fully paid up — nothing outstanding. 🎉";
+            return "You're fully paid up - nothing outstanding. 🎉";
         }
 
         $lines = ['**Your payments**'];
@@ -168,7 +168,7 @@ class ClientLocalProvider implements AiProvider
     {
         $r = $context['requests'] ?? null;
         if (! $r || $r['total'] === 0) {
-            return "You haven't sent any booking requests yet. Browse planners and send a request describing your event — "
+            return "You haven't sent any booking requests yet. Browse planners and send a request describing your event - "
                 . "they'll reply with how they can help.";
         }
 
@@ -178,7 +178,7 @@ class ClientLocalProvider implements AiProvider
         $lines[] = "- Responded: {$r['responded']}";
 
         if ($r['accepted'] > 0) {
-            $lines[] = "\n🎉 A planner has **accepted** — review their response and take the next step to confirm them.";
+            $lines[] = "\n🎉 A planner has **accepted** - review their response and take the next step to confirm them.";
         } elseif ($r['pending'] > 0) {
             $lines[] = "\nPlanners usually reply within a few days. I'll let you know as soon as one responds.";
         }
@@ -190,7 +190,7 @@ class ClientLocalProvider implements AiProvider
     {
         $planners = $context['planners'] ?? null;
         if (empty($planners)) {
-            return "I can't see any planners to recommend just yet. New planners join OSEP regularly — check back soon, "
+            return "I can't see any planners to recommend just yet. New planners join OSEP regularly - check back soon, "
                 . "and I'll help you send a booking request the moment you find one you like.";
         }
 
@@ -213,7 +213,7 @@ class ClientLocalProvider implements AiProvider
             if (($p['reviews_count'] ?? 0) > 0) {
                 $bits[] = "⭐ {$p['rating']} ({$p['reviews_count']})";
             }
-            $meta = $bits ? ' — ' . implode(' · ', $bits) : '';
+            $meta = $bits ? ' - ' . implode(' · ', $bits) : '';
             $lines[] = "- **{$name}**{$meta}";
         }
 
@@ -237,7 +237,7 @@ class ClientLocalProvider implements AiProvider
             return $this->greeting($context);
         }
 
-        $lines = ["**{$event['title']} — progress summary**"];
+        $lines = ["**{$event['title']} - progress summary**"];
         $lines[] = "- 📈 Planning is **{$event['progress']}%** complete";
         $lines[] = '- 📅 ' . $this->countdown($event);
         if ($event['planner']) {
@@ -265,7 +265,7 @@ class ClientLocalProvider implements AiProvider
 
         $focus = $this->topReminder($context);
         if ($focus) {
-            $lines[] = "\n**Next up:** {$focus['title']} — {$focus['description']}";
+            $lines[] = "\n**Next up:** {$focus['title']} - {$focus['description']}";
         }
 
         return implode("\n", $lines);
@@ -276,14 +276,14 @@ class ClientLocalProvider implements AiProvider
         $reminders = $this->reminders($context);
 
         if (empty($reminders)) {
-            return "You're in great shape — no approvals waiting, payments current, and your guest list is on track. "
+            return "You're in great shape - no approvals waiting, payments current, and your guest list is on track. "
                 . "Just enjoy the run-up to your event!";
         }
 
         $lines = ["Here's what I'd take care of, most important first:"];
         foreach ($reminders as $i => $reminder) {
             $n = $i + 1;
-            $lines[] = "{$n}. **{$reminder['title']}** — {$reminder['description']}";
+            $lines[] = "{$n}. **{$reminder['title']}** - {$reminder['description']}";
         }
 
         return implode("\n", $lines);

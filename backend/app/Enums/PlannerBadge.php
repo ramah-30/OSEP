@@ -4,8 +4,8 @@ namespace App\Enums;
 
 /**
  * A planner's outward-facing trust badge. Unlike the vendor {@see VerificationLevel}
- * (which an admin grants), a planner's badge is auto-earned from real activity —
- * a verified email, experience, completed events and client reviews — so it needs
+ * (which an admin grants), a planner's badge is auto-earned from real activity -
+ * a verified email, experience, completed events and client reviews - so it needs
  * no moderation step. Higher tiers read as more established.
  */
 enum PlannerBadge: string
@@ -51,7 +51,7 @@ enum PlannerBadge: string
         };
     }
 
-    /** Sort weight — higher is more established. */
+    /** Sort weight - higher is more established. */
     public function weight(): int
     {
         return match ($this) {

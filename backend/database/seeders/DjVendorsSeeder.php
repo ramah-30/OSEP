@@ -112,7 +112,7 @@ class DjVendorsSeeder extends Seeder
             );
         }
 
-        // Portfolio — DJ / event imagery
+        // Portfolio - DJ / event imagery
         $shots = ['1470225620780-dba8ba36b745', '1459749411175-04bf5292ceea', '1514525253161-7a46d19cd819', '1429962714451-bb934ecdc4ec', '1493225457124-a3eb161ffa5f', '1533174072545-7a4b6ad7a6c3'];
         foreach (['Wedding Reception', 'Corporate Gala', 'Beach Party'] as $i => $title) {
             $vendor->vendorPortfolios()->updateOrCreate(
@@ -126,7 +126,7 @@ class DjVendorsSeeder extends Seeder
                         ['type' => 'image', 'url' => $this->img($shots[($i * 2) % count($shots)], 800, 600), 'caption' => 'On the decks'],
                         ['type' => 'image', 'url' => $this->img($shots[($i * 2 + 1) % count($shots)], 800, 600), 'caption' => 'Full dancefloor'],
                     ],
-                    'client_feedback' => 'The dancefloor did not empty once — read the crowd perfectly all night.',
+                    'client_feedback' => 'The dancefloor did not empty once - read the crowd perfectly all night.',
                     'is_case_study' => $i === 1,
                     'sort_order' => $i,
                 ],

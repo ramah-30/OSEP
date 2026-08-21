@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 
 /**
  * The AI "mode" control: which provider OSEP AI is talking to. Switching to a
- * live model requires that provider's API key to be configured — otherwise the
+ * live model requires that provider's API key to be configured - otherwise the
  * option is offered but disabled.
  */
 class SettingsController extends Controller

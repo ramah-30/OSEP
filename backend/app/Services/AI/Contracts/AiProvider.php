@@ -3,8 +3,8 @@
 namespace App\Services\AI\Contracts;
 
 /**
- * A pluggable large-language-model backend. Every provider — the offline
- * heuristic engine or a real hosted LLM — answers to the same contract so the
+ * A pluggable large-language-model backend. Every provider - the offline
+ * heuristic engine or a real hosted LLM - answers to the same contract so the
  * Orchestrator never has to know which one is wired in.
  */
 interface AiProvider
@@ -21,6 +21,6 @@ interface AiProvider
      */
     public function chat(string $system, array $messages, array $context = []): array;
 
-    /** A short identifier shown in the UI ("local", "anthropic", …). */
+    /** A short identifier shown in the UI ("local", "anthropic", ...). */
     public function name(): string;
 }

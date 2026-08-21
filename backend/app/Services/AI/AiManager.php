@@ -59,7 +59,7 @@ class AiManager
 
     /**
      * Switch the active driver at runtime. Only 'local' or a driver whose API key
-     * is configured is allowed — you cannot go live without a key.
+     * is configured is allowed - you cannot go live without a key.
      */
     public function setDriver(string $driver): void
     {

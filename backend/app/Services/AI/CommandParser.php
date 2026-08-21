@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
  * It only recognises the defined command set the copilot can actually perform;
  * anything else returns null and is answered as a normal conversation turn.
  *
- * Deliberately rule-based so it works identically in offline and live mode — the
+ * Deliberately rule-based so it works identically in offline and live mode - the
  * copilot's ability to *act* never depends on a hosted model being switched on.
  */
 class CommandParser
@@ -82,7 +82,7 @@ class CommandParser
     /**
      * Pull the full set of event fields out of a "create event" message: title,
      * date, start/end time, priority, client, guest count, budget, theme and
-     * description. Everything is best-effort — the executor validates and the
+     * description. Everything is best-effort - the executor validates and the
      * approval card echoes back exactly what was understood.
      *
      * @return array<string,mixed>
@@ -100,9 +100,9 @@ class CommandParser
             $params['priority'] = 'urgent';
         }
 
-        // Times — "from X to Y", or a lone start/end.
+        // Times - "from X to Y", or a lone start/end.
         $time = '([0-9]{1,2}(?::[0-9]{2})?\s*(?:am|pm)?)';
-        if (preg_match('/\bfrom\s+'.$time.'\s*(?:to|until|till|[-–—])\s*'.$time.'/i', $message, $m)) {
+        if (preg_match('/\bfrom\s+'.$time.'\s*(?:to|until|till|[-–-])\s*'.$time.'/i', $message, $m)) {
             $this->putTime($params, 'start_time', $m[1]);
             $this->putTime($params, 'end_time', $m[2]);
         } else {
@@ -131,26 +131,26 @@ class CommandParser
             $params['theme'] = trim($m[1]);
         }
 
-        // Description / notes — runs to the end of the message.
+        // Description / notes - runs to the end of the message.
         if (preg_match('/\b(?:description|described as|notes?|about)[:\s]+(.+)$/i', $message, $m)) {
             $params['description'] = trim($m[1], " .\t\n");
         }
 
-        // Client — "for client X" or "client X" (a name or email hint the
+        // Client - "for client X" or "client X" (a name or email hint the
         // executor resolves against the planner's client book).
-        // Note: no '.' in the stop set here — client hints are often emails.
+        // Note: no '.' in the stop set here - client hints are often emails.
         if (preg_match('/\bfor\s+client\s+(.+?)(?=\s+'.$stop.'\b|[,;]|$)/i', $message, $m)
             || preg_match('/\bclient[:\s]+(.+?)(?=\s+'.$stop.'\b|[,;]|$)/i', $message, $m)) {
             $params['client'] = trim($m[1], " .\t\n");
         }
 
-        // Date — after "on", up to the next clause.
+        // Date - after "on", up to the next clause.
         if (preg_match('/\bon\s+(.+?)(?=\s+'.$stop.'\b|[,.;]|$)/i', $message, $m)) {
             $params['event_date'] = trim($m[1]);
         }
 
-        // Title — a quoted phrase, or after called/named/titled, or "for <couple>"
-        // (but not "for client …", which is handled above).
+        // Title - a quoted phrase, or after called/named/titled, or "for <couple>"
+        // (but not "for client ...", which is handled above).
         if (preg_match('/["“](.+?)["”]/u', $message, $m)) {
             $params['title'] = trim($m[1]);
         } elseif (preg_match('/\b(?:called|named|titled)\s+(.+?)(?=\s+'.$stop.'\b|[,.;]|$)/i', $message, $m)) {
@@ -242,7 +242,7 @@ class CommandParser
             $desc = $this->budgetDesc($message);
             // Require a real budget-line description (via "budget item X" or
             // "add X to the budget") so we don't hijack sentences that merely
-            // mention a budget, e.g. "create a wedding … budget 10,000,000".
+            // mention a budget, e.g. "create a wedding ... budget 10,000,000".
             if ($desc === '' || $amount === null) {
                 return null;
             }
@@ -429,7 +429,7 @@ class CommandParser
             $c['new_title'] = trim($m[1]);
         }
 
-        // Due date — "due/by/deadline X", or "reschedule/move/push … to X".
+        // Due date - "due/by/deadline X", or "reschedule/move/push ... to X".
         if (preg_match('/\b(?:due(?:\s+date)?|by|deadline)\s+(?:on\s+)?(.+?)(?=[,.;]|\bpriority\b|\bwith\b|\bas\b|$)/i', $message, $m)) {
             $c['due_date'] = trim($m[1]);
         } elseif (empty($c['new_title'])

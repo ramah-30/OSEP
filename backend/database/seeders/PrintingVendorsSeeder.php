@@ -60,7 +60,7 @@ class PrintingVendorsSeeder extends RealVendorSeeder
 
     protected function portfolioFeedback(): string
     {
-        return 'Gorgeous stationery, crisp printing and delivered on time — exactly the look we wanted.';
+        return 'Gorgeous stationery, crisp printing and delivered on time - exactly the look we wanted.';
     }
 
     protected function rows(): array
@@ -75,7 +75,7 @@ class PrintingVendorsSeeder extends RealVendorSeeder
              'business' => 'Print Galore', 'tagline' => 'Printing & branding, done well', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 9, 'level' => 'business_verified', 'featured' => true, 'rating' => 4.7, 'reviews' => 34, 'jobs' => 300, 'response' => 2,
              'website' => 'https://printgalore.co.tz', 'instagram' => 'https://instagram.com/printgalore',
-             'description' => 'Comprehensive printing and branding — invitations, large-format banners, business cards, brochures and signage.'],
+             'description' => 'Comprehensive printing and branding - invitations, large-format banners, business cards, brochures and signage.'],
             ['key' => 'jaraprint', 'email' => 'jaraprint@osep.test', 'first' => 'Jamal', 'last' => 'Rashid',
              'business' => 'Jara Print', 'tagline' => 'Custom prints in 3–5 days', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 7, 'level' => 'business_verified', 'featured' => false, 'rating' => 4.7, 'reviews' => 27, 'jobs' => 190, 'response' => 3,

@@ -13,7 +13,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
- * Powers the AI Dashboard — conversation shortcuts and onboarding
+ * Powers the AI Dashboard - conversation shortcuts and onboarding
  * across the planner's active events.
  */
 class DashboardController extends Controller

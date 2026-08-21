@@ -60,7 +60,7 @@ class TransportVendorsSeeder extends RealVendorSeeder
 
     protected function portfolioFeedback(): string
     {
-        return 'Immaculate cars, punctual chauffeurs — our arrival felt like a red-carpet moment.';
+        return 'Immaculate cars, punctual chauffeurs - our arrival felt like a red-carpet moment.';
     }
 
     protected function rows(): array
@@ -80,7 +80,7 @@ class TransportVendorsSeeder extends RealVendorSeeder
              'business' => 'Bright Car Rental', 'tagline' => 'Vintage & luxury bridal cars', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 9, 'level' => 'business_verified', 'featured' => true, 'rating' => 4.75, 'reviews' => 39, 'jobs' => 210, 'response' => 2,
              'website' => 'https://brightcarrentals.com', 'instagram' => 'https://instagram.com/bright_car_rental',
-             'description' => 'Chauffeur-driven vintage and luxury wedding cars — Mercedes S-Class, Range Rover and more — across Dar es Salaam.'],
+             'description' => 'Chauffeur-driven vintage and luxury wedding cars - Mercedes S-Class, Range Rover and more - across Dar es Salaam.'],
             ['key' => 'rentadriver', 'email' => 'rentadriver@osep.test', 'first' => 'Ramadhani', 'last' => 'Juma',
              'business' => 'Rent a Driver Tanzania', 'tagline' => 'Bridal cars to guest transport', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 7, 'level' => 'business_verified', 'featured' => false, 'rating' => 4.65, 'reviews' => 26, 'jobs' => 150, 'response' => 3,

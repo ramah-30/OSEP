@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 /**
- * A guest's submission from the public RSVP page. No auth — the URL token is the
+ * A guest's submission from the public RSVP page. No auth - the URL token is the
  * credential (resolved in the controller).
  */
 class PublicRsvpRequest extends FormRequest

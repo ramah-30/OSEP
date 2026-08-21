@@ -59,7 +59,7 @@ class LiveBandVendorsSeeder extends RealVendorSeeder
 
     protected function portfolioFeedback(): string
     {
-        return 'The band read the room perfectly — everyone was up and dancing all night.';
+        return 'The band read the room perfectly - everyone was up and dancing all night.';
     }
 
     protected function rows(): array
@@ -101,10 +101,10 @@ class LiveBandVendorsSeeder extends RealVendorSeeder
              'website' => 'https://shikamoojazz.example', 'instagram' => 'https://instagram.com/shikamoojazz',
              'description' => 'A veteran Tanzanian dance band reviving classic muziki wa dansi for nostalgic, joyful celebrations.'],
             ['key' => 'kilimanjaroband', 'email' => 'kilimanjaroband@osep.test', 'first' => 'Cosmas', 'last' => 'Chidumule',
-             'business' => 'The Kilimanjaro Band', 'tagline' => 'WanaNjenje — Tanzanian classics', 'location' => 'Dar es Salaam, Tanzania',
+             'business' => 'The Kilimanjaro Band', 'tagline' => 'WanaNjenje - Tanzanian classics', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 14, 'level' => 'business_verified', 'featured' => false, 'rating' => 4.7, 'reviews' => 25, 'jobs' => 104, 'response' => 3,
              'website' => 'https://kilimanjaroband.example', 'instagram' => 'https://instagram.com/kilimanjaroband',
-             'description' => 'The much-loved WanaNjenje — a Dar es Salaam institution performing beloved Tanzanian classics live.'],
+             'description' => 'The much-loved WanaNjenje - a Dar es Salaam institution performing beloved Tanzanian classics live.'],
             ['key' => 'bantugroup', 'email' => 'bantugroup@osep.test', 'first' => 'Peter', 'last' => 'Mwakyusa',
              'business' => 'Bantu Group', 'tagline' => 'Afro-fusion for any stage', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 8, 'level' => 'email_verified', 'featured' => false, 'rating' => 4.6, 'reviews' => 18, 'jobs' => 62, 'response' => 4,

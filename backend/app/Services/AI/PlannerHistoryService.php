@@ -11,8 +11,8 @@ use Illuminate\Support\Collection;
 /**
  * Turns the planner's OWN past events into a private benchmark. Because every
  * figure comes from events this planner actually delivered, the guidance is
- * something no generic model could produce — "your weddings run 38% catering",
- * "this quote is 22% above what you normally pay a photographer" — and it works
+ * something no generic model could produce - "your weddings run 38% catering",
+ * "this quote is 22% above what you normally pay a photographer" - and it works
  * entirely offline.
  *
  * "History" means delivered events (completed or archived); the live event being

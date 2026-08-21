@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Per-guest communication history — invitations, reminders, RSVP responses,
+ * Per-guest communication history - invitations, reminders, RSVP responses,
  * planner notes and check-ins in one timeline. `guest_id` is nullable so an
  * event-wide broadcast can be logged too.
  */

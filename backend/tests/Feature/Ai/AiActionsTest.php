@@ -143,7 +143,7 @@ class AiActionsTest extends TestCase
         $this->assertSame('high', $task->priority->value);
         $this->assertSame('12-01', $task->due_date->format('m-d'));
 
-        // Update — mark it done.
+        // Update - mark it done.
         $approve('Mark task Book the caterer as done');
         $this->assertSame('completed', $task->fresh()->status->value);
 

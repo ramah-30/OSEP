@@ -14,7 +14,7 @@ use App\Models\User;
 use Illuminate\Support\Carbon;
 
 /**
- * Runs the client concierge's actions — the things it does *for* the client:
+ * Runs the client concierge's actions - the things it does *for* the client:
  * responding to an approval their planner asked for, and adding a guest to their
  * list. Each type can preview itself without touching anything and execute once
  * the client approves. Every action is re-scoped to the client's own event(s) at
@@ -174,10 +174,10 @@ class ClientActionExecutor
             return "You have no approvals waiting right now.";
         }
         if ($hint !== '') {
-            return "I couldn't find a pending approval matching “{$hint}”. You have {$count} waiting — try naming it.";
+            return "I couldn't find a pending approval matching “{$hint}”. You have {$count} waiting - try naming it.";
         }
 
-        return "You have {$count} approvals waiting — tell me which one (e.g. “approve the catering menu”).";
+        return "You have {$count} approvals waiting - tell me which one (e.g. “approve the catering menu”).";
     }
 
     // -----------------------------------------------------------------
@@ -237,7 +237,7 @@ class ClientActionExecutor
 
         $planner = $this->resolvePlanner($hint);
         if (! $planner) {
-            return ['title' => 'Book a planner', 'summary' => "I couldn't find a planner matching “{$hint}”. Try their exact name or company — ask me to *find a planner* to see the options.", 'count' => 0];
+            return ['title' => 'Book a planner', 'summary' => "I couldn't find a planner matching “{$hint}”. Try their exact name or company - ask me to *find a planner* to see the options.", 'count' => 0];
         }
 
         if ($this->hasPendingRequest($client, $planner)) {

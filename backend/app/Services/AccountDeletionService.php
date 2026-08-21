@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Permanently deletes a user and everything that belongs to them.
  *
- * The cascade is defined in database/sql/delete_user_cascade.sql — a vetted,
+ * The cascade is defined in database/sql/delete_user_cascade.sql - a vetted,
  * ordered script that nulls out references that should merely detach and deletes
  * the rows that should go with the account, leaves first and the user row last.
  * We drive it from PHP (rather than relying on database foreign keys) because the
@@ -26,7 +26,7 @@ class AccountDeletionService
 
         DB::transaction(function () use ($id, $user) {
             // Sanctum tokens are a polymorphic relation with no FK, so the cascade
-            // script can't reach them — revoke them here.
+            // script can't reach them - revoke them here.
             $user->tokens()->delete();
 
             // Bind the target once; every statement in the script keys off @uid.
@@ -58,7 +58,7 @@ class AccountDeletionService
 
         return array_values(array_filter(
             array_map('trim', explode(";", $clean)),
-            // Skip blanks and the placeholder SET line — we set @uid ourselves.
+            // Skip blanks and the placeholder SET line - we set @uid ourselves.
             fn (string $s) => $s !== '' && ! str_starts_with(strtoupper($s), 'SET @UID'),
         ));
     }

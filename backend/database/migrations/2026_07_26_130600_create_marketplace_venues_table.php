@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * Marketplace venue listings. Deliberately NOT the Phase 3 `venues` table, which
- * is the single venue attached to one event — this is a public, searchable
+ * is the single venue attached to one event - this is a public, searchable
  * directory of bookable venues owned by vendor-role users.
  */
 return new class extends Migration

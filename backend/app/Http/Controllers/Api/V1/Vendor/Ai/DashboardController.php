@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 /**
  * The vendor AI dashboard: an at-a-glance snapshot of the business (pipeline,
  * quotations, revenue, rating) plus the copilot's prioritised reminders and
- * recent conversations — the vendor's home for their AI assistant.
+ * recent conversations - the vendor's home for their AI assistant.
  */
 class DashboardController extends Controller
 {

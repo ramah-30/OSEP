@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 /**
  * A vendor managing their own marketplace storefront (the vendor_profiles row
  * plus its services/packages/portfolio). Everything is scoped to the signed-in
- * vendor — there is no id in the route.
+ * vendor - there is no id in the route.
  */
 class StorefrontController extends Controller
 {
@@ -57,7 +57,7 @@ class StorefrontController extends Controller
     }
 
     /**
-     * The self-serve "email verified" tier bump — the first step of the
+     * The self-serve "email verified" tier bump - the first step of the
      * verification ladder. Higher tiers are granted by an admin.
      */
     public function requestVerification(Request $request): JsonResponse

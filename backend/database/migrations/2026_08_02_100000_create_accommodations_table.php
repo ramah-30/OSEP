@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Hotels / accommodation listings — a marketplace vertical distinct from event
+ * Hotels / accommodation listings - a marketplace vertical distinct from event
  * venues. A planner browses these to book a stay for a client (e.g. a honeymoon
  * after the wedding). Rooms hang off {@see accommodation_room_types}.
  */
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('location')->nullable();
             $table->string('address')->nullable();
-            $table->json('amenities')->nullable();       // ['Pool','Spa','Free Wi-Fi',…]
+            $table->json('amenities')->nullable();       // ['Pool','Spa','Free Wi-Fi',...]
             $table->string('cover_image_url')->nullable();
             $table->json('gallery')->nullable();
             $table->string('currency', 8)->default('TZS');

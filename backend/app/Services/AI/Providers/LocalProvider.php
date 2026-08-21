@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
  * the Orchestrator (budget figures, timeline, guests, vendors, finance, health
  * score). Intent is inferred from the planner's wording and the reply is built
  * from the real numbers, so the assistant is genuinely useful the moment the
- * platform is installed — no API key, no internet, no cost.
+ * platform is installed - no API key, no internet, no cost.
  */
 class LocalProvider implements AiProvider
 {
@@ -80,7 +80,7 @@ class LocalProvider implements AiProvider
         $name = config('ai.assistant_name', 'OSEP AI');
 
         if ($event) {
-            return "Hi — I'm {$name}, your planning copilot for **{$event['title']}**. "
+            return "Hi - I'm {$name}, your planning copilot for **{$event['title']}**. "
                 . "I can see this event's budget, timeline, guests, vendors and finances. Try asking me:\n\n"
                 . "- *Summarize where this event stands*\n"
                 . "- *Is the budget on track?*\n"
@@ -89,11 +89,11 @@ class LocalProvider implements AiProvider
                 . "- *Which vendors still need attention?*";
         }
 
-        return "Hi — I'm {$name}, your event-planning copilot. Pick an event from the context selector and I'll "
+        return "Hi - I'm {$name}, your event-planning copilot. Pick an event from the context selector and I'll "
             . "ground every answer in its real budget, timeline, guest and vendor data. You can also ask me general "
             . "planning questions like *draft a 12-month wedding timeline* or *what should a corporate budget include*.\n\n"
             . "New here? **Create your first event** and I'll unlock grounded budgets, RSVPs, vendor tracking and what-if "
-            . "planning — your AI Dashboard has a setup checklist to walk you through it.";
+            . "planning - your AI Dashboard has a setup checklist to walk you through it.";
     }
 
     private function summaryAnswer(array $context): string
@@ -118,7 +118,7 @@ class LocalProvider implements AiProvider
 
         if (isset($context['timeline'])) {
             $t = $context['timeline'];
-            $overdue = $t['overdue_count'] > 0 ? " — {$t['overdue_count']} overdue" : '';
+            $overdue = $t['overdue_count'] > 0 ? " - {$t['overdue_count']} overdue" : '';
             $lines[] = "- ✅ **Tasks:** {$t['tasks_done']}/{$t['tasks_total']} done, "
                 . "{$t['milestones_done']}/{$t['milestones_total']} milestones{$overdue}";
         }
@@ -200,7 +200,7 @@ class LocalProvider implements AiProvider
         $scope = $benchmark['event_type'] ? "your {$benchmark['event_type']}s" : 'your past events';
 
         return "\n**📈 Vs your history:** {$a['name']} is {$a['event_pct']}% of this budget, but you average "
-            . "{$a['benchmark_pct']}% across {$scope} ({$benchmark['sample_events']} event(s)) — worth a look.";
+            . "{$a['benchmark_pct']}% across {$scope} ({$benchmark['sample_events']} event(s)) - worth a look.";
     }
 
     private function timelineAnswer(array $context): string
@@ -242,15 +242,15 @@ class LocalProvider implements AiProvider
                 . "track their status, contracts and readiness here.";
         }
 
-        $lines = ["**Vendors** — {$v['count']} assigned"];
+        $lines = ["**Vendors** - {$v['count']} assigned"];
         foreach (array_slice($v['assigned'], 0, 8) as $vendor) {
-            $status = $vendor['status'] ? " — {$vendor['status']}" : '';
+            $status = $vendor['status'] ? " - {$vendor['status']}" : '';
             $cost = $vendor['cost'] > 0 ? " ({$this->money($vendor['cost'])})" : '';
             $lines[] = "- **{$vendor['name']}**{$status}{$cost}";
         }
 
         if ($v['pending'] > 0) {
-            $lines[] = "\n⚠️ {$v['pending']} vendor(s) are still unconfirmed — chase these to remove delivery risk.";
+            $lines[] = "\n⚠️ {$v['pending']} vendor(s) are still unconfirmed - chase these to remove delivery risk.";
         } else {
             $lines[] = "\n✅ All assigned vendors are confirmed.";
         }
@@ -260,7 +260,7 @@ class LocalProvider implements AiProvider
             $lines[] = "\n**📈 Vs your history:**";
             foreach (array_slice($flags, 0, 3) as $q) {
                 $lines[] = "- **{$q['name']}** ({$q['service']}) is {$q['delta_pct']}% above your usual "
-                    . "{$this->money($q['your_avg'])} — consider negotiating.";
+                    . "{$this->money($q['your_avg'])} - consider negotiating.";
             }
         }
 
@@ -283,7 +283,7 @@ class LocalProvider implements AiProvider
         $lines[] = "- Response rate: {$g['confirmation_rate']}%";
 
         if ($g['pending'] > 0) {
-            $lines[] = "\n💡 {$g['pending']} guest(s) haven't responded. I'd send a reminder wave now — a nudge 3–4 weeks "
+            $lines[] = "\n💡 {$g['pending']} guest(s) haven't responded. I'd send a reminder wave now - a nudge 3–4 weeks "
                 . "out typically recovers a large share of non-responses.";
         }
 
@@ -310,7 +310,7 @@ class LocalProvider implements AiProvider
         $lines[] = "- Outstanding: {$this->money($f['outstanding_amount'])} ({$f['invoices_outstanding']} invoice(s))";
 
         if ($f['outstanding_amount'] > 0) {
-            $lines[] = "\n💡 I'd follow up on the outstanding invoices — send reminders on anything past its due date first.";
+            $lines[] = "\n💡 I'd follow up on the outstanding invoices - send reminders on anything past its due date first.";
         } else {
             $lines[] = "\n✅ Everything invoiced has been collected.";
         }
@@ -345,7 +345,7 @@ class LocalProvider implements AiProvider
     private function scenarioAnswer(array $context, string $prompt): string
     {
         if (empty($context['event'])) {
-            return "Pick an event first and I'll run the numbers — guest-count changes, cost per head, "
+            return "Pick an event first and I'll run the numbers - guest-count changes, cost per head, "
                 . "tables needed and the catering quantities that follow.";
         }
 
@@ -363,11 +363,11 @@ class LocalProvider implements AiProvider
         $base = $result['baseline'];
 
         if ($base['per_head'] <= 0) {
-            return "I can't compute a per-head cost yet — this event has no budget or expected guest count. "
+            return "I can't compute a per-head cost yet - this event has no budget or expected guest count. "
                 . "Add a budget (ideally a catering line) and a headcount and I'll model any what-if instantly.";
         }
 
-        $lines = ["**What-if — {$context['event']['title']}**"];
+        $lines = ["**What-if - {$context['event']['title']}**"];
         $lines[] = "- Current basis: **{$this->money($base['per_head'])}/head** ({$base['per_head_basis']}), {$base['current_guests']} guest(s)";
 
         $p = $result['projection'];
@@ -380,7 +380,7 @@ class LocalProvider implements AiProvider
                 . ($p['tables_delta'] >= 0 ? "+{$p['tables_delta']}" : $p['tables_delta']) . ")";
 
             if ($p['capacity_ok'] === false) {
-                $lines[] = "- ⚠️ Venue capacity is {$base['capacity']} — you'd be **{$p['over_capacity_by']} over**.";
+                $lines[] = "- ⚠️ Venue capacity is {$base['capacity']} - you'd be **{$p['over_capacity_by']} over**.";
             } elseif ($p['capacity_ok'] === true) {
                 $lines[] = "- ✅ Fits the venue capacity ({$base['capacity']}).";
             }
@@ -392,7 +392,7 @@ class LocalProvider implements AiProvider
                 }
             }
         } else {
-            $lines[] = "\nTell me a change to model — e.g. *what if 20 more guests confirm?* or *how many tables for 180?*";
+            $lines[] = "\nTell me a change to model - e.g. *what if 20 more guests confirm?* or *how many tables for 180?*";
         }
 
         return implode("\n", $lines);
@@ -440,7 +440,7 @@ class LocalProvider implements AiProvider
         $risks = $this->collectRisks($context);
 
         if (empty($risks)) {
-            return "Good news — I'm not seeing material risks right now. Budget, timeline, guests and vendors all look "
+            return "Good news - I'm not seeing material risks right now. Budget, timeline, guests and vendors all look "
                 . "healthy. I'll keep watching and flag anything that drifts.";
         }
 
@@ -471,34 +471,34 @@ class LocalProvider implements AiProvider
         $b = $context['budget'] ?? null;
         if ($b && $b['over_budget']) {
             $over = $b['spent'] - $b['total'];
-            $risks[] = "Budget is **{$this->money($over)} over** allocation — review the largest categories.";
+            $risks[] = "Budget is **{$this->money($over)} over** allocation - review the largest categories.";
         }
 
         $t = $context['timeline'] ?? null;
         if ($t && $t['overdue_count'] > 0) {
-            $risks[] = "{$t['overdue_count']} task(s)/milestone(s) are **overdue** — clear these to keep the plan on track.";
+            $risks[] = "{$t['overdue_count']} task(s)/milestone(s) are **overdue** - clear these to keep the plan on track.";
         }
 
         $f = $context['finance'] ?? null;
         if ($f && $f['outstanding_amount'] > 0) {
-            $risks[] = "{$this->money($f['outstanding_amount'])} in invoices is **outstanding** — chase payment.";
+            $risks[] = "{$this->money($f['outstanding_amount'])} in invoices is **outstanding** - chase payment.";
         }
 
         $g = $context['guests'] ?? null;
         if ($g && $g['total'] > 0 && $g['pending'] > 0) {
-            $risks[] = "{$g['pending']} guest(s) still haven't RSVP'd — send a reminder.";
+            $risks[] = "{$g['pending']} guest(s) still haven't RSVP'd - send a reminder.";
         }
 
         $v = $context['vendors'] ?? null;
         if ($v && $v['pending'] > 0) {
-            $risks[] = "{$v['pending']} vendor(s) remain unconfirmed — confirm before the event date.";
+            $risks[] = "{$v['pending']} vendor(s) remain unconfirmed - confirm before the event date.";
         }
 
         $event = $context['event'] ?? null;
         if ($event && isset($event['days_until']) && $event['days_until'] !== null
             && $event['days_until'] <= 14 && $event['days_until'] >= 0
             && ($event['progress'] ?? 100) < 80) {
-            $risks[] = "Only {$event['days_until']} day(s) to go but planning is {$event['progress']}% complete — accelerate open items.";
+            $risks[] = "Only {$event['days_until']} day(s) to go but planning is {$event['progress']}% complete - accelerate open items.";
         }
 
         return $risks;

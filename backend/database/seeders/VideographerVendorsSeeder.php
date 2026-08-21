@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Hash;
  * Nine real Tanzanian wedding/event videography studios as demo vendor accounts,
  * so the marketplace's Videographers category shows recognisable listings.
  *
- * Real, public details are used — studio name, city, description, website /
- * social — but login email and phone are demo values (@osep.test / a placeholder
+ * Real, public details are used - studio name, city, description, website /
+ * social - but login email and phone are demo values (@osep.test / a placeholder
  * number), NOT the studios' real contact lines, since these are illustrative demo
  * accounts, not genuine sign-ups. Ratings/job counts are demo metrics. Idempotent
  * (keyed on email) and guarded to non-production in DatabaseSeeder.
@@ -111,7 +111,7 @@ class VideographerVendorsSeeder extends Seeder
             );
         }
 
-        // Portfolio — film/videography imagery
+        // Portfolio - film/videography imagery
         $shots = ['1579632652768-6cb9dcf85912', '1601506521937-0121a7fc2a6b', '1626814026160-2237a95fc5a0', '1502920917128-1aa500764cbd', '1583939003579-730e3918a45a', '1440404653325-ab127d49abc1'];
         foreach (['Beach Wedding Film', 'Nikah Celebration', 'Corporate Launch'] as $i => $title) {
             $vendor->vendorPortfolios()->updateOrCreate(
@@ -125,7 +125,7 @@ class VideographerVendorsSeeder extends Seeder
                         ['type' => 'image', 'url' => $this->img($shots[($i * 2) % count($shots)], 800, 600), 'caption' => 'On set'],
                         ['type' => 'image', 'url' => $this->img($shots[($i * 2 + 1) % count($shots)], 800, 600), 'caption' => 'Highlight frame'],
                     ],
-                    'client_feedback' => 'Watching our film brings the whole day back — beautifully shot and edited.',
+                    'client_feedback' => 'Watching our film brings the whole day back - beautifully shot and edited.',
                     'is_case_study' => $i === 1,
                     'sort_order' => $i,
                 ],

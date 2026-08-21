@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 /**
  * Shared ownership guards for the planner event workspace. A planner may only
  * touch their own events, and any nested record must belong to the event in the
- * route — otherwise we 404 rather than leak that the id exists.
+ * route - otherwise we 404 rather than leak that the id exists.
  */
 trait AuthorizesEventAccess
 {

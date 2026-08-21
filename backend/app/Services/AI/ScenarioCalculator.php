@@ -5,8 +5,8 @@ namespace App\Services\AI;
 /**
  * Offline "what-if" engine. Given an event's grounding snapshot (the same
  * structure {@see EventContextBuilder} produces) plus a scenario the planner is
- * weighing — "what if 20 more guests confirm?", "how many tables for 180?",
- * "what per-head do I need to land on this budget?" — it returns the arithmetic
+ * weighing - "what if 20 more guests confirm?", "how many tables for 180?",
+ * "what per-head do I need to land on this budget?" - it returns the arithmetic
  * consequences: catering cost delta, projected total, tables required, a meal
  * quantity rollup and venue-capacity check.
  *

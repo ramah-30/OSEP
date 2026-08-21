@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Hash;
  * Nine real Tanzanian décor & florist businesses as demo vendor accounts, so the
  * marketplace's Decorators category shows recognisable listings.
  *
- * Real, public details are used — business name, city, description, website /
- * social — but login email and phone are demo values (@osep.test / a placeholder
+ * Real, public details are used - business name, city, description, website /
+ * social - but login email and phone are demo values (@osep.test / a placeholder
  * number), NOT the businesses' real contact lines, since these are illustrative
  * demo accounts, not genuine sign-ups. Ratings/job counts are demo metrics.
  * Idempotent (keyed on email) and guarded to non-production in DatabaseSeeder.
@@ -111,7 +111,7 @@ class DecorVendorsSeeder extends Seeder
             );
         }
 
-        // Portfolio — décor / floral imagery
+        // Portfolio - décor / floral imagery
         $shots = ['1519225421980-715cb0215aed', '1523438885200-e635ba2c371e', '1508610048659-a06b669e3321', '1490750967868-88aa4486c946', '1465495976277-4387d4b0b4c6', '1478146059778-26028b07395a'];
         foreach (['Floral Wedding Stage', 'Garden Reception', 'Traditional Send-off'] as $i => $title) {
             $vendor->vendorPortfolios()->updateOrCreate(
@@ -125,7 +125,7 @@ class DecorVendorsSeeder extends Seeder
                         ['type' => 'image', 'url' => $this->img($shots[($i * 2) % count($shots)], 800, 600), 'caption' => 'Stage & backdrop'],
                         ['type' => 'image', 'url' => $this->img($shots[($i * 2 + 1) % count($shots)], 800, 600), 'caption' => 'Floral details'],
                     ],
-                    'client_feedback' => 'The room was breathtaking — every flower and drape was exactly as we dreamed.',
+                    'client_feedback' => 'The room was breathtaking - every flower and drape was exactly as we dreamed.',
                     'is_case_study' => $i === 1,
                     'sort_order' => $i,
                 ],
@@ -166,7 +166,7 @@ class DecorVendorsSeeder extends Seeder
                 'location' => 'Dar es Salaam, Tanzania', 'years' => 11, 'level' => 'premium_partner',
                 'featured' => true, 'rating' => 4.8, 'reviews' => 58, 'jobs' => 190, 'response' => 2,
                 'website' => 'https://kevinsevents.example', 'instagram' => 'https://instagram.com/kevinsevents',
-                'description' => 'A decade of destination weddings from Dar es Salaam — from intimate ceremonies to grand, fully-dressed receptions.',
+                'description' => 'A decade of destination weddings from Dar es Salaam - from intimate ceremonies to grand, fully-dressed receptions.',
                 'logo' => '1523438885200-e635ba2c371e', 'cover' => '1508610048659-a06b669e3321',
             ],
             [
@@ -202,7 +202,7 @@ class DecorVendorsSeeder extends Seeder
                 'location' => 'Arusha, Tanzania', 'years' => 8, 'level' => 'business_verified',
                 'featured' => false, 'rating' => 4.65, 'reviews' => 27, 'jobs' => 70, 'response' => 3,
                 'website' => 'https://accentplanners.example', 'instagram' => 'https://instagram.com/accentplanners',
-                'description' => 'Décor and styling across Dar es Salaam, Zanzibar and Arusha — traditional, white and reception celebrations.',
+                'description' => 'Décor and styling across Dar es Salaam, Zanzibar and Arusha - traditional, white and reception celebrations.',
                 'logo' => '1478146059778-26028b07395a', 'cover' => '1519167758481-83f550bb49b3',
             ],
             [

@@ -5,7 +5,7 @@ namespace App\Services\AI;
 use Illuminate\Support\Str;
 
 /**
- * The offline meeting engine — the counterpart to LocalProvider / LocalDocument-
+ * The offline meeting engine - the counterpart to LocalProvider / LocalDocument-
  * Composer. It turns raw meeting notes into a structured Markdown summary and a
  * list of action items deterministically (no external model), grounding the
  * header in the event context when one is supplied. Extraction is heuristic:
@@ -17,8 +17,8 @@ class LocalMeetingAnalyzer
     private const ACTION_CUES = '/^\s*(action|todo|to-?do|follow[\s-]?up|next\s?step|task)\b\s*[:\-–]?\s*/i';
 
     /**
-     * Label-style prefixes safe to strip from the description ("Action: …",
-     * "TODO - …"). Requires a separator, so conversational openers like
+     * Label-style prefixes safe to strip from the description ("Action: ...",
+     * "TODO - ..."). Requires a separator, so conversational openers like
      * "Follow up with the DJ" keep their wording intact.
      */
     private const STRIP_CUES = '/^\s*(action items?|action|todo|to-?do|task)\s*[:\-–]\s*/i';
@@ -83,7 +83,7 @@ class LocalMeetingAnalyzer
             return true;
         }
 
-        // "<Name> to/will <verb> …" or a line that leads with an action verb.
+        // "<Name> to/will <verb> ..." or a line that leads with an action verb.
         if (preg_match('/\b(to|will|needs? to|should|must)\s+(' . self::ACTION_VERBS . ')\b/i', $line)) {
             return true;
         }
@@ -112,7 +112,7 @@ class LocalMeetingAnalyzer
             $desc = trim($m[2]);
         }
 
-        // An attendee named at the start ("Sarah to send …").
+        // An attendee named at the start ("Sarah to send ...").
         if (! $owner) {
             foreach ($attendees as $name) {
                 $first = trim((string) Str::of($name)->explode(' ')->first());
@@ -177,7 +177,7 @@ class LocalMeetingAnalyzer
         $md[] = '';
         $md[] = '### Action items';
         $md[] = $actionCount > 0
-            ? "**{$actionCount} action item" . ($actionCount === 1 ? '' : 's') . '** captured — review, assign and push them to the task board below.'
+            ? "**{$actionCount} action item" . ($actionCount === 1 ? '' : 's') . '** captured - review, assign and push them to the task board below.'
             : 'No explicit action items were detected. Add them manually if needed.';
 
         return implode("\n", $md);

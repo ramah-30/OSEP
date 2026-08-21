@@ -25,7 +25,7 @@ class StoreClientRequest extends FormRequest
         // Email is not globally unique here on purpose: the same person can be a
         // client of more than one planner. A matching email is reused (the
         // controller attaches the existing account), so what we guard against is
-        // a duplicate *name* on this planner's own roster — see withValidator().
+        // a duplicate *name* on this planner's own roster - see withValidator().
         return [
             'first_name' => ['required', 'string', 'max:100'],
             'last_name' => ['required', 'string', 'max:100'],

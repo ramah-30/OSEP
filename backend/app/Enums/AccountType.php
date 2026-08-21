@@ -6,7 +6,7 @@ namespace App\Enums;
  * The identity a user selects when registering.
  *
  * Every case maps 1:1 onto a seeded role of the same name, so a new account
- * type only ever needs a case here plus a row in RoleSeeder — no schema change.
+ * type only ever needs a case here plus a row in RoleSeeder - no schema change.
  */
 enum AccountType: string
 {

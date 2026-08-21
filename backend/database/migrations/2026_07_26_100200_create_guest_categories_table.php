@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Guest groupings (VIP, Family, Media …). Seeded defaults have a null owner;
+ * Guest groupings (VIP, Family, Media ...). Seeded defaults have a null owner;
  * planners may add custom categories scoped to themselves.
  */
 return new class extends Migration

@@ -36,7 +36,7 @@ use App\Http\Controllers\Api\V1\VendorAssignmentController;
 use App\Http\Controllers\Api\V1\VendorDirectoryController;
 use App\Http\Controllers\Api\V1\VenueController;
 use App\Http\Controllers\Api\V1\VenueLayoutController;
-// Phase 7 — AI Planning Engine
+// Phase 7 - AI Planning Engine
 use App\Http\Controllers\Api\V1\Ai\ChatController as AiChatController;
 use App\Http\Controllers\Api\V1\Ai\DashboardController as AiDashboardController;
 use App\Http\Controllers\Api\V1\Ai\AnalyticsController as AiAnalyticsController;
@@ -55,7 +55,7 @@ use App\Http\Controllers\Api\V1\ClientInvoiceController;
 use App\Http\Controllers\Api\V1\ClientPlannerReviewController;
 use App\Http\Controllers\Api\V1\PlannerReviewController;
 use App\Http\Controllers\Api\V1\PublicPlannerController;
-// Phase 5 — Vendor & Venue Marketplace
+// Phase 5 - Vendor & Venue Marketplace
 use App\Http\Controllers\Api\V1\Marketplace\AccommodationBookingController as MpAccommodationBookingController;
 use App\Http\Controllers\Api\V1\Marketplace\AccommodationController as MpAccommodationController;
 use App\Http\Controllers\Api\V1\Marketplace\DiscoveryController as MpDiscoveryController;
@@ -93,7 +93,7 @@ use App\Http\Controllers\Api\V1\Admin\VendorController as AdminVendorController;
 use App\Http\Controllers\Api\V1\Admin\VenueController as AdminVenueController;
 use App\Http\Controllers\Api\V1\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Api\V1\Admin\ReviewController as AdminReviewController;
-// Phase 6 — Financial Management
+// Phase 6 - Financial Management
 use App\Http\Controllers\Api\V1\Finance\DashboardController as FinanceDashboardController;
 use App\Http\Controllers\Api\V1\Finance\BudgetController as FinanceBudgetController;
 use App\Http\Controllers\Api\V1\Finance\ExpenseController as FinanceExpenseController;
@@ -110,7 +110,7 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| API routes — mounted under /api/v1 (see bootstrap/app.php)
+| API routes - mounted under /api/v1 (see bootstrap/app.php)
 |--------------------------------------------------------------------------
 */
 
@@ -143,20 +143,20 @@ Route::prefix('auth')->group(function () {
 Route::post('contact', [ContactController::class, 'store'])
     ->middleware('throttle:contact');
 
-// Public RSVP — the URL token is the credential, so these sit outside auth.
+// Public RSVP - the URL token is the credential, so these sit outside auth.
 Route::get('rsvp/{token}', [RsvpController::class, 'show'])->middleware('throttle:60,1');
 Route::post('rsvp/{token}', [RsvpController::class, 'respond'])->middleware('throttle:20,1');
 
-// Public planner booking page — no auth required.
+// Public planner booking page - no auth required.
 Route::get('planners/{slug}', [PublicPlannerController::class, 'show'])->middleware('throttle:60,1');
 
-// Public vendor category list — needed by the registration form, before the
+// Public vendor category list - needed by the registration form, before the
 // vendor has an account to authenticate with.
 Route::get('vendor-categories', [MpCategoryController::class, 'index'])->middleware('throttle:60,1');
 
 /*
 |--------------------------------------------------------------------------
-| Phase 2 — the authenticated workspace
+| Phase 2 - the authenticated workspace
 |--------------------------------------------------------------------------
 | Every route below requires a Sanctum token. Role-specific areas are gated
 | further with the `role:` middleware; the SPA mirrors the same rules but the
@@ -177,7 +177,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('notifications/read-all', [NotificationController::class, 'markAllRead']);
     Route::delete('notifications/{notification}', [NotificationController::class, 'destroy']);
 
-    // Direct messaging — shared by every role (planner-as-hub rules enforced in the controller)
+    // Direct messaging - shared by every role (planner-as-hub rules enforced in the controller)
     Route::get('conversations', [ConversationController::class, 'index']);
     Route::get('conversations/contacts', [ConversationController::class, 'contacts']);
     Route::post('conversations', [ConversationController::class, 'start']);
@@ -232,7 +232,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('dashboard', [ClientAiDashboardController::class, 'index']);
             Route::get('meta', [ClientAiChatController::class, 'meta']);
 
-            // Mode (offline engine ↔ live model) — shares the global driver switch
+            // Mode (offline engine ↔ live model) - shares the global driver switch
             Route::get('settings', [AiSettingsController::class, 'show']);
             Route::put('settings', [AiSettingsController::class, 'update']);
             Route::post('chat', [ClientAiChatController::class, 'chat']);
@@ -249,7 +249,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /*
     |----------------------------------------------------------------------
-    | Phase 3 — the planner's event engine
+    | Phase 3 - the planner's event engine
     |----------------------------------------------------------------------
     | Everything below is planner-only. Nested records are additionally
     | scoped to the event in the URL inside each controller.
@@ -283,7 +283,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         /*
         |------------------------------------------------------------------
-        | Phase 7 — AI Planning Engine (planner copilot)
+        | Phase 7 - AI Planning Engine (planner copilot)
         |------------------------------------------------------------------
         */
         Route::prefix('ai')->group(function () {
@@ -320,7 +320,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::put('memory/{memory}', [AiMemoryController::class, 'update']);
             Route::delete('memory/{memory}', [AiMemoryController::class, 'destroy']);
 
-            // Content generation — templates & generated documents
+            // Content generation - templates & generated documents
             Route::get('templates', [AiTemplateController::class, 'index']);
             Route::get('documents', [AiDocumentController::class, 'index']);
             Route::post('documents', [AiDocumentController::class, 'store']);
@@ -429,7 +429,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('events/{event}/venue', [VenueController::class, 'show']);
         Route::put('events/{event}/venue', [VenueController::class, 'upsert']);
 
-        // Venue Designer — floor-plan layouts
+        // Venue Designer - floor-plan layouts
         Route::get('events/{event}/venue-layouts', [VenueLayoutController::class, 'index']);
         Route::post('events/{event}/venue-layouts', [VenueLayoutController::class, 'store']);
         Route::get('events/{event}/venue-layouts/{layout}', [VenueLayoutController::class, 'show']);
@@ -464,7 +464,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         /*
         |------------------------------------------------------------------
-        | Phase 5 — Marketplace (planner side)
+        | Phase 5 - Marketplace (planner side)
         |------------------------------------------------------------------
         */
         Route::prefix('marketplace')->group(function () {
@@ -509,7 +509,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         /*
         |------------------------------------------------------------------
-        | Phase 6 — Financial Management
+        | Phase 6 - Financial Management
         |------------------------------------------------------------------
         */
         Route::prefix('finance')->group(function () {
@@ -519,7 +519,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::delete('tax-rules/{taxRule}', [FinanceConfigController::class, 'destroyTaxRule']);
             Route::get('audit', [FinanceAuditController::class, 'index']);
 
-            // Budgets — keyed by the owning event
+            // Budgets - keyed by the owning event
             Route::get('budgets', [FinanceBudgetController::class, 'index']);
             Route::get('budgets/{event}', [FinanceBudgetController::class, 'show']);
             Route::put('budgets/{event}', [FinanceBudgetController::class, 'upsert']);
@@ -580,7 +580,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /*
     |----------------------------------------------------------------------
-    | Phase 5 — Marketplace (vendor storefront management)
+    | Phase 5 - Marketplace (vendor storefront management)
     |----------------------------------------------------------------------
     */
     Route::middleware('role:vendor')->prefix('marketplace/vendor')->group(function () {
@@ -637,7 +637,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('dashboard', [VendorAiDashboardController::class, 'index']);
             Route::get('meta', [VendorAiChatController::class, 'meta']);
 
-            // Mode (offline engine ↔ live model) — shares the global driver switch
+            // Mode (offline engine ↔ live model) - shares the global driver switch
             Route::get('settings', [AiSettingsController::class, 'show']);
             Route::put('settings', [AiSettingsController::class, 'update']);
             Route::post('chat', [VendorAiChatController::class, 'chat']);
@@ -654,7 +654,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /*
     |----------------------------------------------------------------------
-    | Phase 5 — Marketplace (admin moderation)
+    | Phase 5 - Marketplace (admin moderation)
     |----------------------------------------------------------------------
     */
     Route::middleware('role:admin')->prefix('admin/marketplace')->group(function () {
@@ -689,7 +689,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     /*
     |----------------------------------------------------------------------
-    | Phase 5 — Marketplace (shared read + messaging)
+    | Phase 5 - Marketplace (shared read + messaging)
     |----------------------------------------------------------------------
     | Browsing and secure messaging are open to any authenticated user; the
     | write actions above are role-gated. Ownership is enforced per-record.

@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Guest reviews of a hotel / accommodation — the lighter single-rating flow
+ * Guest reviews of a hotel / accommodation - the lighter single-rating flow
  * (like planner_reviews): one overall 1–5 rating and a comment, no categories or
  * replies. One review per reviewer per hotel.
  */

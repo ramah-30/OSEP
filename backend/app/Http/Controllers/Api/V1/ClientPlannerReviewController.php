@@ -84,6 +84,6 @@ class ClientPlannerReviewController extends Controller
                 'comment' => $review->comment,
             ],
             'reputation' => PlannerReputation::summary($event->planner),
-        ], 'Thanks — your review has been saved.');
+        ], 'Thanks - your review has been saved.');
     }
 }

@@ -45,29 +45,29 @@ class ChatController extends Controller
     {
         $user = $request->user();
 
-        $events = \App\Models\Event::where(‘client_id’, $user->id)
-            ->where(‘status’, ‘!=’, ‘cancelled’)
-            ->orderBy(‘event_date’, ‘desc’)
-            ->select(‘id’, ‘title’, ‘event_date’, ‘status’)
+        $events = \App\Models\Event::where('client_id', $user->id)
+            ->where('status', '!=', 'cancelled')
+            ->orderBy('event_date', 'desc')
+            ->select('id', 'title', 'event_date', 'status')
             ->get()
             ->map(fn ($e) => [
-                ‘id’ => $e->id,
-                ‘title’ => $e->title,
-                ‘date’ => $e->event_date?->format(‘M d, Y’),
-                ‘status’ => $e->status,
+                'id' => $e->id,
+                'title' => $e->title,
+                'date' => $e->event_date?->format('M d, Y'),
+                'status' => $e->status,
             ]);
 
         return $this->success([
-            ‘assistant_name’ => config(‘ai.client_assistant_name’, ‘OSEP Planning Concierge’),
-            ‘driver’ => $this->ai->driver(),
-            ‘is_live’ => $this->ai->isLive(),
-            ‘events’ => $events,
-            ‘suggested_prompts’ => [
-                ‘Find me a planner’,
-                ‘Show my progress summary’,
-                ‘How many guests have confirmed?’,
-                ‘What’s my outstanding balance?’,
-                ‘What should I take care of next?’,
+            'assistant_name' => config('ai.client_assistant_name', 'OSEP Planning Concierge'),
+            'driver' => $this->ai->driver(),
+            'is_live' => $this->ai->isLive(),
+            'events' => $events,
+            'suggested_prompts' => [
+                'Find me a planner',
+                'Show my progress summary',
+                'How many guests have confirmed?',
+                "What's my outstanding balance?",
+                'What should I take care of next?',
             ],
         ]);
     }

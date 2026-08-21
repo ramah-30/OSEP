@@ -18,7 +18,7 @@ use Illuminate\Support\Collection;
  * concierge: their event (planner, countdown, progress), the guest list they
  * manage, approvals awaiting their decision, invoices and balances, planner
  * updates and the booking requests they've sent. Everything is scoped to what
- * the client owns — their own events (client_id) and their own invoices — so the
+ * the client owns - their own events (client_id) and their own invoices - so the
  * concierge only ever sees this client's affairs.
  */
 class ClientContextBuilder

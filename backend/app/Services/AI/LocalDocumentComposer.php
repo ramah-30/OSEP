@@ -3,7 +3,7 @@
 namespace App\Services\AI;
 
 /**
- * The offline, data-grounded document composer — the document-generation
+ * The offline, data-grounded document composer - the document-generation
  * counterpart to LocalProvider. It assembles polished Markdown deliverables from
  * the structured event context (budget, timeline, guests, vendors, finance,
  * so the platform can generate real proposals, timelines, emails and
@@ -82,7 +82,7 @@ class LocalDocumentComposer
         if (isset($c['vendors']) && $c['vendors']['count'] > 0) {
             $out[] = '## Vendor Team';
             foreach (array_slice($c['vendors']['assigned'], 0, 8) as $v) {
-                $svc = $v['service'] ? " — {$v['service']}" : '';
+                $svc = $v['service'] ? " - {$v['service']}" : '';
                 $out[] = "- **{$v['name']}**{$svc}";
             }
             $out[] = '';
@@ -120,7 +120,7 @@ class LocalDocumentComposer
             $out[] = '';
 
             if (! empty($t['overdue'])) {
-                $out[] = '## ⚠️ Overdue — Clear These First';
+                $out[] = '## ⚠️ Overdue - Clear These First';
                 foreach (array_slice($t['overdue'], 0, 10) as $item) {
                     $due = $item['due'] ? " _(was due {$item['due']})_" : '';
                     $out[] = "- [ ] {$item['title']}{$due}";
@@ -131,7 +131,7 @@ class LocalDocumentComposer
             if (! empty($t['upcoming'])) {
                 $out[] = '## Coming Up Next';
                 foreach (array_slice($t['upcoming'], 0, 12) as $item) {
-                    $due = $item['due'] ? " — {$item['due']}" : '';
+                    $due = $item['due'] ? " - {$item['due']}" : '';
                     $out[] = "- [ ] {$item['title']}{$due}";
                 }
                 $out[] = '';
@@ -140,7 +140,7 @@ class LocalDocumentComposer
             return $this->join($out);
         }
 
-        // No timeline data — provide a best-practice countdown plan.
+        // No timeline data - provide a best-practice countdown plan.
         $out[] = '_No milestones are recorded yet, so here is a recommended countdown plan. Add these to your event timeline to track them._';
         $out[] = '';
         foreach ($this->standardTimeline($e['type'] ?? null) as $phase => $items) {
@@ -189,7 +189,7 @@ class LocalDocumentComposer
             $out[] = '';
             $out[] = '## Vendor Contacts';
             foreach (array_slice($c['vendors']['assigned'], 0, 10) as $v) {
-                $out[] = "- **{$v['name']}**" . ($v['service'] ? " — {$v['service']}" : '');
+                $out[] = "- **{$v['name']}**" . ($v['service'] ? " - {$v['service']}" : '');
             }
         }
 
@@ -247,7 +247,7 @@ class LocalDocumentComposer
             : 'We would love to finalise our numbers';
 
         $out = [];
-        $out[] = "**Subject:** A quick reminder — please RSVP for {$title}";
+        $out[] = "**Subject:** A quick reminder - please RSVP for {$title}";
         $out[] = '';
         $out[] = 'Dear Guest,';
         $out[] = '';
@@ -339,13 +339,13 @@ class LocalDocumentComposer
         $out[] = '| Category | Share | Suggested |';
         $out[] = '| --- | --- | --- |';
         foreach ($splits as $name => $pct) {
-            $amount = $total > 0 ? ' ' . $this->money($total * $pct / 100) : ' —';
+            $amount = $total > 0 ? ' ' . $this->money($total * $pct / 100) : ' -';
             $out[] = "| {$name} | {$pct}% |{$amount} |";
         }
         $out[] = '';
 
         if ($b && $b['total'] > 0) {
-            $flag = $b['over_budget'] ? ' You are currently **over budget** — trim discretionary categories first.' : '';
+            $flag = $b['over_budget'] ? ' You are currently **over budget** - trim discretionary categories first.' : '';
             $out[] = '## Against Your Actuals';
             $out[] = "You have allocated {$this->money($b['total'])} and committed {$this->money($b['spent'])} "
                 . "({$b['utilization_pct']}%), leaving {$this->money($b['remaining'])}.{$flag}";
@@ -376,13 +376,13 @@ class LocalDocumentComposer
         $tone = strtolower($this->val($in, 'tone') ?: 'warm');
 
         $opener = match ($tone) {
-            'formal' => "Distinguished guests, friends and family — welcome.",
-            'light-hearted' => "Well, you all showed up — so I suppose I have to give a speech!",
-            default => "Good evening, everyone — and welcome.",
+            'formal' => "Distinguished guests, friends and family - welcome.",
+            'light-hearted' => "Well, you all showed up - so I suppose I have to give a speech!",
+            default => "Good evening, everyone - and welcome.",
         };
 
         $out = [];
-        $out[] = "# Welcome Speech — {$occasion}";
+        $out[] = "# Welcome Speech - {$occasion}";
         $out[] = '';
         $out[] = $opener;
         $out[] = '';
@@ -392,15 +392,15 @@ class LocalDocumentComposer
         $out[] = 'Occasions like this remind us that the moments worth celebrating are the ones we share. '
             . 'Every person here has played some part in the story that brings us together tonight.';
         $out[] = '';
-        $out[] = 'So let us make the most of this evening — enjoy the food, the company and the memories we are about to make.';
+        $out[] = 'So let us make the most of this evening - enjoy the food, the company and the memories we are about to make.';
         $out[] = '';
         $out[] = 'Please, raise your glasses with me. Here is to **' . $occasion . '**, to good times, and to the people who make them unforgettable. Cheers!';
         if ($speaker) {
             $out[] = '';
-            $out[] = "— {$speaker}";
+            $out[] = "- {$speaker}";
         }
         $out[] = '';
-        $out[] = '> _Tip: personalise the middle section with a specific memory or two — that is what audiences remember._';
+        $out[] = '> _Tip: personalise the middle section with a specific memory or two - that is what audiences remember._';
 
         return $this->join($out);
     }
@@ -419,19 +419,19 @@ class LocalDocumentComposer
         $out = [];
         $out[] = "# {$platform} Announcement";
         $out[] = '';
-        $out[] = '**Option 1 — short & punchy**';
+        $out[] = '**Option 1 - short & punchy**';
         $out[] = '';
         $out[] = "✨ {$headline}! ✨";
-        $out[] = "{$title}" . ($date ? " is happening **{$date}**" : ' is on the way') . ' — and you are invited to be part of it. 🎉';
+        $out[] = "{$title}" . ($date ? " is happening **{$date}**" : ' is on the way') . ' - and you are invited to be part of it. 🎉';
         $out[] = '';
         $out[] = $tags;
         $out[] = '';
         $out[] = '---';
         $out[] = '';
-        $out[] = '**Option 2 — warm & personal**';
+        $out[] = '**Option 2 - warm & personal**';
         $out[] = '';
         $out[] = "We have been dreaming this up for a while, and we cannot wait to finally share it. "
-            . "{$title}" . ($date ? " — mark your calendar for {$date}." : ' is coming soon.') . ' More details to follow. 💛';
+            . "{$title}" . ($date ? " - mark your calendar for {$date}." : ' is coming soon.') . ' More details to follow. 💛';
         $out[] = '';
         $out[] = $tags;
 
@@ -483,15 +483,15 @@ class LocalDocumentComposer
     private function runOfShowRows(?string $type): array
     {
         return [
-            ['—:—', 'Vendor & team arrival, setup begins', 'Coordinator'],
-            ['—:—', 'Final walkthrough & sound check', 'Coordinator'],
-            ['—:—', 'Guest arrival & welcome', 'Front of house'],
-            ['—:—', 'Main programme begins', 'Host / MC'],
-            ['—:—', 'Catering service', 'Caterer'],
-            ['—:—', 'Speeches / key moments', 'Host / MC'],
-            ['—:—', 'Entertainment / dancing', 'DJ / Band'],
-            ['—:—', 'Close & guest departure', 'Coordinator'],
-            ['—:—', 'Breakdown & vendor load-out', 'All vendors'],
+            ['-:-', 'Vendor & team arrival, setup begins', 'Coordinator'],
+            ['-:-', 'Final walkthrough & sound check', 'Coordinator'],
+            ['-:-', 'Guest arrival & welcome', 'Front of house'],
+            ['-:-', 'Main programme begins', 'Host / MC'],
+            ['-:-', 'Catering service', 'Caterer'],
+            ['-:-', 'Speeches / key moments', 'Host / MC'],
+            ['-:-', 'Entertainment / dancing', 'DJ / Band'],
+            ['-:-', 'Close & guest departure', 'Coordinator'],
+            ['-:-', 'Breakdown & vendor load-out', 'All vendors'],
         ];
     }
 
@@ -555,7 +555,7 @@ class LocalDocumentComposer
             return "**The event is today** ({$date}).";
         }
 
-        return "**{$days} day(s) to go** — the event is on {$date}.";
+        return "**{$days} day(s) to go** - the event is on {$date}.";
     }
 
     /** @param array<string,mixed> $in */

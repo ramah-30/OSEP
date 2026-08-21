@@ -59,7 +59,7 @@ class SecurityVendorsSeeder extends RealVendorSeeder
 
     protected function portfolioFeedback(): string
     {
-        return 'Professional, discreet and reassuring — our guests felt safe and the day ran without a hitch.';
+        return 'Professional, discreet and reassuring - our guests felt safe and the day ran without a hitch.';
     }
 
     protected function rows(): array

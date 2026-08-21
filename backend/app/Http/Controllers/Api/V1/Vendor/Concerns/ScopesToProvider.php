@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Constrains a query on any record carrying the vendor_id / venue_id provider
- * pair to the rows a given vendor owns — either directly (vendor_id) or through
+ * pair to the rows a given vendor owns - either directly (vendor_id) or through
  * a venue they own.
  */
 trait ScopesToProvider

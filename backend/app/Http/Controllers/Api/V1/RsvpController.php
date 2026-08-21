@@ -37,7 +37,7 @@ class RsvpController extends Controller
     }
 
     // ------------------------------------------------------------------
-    // Public side (no auth — the URL token is the credential)
+    // Public side (no auth - the URL token is the credential)
     // ------------------------------------------------------------------
 
     public function show(string $token): JsonResponse
@@ -126,7 +126,7 @@ class RsvpController extends Controller
         return $this->success([
             'response' => new RsvpResponseResource($record),
             'confirmed' => $response === RsvpResponseEnum::Attending,
-        ], 'Thank you — your response has been recorded.');
+        ], 'Thank you - your response has been recorded.');
     }
 
     private function resolveGuest(string $token): Guest

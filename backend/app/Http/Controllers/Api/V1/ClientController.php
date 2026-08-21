@@ -60,7 +60,7 @@ class ClientController extends Controller
 
         // The email may already belong to someone: the same person can be a
         // client of several planners. Reuse that account rather than failing on
-        // the unique constraint — but only if it's actually a client account.
+        // the unique constraint - but only if it's actually a client account.
         $existing = User::where('email', $data['email'])->first();
 
         if ($existing) {

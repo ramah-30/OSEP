@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Append-only delivery trail for an invitation — one entry per lifecycle event
+ * Append-only delivery trail for an invitation - one entry per lifecycle event
  * (queued, sent, delivered, opened, failed). Powers the per-invitation history
  * and would be fed by a mail-provider webhook in production.
  */

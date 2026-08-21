@@ -10,8 +10,8 @@ use Illuminate\Support\Str;
 
 /**
  * The client concierge's orchestrator. Gathers the client's permission-filtered
- * snapshot, routes to the active provider — the offline client engine, or the
- * shared hosted model in live mode — and persists the exchange. Separate from
+ * snapshot, routes to the active provider - the offline client engine, or the
+ * shared hosted model in live mode - and persists the exchange. Separate from
  * the planner and vendor orchestrators so each role's copilot evolves on its
  * own, while all three share the provider layer and conversation storage.
  */
@@ -89,7 +89,7 @@ class ClientOrchestrator
 
         $assistant = $conversation->messages()->create([
             'role' => 'assistant',
-            'content' => "I can do that — **{$preview['title']}**.\n\n{$preview['summary']}\n\nApprove below and I'll take care of it. Nothing happens until you do.",
+            'content' => "I can do that - **{$preview['title']}**.\n\n{$preview['summary']}\n\nApprove below and I'll take care of it. Nothing happens until you do.",
             'agent' => 'client',
             'model' => 'command',
             'meta' => ['driver' => $this->ai->driver(), 'has_action' => true, 'workspace' => 'client'],
@@ -125,7 +125,7 @@ class ClientOrchestrator
         $updates = ['last_message_at' => now()];
 
         if ($conversation->title === 'New conversation') {
-            $updates['title'] = Str::limit(trim($firstMessage), 48, '…');
+            $updates['title'] = Str::limit(trim($firstMessage), 48, '...');
         }
 
         $conversation->update($updates);

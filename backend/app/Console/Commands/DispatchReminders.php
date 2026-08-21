@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 
 /**
  * Delivers any invitation or reminder whose scheduled time has arrived. Point a
- * cron entry at `php artisan schedule:run` (which runs this every minute — see
+ * cron entry at `php artisan schedule:run` (which runs this every minute - see
  * routes/console.php) or call this command directly.
  */
 class DispatchReminders extends Command

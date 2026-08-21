@@ -3,7 +3,7 @@
 namespace App\Enums;
 
 /**
- * A contract's payment progress — tracked separately from its legal `status`
+ * A contract's payment progress - tracked separately from its legal `status`
  * (draft/sent/signed/active/completed). See Contract::recalculatePaid().
  */
 enum ContractPaymentStatus: string

@@ -30,7 +30,7 @@ trait BelongsToProvider
         return $this->belongsTo(MarketplaceVenue::class, 'venue_id');
     }
 
-    /** 'vendor' | 'venue' — which kind of provider this record points at. */
+    /** 'vendor' | 'venue' - which kind of provider this record points at. */
     public function providerType(): string
     {
         return $this->venue_id ? 'venue' : 'vendor';
@@ -46,7 +46,7 @@ trait BelongsToProvider
         return $this->vendor?->vendorProfile?->business_name ?? $this->vendor?->full_name;
     }
 
-    /** The user id to notify/pay — the vendor themself, or the venue's owner. */
+    /** The user id to notify/pay - the vendor themself, or the venue's owner. */
     public function providerId(): ?int
     {
         if ($this->venue_id) {

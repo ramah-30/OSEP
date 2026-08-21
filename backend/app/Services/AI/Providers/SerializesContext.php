@@ -18,7 +18,7 @@ trait SerializesContext
 
         $json = json_encode($context, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
-        return "GROUNDING DATA (the planner's real, authorized platform data — base every factual claim on this and "
+        return "GROUNDING DATA (the planner's real, authorized platform data - base every factual claim on this and "
             . "never invent figures):\n{$json}";
     }
 }

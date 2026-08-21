@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 /**
  * Nine Tanzanian event-equipment / AV rental firms (marketplace Event Equipment
- * Rental category — sound, lighting, LED screens, staging, power). Real firms
+ * Rental category - sound, lighting, LED screens, staging, power). Real firms
  * found publicly (Aperture Media, LJBK Enterprises, Rent A Machine, Tanzania
  * Fixer) plus representative sound/lighting/LED/power brands, since named AV
  * firms are sparse online. Demo contact + illustrative metrics. See
@@ -62,7 +62,7 @@ class EventEquipmentVendorsSeeder extends RealVendorSeeder
 
     protected function portfolioFeedback(): string
     {
-        return 'Crystal-clear sound and a stunning light show — the technicians were professional and completely reliable.';
+        return 'Crystal-clear sound and a stunning light show - the technicians were professional and completely reliable.';
     }
 
     protected function rows(): array
@@ -87,7 +87,7 @@ class EventEquipmentVendorsSeeder extends RealVendorSeeder
              'business' => 'Tanzania Fixer', 'tagline' => 'Cinema-grade lighting & grip', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 10, 'level' => 'business_verified', 'featured' => false, 'rating' => 4.7, 'reviews' => 22, 'jobs' => 90, 'response' => 3,
              'website' => 'https://www.tzfixer.com', 'instagram' => 'https://instagram.com/tanzaniafixer',
-             'description' => 'Production-equipment rental with cinema-grade cameras, lighting, grip and crew — ideal for high-end event films and stages.'],
+             'description' => 'Production-equipment rental with cinema-grade cameras, lighting, grip and crew - ideal for high-end event films and stages.'],
             ['key' => 'soundwave', 'email' => 'soundwavetz@osep.test', 'first' => 'Sadick', 'last' => 'Waziri',
              'business' => 'SoundWave Rentals TZ', 'tagline' => 'Pro sound & PA systems', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 6, 'level' => 'business_verified', 'featured' => false, 'rating' => 4.6, 'reviews' => 19, 'jobs' => 110, 'response' => 3,

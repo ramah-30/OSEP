@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Check a guest in — by scanned QR `token` or by `guest_id` (manual search).
+ * Check a guest in - by scanned QR `token` or by `guest_id` (manual search).
  */
 class CheckinRequest extends FormRequest
 {

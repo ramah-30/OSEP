@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 /**
  * Turns a client's natural-language message into a proposed action, if it reads
  * as a command ("approve the catering menu", "add Jane Doe to the guest list").
- * Only the defined command set is recognised; anything else — and any question —
+ * Only the defined command set is recognised; anything else - and any question -
  * returns null and is answered as a normal chat turn. Rule-based, so it behaves
  * identically offline and live.
  */
@@ -37,7 +37,7 @@ class ClientCommandParser
         }
 
         // Book a planner. "find/recommend a planner" is informational (not a
-        // command) — only an explicit book/hire instruction proposes an action.
+        // command) - only an explicit book/hire instruction proposes an action.
         if ($this->has($text, ['book ', 'book a', 'hire', 'send a booking request', 'request to book'])
             && ! $this->has($text, ['booked', 'my booking', 'booking request status', 'facebook'])) {
             $name = $this->plannerName($message);
@@ -95,7 +95,7 @@ class ClientCommandParser
             $name = preg_replace('/^(the|a|an)\s+/i', '', $name);
             $name = trim(preg_replace('/\s*\bplanners?\b\s*$/i', '', $name));
 
-            // A generic phrase ("a planner") carries no name — let it fall through
+            // A generic phrase ("a planner") carries no name - let it fall through
             // to the chat directory instead of proposing a booking.
             if (in_array(mb_strtolower($name), ['', 'planner', 'planners'], true)) {
                 return '';

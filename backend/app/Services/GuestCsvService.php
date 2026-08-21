@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 /**
  * CSV import/export for the guest list. Import validates each row, skips
- * duplicates (by email, else full name — both within the file and against the
+ * duplicates (by email, else full name - both within the file and against the
  * event) and returns a structured report so the UI can show exactly what
  * happened. Export produces a spreadsheet-friendly CSV string.
  */

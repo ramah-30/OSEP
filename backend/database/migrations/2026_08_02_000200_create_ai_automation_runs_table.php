@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * The activity log of automation rules that fired — what condition was met, on
+ * The activity log of automation rules that fired - what condition was met, on
  * which event, and what the copilot did about it (with a pointer to the created
  * recommendation or document). Also serves as the dedupe window so a rule does
  * not re-fire on every evaluation.

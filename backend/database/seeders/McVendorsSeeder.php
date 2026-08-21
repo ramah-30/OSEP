@@ -111,7 +111,7 @@ class McVendorsSeeder extends Seeder
             );
         }
 
-        // Portfolio — hosting / stage imagery
+        // Portfolio - hosting / stage imagery
         $shots = ['1505236858219-8359eb29e329', '1516280440614-37939bbacd81', '1543007630-9710e4a00a20', '1587825140708-dfaf72ae4b04', '1470229538611-16ba8c7ffbd7', '1493225457124-a3eb161ffa5f'];
         foreach (['Wedding Reception', 'Traditional Send-off', 'Corporate Awards'] as $i => $title) {
             $vendor->vendorPortfolios()->updateOrCreate(
@@ -125,7 +125,7 @@ class McVendorsSeeder extends Seeder
                         ['type' => 'image', 'url' => $this->img($shots[($i * 2) % count($shots)], 800, 600), 'caption' => 'On the mic'],
                         ['type' => 'image', 'url' => $this->img($shots[($i * 2 + 1) % count($shots)], 800, 600), 'caption' => 'Working the room'],
                     ],
-                    'client_feedback' => 'Kept the whole programme flowing and had our guests laughing all night — a natural host.',
+                    'client_feedback' => 'Kept the whole programme flowing and had our guests laughing all night - a natural host.',
                     'is_case_study' => $i === 1,
                     'sort_order' => $i,
                 ],
@@ -157,7 +157,7 @@ class McVendorsSeeder extends Seeder
                 'location' => 'Dar es Salaam, Tanzania', 'years' => 9, 'level' => 'premium_partner',
                 'featured' => true, 'rating' => 4.8, 'reviews' => 54, 'jobs' => 160, 'response' => 2,
                 'website' => 'https://mcgarab.example', 'instagram' => 'https://instagram.com/mcgarab',
-                'description' => 'Blends humour with elegance for destination weddings and luxury receptions — a polished, charismatic host.',
+                'description' => 'Blends humour with elegance for destination weddings and luxury receptions - a polished, charismatic host.',
                 'logo' => '1505236858219-8359eb29e329', 'cover' => '1516280440614-37939bbacd81',
             ],
             [

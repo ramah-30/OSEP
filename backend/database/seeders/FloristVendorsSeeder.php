@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 /**
- * Nine real Tanzanian florists (marketplace Florists category — distinct from
+ * Nine real Tanzanian florists (marketplace Florists category - distinct from
  * Decorators). Real shops found publicly + a few representative regional
  * florists; demo contact + illustrative metrics. See {@see RealVendorSeeder}.
  */
@@ -59,7 +59,7 @@ class FloristVendorsSeeder extends RealVendorSeeder
 
     protected function portfolioFeedback(): string
     {
-        return 'The flowers were fresh, abundant and exactly the palette we wanted — absolutely gorgeous.';
+        return 'The flowers were fresh, abundant and exactly the palette we wanted - absolutely gorgeous.';
     }
 
     protected function rows(): array

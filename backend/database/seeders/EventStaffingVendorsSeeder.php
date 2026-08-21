@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 /**
- * Nine Tanzanian event-staffing agencies (marketplace Event Staffing category —
+ * Nine Tanzanian event-staffing agencies (marketplace Event Staffing category -
  * waiters, ushers, hostesses, bartenders). Named staffing agencies are sparse
  * online (planners usually coordinate staff), so these are representative
  * Tanzanian agency brands; demo contact + illustrative metrics.
@@ -61,7 +61,7 @@ class EventStaffingVendorsSeeder extends RealVendorSeeder
 
     protected function portfolioFeedback(): string
     {
-        return 'Smart, warm and completely on it — the team made our guests feel looked after all night.';
+        return 'Smart, warm and completely on it - the team made our guests feel looked after all night.';
     }
 
     protected function rows(): array
@@ -101,7 +101,7 @@ class EventStaffingVendorsSeeder extends RealVendorSeeder
              'business' => 'ProServe Event Staffing', 'tagline' => 'Full-service event teams', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 6, 'level' => 'business_verified', 'featured' => false, 'rating' => 4.6, 'reviews' => 16, 'jobs' => 110, 'response' => 3,
              'website' => 'https://proserve.example', 'instagram' => 'https://instagram.com/proservetz',
-             'description' => 'Full event staffing — waiters, bartenders, ushers and coordinators — supplied and managed end to end.'],
+             'description' => 'Full event staffing - waiters, bartenders, ushers and coordinators - supplied and managed end to end.'],
             ['key' => 'summithostess', 'email' => 'summithostess@osep.test', 'first' => 'Halima', 'last' => 'Ally',
              'business' => 'Summit Hostess Agency', 'tagline' => 'Corporate hostesses & greeters', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 5, 'level' => 'business_verified', 'featured' => false, 'rating' => 4.6, 'reviews' => 13, 'jobs' => 64, 'response' => 3,

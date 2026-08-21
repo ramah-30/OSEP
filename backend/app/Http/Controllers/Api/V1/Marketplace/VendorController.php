@@ -41,7 +41,7 @@ class VendorController extends Controller
         abort_unless($vendor->account_type === AccountType::Vendor, 404);
         abort_if((bool) $vendor->vendorProfile?->is_suspended, 404);
 
-        // A lightweight view counter — richer analytics land later.
+        // A lightweight view counter - richer analytics land later.
         $vendor->vendorProfile?->increment('profile_views');
 
         $vendor->load([

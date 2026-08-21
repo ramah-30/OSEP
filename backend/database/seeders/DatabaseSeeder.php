@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Reference data — always seeded, safe in every environment.
+        // Reference data - always seeded, safe in every environment.
         $this->call([
             RoleSeeder::class,
             PermissionSeeder::class,

@@ -9,7 +9,7 @@ return [
     |
     | Which provider the AI Service Layer talks to. The 'local' driver is a
     | fully offline, data-grounded heuristic engine that needs no API key and
-    | always works — it is the default so the platform's AI is demo-ready out
+    | always works - it is the default so the platform's AI is demo-ready out
     | of the box. Set AI_DRIVER=anthropic (or openai) and drop in a key to
     | switch to a real large language model without touching any other code.
     |

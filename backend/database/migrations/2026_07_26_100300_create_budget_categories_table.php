@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Budget line categories (Venue, Catering, Decoration …). Seeded defaults have
+ * Budget line categories (Venue, Catering, Decoration ...). Seeded defaults have
  * a null owner; planners may add custom categories scoped to themselves.
  */
 return new class extends Migration

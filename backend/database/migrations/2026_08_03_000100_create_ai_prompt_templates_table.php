@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('category')->nullable();
             $table->string('description')->nullable();
-            $table->json('variables')->nullable();        // ["client_name", "budget", …] parsed from the body
+            $table->json('variables')->nullable();        // ["client_name", "budget", ...] parsed from the body
             $table->unsignedInteger('current_version')->default(1);
             $table->unsignedInteger('usage_count')->default(0);
             $table->boolean('pinned')->default(false);

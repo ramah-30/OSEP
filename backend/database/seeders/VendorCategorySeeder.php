@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 /**
  * The marketplace's default vendor taxonomy (spec's supported categories).
- * Reference data — safe in every environment. Admins add custom categories on
+ * Reference data - safe in every environment. Admins add custom categories on
  * top through the admin tools.
  */
 class VendorCategorySeeder extends Seeder

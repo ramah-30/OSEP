@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
  * Lightweight, dependency-free retrieval over the planner's knowledge base. It
  * scores each candidate note by keyword overlap with the question (title matches
  * weighted highest), returns the best few with a focused snippet, and lets the
- * providers cite them. No embeddings or external service required — the copilot
+ * providers cite them. No embeddings or external service required - the copilot
  * can ground answers in the planner's own notes out of the box.
  */
 class KnowledgeRetriever
@@ -113,6 +113,6 @@ class KnowledgeRetriever
 
         $start = max(0, $pos - 80);
 
-        return '…' . Str::limit(substr($clean, $start), 240);
+        return '...' . Str::limit(substr($clean, $start), 240);
     }
 }

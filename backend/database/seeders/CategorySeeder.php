@@ -96,7 +96,7 @@ class CategorySeeder extends Seeder
             ],
             [
                 'name' => 'Corporate Event', 'type' => 'corporate',
-                'subject' => 'You are invited — {{event}}',
+                'subject' => 'You are invited - {{event}}',
                 'body' => "Dear {{first_name}},\n\nWe would be honoured to have you join us at {{event}}. Kindly let us know if you can attend.",
                 'theme' => ['primary' => '#0f766e', 'accent' => '#5eead4', 'font' => 'sans'],
             ],

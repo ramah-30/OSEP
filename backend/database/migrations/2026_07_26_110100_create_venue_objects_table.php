@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * A single item placed on a layout (table, chair, stage, light …). `uid` is a
+ * A single item placed on a layout (table, chair, stage, light ...). `uid` is a
  * stable client-generated id so the canvas can bulk-save (upsert by uid) without
  * churning database ids and breaking seating references.
  */

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * A contract's payment progress, tracked separately from its legal `status`
- * (draft/sent/signed/active/completed) — a signed, active contract can be
+ * (draft/sent/signed/active/completed) - a signed, active contract can be
  * partially paid without that overwriting where it is in its own lifecycle.
  */
 return new class extends Migration

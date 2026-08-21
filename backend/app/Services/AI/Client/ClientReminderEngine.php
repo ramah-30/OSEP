@@ -6,7 +6,7 @@ use App\Models\User;
 
 /**
  * Turns a client's snapshot into a short, prioritised list of things that need
- * their attention — an approval to give, a payment due, guests still to chase.
+ * their attention - an approval to give, a payment due, guests still to chase.
  * Pure rule-based analysis over the {@see ClientContextBuilder} snapshot: works
  * offline and only ever reflects the client's real data.
  */
@@ -86,7 +86,7 @@ class ClientReminderEngine
                 'category' => 'requests',
                 'priority' => 'medium',
                 'title' => 'A planner accepted your booking request',
-                'description' => 'Great news — review their response and take the next step to lock in your planner.',
+                'description' => 'Great news - review their response and take the next step to lock in your planner.',
                 'action_label' => 'View requests',
                 'action_href' => "{$base}/booking-requests",
             ];

@@ -32,7 +32,7 @@ class AccommodationBooking extends Model
         ];
     }
 
-    /** ACB-0001, ACB-0002, … */
+    /** ACB-0001, ACB-0002, ... */
     public static function nextReference(): string
     {
         $n = static::count() + 1;

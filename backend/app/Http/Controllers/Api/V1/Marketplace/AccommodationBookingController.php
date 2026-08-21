@@ -17,7 +17,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 
 /**
- * A planner's hotel room bookings — the honeymoon stays they reserve for clients.
+ * A planner's hotel room bookings - the honeymoon stays they reserve for clients.
  * Booking snapshots the nightly rate and checks room inventory across overlapping
  * stays so a room type can't be oversold.
  */
@@ -123,7 +123,7 @@ class AccommodationBookingController extends Controller
             'booking' => new AccommodationBookingResource(
                 $booking->load(['accommodation', 'roomType', 'client', 'event'])
             ),
-        ], 'Room booked — the reservation is confirmed.');
+        ], 'Room booked - the reservation is confirmed.');
     }
 
     public function cancel(Request $request, AccommodationBooking $booking): JsonResponse

@@ -19,7 +19,7 @@ use Throwable;
  * Turns "invite this guest" into a real, logged send: it creates the invitation
  * record, renders the message, hands e-mail to the mailer (which logs in dev),
  * advances the delivery lifecycle and mirrors the outcome onto the guest,
- * the communication log and — on failure — the planner's notifications.
+ * the communication log and - on failure - the planner's notifications.
  */
 class InvitationDispatcher
 {
@@ -94,7 +94,7 @@ class InvitationDispatcher
                     ]),
                 ]);
             }
-            // WhatsApp still has no server gateway — the planner reaches those
+            // WhatsApp still has no server gateway - the planner reaches those
             // guests through the per-guest deep link on the Guest List.
 
             $now = now();
@@ -176,7 +176,7 @@ class InvitationDispatcher
     }
 
     /**
-     * A compact plain-text message for SMS — no HTML, just the essentials and the
+     * A compact plain-text message for SMS - no HTML, just the essentials and the
      * RSVP link, kept short to stay within a segment or two.
      */
     private function renderSmsBody(Guest $guest, Invitation $invitation): string

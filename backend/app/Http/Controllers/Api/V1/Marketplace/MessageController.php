@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 /**
- * Secure messaging between planners and vendors/venues. Shared by both sides —
+ * Secure messaging between planners and vendors/venues. Shared by both sides -
  * a user may only touch a thread they participate in (the planner, the vendor,
  * or the venue's owner).
  */

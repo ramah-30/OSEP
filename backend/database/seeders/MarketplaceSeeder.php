@@ -22,7 +22,7 @@ use Illuminate\Support\Str;
  * A populated marketplace for demos: vendors across every category, venue
  * listings, packages/portfolios/availability, plus a live transaction trail
  * (booking requests → quotations → a signed contract), reviews, saved lists and
- * a message thread — all hung off the known @osep.test logins. Idempotent.
+ * a message thread - all hung off the known @osep.test logins. Idempotent.
  *
  * Guarded to non-production in DatabaseSeeder (runs after DemoSeeder).
  */
@@ -109,7 +109,7 @@ class MarketplaceSeeder extends Seeder
                 'tagline' => $tagline,
                 'category' => $category?->name ?? $business,
                 'category_id' => $category?->id,
-                'description' => "{$business} — {$tagline}. Trusted by planners across the region for reliable, high-quality delivery.",
+                'description' => "{$business} - {$tagline}. Trusted by planners across the region for reliable, high-quality delivery.",
                 'years_in_business' => $years,
                 'location' => $location,
                 'phone' => $user->phone,
@@ -185,14 +185,14 @@ class MarketplaceSeeder extends Seeder
                         ['type' => 'image', 'url' => "https://picsum.photos/seed/{$key}-p{$i}a/800/600", 'caption' => 'Setup'],
                         ['type' => 'image', 'url' => "https://picsum.photos/seed/{$key}-p{$i}b/800/600", 'caption' => 'Highlights'],
                     ],
-                    'client_feedback' => 'Absolutely wonderful to work with — highly recommended.',
+                    'client_feedback' => 'Absolutely wonderful to work with - highly recommended.',
                     'is_case_study' => $i === 1,
                     'sort_order' => $i,
                 ],
             );
         }
 
-        // Availability — next 21 days, mostly available with a few blocked.
+        // Availability - next 21 days, mostly available with a few blocked.
         foreach (range(0, 20) as $d) {
             $date = now()->addDays($d)->toDateString();
             $status = match (true) {
@@ -317,7 +317,7 @@ class MarketplaceSeeder extends Seeder
                 'event_id' => $eventId, 'event_date' => now()->addDays(20)->toDateString(),
                 'guest_count' => 180, 'budget' => 6_000_000,
                 'requirements' => 'Full-day coverage, two photographers, engagement shoot, edited gallery + highlight film.',
-                'status' => 'accepted', 'response_note' => 'Delighted to be considered — we are available.',
+                'status' => 'accepted', 'response_note' => 'Delighted to be considered - we are available.',
                 'responded_at' => now()->subDays(2),
             ],
         );
@@ -415,7 +415,7 @@ class MarketplaceSeeder extends Seeder
         );
         $review->replies()->updateOrCreate(
             ['user_id' => $vendors['zawadi']->id],
-            ['body' => 'Thank you so much — it was a joy to be part of your day!'],
+            ['body' => 'Thank you so much - it was a joy to be part of your day!'],
         );
 
         Review::updateOrCreate(
@@ -463,9 +463,9 @@ class MarketplaceSeeder extends Seeder
 
         $lines = [
             [$planner->id, 'Hi Zawadi! Loved your portfolio. Are you free on the 15th?', now()->subDays(3)],
-            [$vendor->id, 'Hi Sarah — yes, the 15th is open. Happy to put together a quote.', now()->subDays(3)->addHours(1)],
+            [$vendor->id, 'Hi Sarah - yes, the 15th is open. Happy to put together a quote.', now()->subDays(3)->addHours(1)],
             [$planner->id, 'Wonderful. Please include a highlight film in the package.', now()->subDays(2)],
-            [$vendor->id, 'Done — I have just sent the quotation across for your review.', now()->subDays(1)],
+            [$vendor->id, 'Done - I have just sent the quotation across for your review.', now()->subDays(1)],
         ];
         foreach ($lines as [$senderId, $body, $at]) {
             $thread->messages()->updateOrCreate(
@@ -488,7 +488,7 @@ class MarketplaceSeeder extends Seeder
                 'star_rating' => 5,
                 'city' => 'Zanzibar',
                 'location' => 'Nungwi, Zanzibar',
-                'description' => 'A five-star beachfront sanctuary on the white sands of Nungwi — the classic Tanzanian honeymoon escape, with private plunge pools, a spa and sunset dhow cruises.',
+                'description' => 'A five-star beachfront sanctuary on the white sands of Nungwi - the classic Tanzanian honeymoon escape, with private plunge pools, a spa and sunset dhow cruises.',
                 'amenities' => ['Private beach', 'Infinity pool', 'Spa & wellness', 'Free Wi-Fi', 'Airport transfer', 'Breakfast included', 'Sunset cruises'],
                 'cover_image_url' => 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=80',
                 'check_in_time' => '14:00', 'check_out_time' => '11:00',
@@ -512,7 +512,7 @@ class MarketplaceSeeder extends Seeder
                 'star_rating' => 5,
                 'city' => 'Serengeti',
                 'location' => 'Central Serengeti, Tanzania',
-                'description' => 'A luxury tented lodge overlooking the endless plains — game drives at dawn, champagne at dusk. An unforgettable safari honeymoon.',
+                'description' => 'A luxury tented lodge overlooking the endless plains - game drives at dawn, champagne at dusk. An unforgettable safari honeymoon.',
                 'amenities' => ['Game drives', 'All-inclusive dining', 'Infinity pool', 'Spa', 'Wi-Fi in lounge', 'Bush dinners'],
                 'cover_image_url' => 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200&q=80',
                 'check_in_time' => '13:00', 'check_out_time' => '10:00',
@@ -532,7 +532,7 @@ class MarketplaceSeeder extends Seeder
                 'star_rating' => 4,
                 'city' => 'Dar es Salaam',
                 'location' => 'Masaki, Dar es Salaam',
-                'description' => 'A stylish four-star city hotel by the harbour — ideal for a pre-honeymoon night or out-of-town wedding guests.',
+                'description' => 'A stylish four-star city hotel by the harbour - ideal for a pre-honeymoon night or out-of-town wedding guests.',
                 'amenities' => ['Rooftop pool', 'Gym', 'Free Wi-Fi', 'Restaurant', 'Airport shuttle', 'Business centre'],
                 'cover_image_url' => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80',
                 'check_in_time' => '14:00', 'check_out_time' => '12:00',

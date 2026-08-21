@@ -6,7 +6,7 @@ use App\Models\User;
 
 /**
  * Turns a vendor's live business snapshot into a prioritised list of reminder
- * cards — the next actions that win work and protect their rating. Pure, rule
+ * cards - the next actions that win work and protect their rating. Pure, rule
  * based analysis over the {@see VendorContextBuilder} snapshot: it works offline
  * and never invents anything the data doesn't support.
  */
@@ -44,7 +44,7 @@ class VendorReminderEngine
                 'priority' => $stale ? 'high' : 'medium',
                 'title' => $r['open'] . ' booking request(s) awaiting your reply',
                 'description' => $stale
-                    ? "Your oldest is {$r['oldest_pending_days']} day(s) old — planners book fast, so reply promptly to win the work."
+                    ? "Your oldest is {$r['oldest_pending_days']} day(s) old - planners book fast, so reply promptly to win the work."
                     : 'Respond while the planner is still deciding to improve your win rate.',
                 'action_label' => 'Open requests',
                 'action_href' => "{$base}/requests",
@@ -59,7 +59,7 @@ class VendorReminderEngine
                 'category' => 'quotations',
                 'priority' => 'high',
                 'title' => $q['expiring_soon'] . ' quotation(s) expiring within 7 days',
-                'description' => 'Follow up with the planner before these lapse — a quick nudge often closes the deal.',
+                'description' => 'Follow up with the planner before these lapse - a quick nudge often closes the deal.',
                 'action_label' => 'Open quotations',
                 'action_href' => "{$base}/quotations",
             ];
@@ -126,7 +126,7 @@ class VendorReminderEngine
                 'category' => 'storefront',
                 'priority' => 'medium',
                 'title' => 'Your storefront is missing ' . count($s['missing']) . ' element(s)',
-                'description' => "Add {$missing} — complete storefronts with photos and packages convert far more of the planners who view them.",
+                'description' => "Add {$missing} - complete storefronts with photos and packages convert far more of the planners who view them.",
                 'action_label' => 'Edit storefront',
                 'action_href' => "{$base}/services",
             ];

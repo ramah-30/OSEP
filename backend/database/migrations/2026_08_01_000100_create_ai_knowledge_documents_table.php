@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('event_id')->nullable()->constrained('events')->cascadeOnDelete();
             $table->string('title');
-            $table->string('category')->nullable();    // freeform: Policy, Checklist, Vendor notes, …
+            $table->string('category')->nullable();    // freeform: Policy, Checklist, Vendor notes, ...
             $table->longText('content');
             $table->boolean('pinned')->default(false);
             $table->string('source')->default('manual');

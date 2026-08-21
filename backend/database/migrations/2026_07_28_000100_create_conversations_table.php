@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * A 1:1 direct-message conversation between two users. The pair is stored
  * canonically (user_one_id is always the smaller id) with a unique constraint,
- * so there is exactly one conversation per pair — this is what guarantees two
+ * so there is exactly one conversation per pair - this is what guarantees two
  * people's messages never split across threads or bleed into someone else's.
  */
 return new class extends Migration

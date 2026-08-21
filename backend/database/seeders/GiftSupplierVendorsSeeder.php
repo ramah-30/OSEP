@@ -60,7 +60,7 @@ class GiftSupplierVendorsSeeder extends RealVendorSeeder
 
     protected function portfolioFeedback(): string
     {
-        return 'Beautifully presented and our guests loved them — thoughtful, quality gifts delivered right on time.';
+        return 'Beautifully presented and our guests loved them - thoughtful, quality gifts delivered right on time.';
     }
 
     protected function rows(): array
@@ -70,12 +70,12 @@ class GiftSupplierVendorsSeeder extends RealVendorSeeder
              'business' => 'Giiftee Tanzania', 'tagline' => 'Tanzania’s online gifting platform', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 6, 'level' => 'premium_partner', 'featured' => true, 'rating' => 4.75, 'reviews' => 34, 'jobs' => 220, 'response' => 2,
              'website' => 'https://giiftee.com', 'instagram' => 'https://instagram.com/giiftee.tz',
-             'description' => 'Tanzania’s first online gifting platform — fresh flower bouquets, artisanal cakes and curated corporate gift boxes delivered across Dar es Salaam.'],
+             'description' => 'Tanzania’s first online gifting platform - fresh flower bouquets, artisanal cakes and curated corporate gift boxes delivered across Dar es Salaam.'],
             ['key' => 'giftmarttz', 'email' => 'giftmarttz@osep.test', 'first' => 'Frank', 'last' => 'Sanga',
              'business' => 'Giftmarttz', 'tagline' => 'Online gift shopping', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 5, 'level' => 'business_verified', 'featured' => true, 'rating' => 4.7, 'reviews' => 27, 'jobs' => 160, 'response' => 3,
              'website' => 'https://giftmarttz.com', 'instagram' => 'https://instagram.com/giftmarttz',
-             'description' => 'Online gift shopping in Dar es Salaam — flowers, cakes, sweets, hampers and jewels, with flower and cake delivery.'],
+             'description' => 'Online gift shopping in Dar es Salaam - flowers, cakes, sweets, hampers and jewels, with flower and cake delivery.'],
             ['key' => 'justbrand', 'email' => 'justbrandtz@osep.test', 'first' => 'Joseph', 'last' => 'Komba',
              'business' => 'Just Brand Tanzania', 'tagline' => 'Branded corporate gifts', 'location' => 'Dar es Salaam, Tanzania',
              'years' => 8, 'level' => 'business_verified', 'featured' => false, 'rating' => 4.65, 'reviews' => 24, 'jobs' => 140, 'response' => 3,
@@ -105,7 +105,7 @@ class GiftSupplierVendorsSeeder extends RealVendorSeeder
              'business' => 'Coastal Keepsakes', 'tagline' => 'Island-made favours', 'location' => 'Zanzibar, Tanzania',
              'years' => 5, 'level' => 'business_verified', 'featured' => false, 'rating' => 4.6, 'reviews' => 13, 'jobs' => 50, 'response' => 4,
              'website' => 'https://coastalkeepsakes.example', 'instagram' => 'https://instagram.com/coastalkeepsakes',
-             'description' => 'Handmade Zanzibari favours and keepsakes — spices, soaps and crafts — for destination weddings.'],
+             'description' => 'Handmade Zanzibari favours and keepsakes - spices, soaps and crafts - for destination weddings.'],
             ['key' => 'arushagiftstudio', 'email' => 'arushagiftstudio@osep.test', 'first' => 'Anna', 'last' => 'Kessy',
              'business' => 'Arusha Gift Studio', 'tagline' => 'Gifts & favours, Arusha', 'location' => 'Arusha, Tanzania',
              'years' => 4, 'level' => 'email_verified', 'featured' => false, 'rating' => 4.55, 'reviews' => 12, 'jobs' => 44, 'response' => 4,

@@ -51,7 +51,7 @@ class PlannerBookingRequestTest extends TestCase
         ]);
 
         // Event.budget_total is the denormalized figure every other screen
-        // (dashboard, workspace overview, the client's own Budget tab) reads —
+        // (dashboard, workspace overview, the client's own Budget tab) reads -
         // it must be kept in sync with the Budget row, not just the row itself.
         $this->assertSame(4500000.0, (float) Event::findOrFail($eventId)->budget_total);
 

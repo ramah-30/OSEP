@@ -59,7 +59,7 @@ class MakeupVendorsSeeder extends RealVendorSeeder
 
     protected function portfolioFeedback(): string
     {
-        return 'I felt like the best version of myself — flawless makeup that lasted the whole day.';
+        return 'I felt like the best version of myself - flawless makeup that lasted the whole day.';
     }
 
     protected function rows(): array

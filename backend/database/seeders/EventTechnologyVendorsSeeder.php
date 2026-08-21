@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 /**
- * Nine Tanzanian event-technology firms (marketplace Event Technology category —
+ * Nine Tanzanian event-technology firms (marketplace Event Technology category -
  * ticketing, registration, check-in, live streaming). Real firms found publicly
  * (EventSquare, 19 Events, Hosanna Higher Technologies, Tukiio) plus
  * representative brands; demo contact + illustrative metrics.
@@ -61,7 +61,7 @@ class EventTechnologyVendorsSeeder extends RealVendorSeeder
 
     protected function portfolioFeedback(): string
     {
-        return 'Check-in was fast and painless and the live stream was flawless — the tech just worked.';
+        return 'Check-in was fast and painless and the live stream was flawless - the tech just worked.';
     }
 
     protected function rows(): array

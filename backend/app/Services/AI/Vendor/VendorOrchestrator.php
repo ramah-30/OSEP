@@ -10,8 +10,8 @@ use Illuminate\Support\Str;
 
 /**
  * The vendor copilot's orchestrator. For a chat turn it gathers the vendor's
- * permission-filtered business snapshot, routes to the active provider — the
- * offline vendor engine, or the shared hosted model when live mode is on — and
+ * permission-filtered business snapshot, routes to the active provider - the
+ * offline vendor engine, or the shared hosted model when live mode is on - and
  * persists the exchange. Deliberately separate from the planner Orchestrator so
  * each role's copilot evolves independently, while both share the provider layer
  * and conversation storage.
@@ -94,7 +94,7 @@ class VendorOrchestrator
 
         $assistant = $conversation->messages()->create([
             'role' => 'assistant',
-            'content' => "I can do that — **{$preview['title']}**.\n\n{$preview['summary']}\n\nApprove below and I'll run it. Nothing happens until you do.",
+            'content' => "I can do that - **{$preview['title']}**.\n\n{$preview['summary']}\n\nApprove below and I'll run it. Nothing happens until you do.",
             'agent' => 'vendor',
             'model' => 'command',
             'meta' => ['driver' => $this->ai->driver(), 'has_action' => true, 'workspace' => 'vendor'],
@@ -131,7 +131,7 @@ class VendorOrchestrator
         $updates = ['last_message_at' => now()];
 
         if ($conversation->title === 'New conversation') {
-            $updates['title'] = Str::limit(trim($firstMessage), 48, '…');
+            $updates['title'] = Str::limit(trim($firstMessage), 48, '...');
         }
 
         $conversation->update($updates);

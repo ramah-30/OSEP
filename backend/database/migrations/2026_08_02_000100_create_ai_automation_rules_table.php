@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('trigger_type');            // budget_over|tasks_overdue|rsvp_pending|vendor_unconfirmed|days_until|outstanding_invoices
             $table->decimal('threshold', 14, 2)->nullable();
             $table->string('action_type');             // recommend|draft_document|flag
-            $table->json('action_config')->nullable(); // {template_key, priority, …}
+            $table->json('action_config')->nullable(); // {template_key, priority, ...}
             $table->boolean('enabled')->default(true);
             $table->timestamp('last_evaluated_at')->nullable();
             $table->timestamp('last_fired_at')->nullable();

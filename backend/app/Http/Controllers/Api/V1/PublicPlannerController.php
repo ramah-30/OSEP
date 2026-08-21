@@ -20,7 +20,7 @@ class PublicPlannerController extends Controller
 {
     use ApiResponse;
 
-    /** Browseable planner list for authenticated clients — returns every planner in the system. */
+    /** Browseable planner list for authenticated clients - returns every planner in the system. */
     public function index(Request $request): JsonResponse
     {
         $q = $request->query('q');

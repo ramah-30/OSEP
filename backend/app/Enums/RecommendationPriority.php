@@ -18,7 +18,7 @@ enum RecommendationPriority: string
         return ucfirst($this->value);
     }
 
-    /** Sort weight — higher surfaces first. */
+    /** Sort weight - higher surfaces first. */
     public function weight(): int
     {
         return match ($this) {

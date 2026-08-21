@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 /**
  * Shared base for the "real Tanzanian vendor" category seeders (live bands,
- * makeup, transport, security, tents, printing, …). Each concrete subclass
+ * makeup, transport, security, tents, printing, ...). Each concrete subclass
  * supplies a category slug, a verified Unsplash image pool, the 9 businesses, and
  * the category's storefront shape (services / packages / portfolio). Logins are
  * `<key>@osep.test` / Password123!; real public business details but demo
@@ -142,7 +142,7 @@ abstract class RealVendorSeeder extends Seeder
             $vendor->vendorPortfolios()->updateOrCreate(
                 ['title' => $title],
                 [
-                    'description' => "{$title} — {$business}.",
+                    'description' => "{$title} - {$business}.",
                     'event_type' => $title,
                     'event_date' => now()->subMonths(($i + 1) * 2)->toDateString(),
                     'cover_url' => $this->img($pool[($i * 2) % $n], 800, 600),

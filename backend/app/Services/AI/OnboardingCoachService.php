@@ -12,7 +12,7 @@ use App\Models\VendorAssignment;
 /**
  * The offline onboarding coach. A brand-new planner has no data for the copilot
  * to ground on, so instead of an empty workspace it assesses which setup
- * milestones are done and hands back the next best step — each a concrete, deep
+ * milestones are done and hands back the next best step - each a concrete, deep
  * link into the product. Pure signal checks over existing data: no model needed.
  */
 class OnboardingCoachService
@@ -48,7 +48,7 @@ class OnboardingCoachService
             ),
             $this->step(
                 'build_budget', 'Set up a budget', 'Wallet', $hasBudget,
-                'Add a budget and line items — this powers spend tracking, forecasts and what-if planning.',
+                'Add a budget and line items - this powers spend tracking, forecasts and what-if planning.',
                 $hasEvent ? "{$eventBase}/budget" : '/dashboard/planner/events', 'Add budget',
             ),
             $this->step(
@@ -63,7 +63,7 @@ class OnboardingCoachService
             ),
             $this->step(
                 'try_copilot', 'Ask your copilot a question', 'Sparkles', $triedCopilot,
-                'Try “summarize where this event stands” or “what if 20 more guests confirm?” — every answer is grounded in your data.',
+                'Try “summarize where this event stands” or “what if 20 more guests confirm?” - every answer is grounded in your data.',
                 null, 'Open copilot', 'chat',
             ),
         ];

@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
  * "Hotels" category (added in {@see VendorCategorySeeder}); this account gets a
  * complete vendor profile and storefront, plus an owned accommodation listing
  * with room types so it shows up in both the vendor marketplace and the hotels
- * browse. Idempotent on the account email — safe to re-run.
+ * browse. Idempotent on the account email - safe to re-run.
  */
 class HotelVendorSeeder extends Seeder
 {
@@ -129,7 +129,7 @@ class HotelVendorSeeder extends Seeder
                         ['type' => 'image', 'url' => "https://picsum.photos/seed/amani-p{$i}a/800/600", 'caption' => 'The venue'],
                         ['type' => 'image', 'url' => "https://picsum.photos/seed/amani-p{$i}b/800/600", 'caption' => 'The celebration'],
                     ],
-                    'client_feedback' => 'Beautiful rooms and seamless service — our guests loved it.',
+                    'client_feedback' => 'Beautiful rooms and seamless service - our guests loved it.',
                     'is_case_study' => $i === 0,
                     'sort_order' => $i,
                 ],
@@ -166,7 +166,7 @@ class HotelVendorSeeder extends Seeder
             [
                 'owner_id' => $owner->id,
                 'name' => $name,
-                'description' => 'A four-star waterfront hotel on the Msasani Peninsula with elegant rooms, a rooftop event terrace and on-site catering — an ideal base for wedding parties and visiting guests.',
+                'description' => 'A four-star waterfront hotel on the Msasani Peninsula with elegant rooms, a rooftop event terrace and on-site catering - an ideal base for wedding parties and visiting guests.',
                 'star_rating' => 4,
                 'city' => 'Dar es Salaam',
                 'location' => 'Msasani Peninsula, Dar es Salaam',

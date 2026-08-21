@@ -36,7 +36,7 @@ enum RsvpStatus: string
     }
 
     /**
-     * A ticket is only issued once the guest has accepted — confirmed (or already
+     * A ticket is only issued once the guest has accepted - confirmed (or already
      * checked in as attended). Everyone else has nothing to download yet.
      */
     public function hasTicket(): bool

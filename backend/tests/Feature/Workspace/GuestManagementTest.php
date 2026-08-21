@@ -100,7 +100,7 @@ class GuestManagementTest extends TestCase
         $event = $this->event($planner);
         $guest = $event->guests()->create(['full_name' => 'Not Yet', 'rsvp_status' => 'pending']);
 
-        // No RSVP yet — no ticket.
+        // No RSVP yet - no ticket.
         $this->getJson("/api/v1/events/{$event->id}/guests/{$guest->id}/ticket")->assertStatus(422);
         $this->assertDatabaseMissing('qr_codes', ['guest_id' => $guest->id]);
 
@@ -167,14 +167,14 @@ class GuestManagementTest extends TestCase
         $event = $this->event($planner);
         $guest = $event->guests()->create(['full_name' => 'Aisha Rashid', 'email' => 'aisha@example.com', 'plus_ones_allowed' => 2]);
 
-        // Public — no auth.
+        // Public - no auth.
         $this->getJson("/api/v1/rsvp/{$guest->rsvp_token}")
             ->assertOk()
             ->assertJsonPath('data.guest.full_name', 'Aisha Rashid');
 
         $this->postJson("/api/v1/rsvp/{$guest->rsvp_token}", [
             'response' => 'attending',
-            'additional_guests' => 5, // over the limit — should clamp to 2
+            'additional_guests' => 5, // over the limit - should clamp to 2
             'meal_choice' => 'Vegan',
         ])->assertOk()->assertJsonPath('data.confirmed', true);
 

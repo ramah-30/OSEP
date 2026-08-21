@@ -92,8 +92,8 @@ class ContractController extends Controller
 
     /**
      * Simulated mobile-money payment to the vendor/venue-owner behind this
-     * contract. Mirrors ClientInvoiceController::pay() — same fake-decline
-     * number, same shape — but settles a Contract's balance instead of an
+     * contract. Mirrors ClientInvoiceController::pay() - same fake-decline
+     * number, same shape - but settles a Contract's balance instead of an
      * Invoice's.
      */
     public function pay(Request $request, Contract $contract, ActivityLogger $activity): JsonResponse

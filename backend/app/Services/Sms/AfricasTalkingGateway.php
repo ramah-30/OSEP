@@ -87,7 +87,7 @@ class AfricasTalkingGateway
 
     /**
      * Force an E.164-ish number: keep a leading +, strip everything else. AT
-     * requires the international format (e.g. +255…).
+     * requires the international format (e.g. +255...).
      */
     private function normalise(string $phone): string
     {

@@ -10,7 +10,7 @@ use RuntimeException;
  * Real-LLM driver for Anthropic's Messages API. Enabled by setting
  * AI_DRIVER=anthropic and ANTHROPIC_API_KEY in .env. The grounding context is
  * folded into the system prompt so the model answers from platform data, not
- * general knowledge — the same contract the offline engine honours.
+ * general knowledge - the same contract the offline engine honours.
  */
 class AnthropicProvider implements AiProvider
 {

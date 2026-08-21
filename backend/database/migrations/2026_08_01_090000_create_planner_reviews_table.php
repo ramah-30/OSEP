@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * Reviews a client leaves about the planner who ran their event. Deliberately
- * lighter than the vendor {@see reviews} table — a single overall 1–5 rating and
+ * lighter than the vendor {@see reviews} table - a single overall 1–5 rating and
  * a comment, no per-category scores, replies or moderation workflow. One review
  * per client per planner (re-submitting updates it).
  */

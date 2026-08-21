@@ -63,7 +63,7 @@ class DocumentController extends Controller
 
         if (($definition['requires_event'] ?? false) && ! $event) {
             throw ValidationException::withMessages([
-                'event_id' => 'This template needs an event to ground its content — please choose one.',
+                'event_id' => 'This template needs an event to ground its content - please choose one.',
             ]);
         }
 
@@ -114,7 +114,7 @@ class DocumentController extends Controller
         ]);
     }
 
-    /** Refine a generated document — edit the content, rename or finalise it. */
+    /** Refine a generated document - edit the content, rename or finalise it. */
     public function update(Request $request, AiGeneratedDocument $document): JsonResponse
     {
         $this->authorizeDocument($request, $document);
@@ -197,7 +197,7 @@ class DocumentController extends Controller
     private function buildTitle(array $definition, ?Event $event): string
     {
         return $event
-            ? "{$definition['name']} — {$event->title}"
+            ? "{$definition['name']} - {$event->title}"
             : $definition['name'];
     }
 }
