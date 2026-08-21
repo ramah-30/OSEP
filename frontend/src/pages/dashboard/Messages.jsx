@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import PageHeader from '../../components/ui/PageHeader'
 import Card from '../../components/ui/Card'
 import Icon from '../../components/ui/Icon'
@@ -14,6 +15,7 @@ import { formatRelative } from '../../lib/format'
 import { cn } from '../../lib/cn'
 
 export default function Messages() {
+  const { t } = useTranslation()
   const { load: reloadNotifications } = useNotifications()
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -148,23 +150,23 @@ export default function Messages() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Messages"
-        description="Your private conversations. Each thread stays just between you and one other person."
-        actions={<Button size="sm" onClick={openContacts}><Icon name="PenLine" className="size-4" /> New message</Button>}
+        title={t('messages.messagesPageTitle')}
+        description={t('messages.messagesPageDesc')}
+        actions={<Button size="sm" onClick={openContacts}><Icon name="PenLine" className="size-4" /> {t('messages.newMessage')}</Button>}
       />
 
       <Card className="grid h-[calc(100vh-16rem)] min-h-[26rem] grid-cols-1 overflow-hidden p-0 md:grid-cols-[20rem_1fr]">
         {/* Conversation list */}
         <aside className={cn('flex flex-col border-r border-line', active && 'hidden md:flex')}>
           <div className="border-b border-line px-4 py-3 text-sm font-bold uppercase tracking-wide text-muted">
-            Conversations
+            {t('messages.conversations')}
           </div>
           <div className="flex-1 overflow-y-auto">
             {listLoading ? (
               <div className="grid h-full place-items-center"><Spinner className="size-6" /></div>
             ) : conversations.length === 0 ? (
               <div className="p-6 text-center text-sm text-muted">
-                No conversations yet. Start one with “New message”.
+                {t('messages.noConversations')}
               </div>
             ) : (
               conversations.map((c) => (
@@ -180,14 +182,14 @@ export default function Messages() {
                   <Avatar name={c.participant?.full_name} src={c.participant?.avatar_url} size="sm" />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="truncate font-semibold text-ink">{c.participant?.full_name ?? 'Unknown'}</span>
+                      <span className="truncate font-semibold text-ink">{c.participant?.full_name ?? t('messages.unknown')}</span>
                       {c.last_message_at && (
                         <span className="shrink-0 text-[0.7rem] text-muted">{formatRelative(c.last_message_at)}</span>
                       )}
                     </div>
                     <div className="flex items-center justify-between gap-2">
                       <span className="truncate text-sm text-muted">
-                        {c.last_message ? `${c.last_message.mine ? 'You: ' : ''}${c.last_message.body}` : c.participant?.account_type_label}
+                        {c.last_message ? `${c.last_message.mine ? t('messages.you') + ': ' : ''}${c.last_message.body}` : c.participant?.account_type_label}
                       </span>
                       {c.unread_count > 0 && (
                         <span className="grid min-w-5 shrink-0 place-items-center rounded-full bg-navy-700 px-1.5 text-[0.65rem] font-bold text-white">
@@ -206,7 +208,7 @@ export default function Messages() {
         <section className={cn('flex flex-col', !active && 'hidden md:flex')}>
           {!active ? (
             <div className="grid flex-1 place-items-center p-6">
-              <EmptyState icon="MessageSquare" title="Select a conversation" description="Pick a thread on the left, or start a new message." />
+              <EmptyState icon="MessageSquare" title={t('messages.selectConversation')} description={t('messages.selectConversationDesc')} />
             </div>
           ) : (
             <>
@@ -216,7 +218,7 @@ export default function Messages() {
                 </button>
                 <Avatar name={active.participant?.full_name} src={active.participant?.avatar_url} size="sm" />
                 <div className="min-w-0">
-                  <p className="truncate font-bold text-ink">{active.participant?.full_name ?? 'Unknown'}</p>
+                  <p className="truncate font-bold text-ink">{active.participant?.full_name ?? t('messages.unknown')}</p>
                   <p className="text-xs text-muted">{active.participant?.account_type_label}</p>
                 </div>
               </div>
@@ -225,7 +227,7 @@ export default function Messages() {
                 {threadLoading ? (
                   <div className="grid h-full place-items-center"><Spinner className="size-6" /></div>
                 ) : (active.messages?.length ?? 0) === 0 ? (
-                  <p className="py-8 text-center text-sm text-muted">No messages yet. Say hello 👋</p>
+                  <p className="py-8 text-center text-sm text-muted">{t('messages.noMessagesYet')}</p>
                 ) : (
                   active.messages.map((m) => (
                     <div key={m.id} className={cn('flex', m.mine ? 'justify-end' : 'justify-start')}>
@@ -253,7 +255,7 @@ export default function Messages() {
                   onChange={(e) => setBody(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(e) } }}
                   rows={1}
-                  placeholder="Write a message…"
+                  placeholder={t('messages.writeMessage')}
                   className="max-h-32 min-h-[2.75rem] flex-1 resize-none rounded-btn border border-line bg-surface px-4 py-2.5 text-sm text-ink outline-none focus:border-navy-600"
                 />
                 <Button type="submit" loading={sending} disabled={!body.trim()}>
@@ -265,11 +267,11 @@ export default function Messages() {
         </section>
       </Card>
 
-      <Modal open={contactsOpen} onClose={() => setContactsOpen(false)} title="New message" description="Choose who you'd like to message.">
+      <Modal open={contactsOpen} onClose={() => setContactsOpen(false)} title={t('messages.newMessage')} description={t('messages.chooseContact')}>
         {contactsLoading ? (
           <div className="grid h-32 place-items-center"><Spinner className="size-6" /></div>
         ) : contacts.length === 0 ? (
-          <EmptyState icon="Users" title="No contacts yet" description="People you work with on events will appear here." />
+          <EmptyState icon="Users" title={t('messages.noContacts')} description={t('messages.noContactsDesc')} />
         ) : (
           <div className="max-h-80 space-y-1 overflow-y-auto">
             {contacts.map((c) => (
