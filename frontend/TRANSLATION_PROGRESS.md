@@ -1,6 +1,6 @@
 # App Translation Progress
 
-## Current Status: 65% Complete (Priority 1 + Priority 2 FINISHED)
+## Current Status: 72% Complete (Priority 1 + 2 + Partial Priority 3)
 
 ### What's Translated ✅
 - **Navigation Sidebar** - All 30+ nav items for all roles (Planner, Client, Vendor, Admin)
@@ -47,30 +47,34 @@ export default function MyComponent() {
 
 ## Priority Translation List
 
-### Priority 1 (High Impact)
-1. **ClientOverview.jsx** - Client dashboard welcome/stats
-2. **VendorOverview.jsx** - Vendor dashboard  
-3. **AdminOverview.jsx** - Admin dashboard
-4. **Events.jsx** - Event list and management
-5. **Events/[id]** - Event details page
-6. **Finance pages** - Invoice, Payment, Receipt lists
-7. **DashboardLayout.jsx** - Header, breadcrumbs
-8. **Navbar.jsx** - Top navigation
+### Priority 1 - COMPLETED ✅ (8/8 components)
+1. **ClientOverview.jsx** ✅
+2. **VendorOverview.jsx** ✅
+3. **AdminOverview.jsx** ✅
+4. **Events.jsx** ✅
+5. **EventWorkspace.jsx** ✅
+6. **Finance/Invoices.jsx** ✅
+7. **DashboardLayout.jsx** ✅
+8. **Navbar/Topbar.jsx** ✅
 
-### Priority 2 (Medium Impact)
-9. **Clients.jsx** - Client list management
-10. **Vendors browsing pages** - Vendor discovery
-11. **Messages.jsx** - Message list
-12. **Reviews pages** - Review lists
-13. **Settings Account tab** - Account details form
-14. **Settings Email tab** - Email change form
+### Priority 2 - COMPLETED ✅ (5/5 components)
+1. **Clients.jsx** ✅
+2. **Vendors.jsx + VendorsBrowse.jsx** ✅
+3. **Messages.jsx** ✅
+4. **Reviews.jsx** ✅
+5. **Settings (Account/Email/Password/Preferences)** ✅
 
-### Priority 3 (Remaining)
-15. All form fields and labels
-16. All modal dialogs
-17. All empty states & error messages
-18. All cards and list items
-19. All buttons and link text
+### Priority 3 - IN PROGRESS (4/10+ components started)
+1. **BookingRequestsInbox.jsx** ✅ - Booking workflow & request handling
+2. **Budget.jsx** ✅ - Budget tracking & item CRUD
+3. **ApprovalsTab.jsx** ✅ - Client approval workflow
+4. **Guests.jsx** ✅ - Guest management coordination
+5. Timeline.jsx - Event timeline management (pending)
+6. Documents.jsx - Document management (pending)
+7. Profile pages - User profile forms (pending)
+8. Import/Export panels - Bulk guest operations (pending)
+9. Various form modals - Guest/Vendor/Review forms (pending)
+10. Error messages & empty states (ongoing)
 
 ## How to Contribute to Translation
 
