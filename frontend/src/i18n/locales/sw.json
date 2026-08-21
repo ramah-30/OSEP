@@ -41,7 +41,8 @@
     "apply": "Tumia",
     "create": "Unda",
     "new": "Mpya",
-    "remove": "Ondoa"
+    "remove": "Ondoa",
+    "hi": "Habari"
   },
   "nav": {
     "dashboard": "Dashibodi",
@@ -98,7 +99,11 @@
     "completed": "Imekamilika",
     "inProgress": "Inaendelea",
     "startPlanning": "Anza Kupanga",
-    "viewAll": "Angalia Yote"
+    "viewAll": "Angalia Yote",
+    "clientEventOverview": "Hii ndio jinsi matukio yako yanavyokuja pamoja.",
+    "noEventAssigned": "Hakuna matukio yaliyoteuliwa bado",
+    "noEventAssignedDesc": "Mara tu mlezi wako atakapopanga matukio yako, itaonekana hapa.",
+    "vendorBusinessOverview": "Hii ndio jinsi biashara yako inayoendeshwa kwenye OSEP."
   },
   "settings": {
     "preferences": "Mapendeleo",
@@ -137,6 +142,8 @@
     "payments": "Malipo",
     "updates": "Sasisho",
     "progress": "Maendeleo",
+    "trackProgress": "Fuatilia maendeleo",
+    "viewMyEvents": "Angalia matukio yangu",
     "archived": "Iliyohifadhiwa",
     "completed": "Imekamilika",
     "cancelled": "Imeghairiwa",
@@ -243,7 +250,17 @@
     "viewProfile": "Angalia Wasifu",
     "rating": "Ukadiriaji",
     "reviews": "Mapitio",
-    "availableNow": "Inapatikana Sasa"
+    "availableNow": "Inapatikana Sasa",
+    "yourBusiness": "Biashara yako",
+    "addServiceCategory": "Ongeza kategoria ya huduma yako",
+    "unverified": "Haijathibitishwa",
+    "availability": "Upatikanaji",
+    "editBusinessProfile": "Hariri Wasifu wa Biashara",
+    "manageServices": "Dhibiti Huduma",
+    "updatePortfolio": "Sasisha Forofolio",
+    "viewRequests": "Angalia Maombi",
+    "growBookings": "Ongeza ubooking wako",
+    "growBookingsDesc": "Wabepari wenye wasifu kamili, forofolio na upatikanaji wazi wanapata maombi zaidi ya booking. Huduma, forofolio na zana za booking zinaika katika Awamu ya 3."
   },
   "forms": {
     "name": "Jina",

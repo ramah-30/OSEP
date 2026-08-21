@@ -41,7 +41,8 @@
     "apply": "Apply",
     "create": "Create",
     "new": "New",
-    "remove": "Remove"
+    "remove": "Remove",
+    "hi": "Hi"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -98,7 +99,11 @@
     "completed": "Completed",
     "inProgress": "In Progress",
     "startPlanning": "Start Planning",
-    "viewAll": "View All"
+    "viewAll": "View All",
+    "clientEventOverview": "Here's how your event is coming together.",
+    "noEventAssigned": "No event assigned yet",
+    "noEventAssignedDesc": "Once your planner sets up your event, it will appear right here.",
+    "vendorBusinessOverview": "Here's how your business is performing on OSEP."
   },
   "settings": {
     "preferences": "Preferences",
@@ -137,13 +142,14 @@
     "payments": "Payments",
     "updates": "Updates",
     "progress": "Progress",
+    "trackProgress": "Track progress",
+    "viewMyEvents": "View my events",
     "archived": "Archived",
     "completed": "Completed",
     "cancelled": "Cancelled",
     "draft": "Draft",
     "published": "Published",
     "activeEventCount": "Active Events",
-    "eventDetails": "Details",
     "eventHost": "Host",
     "eventGuests": "Guests",
     "eventBudget": "Budget",
@@ -244,7 +250,17 @@
     "viewProfile": "View Profile",
     "rating": "Rating",
     "reviews": "Reviews",
-    "availableNow": "Available Now"
+    "availableNow": "Available Now",
+    "yourBusiness": "Your business",
+    "addServiceCategory": "Add your service category",
+    "unverified": "Unverified",
+    "availability": "Availability",
+    "editBusinessProfile": "Edit Business Profile",
+    "manageServices": "Manage Services",
+    "updatePortfolio": "Update Portfolio",
+    "viewRequests": "View Requests",
+    "growBookings": "Grow your bookings",
+    "growBookingsDesc": "Vendors with a complete profile, portfolio and clear availability get more booking requests. Services, portfolio and booking tools arrive in Phase 3."
   },
   "forms": {
     "name": "Name",

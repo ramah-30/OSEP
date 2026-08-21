@@ -41,7 +41,8 @@
     "apply": "Appliquer",
     "create": "Créer",
     "new": "Nouveau",
-    "remove": "Retirer"
+    "remove": "Retirer",
+    "hi": "Bonjour"
   },
   "nav": {
     "dashboard": "Tableau de bord",
@@ -98,7 +99,11 @@
     "completed": "Terminé",
     "inProgress": "En cours",
     "startPlanning": "Commencer la planification",
-    "viewAll": "Afficher tout"
+    "viewAll": "Afficher tout",
+    "clientEventOverview": "Voici comment votre événement prend forme.",
+    "noEventAssigned": "Pas encore d'événement assigné",
+    "noEventAssignedDesc": "Une fois que votre planificateur configurera votre événement, il apparaîtra ici.",
+    "vendorBusinessOverview": "Voici comment votre entreprise fonctionne sur OSEP."
   },
   "settings": {
     "preferences": "Préférences",
@@ -137,6 +142,8 @@
     "payments": "Paiements",
     "updates": "Mises à jour",
     "progress": "Progression",
+    "trackProgress": "Suivre la progression",
+    "viewMyEvents": "Voir mes événements",
     "archived": "Archivé",
     "completed": "Terminé",
     "cancelled": "Annulé",
@@ -243,7 +250,17 @@
     "viewProfile": "Afficher le profil",
     "rating": "Évaluation",
     "reviews": "Avis",
-    "availableNow": "Disponible maintenant"
+    "availableNow": "Disponible maintenant",
+    "yourBusiness": "Votre entreprise",
+    "addServiceCategory": "Ajoutez votre catégorie de service",
+    "unverified": "Non vérifié",
+    "availability": "Disponibilité",
+    "editBusinessProfile": "Modifier le profil commercial",
+    "manageServices": "Gérer les services",
+    "updatePortfolio": "Mettre à jour le portefeuille",
+    "viewRequests": "Afficher les demandes",
+    "growBookings": "Augmentez vos réservations",
+    "growBookingsDesc": "Les fournisseurs ayant un profil complet, un portefeuille et une disponibilité claire reçoivent plus de demandes de réservation. Les services, le portefeuille et les outils de réservation arrivent dans la phase 3."
   },
   "forms": {
     "name": "Nom",

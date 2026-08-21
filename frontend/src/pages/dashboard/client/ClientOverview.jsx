@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import Card from '../../../components/ui/Card'
 import Badge from '../../../components/ui/Badge'
 import Icon from '../../../components/ui/Icon'
@@ -11,6 +12,7 @@ import { formatDate } from '../../../lib/format'
 
 export default function ClientOverview() {
   const { user } = useAuth()
+  const { t } = useTranslation()
   const { data, loading, error, reload } = useResource('/dashboard/stats')
   const event = data?.event
   const base = user.dashboard_path
@@ -19,17 +21,17 @@ export default function ClientOverview() {
     <div className="space-y-8">
       <div>
         <h1 className="text-h3 font-extrabold tracking-tight text-ink">
-          Welcome, {user.first_name}
+          {t('dashboard.welcome')}, {user.first_name}
         </h1>
-        <p className="mt-1.5 text-muted">Here's how your event is coming together.</p>
+        <p className="mt-1.5 text-muted">{t('dashboard.clientEventOverview')}</p>
       </div>
 
       <LoadState loading={loading} error={error} onRetry={reload}>
         {!event ? (
           <EmptyState
             icon="CalendarClock"
-            title="No event assigned yet"
-            description="Once your planner sets up your event, it will appear right here."
+            title={t('dashboard.noEventAssigned')}
+            description={t('dashboard.noEventAssignedDesc')}
           />
         ) : (
           <div className="space-y-8">
@@ -63,12 +65,12 @@ export default function ClientOverview() {
               <div className="p-6 md:p-8">
                 <div className="flex flex-wrap gap-3">
                   <Button to={`${base}/my-events`} size="sm">
-                    View my events
+                    {t('events.viewMyEvents')}
                     <Icon name="ArrowRight" className="size-4" />
                   </Button>
                   <Button to={`${base}/progress`} size="sm" variant="secondary">
                     <Icon name="TrendingUp" className="size-4" />
-                    Track progress
+                    {t('events.trackProgress')}
                   </Button>
                 </div>
               </div>
