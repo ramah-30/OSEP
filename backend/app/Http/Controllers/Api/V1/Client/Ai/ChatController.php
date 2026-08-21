@@ -43,17 +43,31 @@ class ChatController extends Controller
 
     public function meta(Request $request): JsonResponse
     {
+        $user = $request->user();
+
+        $events = \App\Models\Event::where(‘client_id’, $user->id)
+            ->where(‘status’, ‘!=’, ‘cancelled’)
+            ->orderBy(‘event_date’, ‘desc’)
+            ->select(‘id’, ‘title’, ‘event_date’, ‘status’)
+            ->get()
+            ->map(fn ($e) => [
+                ‘id’ => $e->id,
+                ‘title’ => $e->title,
+                ‘date’ => $e->event_date?->format(‘M d, Y’),
+                ‘status’ => $e->status,
+            ]);
+
         return $this->success([
-            'assistant_name' => config('ai.client_assistant_name', 'OSEP Planning Concierge'),
-            'driver' => $this->ai->driver(),
-            'is_live' => $this->ai->isLive(),
-            'suggested_prompts' => [
-                'Find me a planner',
-                'Show my progress summary',
-                'What do I need to approve?',
-                'How many guests have confirmed?',
-                'What’s my outstanding balance?',
-                'What should I take care of next?',
+            ‘assistant_name’ => config(‘ai.client_assistant_name’, ‘OSEP Planning Concierge’),
+            ‘driver’ => $this->ai->driver(),
+            ‘is_live’ => $this->ai->isLive(),
+            ‘events’ => $events,
+            ‘suggested_prompts’ => [
+                ‘Find me a planner’,
+                ‘Show my progress summary’,
+                ‘How many guests have confirmed?’,
+                ‘What’s my outstanding balance?’,
+                ‘What should I take care of next?’,
             ],
         ]);
     }
@@ -73,6 +87,7 @@ class ChatController extends Controller
         $data = $request->validate([
             'message' => ['required', 'string', 'max:5000'],
             'conversation_id' => ['nullable', 'integer'],
+            'event_id' => ['nullable', 'integer'],
         ]);
 
         $user = $request->user();
@@ -82,7 +97,8 @@ class ChatController extends Controller
         } else {
             $conversation = AiConversation::create([
                 'user_id' => $user->id,
-                'context_type' => 'general',
+                'context_type' => 'event',
+                'event_id' => $data['event_id'] ?? null,
             ]);
         }
 

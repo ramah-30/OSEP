@@ -51,6 +51,8 @@ export default function RoleAiChatWidget({ config }) {
   const [threadLoading, setThreadLoading] = useState(false)
   const [body, setBody] = useState('')
   const [sending, setSending] = useState(false)
+  const [events, setEvents] = useState([])
+  const [selectedEventId, setSelectedEventId] = useState(null)
   const scrollRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -62,7 +64,13 @@ export default function RoleAiChatWidget({ config }) {
   useEffect(() => {
     if (isOpen && !loadedMeta) {
       setLoadedMeta(true)
-      api.get(`${base}/meta`).then((r) => setMeta(r.data.data)).catch(() => {})
+      api.get(`${base}/meta`).then((r) => {
+        setMeta(r.data.data)
+        if (r.data.data?.events && r.data.data.events.length > 0) {
+          setEvents(r.data.data.events)
+          setSelectedEventId(r.data.data.events[0].id)
+        }
+      }).catch(() => {})
       loadConversations()
     }
   }, [isOpen, loadedMeta, base, loadConversations])
@@ -100,17 +108,21 @@ export default function RoleAiChatWidget({ config }) {
   const send = async (text) => {
     const message = (text ?? body).trim()
     if (!message || sending) return
-    setBody('')
-    setMessages((m) => [...m, { role: 'user', content: message }])
+    setBody(‘’)
+    setMessages((m) => [...m, { role: ‘user’, content: message }])
     setSending(true)
     try {
-      const r = await api.post(`${base}/chat`, { message, conversation_id: conversationId })
+      const r = await api.post(`${base}/chat`, {
+        message,
+        conversation_id: conversationId,
+        event_id: selectedEventId,
+      })
       setConversationId(r.data.data.conversation.id)
       const msg = r.data.data.message
-      setMessages((m) => [...m, { id: msg.id, role: 'assistant', content: msg.content, action: msg.action }])
+      setMessages((m) => [...m, { id: msg.id, role: ‘assistant’, content: msg.content, action: msg.action }])
       loadConversations()
     } catch {
-      setMessages((m) => [...m, { role: 'assistant', content: 'Sorry — I couldn’t answer that just now. Please try again.' }])
+      setMessages((m) => [...m, { role: ‘assistant’, content: ‘Sorry — I couldn’t answer that just now. Please try again.’ }])
     } finally {
       setSending(false)
     }
@@ -247,6 +259,25 @@ export default function RoleAiChatWidget({ config }) {
               <span className="text-[11px] font-medium text-muted">Answering engine</span>
               <ModeToggle base={base} onChange={() => api.get(`${base}/meta`).then((r) => setMeta(r.data.data)).catch(() => {})} />
             </div>
+
+            {/* Event context selector (client only) */}
+            {events.length > 0 && (
+              <div className="border-b border-line px-3 py-2">
+                <label className="block text-[11px] font-medium text-muted mb-1.5">Ask about</label>
+                <select
+                  value={selectedEventId || ''}
+                  onChange={(e) => setSelectedEventId(Number(e.target.value) || null)}
+                  className="w-full rounded-lg border border-line bg-surface px-2.5 py-1.5 text-sm text-ink outline-none transition-colors focus:border-navy-300"
+                >
+                  <option value="">General questions</option>
+                  {events.map((evt) => (
+                    <option key={evt.id} value={evt.id}>
+                      {evt.title} ({evt.date})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
 
             {/* Messages */}
             <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-3 py-4">
