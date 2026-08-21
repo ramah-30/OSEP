@@ -236,7 +236,7 @@ const THEMES = [
 function PreferencesTab() {
   const { user, refreshUser } = useAuth()
   const { setPreference } = useTheme()
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   const { register, submit, saved, formError, formState, watch, setValue } = useSettingsForm({
     locale: user.preferences?.locale ?? 'en',
     timezone: user.preferences?.timezone ?? 'Africa/Dar_es_Salaam',
@@ -253,11 +253,12 @@ function PreferencesTab() {
   return (
     <form
       onSubmit={submit(async (values) => {
-        await api.put('/settings/preferences', values)
-        await refreshUser()
         if (values.locale) {
           i18n.changeLanguage(values.locale)
+          localStorage.setItem('i18nextLng', values.locale)
         }
+        await api.put('/settings/preferences', values)
+        await refreshUser()
         return 'Preferences saved.'
       })}
       className="space-y-6"
@@ -266,12 +267,12 @@ function PreferencesTab() {
       {formError && <Alert tone="error">{formError}</Alert>}
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <SelectField label="Language" {...register('locale')}>
+        <SelectField label={t('settings.language')} {...register('locale')}>
           <option value="en">English</option>
           <option value="sw">Kiswahili</option>
           <option value="fr">Français</option>
         </SelectField>
-        <SelectField label="Timezone" {...register('timezone')}>
+        <SelectField label={t('settings.timezone')} {...register('timezone')}>
           {timezones.map((tz) => (
             <option key={tz} value={tz}>
               {tz.replace('_', ' ')}
@@ -281,7 +282,7 @@ function PreferencesTab() {
       </div>
 
       <div>
-        <p className="mb-2 text-sm font-semibold text-ink">Theme</p>
+        <p className="mb-2 text-sm font-semibold text-ink">{t('settings.theme')}</p>
         <div className="grid max-w-md grid-cols-3 gap-2">
           {THEMES.map((t) => {
             const active = theme === t.value
