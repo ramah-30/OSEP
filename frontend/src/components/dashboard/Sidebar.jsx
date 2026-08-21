@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Logo from '../ui/Logo'
 import Icon from '../ui/Icon'
 import { cn } from '../../lib/cn'
@@ -6,12 +7,49 @@ import { hrefFor, navFor } from '../../lib/dashboardNav'
 import { usePendingBookings } from '../../lib/usePendingBookings'
 import { useAuth } from '../../context/AuthContext'
 
+// Map nav labels to translation keys
+const NAV_LABEL_KEYS = {
+  'Dashboard': 'nav.dashboard',
+  'Events': 'nav.events',
+  'Clients': 'nav.clients',
+  'Booking Requests': 'events.approvals',
+  'Marketplace': 'nav.marketplace',
+  'Finance': 'nav.finance',
+  'Calendar': 'events.timeline',
+  'Reviews': 'nav.reviews',
+  'Messages': 'nav.messages',
+  'AI Assistant': 'ai.askAI',
+  'Profile': 'nav.profile',
+  'Settings': 'nav.settings',
+  'My Events': 'events.myEvents',
+  'Find a Planner': 'events.createEvent',
+  'Progress': 'events.progress',
+  'Guest List': 'events.guests',
+  'Budget Overview': 'finance.budget',
+  'Payments': 'finance.payments',
+  'Business Profile': 'clients.clientDetails',
+  'Services': 'forms.title',
+  'Portfolio': 'events.updates',
+  'Availability': 'vendors.availableNow',
+  'My Venues': 'events.vendors',
+  'Requests': 'actions.request',
+  'Quotations': 'finance.invoice',
+  'Contracts': 'finance.contracts',
+  'Analytics': 'status.active',
+  'Overview': 'dashboard.overview',
+  'Planners': 'nav.dashboard',
+  'Vendors': 'nav.vendors',
+  'Venues': 'events.vendors',
+  'Categories': 'forms.title',
+}
+
 /**
  * Role-aware navigation rail. The item list comes from lib/dashboardNav so the
  * planner, client and vendor each get exactly the sidebar the spec describes.
  */
 export default function Sidebar({ onNavigate }) {
   const { user, logout } = useAuth()
+  const { t } = useTranslation()
   const items = navFor(user.account_type, user)
   const pendingBookings = usePendingBookings(user.account_type)
 
@@ -46,7 +84,7 @@ export default function Sidebar({ onNavigate }) {
                     item.accent === 'purple' && !isActive && 'text-purple-300',
                   )}
                 />
-                <span className="flex-1">{item.label}</span>
+                <span className="flex-1">{t(NAV_LABEL_KEYS[item.label] || item.label)}</span>
                 {item.badge === 'bookings' && pendingBookings > 0 && (
                   <span className="grid min-w-[1.25rem] place-items-center rounded-full bg-warning px-1.5 py-0.5 text-[0.65rem] font-bold text-white">
                     {pendingBookings}
@@ -70,7 +108,7 @@ export default function Sidebar({ onNavigate }) {
           className="flex w-full items-center gap-3 rounded-btn px-3 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/8 hover:text-white"
         >
           <Icon name="LogOut" className="size-[18px] shrink-0" />
-          <span className="flex-1 text-left">Sign out</span>
+          <span className="flex-1 text-left">{t('nav.logout')}</span>
         </button>
         <p className="px-3 pt-3 text-xs text-white/50">OSEP Event planning Platform</p>
       </div>
