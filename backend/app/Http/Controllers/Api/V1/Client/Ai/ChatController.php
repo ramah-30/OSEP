@@ -94,6 +94,7 @@ class ChatController extends Controller
 
         if (! empty($data['conversation_id'])) {
             $conversation = AiConversation::where('user_id', $user->id)->findOrFail($data['conversation_id']);
+            $conversation->update(['event_id' => $data['event_id'] ?? null]);
         } else {
             $conversation = AiConversation::create([
                 'user_id' => $user->id,

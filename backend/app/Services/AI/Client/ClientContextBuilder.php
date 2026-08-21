@@ -26,11 +26,16 @@ class ClientContextBuilder
     /**
      * @return array<string, mixed>
      */
-    public function forClient(User $client): array
+    public function forClient(User $client, ?int $eventId = null): array
     {
-        $events = Event::where('client_id', $client->id)
-            ->with('planner:id,first_name,last_name')
-            ->get();
+        $query = Event::where('client_id', $client->id)
+            ->with('planner:id,first_name,last_name');
+
+        if ($eventId !== null) {
+            $query->where('id', $eventId);
+        }
+
+        $events = $query->get();
         $eventIds = $events->pluck('id')->all();
 
         return array_filter([
@@ -38,7 +43,7 @@ class ClientContextBuilder
             'events_count' => $events->count(),
             'guests' => $this->guestSummary($eventIds),
             'approvals' => $this->approvalSummary($eventIds),
-            'finance' => $this->financeSummary($client),
+            'finance' => $this->financeSummary($client, $eventIds),
             'updates' => $this->updateSummary($events),
             'requests' => $this->requestSummary($client),
             'planners' => $this->plannerDirectory(),
@@ -182,11 +187,16 @@ class ClientContextBuilder
     }
 
     /**
+     * @param  array<int, int>  $eventIds
      * @return array<string, mixed>|null
      */
-    private function financeSummary(User $client): ?array
+    private function financeSummary(User $client, array $eventIds = []): ?array
     {
-        $invoices = Invoice::where('client_id', $client->id)->get();
+        $query = Invoice::where('client_id', $client->id);
+        if (!empty($eventIds)) {
+            $query->whereIn('event_id', $eventIds);
+        }
+        $invoices = $query->get();
         if ($invoices->isEmpty()) {
             return null;
         }

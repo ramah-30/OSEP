@@ -34,7 +34,7 @@ class ClientOrchestrator
             return $this->proposeAction($client, $conversation, $message, $command);
         }
 
-        $context = $this->contextBuilder->forClient($client);
+        $context = $this->contextBuilder->forClient($client, $conversation->event_id);
 
         $history = $conversation->messages()
             ->orderBy('created_at')
